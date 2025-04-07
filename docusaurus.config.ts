@@ -76,6 +76,27 @@ const config: Config = {
   ],
 
   themeConfig: {
+    metadata: [
+      {name: 'description', content: 'Explore the official 0G documentation for the decentralized AI blockchain. Learn about 0G Storage, node operation, and building the future of Web3 AI infrastructure.'},
+      {property: 'og:image', content: 'https://docs.0g.ai/img/og-image.png'},
+      {name: 'twitter:card', content: 'summary_large_image'},
+      {name: 'twitter:site', content: '@0g_labs'},
+      {
+        name: 'jsonld:organization',
+        content: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          'name': '0G Labs',
+          'url': 'https://docs.0g.ai',
+          'logo': 'https://docs.0g.ai/img/logo.svg',
+          'sameAs': [
+            'https://twitter.com/0g_labs',
+            'https://github.com/0glabs',
+            'https://0g.ai/'
+           ]
+        }),
+      },
+    ],
     navbar: {
       title: '0G Documentation',
       logo: {
