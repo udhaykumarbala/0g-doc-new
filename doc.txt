@@ -1,0 +1,3012 @@
+================================================================================ 0G COMPLETE DOCUMENTATION FOR CHATBOT TRAINING
+This comprehensive document contains all documentation from the 0G project, compiled from markdown files for chatbot training purposes. Generated on: 2025-08-11
+
+Base URL: https://docs.0g.ai
+
+================================================================================ TABLE OF CONTENTS
+PROJECT OVERVIEW - https://docs.0g.ai/
+INTRODUCTION AND VISION - https://docs.0g.ai/introduction/understanding-0g
+CORE CONCEPTS - https://docs.0g.ai/concepts/chain
+DEVELOPER DOCUMENTATION - https://docs.0g.ai/developer-hub/getting-started
+NODE OPERATIONS - https://docs.0g.ai/run-a-node/overview
+NODE SALE INFORMATION - https://docs.0g.ai/node-sale/node-sale-index
+RESOURCES AND REFERENCES - https://docs.0g.ai/resources/whitepaper
+CONTRIBUTION GUIDELINES - https://docs.0g.ai/resources/how-to-contribute
+================================================================================ SECTION 1: PROJECT OVERVIEW
+📖 **Documentation Home**: https://docs.0g.ai/
+
+0G Documentation
+0G is the world's first Decentralized AI Operating System (dAIOS), designed to enable AI applications that require massive data processing, model training, and inference at scale. The platform combines high-performance blockchain infrastructure with decentralized storage and compute networks to create a comprehensive ecosystem for AI development.
+
+Website: https://docs.0g.ai/
+
+Key Components
+🔗 **0G Chain** - High-performance blockchain with 50,000+ TPS capability
+   📄 Learn more: https://docs.0g.ai/concepts/chain
+🔗 **0G Storage** - Decentralized storage network for AI datasets
+   📄 Learn more: https://docs.0g.ai/concepts/storage
+🔗 **0G DA (Data Availability)** - Scalable data availability layer
+   📄 Learn more: https://docs.0g.ai/concepts/da
+🔗 **0G Compute** - Distributed compute network for AI inference and training
+   📄 Learn more: https://docs.0g.ai/concepts/compute
+🔗 **iNFTs** - Intelligent NFTs with embedded AI capabilities
+   📄 Learn more: https://docs.0g.ai/concepts/inft
+================================================================================ SECTION 2: INTRODUCTION AND VISION
+🌟 **Understanding 0G**: https://docs.0g.ai/introduction/understanding-0g
+🎯 **Vision & Mission**: https://docs.0g.ai/introduction/vision-mission
+
+Understanding 0G
+What is 0G?
+0G serves as a Decentralized AI Operating System (dAIOS), bringing a full stack of services needed to host and run AI applications on-chain including decentralized storage, compute, and data availability services. This full-stack approach enables use cases that were previously impossible or impractical on traditional blockchain networks.
+
+Vision and Mission
+Vision
+To democratize AI by creating a decentralized infrastructure that makes advanced AI capabilities accessible to everyone, not just large corporations.
+
+Mission
+Build the world's most scalable and efficient decentralized AI infrastructure
+Enable developers to create AI applications without centralized dependencies
+Foster an open ecosystem where AI models and data can be shared and monetized fairly
+Ensure AI development remains transparent, verifiable, and aligned with human values
+The AI Revolution Challenge
+The current AI landscape faces several critical challenges:
+
+Centralization of Power: A few tech giants control most AI infrastructure
+Data Privacy Concerns: User data is harvested without proper compensation
+Computational Barriers: High costs prevent smaller players from participating
+Lack of Transparency: AI models operate as black boxes
+Alignment Issues: AI systems may not align with human values
+0G's Solution
+0G addresses these challenges through:
+
+Decentralized Infrastructure
+Distributed storage across thousands of nodes
+Compute resources available globally
+No single point of failure or control
+Fair Data Economy
+Users retain ownership of their data
+Transparent data monetization
+Cryptographic privacy preservation
+Accessible Compute
+Pay-per-use model for AI services
+Pooled resources reduce individual costs
+Efficient resource allocation
+Verifiable AI
+On-chain model verification
+Transparent training processes
+Auditable AI decisions
+Alignment Through Decentralization
+Community governance of AI development
+Diverse stakeholder representation
+Economic incentives for beneficial AI
+================================================================================ SECTION 3: CORE CONCEPTS
+🔧 **Core Concepts Overview**: https://docs.0g.ai/concepts/chain
+
+0G Chain
+📖 **Full Documentation**: https://docs.0g.ai/concepts/chain
+Overview
+0G Chain is the backbone of the 0G ecosystem, providing a high-performance, EVM-compatible blockchain optimized for AI and data-intensive applications. It serves as the consensus and transaction layer for the entire 0G network.
+
+Key Features
+High Performance
+50,000+ TPS: Unprecedented throughput for blockchain networks
+Sub-second finality: Near-instant transaction confirmation
+Horizontal scaling: Performance increases with network growth
+EVM Compatibility
+Familiar development: Use existing Ethereum tools and frameworks
+Smart contract support: Deploy Solidity contracts without modification
+Ecosystem integration: Compatible with major wallets and infrastructure
+AI Optimization
+Precompiled contracts: Native support for AI operations
+Data availability sampling: Efficient verification of large datasets
+Storage proofs: Cryptographic verification of off-chain data
+Architecture
+Consensus Mechanism
+0G Chain uses a novel consensus mechanism combining:
+
+Proof of Stake: For security and decentralization
+BLS signatures: For efficient signature aggregation
+Random beacon: For unpredictable validator selection
+Network Topology
+Validators → Consensus Layer
+    ↓
+Execution Layer ← Smart Contracts
+    ↓
+DA Layer ← Storage Network
+Transaction Flow
+User submits transaction to mempool
+Validators select and order transactions
+Block proposal and voting
+Finalization and state update
+Storage commitment if required
+Validator Network
+Requirements
+Minimum stake: 100,000 0G tokens
+Hardware: 16 cores, 64GB RAM, 2TB NVMe SSD
+Network: 1Gbps connection, static IP
+Uptime: 99.9% availability expected
+Rewards
+Block rewards: Issued per block produced
+Transaction fees: Portion of gas fees
+Storage fees: From data availability services
+Slashing: Penalties for misbehavior
+Smart Contract Development
+Precompiled Contracts
+DASigners
+interface IDASigners {
+    function verifySignatures(
+        bytes32 dataRoot,
+        bytes memory signatures
+    ) external view returns (bool);
+}
+Wrapped 0G Base
+interface IWrapped0GBase {
+    function deposit() external payable;
+    function withdraw(uint256 amount) external;
+}
+Gas Optimization
+Use precompiles for data operations
+Batch transactions when possible
+Store large data off-chain with proofs
+Network Parameters
+Parameter	Value
+Block Time	1 second
+Epoch Length	1 hour
+Unbonding Period	21 days
+Max Validators	125
+Gas Limit	100M per block
+0G Storage
+📖 **Full Documentation**: https://docs.0g.ai/concepts/storage
+🛠️ **Developer Guide**: https://docs.0g.ai/developer-hub/building-on-0g/storage/sdk
+Overview
+0G Storage is a decentralized storage network designed specifically for AI and big data applications. It provides high-throughput, low-latency access to massive datasets while maintaining decentralization and data integrity.
+
+Architecture
+Data Flow
+Data Submission: Client chunks and encodes data
+Distribution: Chunks distributed across storage nodes
+Commitment: Merkle root recorded on-chain
+Retrieval: Parallel fetching from multiple nodes
+Verification: Cryptographic proof validation
+Storage Nodes
+Storage nodes are the backbone of the network:
+
+Store encrypted data chunks
+Serve retrieval requests
+Participate in proof generation
+Earn rewards for storage and bandwidth
+Encoding Scheme
+0G uses erasure coding for redundancy:
+
+Original Data → Chunking → Reed-Solomon Encoding → Distribution
+    ↓
+K data chunks + M parity chunks = N total chunks
+(Can recover from any K chunks)
+Performance Characteristics
+Throughput
+Upload: 100+ MB/s per client
+Download: 200+ MB/s with parallel retrieval
+Latency: < 100ms for first byte
+Scalability
+Network capacity: Exabyte scale
+Node count: Unlimited horizontal scaling
+Geographic distribution: Global coverage
+Storage Mining
+Requirements
+Storage: Minimum 10TB available
+Bandwidth: 100Mbps symmetric
+Uptime: 95%+ availability
+Stake: 10,000 0G tokens
+Reward Mechanism
+Total Rewards = Base Storage Fee × Data Stored × Time
+              + Retrieval Fees × Data Served
+              + Network Incentives
+Proof of Random Access (PoRA)
+Storage nodes must prove data availability:
+
+Random challenge issued by network
+Node computes Merkle proof for challenged data
+Proof submitted and verified on-chain
+Rewards distributed based on successful proofs
+Use Cases
+AI Training Data
+Store massive training datasets
+Version control for model iterations
+Collaborative dataset building
+Model Storage
+Distributed model hosting
+Checkpoint storage during training
+Model marketplace infrastructure
+Application Data
+User-generated content
+Application state and logs
+Backup and archival storage
+0G Data Availability (DA)
+📖 **Full Documentation**: https://docs.0g.ai/concepts/da
+🛠️ **Integration Guide**: https://docs.0g.ai/developer-hub/building-on-0g/da-integration
+🔍 **Deep Dive**: https://docs.0g.ai/developer-hub/building-on-0g/da-deep-dive
+Overview
+0G DA is a high-performance data availability layer that ensures data posted to the network remains available and retrievable. It's designed to support rollups, AI applications, and any system requiring reliable data availability guarantees.
+
+How It Works
+Data Posting Flow
+Data Submission: Sequencer posts data blob
+Dispersal: Data distributed to DA nodes
+Attestation: Nodes sign availability certificates
+Aggregation: Signatures aggregated via BLS
+Commitment: Aggregated signature posted on-chain
+Sampling Mechanism
+Light clients can verify data availability without downloading all data:
+
+For confidence level C and blob size B:
+Samples needed = log(1 - C) / log(1 - 1/B)
+Integration with Rollups
+Supported Rollup Frameworks
+OP Stack: Native integration
+Arbitrum Nitro: Custom adapter
+Polygon CDK: Compatible via DA interface
+StarkNet: In development
+Benefits for Rollups
+10x cost reduction vs Ethereum calldata
+Higher throughput: 100GB/hour capacity
+Fast finality: 1-second confirmation
+Ethereum security: Via checkpointing
+DA Node Operation
+Hardware Requirements
+Component	Minimum	Recommended
+CPU	8 cores	16 cores
+RAM	32GB	64GB
+Storage	2TB NVMe	4TB NVMe
+Network	500Mbps	1Gbps
+Node Responsibilities
+Store assigned data blobs
+Respond to sampling requests
+Generate availability proofs
+Participate in erasure coding
+Rewards Structure
+DA Node Rewards = Base Fee × Data Stored
+                + Sampling Rewards × Requests Served
+                + Performance Bonus
+Technical Specifications
+Performance Metrics
+Throughput: 100GB/hour
+Latency: < 100ms attestation
+Availability: 99.999% guaranteed
+Decentralization: 1000+ nodes
+Erasure Coding Parameters
+Data shards (k): 64
+Parity shards (m): 32
+Total shards (n): 96
+Recovery threshold: Any 64 shards
+Cryptographic Primitives
+Commitment: KZG polynomial commitments
+Signatures: BLS12-381
+Hashing: SHA-256 for Merkle trees
+Erasure code: Reed-Solomon
+0G Compute Network
+📖 **Full Documentation**: https://docs.0g.ai/concepts/compute
+🚀 **Quick Start**: https://docs.0g.ai/developer-hub/building-on-0g/compute-network/overview
+🛠️ **SDK Documentation**: https://docs.0g.ai/developer-hub/building-on-0g/compute-network/sdk
+⚡ **CLI Guide**: https://docs.0g.ai/developer-hub/building-on-0g/compute-network/cli
+Overview
+The 0G Compute Network is a decentralized infrastructure for AI inference and fine-tuning, enabling developers to access distributed GPU resources for machine learning workloads without relying on centralized cloud providers.
+
+Architecture
+Network Components
+Service Providers
+Entities that offer compute resources:
+
+Inference Providers: Serve model predictions
+Fine-tuning Providers: Train custom models
+Verification Nodes: Validate computations
+Resource Types
+GPU Nodes: High-performance inference
+CPU Nodes: Light inference and orchestration
+TPU Nodes: Specialized AI workloads (coming soon)
+Request Flow
+Client submits inference/training request
+Router selects optimal provider
+Provider processes request
+Result verification (optional)
+Payment settlement on-chain
+Inference Services
+Supported Models
+LLMs: Llama, Mistral, GPT variants
+Image Models: Stable Diffusion, DALL-E style
+Audio Models: Whisper, TTS systems
+Custom Models: User-uploaded models
+API Interface
+from og_compute import InferenceClient
+
+client = InferenceClient(api_key="your-key")
+response = client.inference(
+    model="llama-3-70b",
+    prompt="Explain quantum computing",
+    max_tokens=500
+)
+Pricing Model
+Pay-per-token: For text models
+Pay-per-image: For image generation
+Pay-per-second: For audio/video
+Subscription plans: For high-volume users
+Fine-tuning Services
+Workflow
+Upload dataset to 0G Storage
+Select base model and parameters
+Submit fine-tuning job
+Monitor training progress
+Deploy fine-tuned model
+Supported Techniques
+LoRA: Low-rank adaptation
+QLoRA: Quantized LoRA
+Full fine-tuning: Complete model updates
+PEFT: Parameter-efficient methods
+Example Configuration
+job_config:
+  base_model: "llama-3-7b"
+  dataset: "ipfs://Qm..."
+  method: "lora"
+  parameters:
+    learning_rate: 1e-4
+    epochs: 3
+    batch_size: 8
+    lora_rank: 16
+Provider Requirements
+Hardware Specifications
+Type	Minimum GPU	RAM	Storage
+Inference	RTX 3090	24GB	500GB
+Fine-tuning	A100 40GB	64GB	2TB
+Enterprise	H100 80GB	128GB	10TB
+Network Requirements
+Bandwidth: 1Gbps symmetric minimum
+Latency: < 50ms to major regions
+Uptime: 99% SLA requirement
+Static IP: Required for routing
+Staking and Rewards
+Provider Rewards = Base Rate × Compute Hours
+                 + Performance Bonus
+                 + Quality Multiplier
+                 - Slashing Penalties
+Quality Assurance
+Verification Mechanisms
+Reproducibility checks: Random re-computation
+Performance monitoring: Latency and throughput
+Result validation: Comparison across providers
+User ratings: Reputation system
+Service Level Agreements
+Metric	Standard	Premium
+Availability	95%	99.9%
+Response Time	< 5s	< 1s
+Accuracy	99%	99.9%
+Support	24h	1h
+Intelligent NFTs (iNFTs)
+📖 **Full Documentation**: https://docs.0g.ai/concepts/inft
+🚀 **Getting Started**: https://docs.0g.ai/developer-hub/building-on-0g/inft/inft-overview
+🔧 **Integration Guide**: https://docs.0g.ai/developer-hub/building-on-0g/inft/integration
+📋 **ERC-7857 Standard**: https://docs.0g.ai/developer-hub/building-on-0g/inft/erc7857
+Overview
+Intelligent NFTs (iNFTs) represent a revolutionary advancement in digital assets, combining the ownership properties of NFTs with embedded AI capabilities. These tokens can interact, learn, and evolve based on user interactions and external data.
+
+Core Concepts
+What Makes NFTs Intelligent?
+Embedded AI Models: Each iNFT contains or references AI models
+Dynamic Behavior: Responses change based on context and history
+Learning Capability: Can be fine-tuned based on interactions
+Autonomous Actions: Can perform tasks independently
+Architecture
+iNFT Token
+├── Metadata (IPFS)
+├── AI Model Reference
+├── Interaction History
+├── State Variables
+└── Access Controls
+ERC-7857 Standard
+Interface Definition
+interface IERC7857 {
+    // Core NFT functions (ERC-721 compatible)
+    function ownerOf(uint256 tokenId) external view returns (address);
+    function transferFrom(address from, address to, uint256 tokenId) external;
+    
+    // AI-specific functions
+    function getModelURI(uint256 tokenId) external view returns (string memory);
+    function updateModel(uint256 tokenId, string memory newModelURI) external;
+    function interact(uint256 tokenId, bytes calldata input) external returns (bytes memory);
+    
+    // Evolution functions
+    function evolve(uint256 tokenId, bytes calldata trainingData) external;
+    function getEvolutionLevel(uint256 tokenId) external view returns (uint256);
+    
+    // Events
+    event ModelUpdated(uint256 indexed tokenId, string newModelURI);
+    event Interaction(uint256 indexed tokenId, address indexed user, bytes input, bytes output);
+    event Evolution(uint256 indexed tokenId, uint256 newLevel);
+}
+Implementation Types
+TEE-Based iNFTs
+Computation in Trusted Execution Environment
+Private key management
+Secure model execution
+Hardware-based attestation
+ZK-Based iNFTs
+Zero-knowledge proof of computation
+Verifiable model inference
+Privacy-preserving interactions
+On-chain verification
+Use Cases
+AI Companions
+Digital beings that:
+
+Learn user preferences
+Develop unique personalities
+Provide personalized assistance
+Maintain conversation history
+Gaming Assets
+Game characters that:
+
+Adapt strategies based on gameplay
+Learn from battles
+Develop unique skills
+Trade learned behaviors
+Creative Agents
+AI artists that:
+
+Generate unique content
+Evolve artistic style
+Collaborate with owners
+Create derivative works
+Educational Assistants
+Tutors that:
+
+Adapt to learning pace
+Personalize curriculum
+Track progress
+Provide feedback
+Development Guide
+Creating an iNFT
+const { iNFTFactory } = require('@0g/inft-sdk');
+
+const factory = new iNFTFactory(provider);
+const inft = await factory.create({
+    name: "AI Companion",
+    symbol: "AIC",
+    modelURI: "ipfs://QmModel...",
+    initialSupply: 100,
+    evolutionEnabled: true
+});
+Interacting with iNFTs
+const response = await inft.interact(
+    tokenId,
+    "Tell me about quantum physics"
+);
+console.log(response); // AI-generated response
+Training and Evolution
+const trainingData = {
+    conversations: [...],
+    feedback: [...],
+    rewards: [...]
+};
+
+await inft.evolve(tokenId, trainingData);
+const level = await inft.getEvolutionLevel(tokenId);
+Marketplace
+Trading iNFTs
+Base value: Underlying NFT worth
+Intelligence premium: Value of trained model
+Rarity factors: Unique behaviors
+Evolution level: Training investment
+Monetization Models
+Usage fees: Charge for interactions
+Subscription access: Recurring revenue
+Training services: Improve others' iNFTs
+Content generation: Sell AI outputs
+DePIN (Decentralized Physical Infrastructure)
+📖 **Full Documentation**: https://docs.0g.ai/concepts/depin
+Overview
+0G's DePIN integration enables the decentralized coordination and monetization of physical infrastructure resources, including compute, storage, and network capacity. This creates a global, permissionless marketplace for infrastructure services.
+
+Core Components
+Resource Providers
+Entities contributing physical resources:
+
+Data centers: Professional facilities
+Home miners: Individual contributors
+Edge devices: IoT and edge computing
+Network operators: Bandwidth providers
+Resource Types
+Compute: CPUs, GPUs, TPUs
+Storage: HDDs, SSDs, tape
+Network: Bandwidth, CDN nodes
+Sensors: IoT data streams
+Economic Model
+Supply Side
+Providers earn rewards for:
+
+Total Earnings = Resource Provision + Utilization Bonus + Staking Rewards
+                - Operating Costs - Network Fees
+Demand Side
+Users pay for:
+
+Spot pricing: Real-time market rates
+Reserved capacity: Guaranteed resources
+Futures contracts: Locked-in pricing
+Subscription plans: Predictable costs
+Market Dynamics
+Automatic pricing: Supply/demand algorithms
+Quality tiers: Performance-based pricing
+Geographic premiums: Location-based rates
+Reputation scoring: Trust-based adjustments
+Infrastructure Coordination
+Resource Discovery
+1. Provider registers resources
+2. Network validates capabilities
+3. Indexing in global registry
+4. Availability broadcasting
+5. Matching with requests
+Job Scheduling
+Intelligent routing based on:
+
+Proximity: Geographic optimization
+Capability: Hardware requirements
+Availability: Real-time capacity
+Cost: Economic optimization
+Reputation: Quality scores
+Fault Tolerance
+Redundancy: Multiple provider backup
+Migration: Seamless job transfer
+Checkpointing: Progress preservation
+Compensation: SLA enforcement
+Provider Onboarding
+Registration Process
+Install 0G node software
+Configure resource allocation
+Stake minimum tokens
+Pass verification tests
+Join provider network
+Verification Requirements
+Resource	Test Type	Duration	Pass Rate
+Compute	Benchmark	1 hour	95%
+Storage	I/O test	24 hours	99%
+Network	Bandwidth	1 hour	90%
+Monitoring and Compliance
+Uptime tracking: Availability metrics
+Performance monitoring: Service quality
+Proof of resource: Periodic validation
+Slashing conditions: Penalty triggers
+Use Cases
+Distributed AI Training
+Coordinate GPUs globally
+Reduce training costs by 70%
+Enable larger model training
+Democratic AI development
+Content Delivery
+Decentralized CDN
+Edge caching network
+Video streaming infrastructure
+Global content distribution
+Scientific Computing
+Climate modeling
+Drug discovery
+Physics simulations
+Genomics research
+IoT Networks
+Sensor data aggregation
+Edge processing
+Real-time analytics
+Device coordination
+AI Alignment
+📖 **Full Documentation**: https://docs.0g.ai/concepts/ai-alignment
+Overview
+AI Alignment in 0G refers to ensuring AI systems behave in ways that are beneficial, safe, and aligned with human values. The decentralized nature of 0G provides unique mechanisms for achieving and maintaining AI alignment through community governance and economic incentives.
+
+Alignment Mechanisms
+Decentralized Governance
+Community voting: Major decisions require token holder approval
+Parameter adjustment: Collectively tune system behavior
+Model curation: Community-vetted AI models
+Safety protocols: Democratically established guidelines
+Economic Incentives
+Alignment through tokenomics:
+
+Alignment Score = Safety Metrics × Performance × Community Rating
+Rewards = Base Rate × Alignment Score
+Transparency Requirements
+Open training data: Publicly auditable datasets
+Model architecture: Published specifications
+Decision logs: Traceable AI outputs
+Performance metrics: Public dashboards
+Safety Frameworks
+Model Verification
+Before deployment, models undergo:
+
+Safety testing: Adversarial evaluation
+Bias assessment: Fairness metrics
+Capability limits: Boundary testing
+Alignment checks: Value verification
+Runtime Monitoring
+Continuous oversight includes:
+
+Output filtering: Content moderation
+Anomaly detection: Unusual behavior flags
+Usage patterns: Abuse prevention
+Feedback loops: User reporting
+Intervention Protocols
+When issues arise:
+
+Detection → Assessment → Mitigation → Resolution
+    ↓           ↓            ↓            ↓
+Automated   Committee    Temporary    Permanent
+Flagging    Review       Measures     Solutions
+Alignment Node Network
+Node Responsibilities
+Alignment nodes perform:
+
+Model evaluation: Test AI outputs
+Safety validation: Check compliance
+Metric computation: Calculate scores
+Report generation: Document findings
+Participation Requirements
+Stake: 50,000 0G tokens
+Hardware: GPU for model testing
+Expertise: Pass alignment exam
+Availability: 90% uptime
+Reward Distribution
+Node Rewards = Evaluations Performed × Accuracy Rate
+             + Bonus for Critical Findings
+             + Participation Incentives
+Community Standards
+Core Principles
+Beneficial AI: Maximize positive impact
+Harm prevention: Minimize negative outcomes
+Fairness: Equal access and treatment
+Privacy: Respect user data
+Transparency: Open development
+Prohibited Uses
+Surveillance without consent
+Manipulation or deception
+Discrimination or bias
+Harmful content generation
+Unauthorized data processing
+Enforcement
+Automated detection: Rule-based filters
+Community reporting: User flagging
+Committee review: Human oversight
+Penalties: Token slashing, exclusion
+Research Initiatives
+Current Focus Areas
+Value learning: Understanding human preferences
+Robustness: Handling edge cases
+Interpretability: Explaining decisions
+Scalable oversight: Efficient monitoring
+Collaboration Programs
+Academic partnerships: University research
+Bounty programs: Security researchers
+Grants: Alignment research funding
+Competitions: Innovation challenges
+================================================================================ SECTION 4: DEVELOPER DOCUMENTATION
+🚀 **Developer Hub**: https://docs.0g.ai/developer-hub/getting-started
+🧪 **Testnet Guide**: https://docs.0g.ai/developer-hub/testnet/testnet-overview
+🏗️ **Building on 0G**: https://docs.0g.ai/developer-hub/building-on-0g/introduction
+
+Getting Started with 0G Development
+📖 **Complete Getting Started Guide**: https://docs.0g.ai/developer-hub/getting-started
+Prerequisites
+Before you begin developing on 0G, ensure you have:
+
+Development Environment
+Node.js: Version 18.0.0 or higher
+Git: For version control
+Code editor: VS Code recommended
+Terminal: Bash or PowerShell
+Blockchain Tools
+MetaMask: Or compatible Web3 wallet
+Hardhat/Foundry: Smart contract development
+0G CLI: Command-line interface
+Knowledge Requirements
+Basic understanding of blockchain concepts
+Familiarity with JavaScript/TypeScript
+Smart contract basics (Solidity)
+API interaction experience
+Installation
+Install 0G CLI
+npm install -g @0g/cli
+0g --version
+Install SDKs
+# JavaScript/TypeScript SDK
+npm install @0g/sdk
+
+# Python SDK
+pip install 0g-sdk
+
+# Go SDK
+go get github.com/0glabs/0g-sdk-go
+Configure Environment
+Create .env file:
+
+# Network Configuration
+OG_NETWORK=testnet
+OG_RPC_URL=https://evmrpc-testnet.0g.ai
+OG_CHAIN_ID=16600
+
+# Account Configuration
+PRIVATE_KEY=your_private_key_here
+WALLET_ADDRESS=your_wallet_address
+
+# Storage Configuration
+STORAGE_NODE_URL=https://storage-testnet.0g.ai
+STORAGE_INDEXER_URL=https://indexer-testnet.0g.ai
+
+# DA Configuration
+DA_ENTRANCE_CONTRACT=0x1234...
+DA_NODE_URL=https://da-testnet.0g.ai
+
+# Compute Configuration
+COMPUTE_API_URL=https://api-testnet.0g.ai
+COMPUTE_API_KEY=your_api_key
+Quick Start Examples
+Deploy a Smart Contract
+const { ethers } = require('hardhat');
+
+async function deploy() {
+    const Contract = await ethers.getContractFactory("MyContract");
+    const contract = await Contract.deploy();
+    await contract.deployed();
+    
+    console.log("Contract deployed to:", contract.address);
+}
+
+deploy().catch(console.error);
+Store Data
+const { StorageClient } = require('@0g/sdk');
+
+async function storeData() {
+    const client = new StorageClient({
+        nodeUrl: process.env.STORAGE_NODE_URL,
+        privateKey: process.env.PRIVATE_KEY
+    });
+    
+    const data = Buffer.from("Hello, 0G!");
+    const result = await client.upload(data);
+    console.log("Data stored with root:", result.root);
+}
+AI Inference
+from og_sdk import InferenceClient
+
+client = InferenceClient(api_key=os.getenv("COMPUTE_API_KEY"))
+
+response = client.generate(
+    model="llama-3-8b",
+    prompt="What is the future of AI?",
+    max_tokens=200
+)
+
+print(response.text)
+Network Configuration
+Testnet (Galileo)
+Parameter	Value
+Network Name	0G Galileo Testnet
+RPC URL	https://evmrpc-testnet.0g.ai
+Chain ID	16600
+Currency	A0GI
+Explorer	https://explorer-testnet.0g.ai
+Contract Addresses
+const CONTRACTS = {
+    storage: "0x1234567890abcdef...",
+    da: "0xabcdef1234567890...",
+    staking: "0x9876543210fedcba...",
+    governance: "0xfedcba9876543210..."
+};
+Faucet
+Get test tokens:
+
+curl -X POST https://faucet-testnet.0g.ai/api/claim \
+  -H "Content-Type: application/json" \
+  -d '{"address": "0xYourAddress"}'
+Building on 0G
+Smart Contract Development
+📋 **Deploy Contracts Guide**: https://docs.0g.ai/developer-hub/building-on-0g/contracts-on-0g/deploy-contracts
+🔧 **Precompiles Overview**: https://docs.0g.ai/developer-hub/building-on-0g/contracts-on-0g/precompiles/precompiles-overview
+⚖️ **Staking Interfaces**: https://docs.0g.ai/developer-hub/building-on-0g/contracts-on-0g/staking-interfaces
+Setting Up Hardhat Project
+mkdir my-0g-project
+cd my-0g-project
+npm init -y
+npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers
+npx hardhat init
+Hardhat Configuration
+// hardhat.config.js
+require("@nomiclabs/hardhat-ethers");
+
+module.exports = {
+  solidity: "0.8.19",
+  networks: {
+    "0g-testnet": {
+      url: "https://evmrpc-testnet.0g.ai",
+      accounts: [process.env.PRIVATE_KEY],
+      chainId: 16600
+    }
+  }
+};
+Example Contract
+// contracts/DataRegistry.sol
+pragma solidity ^0.8.19;
+
+contract DataRegistry {
+    mapping(address => bytes32[]) public userDataRoots;
+    
+    event DataStored(address indexed user, bytes32 root);
+    
+    function storeDataRoot(bytes32 root) external {
+        userDataRoots[msg.sender].push(root);
+        emit DataStored(msg.sender, root);
+    }
+    
+    function getUserData(address user) 
+        external 
+        view 
+        returns (bytes32[] memory) 
+    {
+        return userDataRoots[user];
+    }
+}
+Deployment Script
+// scripts/deploy.js
+async function main() {
+    const [deployer] = await ethers.getSigners();
+    console.log("Deploying with account:", deployer.address);
+    
+    const DataRegistry = await ethers.getContractFactory("DataRegistry");
+    const registry = await DataRegistry.deploy();
+    await registry.deployed();
+    
+    console.log("DataRegistry deployed to:", registry.address);
+}
+
+main()
+    .then(() => process.exit(0))
+    .catch(error => {
+        console.error(error);
+        process.exit(1);
+    });
+Storage Integration
+TypeScript SDK Usage
+import { StorageClient, DataInfo } from '@0g/storage-sdk';
+
+class DataManager {
+    private client: StorageClient;
+    
+    constructor(privateKey: string) {
+        this.client = new StorageClient({
+            nodeUrl: 'https://storage-testnet.0g.ai',
+            indexerUrl: 'https://indexer-testnet.0g.ai',
+            privateKey
+        });
+    }
+    
+    async uploadFile(filePath: string): Promise<string> {
+        const data = await fs.readFile(filePath);
+        const info: DataInfo = await this.client.upload(data);
+        return info.root;
+    }
+    
+    async downloadFile(root: string, outputPath: string): Promise<void> {
+        const data = await this.client.download(root);
+        await fs.writeFile(outputPath, data);
+    }
+    
+    async uploadLargeFile(filePath: string): Promise<string> {
+        // For files > 256MB, use streaming
+        const stream = fs.createReadStream(filePath);
+        const info = await this.client.uploadStream(stream);
+        return info.root;
+    }
+}
+Go SDK Usage
+package main
+
+import (
+    "context"
+    "fmt"
+    "github.com/0glabs/0g-storage-go/client"
+)
+
+func main() {
+    // Initialize client
+    storageClient := client.NewClient(
+        "https://storage-testnet.0g.ai",
+        "your_private_key",
+    )
+    
+    // Upload data
+    data := []byte("Hello from Go!")
+    root, err := storageClient.Upload(context.Background(), data)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Printf("Uploaded with root: %s\n", root)
+    
+    // Download data
+    downloaded, err := storageClient.Download(context.Background(), root)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Printf("Downloaded: %s\n", string(downloaded))
+}
+Storage CLI Commands
+# Upload a file
+0g storage upload --file ./data.json
+
+# Download by root hash
+0g storage download --root 0x1234... --output ./downloaded.json
+
+# List user's stored files
+0g storage list --address 0xYourAddress
+
+# Check storage node status
+0g storage status --node https://storage-testnet.0g.ai
+Data Availability Integration
+Posting Data to DA
+const { DAClient } = require('@0g/da-sdk');
+
+async function postToDA() {
+    const client = new DAClient({
+        rpcUrl: process.env.OG_RPC_URL,
+        privateKey: process.env.PRIVATE_KEY,
+        daContract: process.env.DA_ENTRANCE_CONTRACT
+    });
+    
+    // Post raw data
+    const data = Buffer.from("Important data for DA");
+    const receipt = await client.postData(data);
+    
+    console.log("DA submission:", {
+        epochNumber: receipt.epochNumber,
+        quorumId: receipt.quorumId,
+        blobIndex: receipt.blobIndex,
+        dataCommitment: receipt.dataCommitment
+    });
+}
+Retrieving DA Data
+async function retrieveFromDA() {
+    const client = new DAClient({
+        nodeUrl: process.env.DA_NODE_URL
+    });
+    
+    const blobData = await client.getBlob(
+        epochNumber,
+        quorumId,
+        blobIndex
+    );
+    
+    console.log("Retrieved data:", blobData.toString());
+}
+Rollup Integration
+// For OP Stack integration
+const { OpStackDA } = require('@0g/rollup-adapters');
+
+const daProvider = new OpStackDA({
+    daUrl: process.env.DA_NODE_URL,
+    daContract: process.env.DA_ENTRANCE_CONTRACT
+});
+
+// Configure your OP Stack deployment
+const config = {
+    dataAvailabilityType: "0g",
+    dataAvailabilityProvider: daProvider,
+    // ... other config
+};
+Compute Network Integration
+Inference SDK
+import { InferenceClient, ModelConfig } from '@0g/compute-sdk';
+
+class AIService {
+    private client: InferenceClient;
+    
+    constructor(apiKey: string) {
+        this.client = new InferenceClient({
+            apiUrl: 'https://api-testnet.0g.ai',
+            apiKey
+        });
+    }
+    
+    async generateText(prompt: string): Promise<string> {
+        const response = await this.client.inference({
+            model: 'llama-3-8b',
+            prompt,
+            maxTokens: 500,
+            temperature: 0.7
+        });
+        
+        return response.text;
+    }
+    
+    async generateImage(prompt: string): Promise<Buffer> {
+        const response = await this.client.inference({
+            model: 'stable-diffusion-xl',
+            prompt,
+            width: 1024,
+            height: 1024,
+            steps: 30
+        });
+        
+        return response.image;
+    }
+    
+    async transcribeAudio(audioBuffer: Buffer): Promise<string> {
+        const response = await this.client.inference({
+            model: 'whisper-large',
+            audio: audioBuffer,
+            language: 'en'
+        });
+        
+        return response.transcript;
+    }
+}
+Fine-tuning CLI
+# Prepare dataset
+0g compute prepare-dataset \
+  --input ./raw_data.jsonl \
+  --output ./prepared_dataset.json
+
+# Upload dataset to storage
+0g storage upload --file ./prepared_dataset.json
+# Returns: root_hash_123...
+
+# Start fine-tuning job
+0g compute fine-tune \
+  --base-model llama-3-7b \
+  --dataset root_hash_123... \
+  --method lora \
+  --epochs 3 \
+  --learning-rate 1e-4
+
+# Monitor job progress
+0g compute job-status --job-id job_456...
+
+# Deploy fine-tuned model
+0g compute deploy --model-id model_789... --name "my-custom-model"
+Marketplace Integration
+const { ComputeMarketplace } = require('@0g/compute-sdk');
+
+async function listModel() {
+    const marketplace = new ComputeMarketplace({
+        privateKey: process.env.PRIVATE_KEY
+    });
+    
+    // List a model for others to use
+    const listing = await marketplace.list({
+        modelId: 'model_789...',
+        name: 'Custom Finance LLM',
+        description: 'Fine-tuned for financial analysis',
+        pricePerRequest: '0.001', // in 0G tokens
+        category: 'finance'
+    });
+    
+    console.log("Model listed:", listing.id);
+}
+
+async function purchaseAccess() {
+    const marketplace = new ComputeMarketplace();
+    
+    // Purchase access to a model
+    const access = await marketplace.purchase({
+        listingId: 'listing_123...',
+        duration: 30 * 24 * 60 * 60, // 30 days in seconds
+        payment: '30' // in 0G tokens
+    });
+    
+    console.log("Access granted:", access.apiKey);
+}
+iNFT Development
+Creating iNFT Collection
+// contracts/MyiNFT.sol
+pragma solidity ^0.8.19;
+
+import "@0g/contracts/iNFT/ERC7857.sol";
+
+contract MyAICompanion is ERC7857 {
+    uint256 private _tokenIdCounter;
+    
+    mapping(uint256 => string) private _personalities;
+    mapping(uint256 => uint256) private _interactionCount;
+    
+    constructor() ERC7857("AI Companion", "AIC") {}
+    
+    function mint(
+        address to,
+        string memory modelURI,
+        string memory personality
+    ) public returns (uint256) {
+        uint256 tokenId = _tokenIdCounter++;
+        _safeMint(to, tokenId);
+        _setModelURI(tokenId, modelURI);
+        _personalities[tokenId] = personality;
+        
+        return tokenId;
+    }
+    
+    function interact(
+        uint256 tokenId,
+        bytes calldata input
+    ) public override returns (bytes memory) {
+        require(_exists(tokenId), "Token does not exist");
+        
+        _interactionCount[tokenId]++;
+        
+        // Call AI model through oracle or direct integration
+        bytes memory response = _callAIModel(
+            tokenId,
+            input,
+            _personalities[tokenId]
+        );
+        
+        emit Interaction(
+            tokenId,
+            msg.sender,
+            input,
+            response
+        );
+        
+        return response;
+    }
+    
+    function evolve(
+        uint256 tokenId,
+        bytes calldata trainingData
+    ) public override {
+        require(ownerOf(tokenId) == msg.sender, "Not owner");
+        
+        // Submit training job to compute network
+        string memory newModelURI = _submitTraining(
+            _getModelURI(tokenId),
+            trainingData
+        );
+        
+        _setModelURI(tokenId, newModelURI);
+        _incrementEvolution(tokenId);
+        
+        emit Evolution(tokenId, getEvolutionLevel(tokenId));
+    }
+}
+iNFT SDK Usage
+import { iNFTClient, iNFTMetadata } from '@0g/inft-sdk';
+
+class iNFTManager {
+    private client: iNFTClient;
+    
+    constructor(contractAddress: string, privateKey: string) {
+        this.client = new iNFTClient({
+            contractAddress,
+            privateKey,
+            rpcUrl: process.env.OG_RPC_URL
+        });
+    }
+    
+    async createCompanion(
+        name: string,
+        personality: string,
+        baseModel: string = 'llama-3-8b'
+    ): Promise<number> {
+        // Upload base model configuration
+        const modelConfig = {
+            base: baseModel,
+            systemPrompt: `You are ${name}, a ${personality} AI companion.`,
+            parameters: {
+                temperature: 0.8,
+                maxTokens: 500
+            }
+        };
+        
+        const modelURI = await this.uploadModel(modelConfig);
+        
+        // Mint iNFT
+        const tokenId = await this.client.mint({
+            modelURI,
+            metadata: {
+                name,
+                personality,
+                created: Date.now()
+            }
+        });
+        
+        return tokenId;
+    }
+    
+    async chat(tokenId: number, message: string): Promise<string> {
+        const response = await this.client.interact(
+            tokenId,
+            Buffer.from(message)
+        );
+        
+        return response.toString();
+    }
+    
+    async trainCompanion(
+        tokenId: number,
+        conversations: Array<{user: string, assistant: string}>
+    ): Promise<void> {
+        const trainingData = {
+            format: 'conversational',
+            data: conversations,
+            config: {
+                method: 'lora',
+                epochs: 2,
+                learningRate: 5e-5
+            }
+        };
+        
+        await this.client.evolve(
+            tokenId,
+            Buffer.from(JSON.stringify(trainingData))
+        );
+    }
+}
+Rollup Integration
+OP Stack on 0G DA
+📖 **OP Stack Integration Guide**: https://docs.0g.ai/developer-hub/building-on-0g/rollups-and-appchains/op-stack-on-0g-da
+Prerequisites
+OP Stack knowledge
+Docker and Docker Compose
+Access to 0G testnet
+Configuration
+# docker-compose.yml
+version: '3.8'
+
+services:
+  op-geth:
+    image: ethereum-optimism/op-geth:latest
+    environment:
+      - GETH_ROLLUP_DATAAVILABILITYTYPE=0g
+      - GETH_0G_DA_URL=https://da-testnet.0g.ai
+      - GETH_0G_DA_CONTRACT=0x1234...
+    
+  op-node:
+    image: ethereum-optimism/op-node:latest
+    environment:
+      - OP_NODE_DA_TYPE=0g
+      - OP_NODE_0G_DA_ENDPOINT=https://da-testnet.0g.ai
+      - OP_NODE_0G_ENTRANCE_CONTRACT=0x1234...
+Deployment Steps
+Deploy L1 contracts
+Configure DA parameters
+Launch sequencer
+Start op-node and op-geth
+Configure block explorer
+Cost Comparison
+DA Layer	Cost per MB	Throughput	Finality
+Ethereum	$50-100	1.5 MB/block	12 min
+0G DA	$0.005	100 GB/hour	1 sec
+Arbitrum Nitro on 0G DA
+📖 **Arbitrum Nitro Integration Guide**: https://docs.0g.ai/developer-hub/building-on-0g/rollups-and-appchains/arbitrum-nitro-on-0g-da
+Setup Instructions
+# Clone Arbitrum Nitro
+git clone https://github.com/0glabs/arbitrum-nitro-0g
+cd arbitrum-nitro-0g
+
+# Configure 0G DA
+export DA_MODE=0g
+export OG_DA_URL=https://da-testnet.0g.ai
+export OG_DA_CONTRACT=0x5678...
+
+# Build and deploy
+./scripts/deploy.sh
+Integration Points
+Sequencer posts batches to 0G DA
+Validators retrieve from 0G DA
+State roots posted to Ethereum
+Fraud proofs reference 0G data
+================================================================================ SECTION 5: NODE OPERATIONS
+🏠 **Node Operations Overview**: https://docs.0g.ai/run-a-node/overview
+⚡ **Validator Node Guide**: https://docs.0g.ai/run-a-node/validator-node
+💾 **Storage Node Guide**: https://docs.0g.ai/run-a-node/storage-node
+🔄 **DA Node Guide**: https://docs.0g.ai/run-a-node/da-node
+📚 **Archival Node Guide**: https://docs.0g.ai/run-a-node/archival-node
+🐳 **Community Docker Repo**: https://docs.0g.ai/run-a-node/community-docker-repo
+
+Running a Validator Node
+📖 **Complete Validator Guide**: https://docs.0g.ai/run-a-node/validator-node
+System Requirements
+Hardware Specifications
+Component	Minimum	Recommended	Optimal
+CPU	16 cores	32 cores	64 cores
+RAM	64 GB	128 GB	256 GB
+Storage	2 TB NVMe	4 TB NVMe	8 TB NVMe
+Network	1 Gbps	10 Gbps	10 Gbps
+Operating System
+Ubuntu 22.04 LTS (recommended)
+Debian 11
+CentOS 8
+macOS (for testing only)
+Network Requirements
+Static IP address
+Open ports: 26656, 26657, 8545, 8546
+Low latency to other validators (< 100ms)
+Installation
+Install Dependencies
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install required packages
+sudo apt install -y build-essential git curl wget jq
+
+# Install Go
+wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+source ~/.bashrc
+Build 0G Binary
+# Clone repository
+git clone https://github.com/0glabs/0g-chain
+cd 0g-chain
+
+# Checkout latest stable version
+git checkout v0.2.0
+
+# Build binary
+make install
+
+# Verify installation
+0gchaind version
+Initialize Node
+# Initialize node with moniker
+0gchaind init "your-validator-name" --chain-id galileo-16600
+
+# Download genesis file
+wget -O ~/.0gchain/config/genesis.json \
+  https://github.com/0glabs/0g-chain/raw/main/networks/testnet/genesis.json
+
+# Set persistent peers
+PEERS="peer1@ip1:26656,peer2@ip2:26656"
+sed -i "s/persistent_peers = \"\"/persistent_peers = \"$PEERS\"/" \
+  ~/.0gchain/config/config.toml
+Configuration
+Config.toml Settings
+# ~/.0gchain/config/config.toml
+
+[rpc]
+laddr = "tcp://0.0.0.0:26657"
+cors_allowed_origins = ["*"]
+
+[p2p]
+laddr = "tcp://0.0.0.0:26656"
+max_num_inbound_peers = 100
+max_num_outbound_peers = 100
+
+[mempool]
+size = 10000
+max_txs_bytes = 1073741824
+
+[consensus]
+timeout_propose = "3s"
+timeout_commit = "1s"
+
+[instrumentation]
+prometheus = true
+prometheus_listen_addr = ":26660"
+App.toml Settings
+# ~/.0gchain/config/app.toml
+
+minimum-gas-prices = "0.00025ua0gi"
+
+[api]
+enable = true
+address = "tcp://0.0.0.0:1317"
+
+[grpc]
+enable = true
+address = "0.0.0.0:9090"
+
+[json-rpc]
+enable = true
+address = "0.0.0.0:8545"
+ws-address = "0.0.0.0:8546"
+Running the Node
+Create Systemd Service
+sudo tee /etc/systemd/system/0gchaind.service > /dev/null <<EOF
+[Unit]
+Description=0G Chain Validator
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=/home/$USER/go/bin/0gchaind start
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+Start Node
+# Enable and start service
+sudo systemctl daemon-reload
+sudo systemctl enable 0gchaind
+sudo systemctl start 0gchaind
+
+# Check status
+sudo systemctl status 0gchaind
+
+# View logs
+sudo journalctl -u 0gchaind -f
+Sync Status
+# Check sync status
+0gchaind status | jq .SyncInfo
+
+# Wait for catching_up to be false
+while true; do
+  sync=$(0gchaind status | jq -r .SyncInfo.catching_up)
+  if [ "$sync" = "false" ]; then
+    echo "Node is synced!"
+    break
+  fi
+  echo "Still syncing..."
+  sleep 10
+done
+Becoming a Validator
+Create Validator Key
+# Create new key
+0gchaind keys add validator
+
+# Or recover existing key
+0gchaind keys add validator --recover
+
+# List keys
+0gchaind keys list
+Fund Validator Account
+# Get your address
+VALIDATOR_ADDR=$(0gchaind keys show validator -a)
+
+# Request testnet tokens from faucet
+curl -X POST https://faucet-testnet.0g.ai/api/claim \
+  -H "Content-Type: application/json" \
+  -d "{\"address\": \"$VALIDATOR_ADDR\"}"
+
+# Check balance
+0gchaind query bank balances $VALIDATOR_ADDR
+Create Validator Transaction
+0gchaind tx staking create-validator \
+  --amount=100000000000000000000ua0gi \
+  --pubkey=$(0gchaind tendermint show-validator) \
+  --moniker="your-validator-name" \
+  --website="https://your-website.com" \
+  --details="Detailed description of your validator" \
+  --chain-id=galileo-16600 \
+  --commission-rate="0.10" \
+  --commission-max-rate="0.20" \
+  --commission-max-change-rate="0.01" \
+  --min-self-delegation="1" \
+  --gas=auto \
+  --gas-adjustment=1.4 \
+  --gas-prices=0.00025ua0gi \
+  --from=validator
+Verify Validator Status
+# Check validator info
+0gchaind query staking validator $(0gchaind keys show validator --bech val -a)
+
+# Check if in active set
+0gchaind query staking validators --limit 100 | grep moniker
+Monitoring
+Prometheus Metrics
+# prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: '0g-validator'
+    static_configs:
+      - targets: ['localhost:26660']
+Key Metrics to Monitor
+Block height progression
+Peer count
+Missed blocks
+Voting power
+Commission earned
+Alerting Rules
+groups:
+  - name: validator_alerts
+    rules:
+      - alert: HighMissedBlocks
+        expr: tendermint_consensus_validator_missed_blocks > 100
+        annotations:
+          summary: "Validator missing blocks"
+      
+      - alert: LowPeerCount
+        expr: tendermint_p2p_peers < 10
+        annotations:
+          summary: "Low peer connectivity"
+Maintenance
+Backup
+# Backup validator key
+cp ~/.0gchain/config/priv_validator_key.json ~/backup/
+cp ~/.0gchain/data/priv_validator_state.json ~/backup/
+
+# Backup node key
+cp ~/.0gchain/config/node_key.json ~/backup/
+Updates
+# Stop node
+sudo systemctl stop 0gchaind
+
+# Update binary
+cd 0g-chain
+git fetch
+git checkout v0.2.1
+make install
+
+# Start node
+sudo systemctl start 0gchaind
+Troubleshooting
+Issue	Solution
+Node not syncing	Check peers, firewall, genesis
+High CPU usage	Increase resources, check debug.log
+Missed blocks	Check time sync, network latency
+Low peers	Add more persistent peers
+Running a Storage Node
+📖 **Complete Storage Node Guide**: https://docs.0g.ai/run-a-node/storage-node
+Prerequisites
+Hardware Requirements
+Component	Minimum	Recommended
+CPU	8 cores	16 cores
+RAM	32 GB	64 GB
+Storage	10 TB HDD	50 TB HDD
+Network	100 Mbps	1 Gbps
+Software Requirements
+Ubuntu 20.04+ or Debian 11+
+Docker and Docker Compose
+Go 1.21+
+Git
+Installation
+Quick Start with Docker
+# Pull official image
+docker pull 0glabs/storage-node:latest
+
+# Create data directory
+mkdir -p ~/0g-storage-node/data
+
+# Run storage node
+docker run -d \
+  --name 0g-storage \
+  -p 5678:5678 \
+  -p 5679:5679 \
+  -v ~/0g-storage-node/data:/data \
+  -e PRIVATE_KEY=your_private_key \
+  -e MINE_CONTRACT=0x1234... \
+  0glabs/storage-node:latest
+Build from Source
+# Clone repository
+git clone https://github.com/0glabs/0g-storage-node
+cd 0g-storage-node
+
+# Build binary
+make build
+
+# Install
+sudo mv build/0g-storage /usr/local/bin/
+Configuration
+Create Config File
+# config.toml
+
+# Network settings
+[network]
+listen_address = "0.0.0.0:5678"
+bootstrap_nodes = [
+  "/ip4/1.2.3.4/tcp/5678/p2p/peer_id_1",
+  "/ip4/5.6.7.8/tcp/5678/p2p/peer_id_2"
+]
+
+# Chain settings
+[chain]
+rpc_endpoint = "https://evmrpc-testnet.0g.ai"
+chain_id = 16600
+mine_contract = "0x1234..."
+flow_contract = "0x5678..."
+
+# Storage settings
+[storage]
+data_path = "/data/storage"
+max_storage = "10TB"
+shard_size = 1048576  # 1MB
+
+# Miner settings
+[miner]
+enabled = true
+private_key = "your_private_key_here"
+submission_gas = 1000000
+reward_address = "0xYourRewardAddress"
+
+# API settings
+[api]
+enabled = true
+listen_address = "0.0.0.0:5679"
+max_request_size = 134217728  # 128MB
+Environment Variables
+# .env file
+PRIVATE_KEY=0x...
+CHAIN_RPC=https://evmrpc-testnet.0g.ai
+MINE_CONTRACT=0x...
+FLOW_CONTRACT=0x...
+BOOTSTRAP_NODES=node1,node2,node3
+Running the Node
+Using Systemd
+# Create service file
+sudo tee /etc/systemd/system/0g-storage.service > /dev/null <<EOF
+[Unit]
+Description=0G Storage Node
+After=network.target
+
+[Service]
+Type=simple
+User=$USER
+ExecStart=/usr/local/bin/0g-storage --config /home/$USER/0g-storage/config.toml
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start service
+sudo systemctl enable 0g-storage
+sudo systemctl start 0g-storage
+Using Docker Compose
+# docker-compose.yml
+version: '3.8'
+
+services:
+  storage-node:
+    image: 0glabs/storage-node:latest
+    container_name: 0g-storage
+    ports:
+      - "5678:5678"  # P2P port
+      - "5679:5679"  # API port
+    volumes:
+      - ./data:/data
+      - ./config.toml:/config.toml
+    environment:
+      - CONFIG_PATH=/config.toml
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+Storage Mining
+Register as Storage Provider
+# Using CLI
+0g-storage register \
+  --contract 0x1234... \
+  --stake 10000 \
+  --capacity 10TB
+
+# Or via script
+curl -X POST http://localhost:5679/admin/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "stake": "10000000000000000000000",
+    "capacity": "10995116277760"
+  }'
+Mining Configuration
+[mining]
+# Proof of Random Access settings
+proof_period = 3600  # 1 hour
+sample_size = 1024   # Number of samples per proof
+parallel_proofs = 4  # Concurrent proof generation
+
+# Optimization settings
+cache_size = "10GB"
+prefetch_enabled = true
+compression = "lz4"
+Monitor Mining Performance
+# Check mining status
+curl http://localhost:5679/mining/status
+
+# View recent proofs
+curl http://localhost:5679/mining/proofs?limit=10
+
+# Check earnings
+curl http://localhost:5679/mining/earnings
+API Endpoints
+Storage API
+# Upload file
+curl -X POST http://localhost:5679/upload \
+  -F "file=@data.json"
+
+# Download file
+curl http://localhost:5679/download/0x1234...
+
+# Get file info
+curl http://localhost:5679/info/0x1234...
+Management API
+# Node status
+curl http://localhost:5679/status
+
+# Peer info
+curl http://localhost:5679/peers
+
+# Storage stats
+curl http://localhost:5679/stats
+Monitoring
+Prometheus Metrics
+# Exposed metrics
+storage_node_capacity_bytes
+storage_node_used_bytes
+storage_node_files_count
+storage_node_upload_bytes_total
+storage_node_download_bytes_total
+storage_node_proofs_submitted
+storage_node_proofs_accepted
+storage_node_earnings_total
+Grafana Dashboard
+{
+  "dashboard": {
+    "title": "0G Storage Node",
+    "panels": [
+      {
+        "title": "Storage Utilization",
+        "targets": [
+          {
+            "expr": "storage_node_used_bytes / storage_node_capacity_bytes * 100"
+          }
+        ]
+      },
+      {
+        "title": "Network Traffic",
+        "targets": [
+          {
+            "expr": "rate(storage_node_upload_bytes_total[5m])"
+          },
+          {
+            "expr": "rate(storage_node_download_bytes_total[5m])"
+          }
+        ]
+      }
+    ]
+  }
+}
+Optimization
+Performance Tuning
+# System settings
+echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
+echo 'net.ipv4.tcp_congestion_control=bbr' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+# Disk optimization
+sudo tune2fs -o journal_data_writeback /dev/sda1
+sudo tune2fs -O ^has_journal /dev/sda1
+Storage Layout
+/data/
+├── storage/        # Data chunks
+│   ├── 00/
+│   ├── 01/
+│   └── ...
+├── metadata/       # File metadata
+├── proofs/         # Generated proofs
+└── cache/          # Hot data cache
+Running a DA Node
+📖 **Complete DA Node Guide**: https://docs.0g.ai/run-a-node/da-node
+Overview
+DA (Data Availability) nodes ensure that data posted to the network remains available for sampling and retrieval. They are crucial for rollup security and overall network health.
+
+Requirements
+Hardware Specifications
+Component	Minimum	Recommended
+CPU	8 cores	16 cores
+RAM	32 GB	64 GB
+Storage	2 TB NVMe	4 TB NVMe
+Network	500 Mbps	1 Gbps
+Network Configuration
+Public IP address (recommended)
+Open ports: 34000 (P2P), 34001 (RPC), 34002 (Metrics)
+Low latency to validators
+Installation
+Using Docker
+# Pull DA node image
+docker pull 0glabs/da-node:latest
+
+# Create directories
+mkdir -p ~/0g-da-node/{data,config}
+
+# Generate node key
+docker run --rm 0glabs/da-node:latest generate-key > ~/0g-da-node/config/node.key
+Build from Source
+# Clone repository
+git clone https://github.com/0glabs/0g-da-node
+cd 0g-da-node
+
+# Build
+make build
+
+# Install
+sudo cp build/da-node /usr/local/bin/
+Configuration
+Node Configuration
+# config.yaml
+
+# Identity
+identity:
+  key_file: "./config/node.key"
+  peer_id_file: "./config/peer.id"
+
+# Network
+network:
+  listen_addr: "0.0.0.0:34000"
+  announce_addr: "YOUR_PUBLIC_IP:34000"
+  bootstrap_peers:
+    - "/ip4/1.2.3.4/tcp/34000/p2p/12D3..."
+    - "/ip4/5.6.7.8/tcp/34000/p2p/34F5..."
+
+# Chain connection
+chain:
+  rpc_url: "https://evmrpc-testnet.0g.ai"
+  ws_url: "wss://evmws-testnet.0g.ai"
+  chain_id: 16600
+  da_entrance_contract: "0xDAEntrance..."
+  da_signers_contract: "0xDASigners..."
+
+# Storage
+storage:
+  data_dir: "./data"
+  max_blob_size: 4194304  # 4MB
+  gc_interval: 3600       # 1 hour
+  retention_period: 604800 # 7 days
+
+# Sampling
+sampling:
+  enable: true
+  sample_interval: 12  # seconds
+  samples_per_blob: 20
+  concurrency: 10
+
+# API
+api:
+  rest_addr: "0.0.0.0:34001"
+  max_request_size: 4194304
+  rate_limit: 100  # requests per second
+
+# Metrics
+metrics:
+  enable: true
+  addr: "0.0.0.0:34002"
+Signer Configuration (for DA signers)
+# signer.yaml
+
+signer:
+  enable: true
+  private_key: "0x..."  # Your signer private key
+  
+  # BLS key for signature aggregation
+  bls_key_file: "./config/bls.key"
+  
+  # Signing parameters
+  max_concurrent_signing: 100
+  signing_timeout: 5s
+  
+  # On-chain registration
+  auto_register: true
+  registration_bond: "100000000000000000000"  # 100 tokens
+Running the Node
+Docker Compose Setup
+# docker-compose.yml
+version: '3.8'
+
+services:
+  da-node:
+    image: 0glabs/da-node:latest
+    container_name: 0g-da-node
+    ports:
+      - "34000:34000"  # P2P
+      - "34001:34001"  # RPC
+      - "34002:34002"  # Metrics
+    volumes:
+      - ./data:/data
+      - ./config:/config
+    command: ["run", "--config", "/config/config.yaml"]
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    
+  # Optional: Prometheus for monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: da-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+volumes:
+  prometheus_data:
+Systemd Service
+# /etc/systemd/system/0g-da-node.service
+[Unit]
+Description=0G Data Availability Node
+After=network.target
+
+[Service]
+Type=simple
+User=0g-da
+Group=0g-da
+WorkingDirectory=/home/0g-da
+ExecStart=/usr/local/bin/da-node run --config /home/0g-da/config/config.yaml
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+Becoming a DA Signer
+Register as Signer
+# Using CLI
+da-node signer register \
+  --private-key 0x... \
+  --bond 100 \
+  --chain-rpc https://evmrpc-testnet.0g.ai
+
+# Verify registration
+da-node signer status \
+  --address 0xYourAddress \
+  --chain-rpc https://evmrpc-testnet.0g.ai
+Generate BLS Keys
+# Generate BLS keypair
+da-node bls generate \
+  --output ./config/bls.key
+
+# Extract public key
+da-node bls public-key \
+  --key-file ./config/bls.key
+Update On-chain Registration
+# Update BLS public key on-chain
+da-node signer update-bls \
+  --private-key 0x... \
+  --bls-public-key 0x... \
+  --chain-rpc https://evmrpc-testnet.0g.ai
+API Usage
+REST API Endpoints
+# Submit data blob
+curl -X POST http://localhost:34001/api/v1/blob \
+  -H "Content-Type: application/octet-stream" \
+  --data-binary @data.bin
+
+# Get blob by ID
+curl http://localhost:34001/api/v1/blob/0x1234...
+
+# Get blob metadata
+curl http://localhost:34001/api/v1/blob/0x1234.../metadata
+
+# Node status
+curl http://localhost:34001/api/v1/status
+
+# Peer information
+curl http://localhost:34001/api/v1/peers
+WebSocket Subscriptions
+const ws = new WebSocket('ws://localhost:34001/ws');
+
+// Subscribe to new blobs
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  topic: 'new_blobs'
+}));
+
+// Subscribe to sampling results
+ws.send(JSON.stringify({
+  type: 'subscribe',
+  topic: 'sampling_results'
+}));
+
+ws.on('message', (data) => {
+  const msg = JSON.parse(data);
+  console.log('Received:', msg);
+});
+Monitoring
+Key Metrics
+# DA node metrics
+da_node_blobs_stored_total
+da_node_blobs_served_total
+da_node_sampling_success_rate
+da_node_signature_latency_seconds
+da_node_peer_count
+da_node_storage_used_bytes
+Alerting Rules
+groups:
+  - name: da_node_alerts
+    rules:
+      - alert: LowSamplingRate
+        expr: da_node_sampling_success_rate < 0.95
+        for: 5m
+        annotations:
+          summary: "DA node sampling rate below threshold"
+      
+      - alert: HighStorageUsage
+        expr: da_node_storage_used_bytes / da_node_storage_capacity_bytes > 0.9
+        annotations:
+          summary: "DA node storage nearly full"
+      
+      - alert: LowPeerCount
+        expr: da_node_peer_count < 5
+        for: 10m
+        annotations:
+          summary: "DA node has few peers"
+Grafana Dashboard Configuration
+{
+  "dashboard": {
+    "title": "0G DA Node Monitoring",
+    "panels": [
+      {
+        "title": "Blobs Processed",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "targets": [{
+          "expr": "rate(da_node_blobs_stored_total[5m])"
+        }]
+      },
+      {
+        "title": "Sampling Success Rate",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "targets": [{
+          "expr": "da_node_sampling_success_rate"
+        }]
+      },
+      {
+        "title": "Storage Usage",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+        "targets": [{
+          "expr": "da_node_storage_used_bytes"
+        }]
+      },
+      {
+        "title": "Network Peers",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+        "targets": [{
+          "expr": "da_node_peer_count"
+        }]
+      }
+    ]
+  }
+}
+Troubleshooting
+Common Issues
+Issue	Cause	Solution
+Not receiving blobs	Poor connectivity	Check firewall, add more bootstrap peers
+High memory usage	Large blob cache	Reduce cache size, enable GC
+Sampling failures	Network issues	Check latency to chain RPC
+Registration failed	Insufficient balance	Fund account with tokens
+BLS signature errors	Key mismatch	Regenerate and re-register BLS key
+Debug Commands
+# Check connectivity
+da-node debug peers --verbose
+
+# Test sampling
+da-node debug sample --blob-id 0x1234...
+
+# Verify configuration
+da-node config validate --config ./config.yaml
+
+# Check on-chain status
+da-node debug chain-status --rpc https://evmrpc-testnet.0g.ai
+Running an Archival Node
+📖 **Complete Archival Node Guide**: https://docs.0g.ai/run-a-node/archival-node
+Overview
+Archival nodes maintain a complete history of the blockchain, including all blocks, transactions, and state changes. They are essential for block explorers, analytics, and historical data queries.
+
+Requirements
+Hardware Specifications
+Component	Minimum	Recommended
+CPU	32 cores	64 cores
+RAM	128 GB	256 GB
+Storage	10 TB NVMe	20 TB NVMe RAID
+Network	1 Gbps	10 Gbps
+Disk Layout
+# Recommended partition scheme
+/dev/nvme0n1p1  500GB  /              # OS and binaries
+/dev/nvme0n1p2  9.5TB  /data/chain    # Blockchain data
+/dev/nvme1n1p1  10TB   /data/archive  # Archive data
+Installation
+Download Pre-synced Snapshot
+# Download latest archival snapshot (faster sync)
+wget https://snapshots.0g.ai/archival/galileo-archive.tar.gz
+
+# Extract to data directory
+tar -xzf galileo-archive.tar.gz -C /data/chain/
+
+# Verify checksum
+sha256sum -c galileo-archive.tar.gz.sha256
+Build Archival Binary
+# Clone with archival features
+git clone https://github.com/0glabs/0g-chain
+cd 0g-chain
+
+# Build with archival flags
+make install-archival ARCHIVAL=true
+
+# Verify build
+0gchaind version --long | grep archival
+Configuration
+Archival-Specific Settings
+# config.toml
+
+# Pruning must be disabled
+pruning = "nothing"
+pruning-keep-recent = "0"
+pruning-keep-every = "0"
+pruning-interval = "0"
+
+# State sync must be disabled
+[statesync]
+enable = false
+
+# Enhanced indexing
+[tx_index]
+indexer = "kv"
+index_all_keys = true
+
+# Increased cache sizes
+[mempool]
+size = 50000
+max_txs_bytes = 10737418240  # 10GB
+
+# API configuration
+[api]
+enable = true
+swagger = true
+address = "tcp://0.0.0.0:1317"
+max-open-connections = 5000
+
+[grpc]
+enable = true
+address = "0.0.0.0:9090"
+max-recv-msg-size = "100000000"  # 100MB
+max-send-msg-size = "100000000"  # 100MB
+
+# JSON-RPC for Web3 compatibility
+[json-rpc]
+enable = true
+address = "0.0.0.0:8545"
+ws-address = "0.0.0.0:8546"
+api = "eth,net,web3,txpool,debug,trace"
+gas-cap = "100000000"
+evm-timeout = "30s"
+txfee-cap = "10"
+filter-cap = "100000"
+feehistory-cap = "10000"
+logs-cap = "50000"
+block-range-cap = "50000"
+Database Optimization
+# app.toml
+
+[store]
+# Use larger cache for historical queries
+cache-size = 10000
+
+# Archive-specific settings
+[archive]
+enable = true
+keep-blocks = "0"  # Keep all blocks
+index-events = true
+compression = "zstd"
+compression-level = 3
+Deployment
+Docker Deployment
+# docker-compose.yml
+version: '3.8'
+
+services:
+  archival-node:
+    image: 0glabs/0g-chain:archival-latest
+    container_name: 0g-archival
+    ports:
+      - "26656:26656"  # P2P
+      - "26657:26657"  # RPC
+      - "1317:1317"    # REST API
+      - "9090:9090"    # gRPC
+      - "8545:8545"    # JSON-RPC HTTP
+      - "8546:8546"    # JSON-RPC WS
+      - "26660:26660"  # Prometheus
+    volumes:
+      - /data/chain:/root/.0gchain
+      - /data/archive:/archive
+      - ./config:/config
+    environment:
+      - ARCHIVAL_MODE=true
+      - CHAIN_ID=galileo-16600
+    command: ["start", "--pruning=nothing"]
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '32'
+          memory: 128G
+        reservations:
+          cpus: '16'
+          memory: 64G
+Native Deployment
+# Create systemd service
+sudo tee /etc/systemd/system/0g-archival.service > /dev/null <<EOF
+[Unit]
+Description=0G Archival Node
+After=network-online.target
+
+[Service]
+Type=simple
+User=archival
+Group=archival
+WorkingDirectory=/home/archival
+ExecStart=/usr/local/bin/0gchaind start \\
+  --pruning=nothing \\
+  --api.enable=true \\
+  --grpc.enable=true \\
+  --json-rpc.enable=true
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start service
+sudo systemctl enable 0g-archival
+sudo systemctl start 0g-archival
+API Services
+REST API Examples
+# Query historical block
+curl http://localhost:1317/cosmos/base/tendermint/v1beta1/blocks/1000000
+
+# Get transaction by hash
+curl http://localhost:1317/cosmos/tx/v1beta1/txs/0xABCD...
+
+# Query account at specific height
+curl "http://localhost:1317/cosmos/auth/v1beta1/accounts/0g1abc...?height=500000"
+
+# Get validator set at height
+curl http://localhost:1317/cosmos/base/tendermint/v1beta1/validatorsets/1000000
+JSON-RPC Examples
+// Web3.js connection
+const Web3 = require('web3');
+const web3 = new Web3('http://localhost:8545');
+
+// Get historical block
+const block = await web3.eth.getBlock(1000000, true);
+
+// Trace transaction
+const trace = await web3.currentProvider.send({
+  jsonrpc: '2.0',
+  method: 'debug_traceTransaction',
+  params: ['0xTxHash...'],
+  id: 1
+});
+
+// Get state at specific block
+const state = await web3.eth.getStorageAt(
+  '0xContractAddress...',
+  '0x0',
+  1000000
+);
+GraphQL Interface
+# Query historical data
+query HistoricalData {
+  block(number: 1000000) {
+    hash
+    timestamp
+    transactions {
+      hash
+      from
+      to
+      value
+      gasUsed
+    }
+  }
+  
+  account(address: "0g1...", height: 500000) {
+    balance
+    nonce
+    code
+  }
+}
+Data Management
+Backup Strategy
+#!/bin/bash
+# backup.sh
+
+# Stop node for consistent backup
+systemctl stop 0g-archival
+
+# Create backup with compression
+tar -czf /backup/archival-$(date +%Y%m%d).tar.gz \
+  --exclude='*.log' \
+  /data/chain/
+
+# Resume node
+systemctl start 0g-archival
+
+# Upload to cloud storage
+aws s3 cp /backup/archival-$(date +%Y%m%d).tar.gz \
+  s3://bucket/archival-backups/
+Data Retention Policy
+# retention.yaml
+policies:
+  - name: full_blocks
+    retention: forever
+    data_types: [blocks, transactions, receipts]
+  
+  - name: state_snapshots
+    retention: 30days
+    interval: 10000  # Every 10k blocks
+    data_types: [state]
+  
+  - name: logs
+    retention: 90days
+    data_types: [logs, events]
+Performance Optimization
+Database Tuning
+-- PostgreSQL settings for indexer
+ALTER SYSTEM SET shared_buffers = '32GB';
+ALTER SYSTEM SET effective_cache_size = '96GB';
+ALTER SYSTEM SET maintenance_work_mem = '2GB';
+ALTER SYSTEM SET checkpoint_completion_target = 0.9;
+ALTER SYSTEM SET wal_buffers = '16MB';
+ALTER SYSTEM SET default_statistics_target = 100;
+ALTER SYSTEM SET random_page_cost = 1.1;
+ALTER SYSTEM SET effective_io_concurrency = 200;
+ALTER SYSTEM SET work_mem = '256MB';
+ALTER SYSTEM SET min_wal_size = '2GB';
+ALTER SYSTEM SET max_wal_size = '8GB';
+Caching Layer
+# Redis configuration for query caching
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+  cache_ttl: 3600
+  max_memory: 16gb
+  eviction_policy: lru
+  
+cache_keys:
+  - block:*
+  - tx:*
+  - account:*:height:*
+Monitoring
+Prometheus Metrics
+# prometheus.yml
+scrape_configs:
+  - job_name: 'archival-node'
+    static_configs:
+      - targets: ['localhost:26660']
+    
+  - job_name: 'archival-api'
+    static_configs:
+      - targets: ['localhost:1318']  # API metrics
+Key Metrics
+# Storage metrics
+archival_db_size_bytes
+archival_blocks_stored
+archival_txs_indexed
+archival_state_size_bytes
+
+# Performance metrics
+archival_query_duration_seconds
+archival_api_requests_total
+archival_cache_hit_ratio
+Health Checks
+#!/bin/bash
+# health_check.sh
+
+# Check if fully synced
+LATEST_HEIGHT=$(curl -s http://localhost:26657/status | jq -r .result.sync_info.latest_block_height)
+NETWORK_HEIGHT=$(curl -s https://rpc-testnet.0g.ai/status | jq -r .result.sync_info.latest_block_height)
+
+if [ $((NETWORK_HEIGHT - LATEST_HEIGHT)) -gt 10 ]; then
+  echo "Node is behind by $((NETWORK_HEIGHT - LATEST_HEIGHT)) blocks"
+  exit 1
+fi
+
+# Check API availability
+curl -f http://localhost:1317/cosmos/base/tendermint/v1beta1/node_info || exit 1
+curl -f http://localhost:8545 -X POST -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' || exit 1
+
+echo "Archival node healthy"
+Use Cases
+Block Explorer Backend
+// Explorer API implementation
+class ExplorerAPI {
+  async getBlock(height) {
+    const block = await this.rpc.getBlock(height);
+    const txs = await Promise.all(
+      block.transactions.map(tx => this.getTxDetails(tx))
+    );
+    return { ...block, transactions: txs };
+  }
+  
+  async getAccountHistory(address, fromBlock, toBlock) {
+    const events = await this.indexer.query({
+      address,
+      fromBlock,
+      toBlock,
+      type: ['transfer', 'delegate', 'unbond']
+    });
+    return events;
+  }
+}
+Analytics Platform
+# Analytics queries
+def analyze_network_growth(start_height, end_height):
+    query = """
+    SELECT 
+      DATE(block_time) as date,
+      COUNT(DISTINCT sender) as active_addresses,
+      COUNT(*) as transaction_count,
+      SUM(gas_used) as total_gas,
+      AVG(gas_price) as avg_gas_price
+    FROM transactions
+    WHERE block_height BETWEEN %s AND %s
+    GROUP BY DATE(block_time)
+    """
+    return db.execute(query, (start_height, end_height))
+================================================================================ SECTION 6: NODE SALE INFORMATION
+🎯 **Node Sale Overview**: https://docs.0g.ai/node-sale/node-sale-index
+📋 **Introduction**: https://docs.0g.ai/node-sale/intro/intro
+💰 **Node Benefits**: https://docs.0g.ai/node-sale/intro/node-holder-benefits
+🏗️ **Sale Structure**: https://docs.0g.ai/node-sale/intro/sale-structure
+✅ **Eligibility**: https://docs.0g.ai/node-sale/intro/eligibility
+🔐 **KYC Process**: https://docs.0g.ai/node-sale/details/kyc-verification
+💳 **Purchase Guide**: https://docs.0g.ai/node-sale/details/purchasing-nodes
+🎁 **Rewards**: https://docs.0g.ai/node-sale/details/incentives-and-rewards
+⚖️ **Compliance**: https://docs.0g.ai/node-sale/details/compliance-and-regulatory
+❓ **FAQ**: https://docs.0g.ai/node-sale/faq/faq
+
+0G Node Sale
+Introduction
+The 0G Node Sale represents a unique opportunity to participate in the decentralized AI revolution by becoming an AI Alignment Node operator. These specialized nodes play a crucial role in ensuring AI systems deployed on the 0G network remain safe, beneficial, and aligned with human values.
+
+What are AI Alignment Nodes?
+AI Alignment Nodes are specialized validators that:
+
+Monitor and evaluate AI model behavior
+Enforce safety protocols and ethical guidelines
+Participate in decentralized governance of AI systems
+Earn rewards for maintaining network security and alignment
+Sale Structure
+Node Tiers
+Tier	Price (USDC)	Total Nodes	Benefits
+Genesis	$3,000	1,000	3x reward multiplier, exclusive NFT
+Pioneer	$5,000	2,000	2x reward multiplier, priority support
+Standard	$8,000	5,000	1.5x reward multiplier
+Community	$10,000	Unlimited	Standard rewards
+Sale Phases
+Whitelist Phase (Day 1-3)
+
+Exclusive access for early supporters
+Genesis tier availability
+KYC required
+Public Sale (Day 4-14)
+
+Open to all eligible participants
+All tiers available
+First-come, first-served
+Final Round (Day 15-21)
+
+Last chance to purchase
+Community tier only
+Instant activation
+Node Holder Benefits
+Reward Structure
+Annual Rewards = Base Reward × Tier Multiplier × Performance Score
+
+Where:
+- Base Reward: 15-20% APY
+- Tier Multiplier: 1x to 3x based on tier
+- Performance Score: 0.8 to 1.2 based on uptime and accuracy
+Additional Benefits
+Governance Rights: Vote on protocol upgrades and AI policies
+Priority Access: Early access to new features and models
+Revenue Share: Portion of network fees distributed to node operators
+Exclusive NFT: Unique digital collectible for node holders
+Community Recognition: Special Discord role and forum badge
+Eligibility
+Geographic Restrictions
+Participants must not be residents of:
+
+United States
+China
+North Korea
+Iran
+Syria
+Cuba
+Crimea region
+Requirements
+Must be 18 years or older
+Pass KYC/AML verification
+Have compatible hardware or cloud setup
+Commit to minimum 1-year operation
+Purchasing Process
+Step 1: Wallet Preparation
+// Connect MetaMask or compatible wallet
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+await provider.send("eth_requestAccounts", []);
+
+// Switch to correct network
+await provider.send("wallet_switchEthereumChain", [{
+  chainId: '0x40E8' // 16616 in hex
+}]);
+Step 2: KYC Verification
+Navigate to https://nodesale.0g.ai
+Click "Start KYC"
+Upload required documents:
+Government-issued ID
+Proof of address
+Selfie with ID
+Wait for approval (24-48 hours)
+Step 3: Node Purchase
+// Approve USDC spending
+const usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, signer);
+await usdcContract.approve(NODE_SALE_ADDRESS, price);
+
+// Purchase node
+const nodeSale = new ethers.Contract(NODE_SALE_ADDRESS, NODE_SALE_ABI, signer);
+await nodeSale.purchaseNode(tierLevel, {
+  gasLimit: 500000
+});
+Step 4: Node Activation
+# Download node software
+wget https://releases.0g.ai/alignment-node-v1.0.0.tar.gz
+tar -xzf alignment-node-v1.0.0.tar.gz
+
+# Configure with your node NFT
+./alignment-node init --nft-id YOUR_NFT_ID
+
+# Start node
+./alignment-node start
+KYC Verification Process
+Required Documents
+Identity Verification
+
+Passport or national ID
+Driver's license (supplementary)
+Address Verification
+
+Utility bill (< 3 months old)
+Bank statement
+Government correspondence
+Source of Funds (for purchases > $10,000)
+
+Bank statements
+Employment verification
+Investment records
+Verification Steps
+Document upload and OCR scanning
+Facial recognition matching
+Sanctions list screening
+PEP (Politically Exposed Person) check
+Manual review by compliance team
+Timeline
+Standard verification: 24-48 hours
+Enhanced due diligence: 3-5 business days
+Appeals process: 7-10 business days
+Incentives and Rewards
+Staking Rewards
+Monthly Rewards = (Stake Amount × Base Rate × Tier Multiplier) / 12
+
+Example (Genesis Tier):
+- Stake: $3,000 equivalent
+- Base Rate: 18% APY
+- Tier Multiplier: 3x
+- Monthly Reward: (3000 × 0.18 × 3) / 12 = $135
+Performance Bonuses
+Metric	Threshold	Bonus
+Uptime	> 99.9%	+20%
+Accuracy	> 95%	+15%
+Response Time	< 100ms	+10%
+Governance Participation	> 80%	+5%
+Referral Program
+Direct referral: 5% bonus on referred node purchases
+Tier upgrade: Additional 2% for 10+ referrals
+Lifetime rewards: 1% of referee's earnings
+Compliance and Regulatory
+Legal Framework
+Nodes are utility tokens, not securities
+Compliance with local regulations required
+Tax reporting responsibility of node holders
+Terms of service must be accepted
+AML/CTF Measures
+Transaction monitoring
+Suspicious activity reporting
+Regular compliance audits
+Wallet screening
+Data Protection
+GDPR compliant data handling
+Encrypted storage of personal information
+Right to erasure upon request
+No data sharing without consent
+FAQ
+General Questions
+Q: What happens if I can't run my node? A: You can delegate operation to a professional validator while retaining ownership and majority of rewards.
+
+Q: Can I transfer my node to another wallet? A: Yes, nodes are NFTs and can be transferred after a 30-day lock period.
+
+Q: What are the hardware requirements? A: Minimum 8 cores, 32GB RAM, 1TB SSD, 100Mbps connection. Cloud hosting is acceptable.
+
+Technical Questions
+Q: Do I need technical knowledge to run a node? A: Basic command line knowledge is helpful. We provide detailed guides and support.
+
+Q: Can I run multiple nodes? A: Yes, but each requires a separate purchase and KYC verification.
+
+Q: What happens during network upgrades? A: Automatic updates are available, or manual upgrade instructions are provided with 7-day notice.
+
+Financial Questions
+Q: When do rewards start? A: Rewards begin accumulating immediately upon node activation.
+
+Q: How are rewards distributed? A: Rewards are distributed daily to your registered wallet address.
+
+Q: Can I sell my node? A: Yes, nodes can be sold on secondary markets after the lock period.
+
+================================================================================ SECTION 7: RESOURCES AND REFERENCES
+📖 **Resources Overview**: https://docs.0g.ai/resources/whitepaper
+📄 **Whitepaper**: https://docs.0g.ai/resources/whitepaper
+🔒 **Security**: https://docs.0g.ai/resources/security
+🤝 **Contributing**: https://docs.0g.ai/resources/how-to-contribute
+📚 **Glossary**: https://docs.0g.ai/resources/glossary
+📝 **Blog**: https://0g.ai/blog
+
+Glossary
+📚 **Full Glossary**: https://docs.0g.ai/resources/glossary
+A
+AI Alignment: The process of ensuring AI systems behave according to human values and intentions.
+
+API (Application Programming Interface): Set of protocols and tools for building software applications that interact with 0G.
+
+APY (Annual Percentage Yield): The rate of return on staked assets over one year.
+
+Archival Node: A node that stores the complete history of the blockchain.
+
+B
+BLS Signatures: Boneh-Lynn-Shacham signatures used for efficient signature aggregation in 0G.
+
+Block: A collection of transactions bundled together and added to the blockchain.
+
+Bootstrap Node: Initial nodes that help new nodes discover and connect to the network.
+
+C
+Chain ID: Unique identifier for different 0G networks (mainnet, testnet, etc.).
+
+Checkpoint: A snapshot of the blockchain state at a specific height.
+
+Consensus: The mechanism by which nodes agree on the state of the blockchain.
+
+Cosmos SDK: The framework used to build the 0G blockchain.
+
+D
+DA (Data Availability): The guarantee that data is available to all network participants.
+
+dAIOS: Decentralized AI Operating System - 0G's comprehensive infrastructure for AI.
+
+DAO: Decentralized Autonomous Organization for governance.
+
+DePIN: Decentralized Physical Infrastructure Networks.
+
+E
+Epoch: A period of time in the blockchain (typically 1 hour in 0G).
+
+ERC-7857: The standard for Intelligent NFTs (iNFTs) on 0G.
+
+Erasure Coding: Data encoding technique used for redundancy in 0G Storage.
+
+EVM: Ethereum Virtual Machine - the runtime environment for smart contracts.
+
+F
+Faucet: A service that distributes test tokens on testnet.
+
+Finality: The point at which a transaction becomes irreversible.
+
+Fine-tuning: The process of training a pre-trained model on specific data.
+
+G
+Gas: The fee required to execute transactions or smart contracts.
+
+Genesis Block: The first block in a blockchain.
+
+Governance: The system for making decisions about protocol changes.
+
+I
+Indexer: A service that organizes blockchain data for efficient querying.
+
+Inference: The process of using a trained AI model to make predictions.
+
+iNFT: Intelligent NFT - NFTs with embedded AI capabilities.
+
+J
+JSON-RPC: A remote procedure call protocol used for blockchain communication.
+
+K
+KYC (Know Your Customer): Identity verification process for regulatory compliance.
+
+KZG Commitments: Kate-Zaverucha-Goldberg polynomial commitments used in 0G DA.
+
+L
+Light Client: A client that verifies blockchain data without storing the full chain.
+
+LoRA: Low-Rank Adaptation - an efficient fine-tuning method for large models.
+
+M
+Mempool: Pool of unconfirmed transactions waiting to be included in blocks.
+
+Merkle Tree: Data structure used for efficient verification of data integrity.
+
+Moniker: A human-readable name for a validator node.
+
+N
+Node: A computer running 0G software that participates in the network.
+
+O
+Oracle: A service that provides external data to smart contracts.
+
+P
+P2P (Peer-to-Peer): Direct communication between nodes without intermediaries.
+
+PoRA (Proof of Random Access): 0G's storage mining consensus mechanism.
+
+Precompile: Optimized smart contract functions built into the blockchain.
+
+Q
+Quorum: Minimum number of nodes required to make decisions.
+
+R
+RPC (Remote Procedure Call): Protocol for executing functions on remote systems.
+
+Rollup: A scaling solution that processes transactions off-chain.
+
+S
+Sequencer: The entity responsible for ordering transactions in a rollup.
+
+Slashing: Penalty for validator misbehavior.
+
+Smart Contract: Self-executing code deployed on the blockchain.
+
+Staking: Locking tokens to participate in consensus and earn rewards.
+
+T
+Tendermint: The consensus engine used by 0G Chain.
+
+TPS (Transactions Per Second): Measure of blockchain throughput.
+
+TVL (Total Value Locked): Total value of assets deposited in a protocol.
+
+U
+Unbonding: The process of withdrawing staked tokens.
+
+V
+Validator: A node that participates in consensus and block production.
+
+W
+Web3: The decentralized internet built on blockchain technology.
+
+Wei: The smallest unit of the native token (1 token = 10^18 wei).
+
+Z
+Zero-Knowledge Proof: Cryptographic method to prove knowledge without revealing information.
+
+Security Best Practices
+🔒 **Security Documentation**: https://docs.0g.ai/resources/security
+Key Management
+Hardware Security
+Use hardware wallets for high-value accounts
+Enable multi-signature for treasury wallets
+Keep backup seeds in secure physical locations
+Never share private keys or seed phrases
+Software Security
+# Encrypt private keys at rest
+openssl enc -aes-256-cbc -salt -in private.key -out private.key.enc
+
+# Use environment variables for sensitive data
+export PRIVATE_KEY=$(cat private.key.enc | openssl enc -aes-256-cbc -d)
+
+# Clear sensitive variables after use
+unset PRIVATE_KEY
+Node Security
+System Hardening
+# Disable root SSH login
+sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# Setup firewall
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow 22/tcp  # SSH
+ufw allow 26656/tcp  # P2P
+ufw allow 26657/tcp  # RPC (restrict to trusted IPs)
+ufw enable
+
+# Enable automatic security updates
+apt install unattended-upgrades
+dpkg-reconfigure unattended-upgrades
+Monitoring
+# alerting.yaml
+alerts:
+  - name: unauthorized_access
+    condition: failed_login_attempts > 5
+    action: block_ip_and_notify
+  
+  - name: unusual_activity
+    condition: transaction_rate > normal * 2
+    action: require_2fa
+  
+  - name: balance_change
+    condition: balance_decrease > threshold
+    action: pause_and_verify
+Smart Contract Security
+Development Practices
+Always use latest Solidity version
+Implement reentrancy guards
+Use OpenZeppelin libraries
+Conduct thorough testing
+Get professional audits
+Common Vulnerabilities
+// BAD: Reentrancy vulnerability
+function withdraw(uint amount) public {
+    require(balances[msg.sender] >= amount);
+    msg.sender.call{value: amount}("");
+    balances[msg.sender] -= amount;
+}
+
+// GOOD: Protected against reentrancy
+function withdraw(uint amount) public nonReentrant {
+    require(balances[msg.sender] >= amount);
+    balances[msg.sender] -= amount;
+    (bool success, ) = msg.sender.call{value: amount}("");
+    require(success, "Transfer failed");
+}
+Network Security
+DDoS Protection
+Use rate limiting on all endpoints
+Implement proof-of-work for certain operations
+Maintain peer diversity
+Use geographic distribution
+API Security
+// Rate limiting middleware
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests
+  message: 'Too many requests'
+});
+
+app.use('/api/', limiter);
+
+// API key authentication
+app.use((req, res, next) => {
+  const apiKey = req.headers['x-api-key'];
+  if (!apiKey || !isValidApiKey(apiKey)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+});
+Incident Response
+Response Plan
+Detection: Monitor alerts and anomalies
+Containment: Isolate affected systems
+Investigation: Analyze logs and traces
+Remediation: Fix vulnerabilities
+Recovery: Restore normal operations
+Post-mortem: Document and learn
+Emergency Contacts
+Security Team: security@0g.ai
+Bug Bounty: https://immunefi.com/bounty/0g
+Discord: Emergency channel for validators
+Whitepaper
+📄 **Full Whitepaper**: https://docs.0g.ai/resources/whitepaper
+🔗 **PDF Version**: https://0g.ai/whitepaper.pdf
+The 0G Whitepaper provides the foundational technical and economic design of the network. Key sections include:
+
+Executive Summary
+0G is a decentralized AI operating system that enables AI applications requiring massive data processing, model training, and inference at scale. By combining high-performance blockchain infrastructure with decentralized storage and compute networks, 0G creates a comprehensive ecosystem for AI development.
+
+Technical Architecture
+Modular design with separate consensus, storage, and compute layers
+Novel consensus mechanism achieving 50,000+ TPS
+Decentralized storage with erasure coding and PoRA
+Distributed compute network for AI workloads
+Data availability layer for scalable rollups
+Economic Model
+Dual token system (utility and governance)
+Sustainable reward mechanisms
+Alignment incentives for AI safety
+Value accrual through network effects
+Use Cases
+Decentralized AI training
+On-chain inference
+AI-powered DeFi
+Autonomous agents
+Content generation
+For the full whitepaper, visit: https://0g.ai/whitepaper.pdf
+
+Contributing
+🤝 **How to Contribute Guide**: https://docs.0g.ai/resources/how-to-contribute
+How to Contribute
+We welcome contributions from the community! Here's how you can help:
+
+Code Contributions
+Fork the repository
+Create a feature branch
+Make your changes
+Write tests
+Submit a pull request
+Documentation
+Fix typos and improve clarity
+Add examples and tutorials
+Translate to other languages
+Create video guides
+Community Support
+Answer questions on Discord
+Help new users get started
+Share your experience
+Report bugs and issues
+Contribution Guidelines
+Code Style
+// Follow consistent naming conventions
+const myVariable = 'camelCase';
+function myFunction() {}
+class MyClass {}
+
+// Use meaningful variable names
+// BAD
+const d = new Date();
+const u = users.filter(x => x.a > 18);
+
+// GOOD
+const currentDate = new Date();
+const adultUsers = users.filter(user => user.age > 18);
+Commit Messages
+type: Brief description (50 chars max)
+
+- Detailed explanation if needed
+- Use bullet points for multiple changes
+- Reference issue numbers with #123
+
+Fixes #456
+Testing
+Write unit tests for new features
+Ensure all tests pass before submitting
+Include integration tests where appropriate
+Document test scenarios
+Recognition
+Contributor Levels
+Contributor: 1+ merged PRs
+Regular Contributor: 5+ merged PRs
+Core Contributor: 20+ merged PRs
+Maintainer: Invited based on contributions
+Rewards
+Bug bounties for security issues
+Grants for significant features
+NFT badges for contributors
+Recognition in release notes
+Getting Help
+Resources
+Developer docs: https://docs.0g.ai
+Discord: https://discord.gg/0g
+GitHub: https://github.com/0glabs
+Forum: https://forum.0g.ai
+Office Hours
+Weekly developer calls (Thursdays 2PM UTC)
+Monthly community updates
+Quarterly roadmap reviews
+================================================================================ SECTION 8: CONTRIBUTION GUIDELINES
+🤝 **Complete Contribution Guide**: https://docs.0g.ai/resources/how-to-contribute
+[Already included in Section 7 under Contributing]
+
+================================================================================ END OF DOCUMENT
+This document contains the complete documentation from the 0G project, compiled for chatbot training purposes. It includes all technical specifications, developer guides, operational procedures, and community resources.
+
+📖 **Base Documentation URL**: https://docs.0g.ai
+🏠 **Main Website**: https://0g.ai
+🐙 **GitHub**: https://github.com/0glabs
+💬 **Discord**: https://discord.gg/0g
+📝 **Blog**: https://0g.ai/blog
+🌐 **Hub**: https://hub.0g.ai
+
+Last Updated: 2025-08-11 Version: 1.0.0 Total Sections: 8 Total Content: Complete documentation set with navigation links
+
+For the latest updates, visit: https://docs.0g.ai
+

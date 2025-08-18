@@ -33,6 +33,9 @@ const config: Config = {
       crossorigin: 'anonymous',
     },
   ],
+  scripts: [
+    '/js/chatbase.js',
+  ],
   presets: [
     [
       'classic',
