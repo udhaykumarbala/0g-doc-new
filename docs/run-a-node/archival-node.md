@@ -27,7 +27,7 @@ Running an Archival node for the **0G-Galileo-Testnet** means providing complete
 
 ### Required Files
 
-1. **Node Package**: [galileo-archive.tar.gz](/binaries/galileo-archive.tar.gz)
+1. **Node Package**: Contact support or check official channels for the latest `galileo-archive.tar.gz` binary
 2. **Archive Snapshot**: Download from https://chain-snapshot.oss-cn-hongkong.aliyuncs.com/snapshot/galileo/archive/20250717.tar.lz4
 
 ### System Requirements
@@ -40,7 +40,7 @@ Running an Archival node for the **0G-Galileo-Testnet** means providing complete
 
 ### 1. Download Node Package
 
-Download the node package: [galileo-archive.tar.gz](/binaries/galileo-archive.tar.gz)
+Download the node package: Contact support or check official channels for the latest `galileo-archive.tar.gz` binary
 
 ### 2. Extract Node Package
 
