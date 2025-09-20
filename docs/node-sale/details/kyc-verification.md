@@ -29,11 +29,10 @@ You must be at least 18 years old to participate in the 0G Alignment Node Portal
 Due to regulatory requirements, users from the following countries and regions are **not eligible** to participate:
 
 **Restricted Countries:**
-- Belarus, Canada, Cuba, Democratic People's Republic of Korea (North Korea), Iran, Syria, United States, United Kingdom, Venezuela, Yemen
+- Belarus, the Central African Republic, The Democratic Republic of Congo, the Democratic People's Republic of Korea, Cuba, Iran, Libya, Russia, Somalia, Sudan, South Sudan, Venezuela, Yemen, Zimbabwe. 
 
 **Restricted Regions:**
-- Ukraine: Crimea region, Donetsk People's Republic (DNR), Luhansk People's Republic (LNR), Kherson region, and Zaporizhia region
-- Russia: Specific sanctioned regions
+- Ukraine: Crimea region, Donetsk People's Republic (DNR), Luhansk People's Republic (LNR), Kherson region, and Zaporizhia region 
 
 :::important Geographic Restrictions
 If you reside in any of these restricted locations, you will not be able to complete the KYC process. This restriction is in place to comply with international regulations and sanctions.
