@@ -46,6 +46,11 @@ const sidebars: SidebarsConfig = {
           label: 'Testnet',
         },
         {
+          type: 'doc',
+          id: 'developer-hub/mainnet/mainnet-overview',
+          label: 'Mainnet',
+        },
+        {
           type: 'category',
           label: 'Building on 0G',
           link: {
