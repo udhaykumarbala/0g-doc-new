@@ -8,11 +8,28 @@ declare global {
 
 interface OKXButtonProps {
   label?: string;
+  chainId?: string | number;
+  chainName?: string;
+  tokenSymbol?: string;
+  tokenName?: string;
+  tokenDecimals?: number;
+  rpcUrls?: string[];
+  blockExplorerUrls?: string[];
 }
 
-export default function OKXButton({ label = "Add 0G Testnet" }: OKXButtonProps): JSX.Element {
-  const getChainID = (networkId: string): string => {
-    return '0x' + parseInt(networkId).toString(16);
+export default function OKXButton({
+  label = "Add 0G Testnet",
+  chainId: inputChainId = '16601',
+  chainName = '0G-Galileo-Testnet',
+  tokenSymbol = 'OG',
+  tokenName = 'OG',
+  tokenDecimals = 18,
+  rpcUrls = ['https://evmrpc-testnet.0g.ai'],
+  blockExplorerUrls = ['https://chainscan-galileo.0g.ai/']
+}: OKXButtonProps): JSX.Element {
+  const getChainID = (networkId: string | number): string => {
+    const numeric = typeof networkId === 'string' ? parseInt(networkId) : networkId;
+    return '0x' + Number(numeric).toString(16);
   };
 
   const addNetwork = async () => {
@@ -21,37 +38,33 @@ export default function OKXButton({ label = "Add 0G Testnet" }: OKXButtonProps):
       return;
     }
 
-    const chainId = getChainID('16601');
-    
+    const chainId = getChainID(inputChainId);
     const currentChainId = await window.okxwallet.request({ method: 'eth_chainId' });
     if (currentChainId === chainId) {
-      alert('Already connected to 0G Testnet!');
+      alert(`Already connected to ${chainName}!`);
       return;
     }
 
     try {
-      // First try to switch to the network
-      console.log('Switching to 0G Testnet');
       await window.okxwallet.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId }]
       });
     } catch (switchError: any) {
-      // If the network is not added yet (error code 4902), add it
       if (switchError.code === 4902) {
         try {
           await window.okxwallet.request({
             method: 'wallet_addEthereumChain',
             params: [{
               chainId,
-              chainName: '0G-Galileo-Testnet',
+              chainName,
               nativeCurrency: {
-                name: 'OG',
-                symbol: 'OG',
-                decimals: 18
+                name: tokenName,
+                symbol: tokenSymbol,
+                decimals: tokenDecimals
               },
-              rpcUrls: ['https://evmrpc-testnet.0g.ai'],
-              blockExplorerUrls: ['https://chainscan-galileo.0g.ai/']
+              rpcUrls,
+              blockExplorerUrls
             }]
           });
         } catch (addError) {
