@@ -21,6 +21,11 @@ Build and run production workloads on the 0G Mainnet.
 | **Token Symbol** | 0G |
 | **Block Explorer** | `https://chianscan.0g.ai` |
 
+#### ✅ 3rd Party RPCs (Recommended for production)
+- QuickNode
+- ThirdWeb
+- Ankr
+
 ### Add Network to Wallet
 
 <div className="wallet-buttons" style={{ display: 'flex', gap: '16px', margin: '16px 0' }}>
@@ -53,7 +58,3 @@ For redundancy in production apps, consider adding multiple RPC providers where 
 ## Developer Tools
 
 - **Chain Explorer**: `https://chianscan.0g.ai`
-
-## Notes
-- Use the correct Chain ID (16661) when configuring wallets and tooling.
-- Use native token symbol 0G for gas on mainnet.
