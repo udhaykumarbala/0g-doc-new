@@ -1,10 +1,10 @@
 blank_issues_enabled: false
 contact_links:
   - name: 💬 Ask a Question
-    url: https://github.com/0gfoundation/0g-doc-new/discussions
+    url: https://github.com/0gfoundation/0g-doc/discussions
     about: Ask questions and discuss ideas with the community
   - name: 🔐 Security Issue
-    url: https://github.com/0gfoundation/0g-doc-new/security/advisories/new
+    url: https://github.com/0gfoundation/0g-doc/security/advisories/new
     about: Report security vulnerabilities privately
   - name: 📧 General Inquiries
     url: mailto:udhaykumar@0g.ai
