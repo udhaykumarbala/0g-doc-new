@@ -205,6 +205,11 @@ const sidebars: SidebarsConfig = {
             'node-sale/intro/eligibility',
           ],
         },
+        {
+          type: 'doc',
+          id: 'node-sale/ai-alignment-node-user-guide',
+          label: 'AI Alignment Node - User Guide',
+        },
         'node-sale/details/kyc-verification',
         {
           type: 'category',
