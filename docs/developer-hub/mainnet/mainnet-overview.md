@@ -56,4 +56,4 @@ For redundancy in production apps, consider adding multiple RPC providers where 
 :::
 
 ## Developer Tools
-- **Chain Explorer**: `https://chianscan.0g.ai`
+- **Chain Explorer**: `https://chainscan.0g.ai (https://chainscan.0g.ai)`
