@@ -15,7 +15,7 @@ In most cases this precompile should be only called by wrapped OG contract.
 
 # Interface
 
-[https://github.com/0glabs/0g-chain/blob/dev/precompiles/interfaces/contracts/IWrappedA0GIBase.sol](https://github.com/0glabs/0g-chain/blob/dev/precompiles/interfaces/contracts/IWrappedA0GIBase.sol)
+[https://github.com/0gfoundation/0g-chain/blob/dev/precompiles/interfaces/contracts/IWrappedA0GIBase.sol](https://github.com/0gfoundation/0g-chain/blob/dev/precompiles/interfaces/contracts/IWrappedA0GIBase.sol)
 
 ## Structs
 

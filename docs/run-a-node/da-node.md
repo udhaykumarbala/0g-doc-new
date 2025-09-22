@@ -24,7 +24,7 @@ To operate effectively, your DA signer needs to run a DA node to verify encoded 
 **1. Clone the DA Node Repo:** 
 
    ```
-   git clone https://github.com/0glabs/0g-da-node.git
+   git clone https://github.com/0gfoundation/0g-da-node.git
    cd 0g-da-node
    ```
 
@@ -105,7 +105,7 @@ As a DA node operator, your node will perform the following tasks:
 
 ### Conclusion
 
-You have now successfully set up and run a 0g DA node as a DA Signer. For more advanced configuration options and usage instructions, please refer to the [Official GitHub repository](https://github.com/0glabs/0g-da-node).
+You have now successfully set up and run a 0g DA node as a DA Signer. For more advanced configuration options and usage instructions, please refer to the [Official GitHub repository](https://github.com/0gfoundation/0g-da-node).
 
 Remember to keep your private keys secure and regularly update your node software to ensure optimal performance and security.
 
@@ -126,7 +126,7 @@ Remember to keep your private keys secure and regularly update your node softwar
 2. Clone the repository and checkout the specific version:
 
    ```
-   git clone https://github.com/0glabs/0g-da-node.git
+   git clone https://github.com/0gfoundation/0g-da-node.git
    cd 0g-da-node
    ```
 
@@ -224,7 +224,7 @@ As a DA node operator, your node will perform the following tasks:
 
 ## Conclusion
 
-You have now successfully set up and run a 0g DA node as a DA Signer. For more advanced configuration options and usage instructions, please refer to the [Official GitHub repository](https://github.com/0glabs/0g-da-node).
+You have now successfully set up and run a 0g DA node as a DA Signer. For more advanced configuration options and usage instructions, please refer to the [Official GitHub repository](https://github.com/0gfoundation/0g-da-node).
 
 Remember to keep your private keys secure and regularly update your node software to ensure optimal performance and security.
   </TabItem>
@@ -297,11 +297,11 @@ Signers can submit their signatures on a registration message to request joining
 
 ## Interface
 
-Find the Solidity interface in the [0g-da-contract repo](https://github.com/0glabs/0g-da-contract).
+Find the Solidity interface in the [0g-da-contract repo](https://github.com/0gfoundation/0g-da-contract).
 
 ## ABI
 
-Find the ABI in the [0g-chain repo](https://github.com/0glabs/0g-chain).
+Find the ABI in the [0g-chain repo](https://github.com/0gfoundation/0g-chain).
 
 ## Transactions
 

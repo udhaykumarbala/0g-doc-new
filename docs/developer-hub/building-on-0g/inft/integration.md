@@ -721,7 +721,7 @@ async function optimizedTransfer(transfers) {
 
 ### Get Support
 
-🐛 **[GitHub Issues](https://github.com/0glabs/0g-agent-nft/issues)** - Report bugs and feature requests  
+🐛 **[GitHub Issues](https://github.com/0gfoundation/0g-agent-nft/issues)** - Report bugs and feature requests  
 💬 **[Discord Community](https://discord.gg/0glabs)** - Get help from developers  
 📖 **[Documentation](./erc7857)** - Technical reference  
 📚 **[Knowledge Base](https://kb.0g.ai)** - Common solutions  
@@ -731,7 +731,7 @@ async function optimizedTransfer(transfers) {
 ### Continue Learning
 📋 **[ERC-7857 Technical Standard](./erc7857)** - Deep dive into implementation details  
 🎯 **[INFT Use Cases](./inft-overview#real-world-applications)** - Explore more applications  
-💻 **[Example Implementations](https://github.com/0glabs/0g-agent-nft/tree/eip-7857-draft)** - Reference code  
+💻 **[Example Implementations](https://github.com/0gfoundation/0g-agent-nft/tree/eip-7857-draft)** - Reference code  
 
 ### Production Deployment
 🚀 **Mainnet Migration** - Deploy to 0G mainnet when ready  

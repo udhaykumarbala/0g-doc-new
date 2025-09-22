@@ -80,9 +80,9 @@ The blockchain will periodically release DA Sampling tasks at preset height ever
 
 | Parameter | Requirement | Default value | Code |
 |-----------|-------------|---------------|------|
-| TARGET_SUBMITS | | 20 | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L296) |
-| EPOCH_WINDOW_SIZE | | 300 (about 3 months) | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L306) |
-| SAMPLE_PERIOD | | 30 (about 1.5 minutes) | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L323) |
+| TARGET_SUBMITS | | 20 | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L296) |
+| EPOCH_WINDOW_SIZE | | 300 (about 3 months) | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L306) |
+| SAMPLE_PERIOD | | 30 (about 1.5 minutes) | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L323) |
 
 ### Responses
 
@@ -120,10 +120,10 @@ podasTarget -= podasTarget * (actualSubmits - TARGET_SUBMITS) / TARGET_SUBMITS /
 
 | Parameter | Requirement | Default value | Code |
 |-----------|-------------|---------------|------|
-| BASE_REWARD | | 0 | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L318) |
-| BLOB_PRICE | | 0 | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L331) |
-| SERVICE_FEE_RATE_BP | | 0 | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L336) |
-| REWARD_RATIO | [1] | 1,200,000 | [Link](https://github.com/0glabs/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L312) |
+| BASE_REWARD | | 0 | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L318) |
+| BLOB_PRICE | | 0 | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L331) |
+| SERVICE_FEE_RATE_BP | | 0 | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L336) |
+| REWARD_RATIO | [1] | 1,200,000 | [Link](https://github.com/0gfoundation/0g-da-contract/blob/3951565fb6ad3096634da6493e9e863bb2846611/contracts/DAEntrance.sol#L312) |
 
 [1] `TARGET_SUBMITS` × Time elapsed for `EPOCH_WINDOW_SIZE` epochs / Time elapsed in `SAMPLE_PERIOD` / `REWARD_RATIO` should be approximately 0.5 to 2.
 

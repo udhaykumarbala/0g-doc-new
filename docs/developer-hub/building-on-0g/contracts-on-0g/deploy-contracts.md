@@ -161,7 +161,7 @@ Run: `truffle migrate --network 0g-testnet`
 
 Follow the same deployment steps as you would on Ethereum, using your 0G Chain node or RPC endpoint.
 
-> For complete working examples using different frameworks, check out the official deployment scripts repository: 🔗 **[0G Deployment Scripts](https://github.com/0glabs/0g-deployment-scripts)**
+> For complete working examples using different frameworks, check out the official deployment scripts repository: 🔗 **[0G Deployment Scripts](https://github.com/0gfoundation/0g-deployment-scripts)**
 
 ### Step 4: Verify Deployment Results on 0G Chain Scan
 After deployment, you can view the transaction results and verify the contract on [0G Chain Scan](https://chainscan-galileo.0g.ai), 0G Chain's block explorer.

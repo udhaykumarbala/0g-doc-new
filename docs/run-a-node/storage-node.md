@@ -64,7 +64,7 @@ Start by installing all the essential tools and libraries required to build the 
  **Download the Source Code**: 
 
     ```bash
-    git clone -b <latest_tag> https://github.com/0glabs/0g-storage-node.git
+    git clone -b <latest_tag> https://github.com/0gfoundation/0g-storage-node.git
     ```
 
 **Build the Source Code**
@@ -187,7 +187,7 @@ Follow the same steps to install dependencies and Rust as in the storage node se
 #### 1. Download the Source Code
 
 ```bash
-git clone -b <latest_tag> https://github.com/0glabs/0g-storage-kv.git
+git clone -b <latest_tag> https://github.com/0gfoundation/0g-storage-kv.git
 ```
 
 #### 2. Build the Source Code
@@ -298,7 +298,7 @@ If you encounter issues:
 
 If you need assistance:
 
-1. Check the [GitHub Issues](https://github.com/0glabs/0g-storage-kv/issues) for known problems and solutions.
+1. Check the [GitHub Issues](https://github.com/0gfoundation/0g-storage-kv/issues) for known problems and solutions.
 2. Join the 0G community channels (Discord, Telegram, etc.) for community support.
 3. For critical issues, consider reaching out to the 0G team directly.
 

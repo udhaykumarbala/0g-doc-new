@@ -12,7 +12,7 @@ DAsigners is a wrapper for the `x/dasigners` module in the 0g chain, allowing qu
 
 # Interface
 
-[https://github.com/0glabs/0g-chain/blob/dev/precompiles/interfaces/contracts/IDASigners.sol](https://github.com/0glabs/0g-chain/blob/dev/precompiles/interfaces/contracts/IDASigners.sol)
+[https://github.com/0gfoundation/0g-chain/blob/dev/precompiles/interfaces/contracts/IDASigners.sol](https://github.com/0gfoundation/0g-chain/blob/dev/precompiles/interfaces/contracts/IDASigners.sol)
 
 ## Structs
 

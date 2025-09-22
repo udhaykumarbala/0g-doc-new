@@ -28,8 +28,8 @@ Both SDKs provide a streamlined interface to interact with the 0G Storage networ
 :::tip Starter Kits Available
 Get up and running quickly with our comprehensive starter kits:
 
-- **[TypeScript Starter Kit](https://github.com/0glabs/0g-storage-ts-starter-kit)** - Complete examples with Express.js server and CLI tool
-- **[Go Starter Kit](https://github.com/0glabs/0g-storage-go-starter-kit)** - Ready-to-use examples with Gin server and CLI tool
+- **[TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit)** - Complete examples with Express.js server and CLI tool
+- **[Go Starter Kit](https://github.com/0gfoundation/0g-storage-go-starter-kit)** - Ready-to-use examples with Gin server and CLI tool
 
 Both repositories include working examples, API documentation, and everything you need to start building.
 :::
@@ -42,7 +42,7 @@ Both repositories include working examples, API documentation, and everything yo
 Install the 0G Storage Client library:
 
 ```bash
-go get github.com/0glabs/0g-storage-client
+go get github.com/0gfoundation/0g-storage-client
 ```
 
 ## Setup
@@ -52,10 +52,10 @@ go get github.com/0glabs/0g-storage-client
 ```go
 import (
     "context"
-    "github.com/0glabs/0g-storage-client/common/blockchain"
-    "github.com/0glabs/0g-storage-client/indexer"
-    "github.com/0glabs/0g-storage-client/transfer"
-    "github.com/0glabs/0g-storage-client/core"
+    "github.com/0gfoundation/0g-storage-client/common/blockchain"
+    "github.com/0gfoundation/0g-storage-client/indexer"
+    "github.com/0gfoundation/0g-storage-client/transfer"
+    "github.com/0gfoundation/0g-storage-client/core"
 )
 ```
 
@@ -173,8 +173,8 @@ if err != nil {
 
 ## Additional Resources
 
-- [Go SDK Repository](https://github.com/0glabs/0g-storage-client)
-- [Go Starter Kit](https://github.com/0glabs/0g-storage-go-starter-kit)
+- [Go SDK Repository](https://github.com/0gfoundation/0g-storage-client)
+- [Go Starter Kit](https://github.com/0gfoundation/0g-storage-go-starter-kit)
 
 </TabItem>
 <TabItem value="typescript" label="TypeScript SDK">
@@ -356,8 +356,8 @@ async function downloadStream(rootHash) {
 
 ## Additional Resources
 
-- [TypeScript SDK Repository](https://github.com/0glabs/0g-ts-sdk)
-- [TypeScript Starter Kit](https://github.com/0glabs/0g-storage-ts-starter-kit)
+- [TypeScript SDK Repository](https://github.com/0gfoundation/0g-ts-sdk)
+- [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit)
 
 </TabItem>
 </Tabs>

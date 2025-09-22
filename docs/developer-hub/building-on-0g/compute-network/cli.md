@@ -96,7 +96,7 @@ The output consists of two main sections:
 *Note:* We currently offer the models listed above as presets. You can choose one of these models for fine-tuning. More models will be provided in future versions.
 
 ### Prepare Configuration File
-Please download the parameter file template for the model you wish to fine-tune from the [releases page](https://github.com/0glabs/0g-serving-broker/releases) and modify it according to your needs.
+Please download the parameter file template for the model you wish to fine-tune from the [releases page](https://github.com/0gfoundation/0g-serving-broker/releases) and modify it according to your needs.
 
 *Note:* For custom models provided by third-party Providers, you can download the usage template including instructions on how to construct the dataset and training configuration using the following command:
 
@@ -106,7 +106,7 @@ Please download the parameter file template for the model you wish to fine-tune 
 
 ### Prepare Your Data
 
-Please download the dataset format specification and verification script from the [releases page](https://github.com/0glabs/0g-serving-broker/releases) to make sure your generated dataset complies with the requirements.
+Please download the dataset format specification and verification script from the [releases page](https://github.com/0gfoundation/0g-serving-broker/releases) to make sure your generated dataset complies with the requirements.
 
 ### Upload Dataset
 

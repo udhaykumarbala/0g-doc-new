@@ -49,7 +49,7 @@ Restaking configuration is NOT required for non-validator nodes. Do not add the 
 Download the latest package for node binaries:
 
 ```bash
-wget -O galileo.tar.gz https://github.com/0glabs/0gchain-NG/releases/download/v2.0.3/galileo-v2.0.3.tar.gz
+wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v2.0.3/galileo-v2.0.3.tar.gz
 ```
 
 ### 2. Extract Package
@@ -197,7 +197,7 @@ To restore your validator from backup:
 
 ```bash
 # Download & Extract the new release package
-wget -O galileo.tar.gz https://github.com/0glabs/0gchain-NG/releases/download/v2.0.3/galileo-v2.0.3.tar.gz
+wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v2.0.3/galileo-v2.0.3.tar.gz
 
 tar -xzvf galileo.tar.gz -C ~
 

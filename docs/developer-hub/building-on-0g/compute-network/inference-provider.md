@@ -92,11 +92,11 @@ Stay tuned for updates.
 ### Download and Configure Inference Broker
 To register and manage services, handle user request proxies, and perform settlements, you need to use the Inference Broker.
 
-Please visit the [releases page](https://github.com/0glabs/0g-serving-broker/releases) to download and extract the latest version of the installation package.
+Please visit the [releases page](https://github.com/0gfoundation/0g-serving-broker/releases) to download and extract the latest version of the installation package.
 
 ```bash
 # Download from releases page
-wget https://github.com/0glabs/0g-serving-broker/releases/download/v0.2.0/inference-broker.tar.gz
+wget https://github.com/0gfoundation/0g-serving-broker/releases/download/v0.2.0/inference-broker.tar.gz
 tar -xzf inference-broker.tar.gz
 cd inference-broker
 

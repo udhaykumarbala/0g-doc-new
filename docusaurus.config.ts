@@ -95,7 +95,7 @@ const config: Config = {
           html: '<span class="header-hubs-link-text"><i class="fas fa-globe"></i> 0G Hub</span>',
         },
         {
-          href: 'https://github.com/0glabs',
+          href: 'https://github.com/0gfoundation',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -130,7 +130,7 @@ const config: Config = {
           title: 'More',
           items: [
             { label: 'Blog', href: 'https://0g.ai/blog' },
-            { label: 'GitHub', href: 'https://github.com/0glabs' },
+            { label: 'GitHub', href: 'https://github.com/0gfoundation' },
           ],
         },
       ],
