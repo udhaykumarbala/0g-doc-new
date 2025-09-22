@@ -24,7 +24,7 @@ To implement this server specification, 0G DA provides a `da-server` that runs a
 
 ### GitHub Repository
 
-Find the repository for this integration at: https://github.com/0glabs/0g-da-op-plasma
+Find the repository for this integration at: https://github.com/0gfoundation/0g-da-op-plasma
 
 The Optimism codebase has been extended to integrate with the 0G DA `da-server`. This server utilizes the 0G DA Open API to efficiently store and retrieve rollup data.
 
@@ -58,7 +58,7 @@ docker run -p 3100:3100 0g-da-op-plasma:latest da-server \
 **Build DA Server:**
 
 ```bash
-git clone https://github.com/0glabs/0g-da-op-plasma.git
+git clone https://github.com/0gfoundation/0g-da-op-plasma.git
 cd 0g-da-op-plasma
 make da-server
 ```

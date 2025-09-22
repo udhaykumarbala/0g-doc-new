@@ -46,7 +46,7 @@ Scalable data availability for any chain
 
 
 ## Community Projects
-Explore our growing ecosystem of DeAI applications in the [awesome-0g](https://github.com/0glabs/awesome-0g) repository, which showcases community projects, tools, and resources built on 0G.
+Explore our growing ecosystem of DeAI applications in the [awesome-0g](https://github.com/0gfoundation/awesome-0g) repository, which showcases community projects, tools, and resources built on 0G.
 
 ---
 

@@ -208,7 +208,7 @@ By combining INFTs with 0G's comprehensive AI infrastructure, developers can cre
 ### For Developers
 🚀 **[Integration Guide](./integration)** - Start building with INFTs  
 📋 **[ERC-7857 Standard](./erc7857)** - Technical implementation details  
-💻 **[GitHub Repository](https://github.com/0glabs/0g-agent-nft/tree/eip-7857-draft)** - Sample code and examples  
+💻 **[GitHub Repository](https://github.com/0gfoundation/0g-agent-nft/tree/eip-7857-draft)** - Sample code and examples  
 
 ### For Users
 🛒 **[AI Agent Marketplace](#)** - Browse available AI agents (coming soon)  

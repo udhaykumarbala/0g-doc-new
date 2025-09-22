@@ -18,7 +18,7 @@ This integration adds an implementation of the `DataAvailabilityProvider` interf
 
 ### GitHub Repository
 
-Find the repository for this integration at: https://github.com/0glabs/nitro
+Find the repository for this integration at: https://github.com/0gfoundation/nitro
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Before setting up your Arbitrum Nitro rollup with 0G DA, ensure you have:
 
 - [0G DA Client Node](../da-integration.md)
 - [0G DA Encoder Node](../da-integration.md)
-- [0G Arbitrum Nitro Rollup Kit](https://github.com/0glabs/nitro)
+- [0G Arbitrum Nitro Rollup Kit](https://github.com/0gfoundation/nitro)
 
 :::warning Beta Integration
 This is a beta integration and we are working on resolving open issues. Please check the repository for the latest updates and known issues.
@@ -37,12 +37,12 @@ This is a beta integration and we are working on resolving open issues. Please c
 For detailed setup instructions and configuration:
 
 1. **Set up DA infrastructure** → Follow the [DA integration guide](../da-integration.md)
-2. **Clone the integration** → Visit the [0G Nitro repository](https://github.com/0glabs/nitro)
+2. **Clone the integration** → Visit the [0G Nitro repository](https://github.com/0gfoundation/nitro)
 3. **Follow setup guide** → Check the repository README for specific deployment steps
 
 ## Support
 
-- **Technical Issues** → [GitHub Issues](https://github.com/0glabs/nitro/issues)
+- **Technical Issues** → [GitHub Issues](https://github.com/0gfoundation/nitro/issues)
 - **Community Support** → [Discord](https://discord.gg/0glabs)
 
 ---

@@ -32,7 +32,7 @@ For a quick and easy web interface, try the [0G Storage Web Tool](https://storag
 **1. Clone the Repository**
 
 ```bash
-git clone https://github.com/0glabs/0g-storage-client.git
+git clone https://github.com/0gfoundation/0g-storage-client.git
 cd 0g-storage-client
 ```
 

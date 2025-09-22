@@ -20,7 +20,7 @@ Users can submit data blobs up to 32,505,852 bytes in length, which are then pro
 As the DA user, you pay a fee which is the (BLOB_PRICE) when submitting DA blob data.
 
 ### Submitting Data
-See example here: https://github.com/0glabs/0g-da-example-rust/blob/main/src/disperser.proto
+See example here: https://github.com/0gfoundation/0g-da-example-rust/blob/main/src/disperser.proto
 
 ## Hardware Requirements
 
@@ -42,7 +42,7 @@ The following table outlines the hardware requirements for different types of DA
 **1. Clone the DA Client Node Repo**
 
 ```bash
-git clone https://github.com/0glabs/0g-da-client.git
+git clone https://github.com/0gfoundation/0g-da-client.git
 ```
 
 **2. Build the Docker Image**
@@ -235,7 +235,7 @@ DA Encoder will serve on port 34000 with specified gRPC interface.
 Add the following to `Cargo.toml` of your crate:
 
 ```toml
-zg-encoder = { git = "https://github.com/0glabs/0g-da-encoder.git" }
+zg-encoder = { git = "https://github.com/0gfoundation/0g-da-encoder.git" }
 ```
 
 Use the `zg_encoder::EncodedSlice::verify` function for verifying.
@@ -264,7 +264,7 @@ Run the following script for complete testing:
 **1. Clone the DA Retriever Node Repo**
 
 ```bash
-git clone https://github.com/0glabs/0g-da-retriever.git
+git clone https://github.com/0gfoundation/0g-da-retriever.git
 cd 0g-da-retriever
 ```
 
@@ -378,7 +378,7 @@ docker run -d --name 0g-da-retriever -p 34005:34005 0g-da-retriever
 
 ## Next Steps
 
-- **Integration Examples** → [DA Examples Repository](https://github.com/0glabs/0g-da-example-rust)
+- **Integration Examples** → [DA Examples Repository](https://github.com/0gfoundation/0g-da-example-rust)
 - **Join Community** → [Discord](https://discord.gg/0glabs) for support
 - **Run a DA Node** → [DA Node Guide](/run-a-node/da-node)
 
