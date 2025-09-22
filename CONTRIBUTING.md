@@ -35,8 +35,8 @@ By participating in this project, you agree to abide by our community standards:
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/0g-doc-new.git
-   cd 0g-doc-new
+   git clone https://github.com/YOUR_USERNAME/0g-doc.git
+   cd 0g-doc
    ```
 
 2. **Install Dependencies**

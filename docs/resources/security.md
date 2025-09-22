@@ -16,10 +16,10 @@ We regularly conduct thorough security audits of our smart contracts, protocols,
 
 | Date | Auditor | Scope | Report |
 |------|---------|-------|--------|
-| Aug 2024 - Sept 2024 | Halborn | 0G Storage | [Report](https://github.com/0gfoundation/0g-doc-new/blob/main/audit/Halborn%200G%20Storage%20Node%20Audit.pdf) |
-| Aug 2024 | Zellic | 0G Storage and 0G DA | [Report](https://github.com/0gfoundation/0g-doc-new/blob/main/audit/Zellic%200G%20Storage%20and%200G%20DA%20Audit.pdf) |
+| Aug 2024 - Sept 2024 | Halborn | 0G Storage | [Report](https://github.com/0gfoundation/0g-doc/blob/main/audit/Halborn%200G%20Storage%20Node%20Audit.pdf) |
+| Aug 2024 | Zellic | 0G Storage and 0G DA | [Report](https://github.com/0gfoundation/0g-doc/blob/main/audit/Zellic%200G%20Storage%20and%200G%20DA%20Audit.pdf) |
 
-For a complete list of our audits and their detailed reports, please visit our [GitHub repository](https://github.com/0gfoundation/0g-doc-new/tree/main/audit).
+For a complete list of our audits and their detailed reports, please visit our [GitHub repository](https://github.com/0gfoundation/0g-doc/tree/main/audit).
 
 ## [0G Labs Bug Bounty Program with Hackenproof](https://hackenproof.com/programs/0g-labs-smart-contracts)
 
