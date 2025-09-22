@@ -18,6 +18,7 @@ We regularly conduct thorough security audits of our smart contracts, protocols,
 |------|---------|-------|--------|
 | Aug 2024 - Sept 2024 | Halborn | 0G Storage | [Report](https://github.com/0gfoundation/0g-doc/blob/main/audit/Halborn%200G%20Storage%20Node%20Audit.pdf) |
 | Aug 2024 | Zellic | 0G Storage and 0G DA | [Report](https://github.com/0gfoundation/0g-doc/blob/main/audit/Zellic%200G%20Storage%20and%200G%20DA%20Audit.pdf) |
+| Aug 2025 | Octane | 0G Chain | [Report](https://drive.google.com/file/d/1SgL-PDL_8jzDTUMQ9pO28OQVCP2IeqHR/view) |
 
 For a complete list of our audits and their detailed reports, please visit our [GitHub repository](https://github.com/0gfoundation/0g-doc/tree/main/audit).
 
