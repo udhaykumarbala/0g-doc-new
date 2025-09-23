@@ -26,133 +26,6 @@ The 0G AI Alignment Node system allows license holders to participate in the net
 | **Option 1: [Delegate to NAAS](#option-1-delegating-to-naas-providers)** | Non-technical users | 2-3 Minutes | 100% (prepaid) or minus commission | Provider handles |
 | **Option 2: [Run your own](#option-2-running-your-own-node)** | Technical users | 1-2 Hours | 100% | You handle |
 
-
-### Option 1: Delegate to NAAS Provider
-**Best for:** Users who prefer a managed solution without technical overhead.
-
-**Benefits:**
-- No technical expertise required
-- No infrastructure maintenance
-
-### Option 2: Run Your Own Node
-**Best for:** Technical users who want full control over their node infrastructure and 100% of rewards.
-
-**Requirements:**
-- Technical knowledge to manage a server
-- Dedicated hardware or VPS meeting minimum specifications
-- Time for ongoing maintenance and monitoring
-
----
-
-## Option 2: Running Your Own Node
-
-### System Requirements
-
-Before setting up your node, ensure your system meets these minimum specifications:
-
-| Component | Minimum Requirement |
-|-----------|-------------------|
-| **RAM** | 64 MB |
-| **CPU** | 1 x86 Core @ 2.1GHz |
-| **Disk Space** | 10 GB |
-| **Internet** | 10 Mbps connection |
-| **Network** | Port must be externally accessible (configure in firewall) |
-
-### Installation & Setup
-
-#### Step 1: Download the Node Binary
-
-Download the latest 0G alignment node binary from the official repository:
-
-```bash
-# Download the binary (replace with actual URL)
-wget https://github.com/0gfoundation/alignment-node-release/releases/download/v1.0.0/0g-alignment-node
-chmod +x 0g-alignment-node
-```
-
-#### Step 2: Configure Environment
-
-1. Copy the example environment file:
-```bash
-cp .env.example .env
-```
-
-2. Edit the `.env` file with your configuration:
-```bash
-nano .env
-```
-
-3. Configure the following parameters:
-```bash
-export ZG_ALIGNMENT_NODE_LOG_LEVEL=debug
-export ZG_ALIGNMENT_NODE_SERVICE_PORT=8080
-export ZG_ALIGNMENT_NODE_SERVICE_PRIVATEKEY=your_private_key_here
-```
-
-**Important Configuration Notes:**
-- **LOG_LEVEL**: Set to `debug` for troubleshooting, `info` for normal operation
-- **SERVICE_PORT**: Default is 8080. Ensure this port is open and accessible externally
-- **PRIVATEKEY**: Your wallet's private key that holds the alignment node license(s)
-
-#### Step 3: Network Configuration
-
-::::warning **Open your service port**
-The port specified in your configuration (default `8080`) must be accessible externally for consensus communication.
-
-Make sure this port is open in:
-- Cloud security groups/firewalls (AWS, Azure, GCP, etc.)
-- VPS provider firewalls
-- Local server firewall rules
-
-Steps vary by provider; consult your host's docs.
-::::
-
-#### Step 4: Start Your Node
-
-1. Load environment variables:
-```bash
-source .env
-```
-
-2. Start the node:
-```bash
-./0g-alignment-node start
-```
-
-3. To run in background (recommended for production):
-```bash
-nohup ./0g-alignment-node start > node.log 2>&1 &
-```
-
-### Monitoring Your Node
-
-Check node status:
-```bash
-./0g-alignment-node status
-```
-
-View logs:
-```bash
-tail -f node.log
-```
-
-::::tip **Healthy node checklist**
-- Status reports without errors
-- Logs show steady activity, no repeated crashes
-::::
-
-### Troubleshooting
-
-**Node not connecting:**
-- Verify port is open and accessible externally
-- Check your firewall/security group settings
-- Ensure private key has associated licenses
-
-**Node crashes:**
-- Check logs for errors
-- Verify system requirements are met
-- Ensure stable internet connection
-
 ---
 
 ## Option 1: Delegating to NAAS Providers
@@ -255,6 +128,140 @@ To reclaim your licenses:
 - Renew before expiration to avoid downtime
 - Provider will update status upon payment
 - Node shows "Expired" if payment lapses
+
+---
+
+## Option 2: Running Your Own Node
+
+### System Requirements
+
+Before setting up your node, ensure your system meets these minimum specifications:
+
+| Component | Minimum Requirement |
+|-----------|-------------------|
+| **RAM** | 64 MB |
+| **CPU** | 1 x86 Core @ 2.1GHz |
+| **Disk Space** | 10 GB |
+| **Internet** | 10 Mbps connection |
+| **Network** | Port must be externally accessible (configure in firewall) |
+
+### Installation & Setup
+
+#### Step 1: Download the Node Binary
+
+Download the latest 0G alignment node binary from the official repository:
+
+```bash
+# Download the binary (replace with actual URL)
+wget https://github.com/0gfoundation/alignment-node-release/releases/download/v1.0.0/alignment-node.tar.gz
+
+tar -xzf alignment-node.tar.gz
+
+cd alignment-node
+
+chmod +x 0g-alignment-node
+```
+
+#### Step 2: Configure Environment
+
+1. Copy the example environment file:
+```bash
+cp .env.example .env
+```
+
+2. Edit the `.env` file with your configuration:
+```bash
+nano .env
+```
+
+3. Configure the following parameters:
+```bash
+export ZG_ALIGNMENT_NODE_LOG_LEVEL=debug
+export ZG_ALIGNMENT_NODE_SERVICE_PORT=8080
+export ZG_ALIGNMENT_NODE_SERVICE_PRIVATEKEY=your_private_key_here
+```
+
+**Important Configuration Notes:**
+- **LOG_LEVEL**: Set to `debug` for troubleshooting, `info` for normal operation
+- **SERVICE_PORT**: Ensure this port is open and accessible externally
+- **PRIVATEKEY**: Your wallet's private key that holds the alignment node license(s)
+
+#### Step 3: Network Configuration
+
+::::warning **Open your service port**
+The port specified in your configuration must be accessible externally for consensus communication.
+
+Make sure this port is open in:
+- Cloud security groups/firewalls (AWS, Azure, GCP, etc.)
+- VPS provider firewalls
+- Local server firewall rules
+
+Steps vary by provider; consult your host's docs.
+::::
+
+#### Step 4: Start Your Node
+
+1. Load environment variables:
+```bash
+source .env
+```
+
+2. Register the operator:
+```bash
+./0g-alignment-node register-operator --key <your_private_key> --token-id <your_token_id> --chain-id <chain_id> --rpc <rpc_url> --contract <contract_address>
+```
+
+:::note
+The token id is the token id of the NFT you purchased. The private key is the private key of the wallet you used to purchase the NFT. If the wallet doesn't have any NFTs, the wallet is not eligible to register as operator.
+:::
+
+**Configuration Details:**
+- **Chain ID**: `42161` (Arbitrum Mainnet)
+- **RPC URL**: Use a reliable Arbitrum RPC endpoint such as:
+  - `https://arb1.arbitrum.io/rpc` (Public endpoint)
+  - Or your preferred Arbitrum RPC provider
+- **Alignment manager contract address**: `0xdD158B8A76566bC0c342893568e8fd3F08A9dAac` (Arbitrum Mainnet)
+
+3. Start the node:
+```bash
+./0g-alignment-node start --mainnet
+```
+
+4. To run in background (recommended for production):
+```bash
+nohup ./0g-alignment-node start  --mainnet > node.log 2>&1 &
+```
+
+### Monitoring Your Node
+
+View logs:
+```bash
+tail -f node.log
+```
+
+### Node command help
+```bash
+./0g-alignment-node --help
+
+./0g-alignment-node <command> --help
+```
+
+::::tip **Healthy node checklist**
+- Status reports without errors
+- Logs show steady activity, no repeated crashes
+::::
+
+### Troubleshooting
+
+**Node not connecting:**
+- Verify port is open and accessible externally
+- Check your firewall/security group settings
+- Ensure private key has associated licenses
+
+**Node crashes:**
+- Check logs for errors
+- Verify system requirements are met
+- Ensure stable internet connection
 
 ---
 
