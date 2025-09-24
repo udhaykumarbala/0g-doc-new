@@ -175,15 +175,20 @@ nano .env
 ```
 
 3. Configure the following parameters:
+
 ```bash
 export ZG_ALIGNMENT_NODE_LOG_LEVEL=debug
-export ZG_ALIGNMENT_NODE_SERVICE_PORT=8080
+export ZG_ALIGNMENT_NODE_SERVICE_IP="http://127.0.0.1:34567"  # Full URL endpoint
 export ZG_ALIGNMENT_NODE_SERVICE_PRIVATEKEY=your_private_key_here
 ```
 
+:::note
+The private key is the private key of the wallet you used to purchase the NFT. If the wallet doesn't have any NFTs, the wallet is not eligible to register as operator.
+:::
+
 **Important Configuration Notes:**
 - **LOG_LEVEL**: Set to `debug` for troubleshooting, `info` for normal operation
-- **SERVICE_PORT**: Ensure this port is open and accessible externally
+- **SERVICE_IP**: The ip of the service you are running. You need to add the external ip of the node to the `.env` file. The external ip is the ip of the node that is accessible from the internet.
 - **PRIVATEKEY**: Your wallet's private key that holds the alignment node license(s)
 
 #### Step 3: Network Configuration
@@ -208,7 +213,7 @@ source .env
 
 2. Register the operator:
 ```bash
-./0g-alignment-node register-operator --key <your_private_key> --token-id <your_token_id> --chain-id <chain_id> --rpc <rpc_url> --contract <contract_address>
+./0g-alignment-node registerOperator --key <your_private_key> --token-id <your_token_id> --chain-id <chain_id> --rpc <rpc_url> --contract <contract_address>
 ```
 
 :::note
@@ -229,7 +234,7 @@ The token id is the token id of the NFT you purchased. The private key is the pr
 
 4. To run in background (recommended for production):
 ```bash
-nohup ./0g-alignment-node start  --mainnet > node.log 2>&1 &
+nohup ./0g-alignment-node start --mainnet > node.log 2>&1 &
 ```
 
 ### Monitoring Your Node
