@@ -18,7 +18,7 @@ Test your applications on 0G's infrastructure without real costs or risks.
 | Parameters | Network Details |
 |----------------|---|
 | **Network Name** | 0G-Galileo-Testnet |
-| **Chain ID** | 16601 |
+| **Chain ID** | 16602 |
 | **Token Symbol** | OG |
 | **Block Explorer** | ```https://chainscan-galileo.0g.ai``` |
 | **Faucet** | https://faucet.0g.ai |
@@ -100,15 +100,14 @@ Addresses may change during testnet.
 :::
 
 **0G Storage**
-- Flow: `0xbD75117F80b4E22698D0Cd7612d92BDb8eaff628`
-- Mine: `0x3A0d1d67497Ad770d6f72e7f4B8F0BAbaa2A649C`
-- Market: `0x53191725d260221bBa307D8EeD6e2Be8DD265e19`
-- Reward: `0xd3D4D91125D76112AE256327410Dd0414Ee08Cb4`
+- Flow: `0x22E03a6A89B950F1c82ec5e74F8eCa321a105296`
+- Mine: `0x00A9E9604b0538e06b268Fb297Df333337f9593b`
+- Reward: `0xA97B57b4BdFEA2D0a25e535bd849ad4e6C440A69`
 
 **0G DA**
 - DAEntrance: `0xE75A073dA5bb7b0eC622170Fd268f35E675a957B`
 
-**Deployment Block**: `326165`
+<!-- **Deployment Block**: `326165` -->
 
 ## Developer Tools
 

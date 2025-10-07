@@ -19,7 +19,7 @@ interface OKXButtonProps {
 
 export default function OKXButton({
   label = "Add 0G Testnet",
-  chainId: inputChainId = '16601',
+  chainId: inputChainId = '16602',
   chainName = '0G-Galileo-Testnet',
   tokenSymbol = 'OG',
   tokenName = 'OG',

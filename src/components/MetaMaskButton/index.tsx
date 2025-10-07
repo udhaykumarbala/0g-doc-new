@@ -20,7 +20,7 @@ interface MetaMaskButtonProps {
 
 export default function MetaMaskButton({
   label = "Add 0G Testnet",
-  chainId: inputChainId = '16601',
+  chainId: inputChainId = '16602',
   chainName = '0G-Galileo-Testnet',
   tokenSymbol = 'OG',
   tokenName = 'OG',
