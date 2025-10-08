@@ -313,7 +313,7 @@ for (const [model, provider] of Object.entries(OFFICIAL_PROVIDERS)) {
 
 - **Fine-tune Models** → [CLI Guide](./cli)
 - **Become a Provider** → [Provider Setup](./inference-provider)
-- **View Examples** → [GitHub](https://github.com/0gfoundation/compute-examples)
+- **View Examples** → [GitHub](https://github.com/0gfoundation/0g-compute-ts-starter-kit)
 
 ---
 
