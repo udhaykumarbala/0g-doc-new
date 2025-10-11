@@ -30,7 +30,9 @@ For detailed instructions on setting up and operating your Storage Node or Stora
 Before setting up your storage node:
 
 - Understand that 0G Storage interacts with on-chain contracts for blob root confirmation and PoRA mining.
-- Check [here](../developer-hub/testnet/testnet-overview.md) for deployed contract addresses.
+- Choose your network: [Testnet](../developer-hub/testnet/testnet-overview.md) or [Mainnet](../developer-hub/mainnet/mainnet-overview.md)
+- Check the respective network overview pages for deployed contract addresses and RPC endpoints.
+- **For mainnet deployment**: Ensure you have real OG tokens for transaction fees and mining rewards.
 
 
 ## Install Dependencies
@@ -78,60 +80,123 @@ Start by installing all the essential tools and libraries required to build the 
 
 This compiles the Rust code into an executable binary. The `--release` flag optimizes the build for performance.
 
-## Configuration
+## Setup and Configuration
 
-Navigate to the run directory and open config.toml for editing. Follow the steps below. 
+Navigate to the run directory and configure your storage node for either testnet or mainnet.
 
-1. Edit the configuration file:
+:::info Config File References
+The official configuration files are available in the [0G Storage Node GitHub repository](https://github.com/0gfoundation/0g-storage-node/tree/main/run):
+- Testnet: `config-testnet-turbo.toml`
+- Mainnet: `config-mainnet-turbo.toml`
+
+Always use the latest versions from the repository as they contain the most up-to-date network parameters.
+:::
+
+<Tabs>
+  <TabItem value="testnet" label="Testnet">
+
+### Configuration
+
+1. Copy the testnet configuration:
 
 ```bash
 cd run
-nano config.toml
+cp config-testnet-turbo.toml config.toml
 ```
 
-2. Update configuration with your preferred settings:
+2. Update the following fields in `config.toml`:
 
+```toml
+# Contract addresses for testnet
+log_contract_address = "0x22E03a6A89B950F1c82ec5e74F8eCa321a105296" # Flow contract
+mine_contract_address = "0x00A9E9604b0538e06b268Fb297Df333337f9593b" # Mine contract
 
-Below is just an example configuration for illustration purposes.
-For official default values, copy over the `config-testnet-turbo.toml` file to your `config.toml` file.
+# Testnet RPC endpoint
+blockchain_rpc_endpoint = "https://evmrpc-testnet.0g.ai"
 
+# Start sync block number for testnet
+log_sync_start_block_number = 326165
 
-```
-# Peer nodes: A list of peer nodes to help your node join the network. Check inside 0g-storage/run directory for suggested configurations.
-network_boot_nodes = []
-
-# Contract addresses
-log_contract_address = "CONTRACT_ADDRESS" #flow contract address, see testnet information
-mine_contract_address = "CONTRACT_ADDRESS" #Address of the smart contract on the host blockchain that manages mining.
-
-# L1 host blockchain RPC endpoint URL. See testnet information page for RPC endpoints
-blockchain_rpc_endpoint = "RPC_ENDPOINT"
-
-# Start sync block number: The block number from which your node should start synchronizing the log data.
-log_sync_start_block_number = BLOCK_NUMBER
-
-# Your private key (64 chars, no '0x' prefix, include leading zeros): Your private key (without the `0x` prefix) if you want to participate in PoRA mining and earn rewards.
+# Your private key for mining (64 chars, no '0x' prefix)
 miner_key = "YOUR_PRIVATE_KEY"
-
-# Max chunk entries in db (affects storage size): The maximum number of chunk entries (each 256 bytes) to store in the database. This effectively limits the database size.
-db_max_num_chunks = MAX_CHUNKS
-
-# ENR address: Your node's public IP address, essential for other nodes to discover and connect to you. Currently automatically set by the node.
-# network_enr_address = ""
 ```
 
-## Running the Storage Node
+3. Optional: Configure network settings if needed:
+
+```toml
+# Target number of connected peers (can be increased for better connectivity)
+network_target_peers = 50
+```
+
+### Running the Node
 
 1. Check configuration options:
 ```bash
 ../target/release/zgs_node -h
 ```
 
-2. Run the storage service:
+2. Run the testnet storage service:
 ```bash
 cd run
 ../target/release/zgs_node --config config.toml --miner-key <your_private_key>
 ```
+
+  </TabItem>
+  <TabItem value="mainnet" label="Mainnet">
+
+### Configuration
+
+1. Copy the mainnet configuration:
+
+```bash
+cd run
+cp config-mainnet-turbo.toml config.toml
+```
+
+2. Update the following fields in `config.toml`:
+
+```toml
+# Contract addresses for mainnet
+log_contract_address = "0x62D4144dB0F0a6fBBaeb6296c785C71B3D57C526" # Flow contract
+mine_contract_address = "0xCd01c5Cd953971CE4C2c9bFb95610236a7F414fe" # Mine contract
+reward_contract_address = "0x457aC76B58ffcDc118AABD6DbC63ff9072880870" # Reward contract
+
+# Mainnet RPC endpoint
+blockchain_rpc_endpoint = "https://evmrpc.0g.ai"
+
+# Start sync block number for mainnet
+log_sync_start_block_number = 2387557
+
+# Your private key for mining (64 chars, no '0x' prefix)
+miner_key = "YOUR_PRIVATE_KEY"
+```
+
+3. The mainnet configuration includes predefined boot nodes for network connectivity:
+
+```toml
+network_boot_nodes = ["/ip4/34.66.131.173/udp/1234/p2p/16Uiu2HAmG81UgZ1JJLx9T2HqELgJNP36ChHzYkCdA9HdxvAbb5jQ","/ip4/34.60.163.4/udp/1234/p2p/16Uiu2HAmL3DoA7e7mbxs7CkeCPtNrAcfJFFtLpJDr2HWuR6QwJ8k","/ip4/34.169.236.186/udp/1234/p2p/16Uiu2HAm489RdhEgZUFmNTR4jdLEE4HjrvwaPCkEpSYSgvqi1CbR","/ip4/34.71.110.60/udp/1234/p2p/16Uiu2HAmBfGfbLNRegcqihiuXhgSXWNpgiGm6EwW2SYexfPUNUHQ"]
+```
+
+### Running the Node
+
+1. Check configuration options:
+```bash
+../target/release/zgs_node -h
+```
+
+2. Run the mainnet storage service:
+```bash
+cd run
+../target/release/zgs_node --config config.toml --miner-key <your_private_key>
+```
+
+**Important Mainnet Notes**:
+- Ensure your miner key has sufficient OG tokens for transaction fees
+- Mainnet nodes should have stable internet connectivity and sufficient bandwidth
+- Monitor your node's performance and logs regularly
+
+</TabItem>
+</Tabs>
 
 ## Snapshot 
 Make sure to only include `flow_db` and delete `data_db` under `db` folder when you use a snapshot from a 3rd party !
