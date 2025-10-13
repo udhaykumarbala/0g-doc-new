@@ -20,6 +20,7 @@ Build and run production workloads on the 0G Mainnet.
 | **Chain ID** | 16661 |
 | **Token Symbol** | 0G |
 | **RPC URL** | `https://evmrpc.0g.ai` |
+| **Storage Indexer** | `https://indexer-storage-turbo.0g.ai` |
 | **Block Explorer** | `https://chainscan.0g.ai` |
 
 #### ✅ 3rd Party RPCs (Recommended for production)

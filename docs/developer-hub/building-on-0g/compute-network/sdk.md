@@ -50,7 +50,12 @@ GPU owners offering AI services:
 import { ethers } from "ethers";
 import { createZGComputeNetworkBroker } from "@0glabs/0g-serving-broker";
 
-const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
+// Choose your network
+const RPC_URL = process.env.NODE_ENV === 'production'
+  ? "https://evmrpc.0g.ai"  // Mainnet
+  : "https://evmrpc-testnet.0g.ai";  // Testnet
+
+const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
 const broker = await createZGComputeNetworkBroker(wallet);
 ```
