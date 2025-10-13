@@ -76,9 +76,13 @@ if err != nil {
 ```
 
 **Parameters:**
-- `evmRpc`: 0G Chain RPC endpoint (e.g., `https://evmrpc-testnet.0g.ai/`)
+- `evmRpc`: 0G Chain RPC endpoint
+  - Testnet: `https://evmrpc-testnet.0g.ai/`
+  - Mainnet: `https://evmrpc.0g.ai/`
 - `privateKey`: Your Ethereum private key for signing transactions
-- `indRpc`: Indexer RPC endpoint (e.g., `https://indexer-storage-testnet-turbo.0g.ai`)
+- `indRpc`: Indexer RPC endpoint
+  - Testnet: `https://indexer-storage-testnet-turbo.0g.ai`
+  - Mainnet: `https://indexer-storage-turbo.0g.ai`
 
 ## Core Operations
 
@@ -203,9 +207,18 @@ import { ethers } from 'ethers';
 ### Initialize Configuration
 
 ```javascript
-// Network Constants
-const RPC_URL = 'https://evmrpc-testnet.0g.ai/';
-const INDEXER_RPC = 'https://indexer-storage-testnet-turbo.0g.ai';
+// Network Constants - Choose your network
+// Testnet
+const TESTNET_RPC_URL = 'https://evmrpc-testnet.0g.ai/';
+const TESTNET_INDEXER_RPC = 'https://indexer-storage-testnet-turbo.0g.ai';
+
+// Mainnet
+const MAINNET_RPC_URL = 'https://evmrpc.0g.ai/';
+const MAINNET_INDEXER_RPC = 'https://indexer-storage-turbo.0g.ai';
+
+// Use the appropriate constants for your network
+const RPC_URL = TESTNET_RPC_URL; // or MAINNET_RPC_URL
+const INDEXER_RPC = TESTNET_INDEXER_RPC; // or MAINNET_INDEXER_RPC
 
 // Initialize provider and signer
 const privateKey = 'YOUR_PRIVATE_KEY'; // Replace with your private key
