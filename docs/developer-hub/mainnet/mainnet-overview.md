@@ -56,5 +56,12 @@ Build and run production workloads on the 0G Mainnet.
 For redundancy in production apps, consider adding multiple RPC providers where available.
 :::
 
+## Contract Addresses
+
+**0G Storage**
+- Flow: `0x62D4144dB0F0a6fBBaeb6296c785C71B3D57C526`
+- Mine: `0xCd01c5Cd953971CE4C2c9bFb95610236a7F414fe`
+- Reward: `0x457aC76B58ffcDc118AABD6DbC63ff9072880870`
+
 ## Developer Tools
 - **Chain Explorer**: `https://chainscan.0g.ai (https://chainscan.0g.ai)`
