@@ -109,12 +109,12 @@ For other build tools (Webpack, Rollup, etc.), configure the appropriate polyfil
 ### Fund Your Account
 
 ```typescript
-// Add 10 OG tokens
+// Add 10 0G tokens
 await broker.ledger.addLedger(10);
 
 // Check balance
 const account = await broker.ledger.getLedger();
-console.log(`Balance: ${ethers.formatEther(account.totalBalance)} OG`);
+console.log(`Balance: ${ethers.formatEther(account.totalBalance)} 0G`);
 ```
 
 ### Discover Available Services
@@ -246,13 +246,13 @@ Fee settlement by the broker service occurs at scheduled intervals.
 ```typescript
 const account = await broker.ledger.getLedger();
 console.log(`
-  Balance: ${ethers.formatEther(account.totalBalance)} OG
+  Balance: ${ethers.formatEther(account.totalBalance)} 0G
 `);
 ```
 
 ### Add Funds
 ```typescript
-// Add more funds (amount in OG tokens)
+// Add more funds (amount in 0G tokens)
 await broker.ledger.depositFund(10);
 ```
 
@@ -272,7 +272,7 @@ await broker.ledger.retrieveFund("inference");
 
 Your account doesn't have enough funds. Add more:
 ```typescript
-// Amount in OG tokens
+// Amount in 0G tokens
 await broker.ledger.addLedger(1);
 ```
 </details>
