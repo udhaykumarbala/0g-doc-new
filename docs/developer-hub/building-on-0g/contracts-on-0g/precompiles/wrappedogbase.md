@@ -13,6 +13,11 @@ In most cases this precompile should be only called by wrapped 0G contract.
 
 `0x0000000000000000000000000000000000001002`
 
+
+> **Wrapped 0G Token Contract Address**: `0x1Cd0690fF9a693f5EF2dD976660a8dAFc81A109c`
+>
+> This is the official address of the wrapped 0G (W0G) ERC20 token on the 0G chain. Use this address if you want to interact directly with the wrapped 0G token contract for transfers, approvals, or other ERC20 operations.
+
 # Interface
 
 [https://github.com/0gfoundation/0g-chain/blob/dev/precompiles/interfaces/contracts/IWrappedA0GIBase.sol](https://github.com/0gfoundation/0g-chain/blob/dev/precompiles/interfaces/contracts/IWrappedA0GIBase.sol)
@@ -42,7 +47,7 @@ struct Supply {
 ```solidity
 function getWA0GI() external view returns (address);
 ```
-- **Description**: Retrieves the address of the wrapped 0G (WA0GI) contract.
+- **Description**: Retrieves the address of the wrapped 0G token from the wrapped 0G precompile.
 - **Returns**: `address` of the W0G contract.
 
 ---
