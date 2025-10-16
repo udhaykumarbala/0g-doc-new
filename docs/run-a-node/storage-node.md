@@ -32,7 +32,7 @@ Before setting up your storage node:
 - Understand that 0G Storage interacts with on-chain contracts for blob root confirmation and PoRA mining.
 - Choose your network: [Testnet](../developer-hub/testnet/testnet-overview.md) or [Mainnet](../developer-hub/mainnet/mainnet-overview.md)
 - Check the respective network overview pages for deployed contract addresses and RPC endpoints.
-- **For mainnet deployment**: Ensure you have real OG tokens for transaction fees and mining rewards.
+- **For mainnet deployment**: Ensure you have real 0G tokens for transaction fees and mining rewards.
 
 
 ## Install Dependencies
@@ -191,7 +191,7 @@ cd run
 ```
 
 **Important Mainnet Notes**:
-- Ensure your miner key has sufficient OG tokens for transaction fees
+- Ensure your miner key has sufficient 0G tokens for transaction fees
 - Mainnet nodes should have stable internet connectivity and sufficient bandwidth
 - Monitor your node's performance and logs regularly
 

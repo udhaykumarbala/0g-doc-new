@@ -75,6 +75,12 @@ const config: Config = {
   ],
 
   themeConfig: {
+    scripts: [
+      {
+        src: `https://www.clarity.ms/tag/tr0w896qhb`,
+        async: true,
+      },
+    ],
     navbar: {
       title: 'Documentation',
       logo: {

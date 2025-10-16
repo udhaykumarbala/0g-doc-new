@@ -20,7 +20,7 @@ Transform your AI services into verifiable, revenue-generating endpoints on the 
 ## Prerequisites
 - Docker Compose 1.27+
 - OpenAI-compatible model service
-- Wallet with OG tokens for gas fees (see [Testnet Details](/docs/developer-hub/testnet/testnet-overview.md))
+- Wallet with 0G tokens for gas fees (see [Testnet Details](/docs/developer-hub/testnet/testnet-overview.md))
 
 ## Setup Process
 

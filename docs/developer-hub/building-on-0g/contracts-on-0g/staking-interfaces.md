@@ -9,7 +9,7 @@ Welcome to the 0G Chain Staking Interfaces documentation. This guide provides co
 
 ## Overview
 
-The 0G Chain staking system enables OG token holders to participate in network consensus and earn rewards through two primary mechanisms:
+The 0G Chain staking system enables 0G token holders to participate in network consensus and earn rewards through two primary mechanisms:
 
 1. **Becoming a Validator**: Run infrastructure to validate transactions and produce blocks
 2. **Delegating to Validators**: Stake tokens with existing validators to earn rewards without running infrastructure
@@ -367,7 +367,7 @@ signature: 0x1234567890000000000000000000000000000000000000000000000000000000000
 ```
 
 ## Initialize Validator
-To initialize the validator, you need to call the `createAndInitializeValidatorIfNecessary` function with the public key and signature from the previous step. The value should be set to minimum 32 OG tokens as the minimum initial delegation.
+To initialize the validator, you need to call the `createAndInitializeValidatorIfNecessary` function with the public key and signature from the previous step. The value should be set to minimum 32 0G tokens as the minimum initial delegation.
 
 ```solidity
 // SPDX-License-Identifier: MIT

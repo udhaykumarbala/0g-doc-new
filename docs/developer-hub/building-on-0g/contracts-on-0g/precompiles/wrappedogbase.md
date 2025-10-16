@@ -1,13 +1,13 @@
 ---
 id: precompiles-wrappedogbase
-title: Wrapped OG Base
+title: Wrapped 0G Base
 ---
 
 # Overview
 
-WrappedOGBase is a wrapper for the `x/wrapped-og-base` module in the 0g chain. WA0GI is a wrapped ERC20 token for native OG. It supports quota-based mint/burn functions based on native OG transfers, on top of traditional wrapped token implementation. The minting/burning quota for each address will be determined through governance voting. `x/wrapped-og-base` is the module that supports and maintains the minting/burning quota.
+Wrapped0GBase is a wrapper for the `x/wrapped-og-base` module in the 0g chain. W0G is a wrapped ERC20 token for native 0G. It supports quota-based mint/burn functions based on native 0G transfers, on top of traditional wrapped token implementation. The minting/burning quota for each address will be determined through governance voting. `x/wrapped-og-base` is the module that supports and maintains the minting/burning quota.
 
-In most cases this precompile should be only called by wrapped OG contract.
+In most cases this precompile should be only called by wrapped 0G contract.
 
 # Address
 
@@ -42,8 +42,8 @@ struct Supply {
 ```solidity
 function getWA0GI() external view returns (address);
 ```
-- **Description**: Retrieves the address of the wrapped OG (WA0GI) contract.
-- **Returns**: `address` of the WOG contract.
+- **Description**: Retrieves the address of the wrapped 0G (WA0GI) contract.
+- **Returns**: `address` of the W0G contract.
 
 ---
 
@@ -62,10 +62,10 @@ function minterSupply(address minter) external view returns (Supply memory);
 ```solidity
 function mint(address minter, uint256 amount) external;
 ```
-- **Description**: Mints OG to WA0GI contract and adds the corresponding amount to the minter's mint supply. If the minter's final mint supply exceeds their mint cap, the transaction will revert.
+- **Description**: Mints 0G to WA0GI contract and adds the corresponding amount to the minter's mint supply. If the minter's final mint supply exceeds their mint cap, the transaction will revert.
 - **Parameters**: 
   - `minter`: The address of the minter.
-  - `amount`: The amount of OG to mint.
+  - `amount`: The amount of 0G to mint.
 - **Restrictions**: Can only be called by the WA0GI contract.
 
 ---
@@ -74,10 +74,10 @@ function mint(address minter, uint256 amount) external;
 ```solidity
 function burn(address minter, uint256 amount) external;
 ```
-- **Description**: Burns the specified amount of OG in WA0GI contract on behalf of the minter and reduces the corresponding amount from the minter's mint supply.
+- **Description**: Burns the specified amount of 0G in WA0GI contract on behalf of the minter and reduces the corresponding amount from the minter's mint supply.
 - **Parameters**: 
   - `minter`: The address of the minter.
-  - `amount`: The amount of OG to burn.
-- **Restrictions**: Can only be called by the WOG contract.
+  - `amount`: The amount of 0G to burn.
+- **Restrictions**: Can only be called by the W0G contract.
 
 ---

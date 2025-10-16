@@ -30,7 +30,7 @@ export ZG_PRIVATE_KEY=your_private_key_here
 The Fine-tuning CLI requires an account to pay for service fees via the 0G Compute Network. You can create an account with the following command:
 
 ```bash
-# Create account with 0.1 OG
+# Create account with 0.1 0G
 0g-compute-cli add-account --amount 0.1
 ```
 
@@ -45,7 +45,7 @@ The output will be like:
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
 │ Available                                        │ ✓                                                │
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
-│ Price Per Byte in Dataset (OG)                   │ 0.000000000000000001                             │
+│ Price Per Byte in Dataset (0G)                   │ 0.000000000000000001                             │
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
 │ Provider 2                                       │ ......                                           │
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
@@ -55,7 +55,7 @@ The output will be like:
 
 - **Provider x:** The address of the provider. The address of the official provider is ```0xf07240Efa67755B5311bc75784a061eDB47165Dd```.
 - **Available:** Indicates if the provider is available. If ```✓```, the provider is available. If ```✗```, the provider is occupied.
-- **Price Per Byte in Dataset (OG):** The service fee charged by the provider. The fee is currently based on the byte count of the dataset. Future versions may charge more accurately based on the token count of the dataset.
+- **Price Per Byte in Dataset (0G):** The service fee charged by the provider. The fee is currently based on the byte count of the dataset. Future versions may charge more accurately based on the token count of the dataset.
 
 ### List Models
 
@@ -258,7 +258,7 @@ Possible output:
 ```
   Overview
 ┌──────────────────────────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────┐
-│ Balance                                          │ Value (OG)                                                                      │
+│ Balance                                          │ Value (0G)                                                                      │
 ├──────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┤
 │ Total                                            │ 0.999999999820331942                                                            │
 ├──────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┤
@@ -267,7 +267,7 @@ Possible output:
 
   Fine-tuning sub-accounts (Dynamically Created per Used Provider)
 ┌──────────────────────────────────────────────────┬──────────────────────────────┬──────────────────────────────────────────────────┐
-│ Provider                                         │ Balance (OG)                 │ Requested Return to Main Account (OG)            │
+│ Provider                                         │ Balance (0G)                 │ Requested Return to Main Account (0G)            │
 ├──────────────────────────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────┤
 │ 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC       │ 0.000000000179668154         │ 0.000000000000000000                             │
 ├──────────────────────────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────┤
@@ -323,14 +323,14 @@ Possible output:
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
 │ Provider                                         │ 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC       │
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
-│ Balance (OG)                                     │ 0.000000000179668154                             │
+│ Balance (0G)                                     │ 0.000000000179668154                             │
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
-│ Funds Applied for Return to Main Account (OG)    │ 0.000000000179668154                             │
+│ Funds Applied for Return to Main Account (0G)    │ 0.000000000179668154                             │
 └──────────────────────────────────────────────────┴──────────────────────────────────────────────────┘
 
   Details of Each Amount Applied for Return to Main Account
 ┌──────────────────────────────────────────────────┬──────────────────────────────────────────────────┐
-│ Amount (OG)                                      │ Remaining Locked Time                            │
+│ Amount (0G)                                      │ Remaining Locked Time                            │
 ├──────────────────────────────────────────────────┼──────────────────────────────────────────────────┤
 │ 0.000000000179668154                             │ 23h 58min 34s                                    │
 └──────────────────────────────────────────────────┴──────────────────────────────────────────────────┘

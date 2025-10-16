@@ -43,17 +43,17 @@ Native staking operations for validators and delegators.
 
 [Full Staking Documentation](./staking) -->
 
-### 🪙 [WrappedOGBase](./precompiles-wrappedogbase)
+### 🪙 [Wrapped0GBase](./precompiles-wrappedogbase)
 `0x0000000000000000000000000000000000001002`
 
-Wrapped version of native OG token for DeFi compatibility.
+Wrapped version of native 0G token for DeFi compatibility.
 
 **Key Features**:
-- Wrap/unwrap native OG tokens
+- Wrap/unwrap native 0G tokens
 - ERC20-compatible interface
 - Efficient gas operations
 
-**Common Use Case**: Integrating OG tokens with DEXs, lending protocols, or other DeFi applications.
+**Common Use Case**: Integrating 0G tokens with DEXs, lending protocols, or other DeFi applications.
 
 ---
 

@@ -31,7 +31,7 @@ Before deploying contracts on 0G Chain, ensure you have:
 
 - Node.js 16+ installed (for Hardhat/Truffle)
 - Rust installed (for Foundry)
-- A wallet with testnet OG tokens ([get from faucet](https://faucet.0g.ai))
+- A wallet with testnet 0G tokens ([get from faucet](https://faucet.0g.ai))
 - Basic Solidity knowledge
 
 ## Steps to Deploy Your Contract
@@ -321,7 +321,7 @@ You should get a success message like this:
 | Precompile                                               | Address     | Purpose                      |
 | -------------------------------------------------------- | ----------- | ---------------------------- |
 | [DASigners](./precompiles/precompiles-dasigners)         | `0x...1000` | Data availability signatures |
-| [WrappedOGBase](./precompiles/precompiles-wrappedogbase) | `0x...1002` | Wrapped OG token operations  |
+| [Wrapped0GBase](./precompiles/precompiles-wrappedogbase) | `0x...1002` | Wrapped 0G token operations  |
 
 ## Troubleshooting
 
