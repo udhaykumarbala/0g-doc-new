@@ -3,6 +3,9 @@ id: deploy-contracts
 title: Deploy Contracts on 0G Chain
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Deploy Smart Contracts on 0G Chain
 
 Deploy smart contracts on 0G Chain - an EVM-compatible blockchain with built-in AI capabilities.
@@ -10,11 +13,13 @@ Deploy smart contracts on 0G Chain - an EVM-compatible blockchain with built-in 
 ## Why Deploy on 0G Chain?
 
 ### ⚡ Performance Benefits
+
 - **2,500 TPS**: Higher throughput than Ethereum
 - **Low Fees**: Fraction of mainnet costs
 - **Fast Finality**: 1-2 second block times
 
 ### 🔧 Latest EVM Compatibility
+
 - **Pectra & Cancun-Deneb Support**: Leverage newest Ethereum capabilities
 - **Future-Ready**: Architecture designed for quick integration of upcoming EVM upgrades
 - **Familiar Tools**: Use Hardhat, Foundry, Remix
@@ -23,6 +28,7 @@ Deploy smart contracts on 0G Chain - an EVM-compatible blockchain with built-in 
 ## Prerequisites
 
 Before deploying contracts on 0G Chain, ensure you have:
+
 - Node.js 16+ installed (for Hardhat/Truffle)
 - Rust installed (for Foundry)
 - A wallet with testnet OG tokens ([get from faucet](https://faucet.0g.ai))
@@ -31,6 +37,7 @@ Before deploying contracts on 0G Chain, ensure you have:
 ## Steps to Deploy Your Contract
 
 ### Step 1: Prepare Your Smart Contract Code
+
 Write your contract code as you would for any Ethereum-compatible blockchain, ensuring that it meets the requirements for your specific use case.
 
 ```solidity
@@ -40,12 +47,12 @@ pragma solidity ^0.8.19;
 contract MyToken {
     mapping(address => uint256) public balances;
     uint256 public totalSupply;
-    
+
     constructor(uint256 _initialSupply) {
         totalSupply = _initialSupply;
         balances[msg.sender] = _initialSupply;
     }
-    
+
     function transfer(address to, uint256 amount) public returns (bool) {
         require(balances[msg.sender] >= amount, "Insufficient balance");
         balances[msg.sender] -= amount;
@@ -56,16 +63,19 @@ contract MyToken {
 ```
 
 ### Step 2: Compile Your Smart Contract
+
 Use `solc` or another compatible Solidity compiler to compile your smart contract.
 
 **Important**: When compiling, specify `--evm-version cancun` to ensure compatibility with the latest EVM upgrades supported by 0G Chain.
 
 **Using solc directly**:
+
 ```bash
 solc --evm-version cancun --bin --abi MyToken.sol
 ```
 
 **Using Hardhat**:
+
 ```javascript
 // hardhat.config.js
 module.exports = {
@@ -75,14 +85,15 @@ module.exports = {
       evmVersion: "cancun",
       optimizer: {
         enabled: true,
-        runs: 200
-      }
-    }
-  }
+        runs: 200,
+      },
+    },
+  },
 };
 ```
 
 **Using Foundry**:
+
 ```toml
 # foundry.toml
 [profile.default]
@@ -92,15 +103,22 @@ evm_version = "cancun"
 This step will generate the binary and ABI (Application Binary Interface) for your contract.
 
 ### Step 3: Deploy the Contract on 0G Chain
+
 Once compiled, you can use your preferred Ethereum-compatible deployment tools, such as `web3.js`, `ethers.js`, or `hardhat`, to deploy the contract on 0G Chain.
 
 **Configure Network Connection**:
+
 ```javascript
 // For Hardhat
 networks: {
-  "0g-testnet": {
+  "testnet": {
     url: "https://evmrpc-testnet.0g.ai",
-    chainId: 16601,
+    chainId: 16602,
+    accounts: [process.env.PRIVATE_KEY]
+  },
+  "mainnet": {
+    url: "https://evmrpc.0g.ai",
+    chainId: 16661,
     accounts: [process.env.PRIVATE_KEY]
   }
 }
@@ -108,6 +126,7 @@ networks: {
 // For Foundry
 [rpc_endpoints]
 0g_testnet = "https://evmrpc-testnet.0g.ai"
+0g_mainnet = "https://evmrpc.0g.ai"
 ```
 
 **Deploy Using Your Preferred Tool**:
@@ -121,7 +140,7 @@ async function main() {
   const MyToken = await ethers.getContractFactory("MyToken");
   const token = await MyToken.deploy(1000000); // 1M initial supply
   await token.deployed();
-  
+
   console.log("Token deployed to:", token.address);
 }
 
@@ -132,6 +151,7 @@ main().catch((error) => {
 ```
 
 Run: `npx hardhat run scripts/deploy.js --network 0g-testnet`
+
 </details>
 
 <details>
@@ -144,6 +164,7 @@ forge create --rpc-url https://evmrpc-testnet.0g.ai \
   src/MyToken.sol:MyToken \
   --constructor-args 1000000
 ```
+
 </details>
 
 <details>
@@ -151,12 +172,13 @@ forge create --rpc-url https://evmrpc-testnet.0g.ai \
 
 ```javascript
 // migrations/2_deploy_token.js
-module.exports = function(deployer) {
+module.exports = function (deployer) {
   deployer.deploy(MyToken, 1000000);
 };
 ```
 
 Run: `truffle migrate --network 0g-testnet`
+
 </details>
 
 Follow the same deployment steps as you would on Ethereum, using your 0G Chain node or RPC endpoint.
@@ -164,21 +186,142 @@ Follow the same deployment steps as you would on Ethereum, using your 0G Chain n
 > For complete working examples using different frameworks, check out the official deployment scripts repository: 🔗 **[0G Deployment Scripts](https://github.com/0gfoundation/0g-deployment-scripts)**
 
 ### Step 4: Verify Deployment Results on 0G Chain Scan
-After deployment, you can view the transaction results and verify the contract on [0G Chain Scan](https://chainscan-galileo.0g.ai), 0G Chain's block explorer.
 
-You can also verify the contract's code and ABI for public transparency.
+After deployment, you can verify your contract on 0G Chain Scan, the block explorer for **[0G Chain](https://chainscan.0g.ai)** or via the provided API below:
+
+<Tabs>
+  <TabItem value="verify-hardhat" label="Hardhat" default>
+    <!-- Prerequisites -->
+    Make sure you have the following plugins installed:
+    ```bash
+    npm install --save-dev @nomicfoundation/hardhat-verify @nomicfoundation/viem @nomicfoundation/hardhat-toolbox-viem dotenv 
+    ```
+
+    To verify your contract using Hardhat, please use the following settings in your `hardhat.config.js`:
+
+    ```javascript
+    solidity: {
+      ...
+      settings: {
+        evmVersion: "cancun", // Make sure this matches your compiler setting
+        optimizer: {
+          enabled: true,
+          runs: 200, // Adjust based on your optimization needs
+        },
+        viaIR: true, // Enable if your contract uses inline assembly
+        metadata: {
+          bytecodeHash: "none", // Optional: Set to "none" to exclude metadata hash
+        },
+      },
+    }
+    ```
+
+    Add the network configuration:
+
+    ```javascript
+    networks: {
+      "testnet": {
+        url: "https://evmrpc-testnet.0g.ai",
+        chainId: 16602,
+        accounts: [process.env.PRIVATE_KEY]
+      },
+      "mainnet": {
+        url: "https://evmrpc.0g.ai",
+        chainId: 16661,
+        accounts: [process.env.PRIVATE_KEY]
+      }
+    }
+    ```
+
+    and finally, add the etherscan configuration:
+
+    ```javascript
+    etherscan: {
+      apiKey: {
+        testnet: "YOUR_API_KEY", // Use a placeholder if you don't have one
+        mainnet: "YOUR_API_KEY"  // Use a placeholder if you don't have one
+      },
+      customChains: [
+        {
+          // Testnet
+          network: "testnet",
+          chainId: 16602,
+          urls: {
+            apiURL: "https://chainscan-galileo.0g.ai/open/api",
+            browserURL: "https://chainscan-galileo.0g.ai",
+          },
+        },
+        {
+          // Mainnet
+          network: "mainnet",
+          chainId: 16661,
+          urls: {
+            apiURL: "https://chainscan.0g.ai/open/api",
+            browserURL: "https://chainscan.0g.ai",
+          },
+        },
+      ],
+    },
+    ```
+
+    To verify your contract, run the following command:
+
+    ```bash
+    npx hardhat verify DEPLOYED_CONTRACT_ADDRESS --network <Network>
+    ```
+
+    You should get a success message like this:
+
+    ```bash
+    Successfully submitted source code for contract
+    contracts/Contract.sol:ContractName at DEPLOYED_CONTRACT_ADDRESS
+    for verification on the block explorer. Waiting for verification result...
+
+    Successfully verified contract TokenDist on the block explorer.
+    https://chainscan.0g.ai/address/<DEPLOYED_CONTRACT_ADDRESS>#code
+    ```
+
+</TabItem>
+<TabItem value="verify-forge" label="Forge">
+On Foundry, you can verify your contract using the `forge verify-contract` command. Make sure to set your compiler settings in `foundry.toml` as needed.
+
+| Precompile | Verifier URL                               |
+| ---------- | ------------------------------------------ |
+| Testnet    | `https://chainscan-galileo.0g.ai/open/api` |
+| Mainnet    | `https://chainscan.0g.ai/open/api`         |
+
+    ```bash
+    forge verify-contract \
+    --chain-id <CHAIN_ID> \
+    --num-of-optimizations <NUM_OPTIMIZATIONS> \
+    --verifier custom \
+    --verifier-api-key "PLACEHOLDER" \
+    --compiler-version <COMPILER_VERSION> \
+    <CONTRACT_ADDRESS> \
+    src/Counter.sol:Counter \
+    --verifier-url <VERIFIER_URL> \
+    ```
+
+You should get a success message like this:
+
+    ```bash
+    Submitted contract for verification:
+    Response: OK
+    GUID: <GUID>
+    URL: https://chainscan-galileo.0g.ai/open/address/<CONTRACT_ADDRESS>
+    ```
+
+</TabItem>
+</Tabs>
 
 ## Using 0G Precompiles
 
-0G Chain includes special precompiled contracts for advanced features:
-
 ### Available Precompiles
 
-| Precompile | Address | Purpose |
-|------------|---------|---------|
-| [DASigners](./precompiles/precompiles-dasigners) | `0x...1000` | Data availability signatures |
-| [WrappedOGBase](./precompiles/precompiles-wrappedogbase) | `0x...1002` | Wrapped OG token operations |
-
+| Precompile                                               | Address     | Purpose                      |
+| -------------------------------------------------------- | ----------- | ---------------------------- |
+| [DASigners](./precompiles/precompiles-dasigners)         | `0x...1000` | Data availability signatures |
+| [WrappedOGBase](./precompiles/precompiles-wrappedogbase) | `0x...1002` | Wrapped OG token operations  |
 
 ## Troubleshooting
 
@@ -186,6 +329,7 @@ You can also verify the contract's code and ABI for public transparency.
 <summary><b>Transaction failing with "invalid opcode"?</b></summary>
 
 If you're using newer experimental opcodes from unreleased Ethereum upgrades and see "invalid opcode" errors, consider:
+
 - Use `--evm-version cancun` in your compiler settings
 - Downgrade to an earlier Solidity compiler version (e.g., from 0.8.26 to 0.8.19)
 </details>
@@ -194,6 +338,7 @@ If you're using newer experimental opcodes from unreleased Ethereum upgrades and
 <summary><b>Can't connect to RPC?</b></summary>
 
 Try alternative endpoints:
+
 - QuikNode: [Get endpoint](https://www.quicknode.com/chains/0g)
 - ThirdWeb: [Get endpoint](https://thirdweb.com/0g-galileo-testnet-16601)
 </details>

@@ -96,9 +96,13 @@ Upload files to the 0G Storage network using the indexer service:
 ```
 
 **Parameters:**
-- `--url`: 0G Chain RPC endpoint (see [testnet overview](../../testnet/testnet-overview) for endpoints)
+- `--url`: 0G Chain RPC endpoint
+  - Testnet: `https://evmrpc-testnet.0g.ai/`
+  - Mainnet: `https://evmrpc.0g.ai/`
 - `--key`: Your private key for signing transactions
-- `--indexer`: Storage indexer endpoint (e.g., `https://indexer-storage-testnet-turbo.0g.ai/`)
+- `--indexer`: Storage indexer endpoint
+  - Testnet: `https://indexer-storage-testnet-turbo.0g.ai/`
+  - Mainnet: `https://indexer-storage-turbo.0g.ai`
 - `--file`: Path to the file you want to upload
 
 The indexer automatically determines the optimal storage nodes based on their shard configurations.
@@ -138,11 +142,18 @@ The `--proof` flag requests cryptographic proof of data integrity from the stora
 ### Upload Example
 
 ```bash
-# Upload a document to 0G Storage
+# Upload a document to 0G Storage (Testnet)
 0g-storage-client upload \
   --url https://evmrpc-testnet.0g.ai \
   --key YOUR_PRIVATE_KEY \
   --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
+  --file ./documents/report.pdf
+
+# Upload a document to 0G Storage (Mainnet)
+0g-storage-client upload \
+  --url https://evmrpc.0g.ai \
+  --key YOUR_PRIVATE_KEY \
+  --indexer https://indexer-storage-turbo.0g.ai \
   --file ./documents/report.pdf
 
 # Output:
@@ -154,15 +165,28 @@ The `--proof` flag requests cryptographic proof of data integrity from the stora
 ### Download Example
 
 ```bash
-# Download file using root hash
+# Download file using root hash (Testnet)
 0g-storage-client download \
   --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
   --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
   --file ./downloads/report.pdf
 
-# With verification
+# Download file using root hash (Mainnet)
+0g-storage-client download \
+  --indexer https://indexer-storage-turbo.0g.ai \
+  --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
+  --file ./downloads/report.pdf
+
+# With verification (Testnet)
 0g-storage-client download \
   --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
+  --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
+  --file ./downloads/report.pdf \
+  --proof
+
+# With verification (Mainnet)
+0g-storage-client download \
+  --indexer https://indexer-storage-turbo.0g.ai \
   --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
   --file ./downloads/report.pdf \
   --proof
@@ -188,10 +212,20 @@ Write multiple key-value pairs in a single operation:
 
 **Example:**
 ```bash
+# Testnet
 0g-storage-client kv-write \
   --url https://evmrpc-testnet.0g.ai \
   --key YOUR_PRIVATE_KEY \
   --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
+  --stream-id 1 \
+  --stream-keys "key1,key2,key3" \
+  --stream-values "value1,value2,value3"
+
+# Mainnet
+0g-storage-client kv-write \
+  --url https://evmrpc.0g.ai \
+  --key YOUR_PRIVATE_KEY \
+  --indexer https://indexer-storage-turbo.0g.ai \
   --stream-id 1 \
   --stream-keys "key1,key2,key3" \
   --stream-values "value1,value2,value3"
@@ -320,8 +354,12 @@ The indexer intelligently routes data to appropriate storage nodes based on thei
 ### Network Configuration
 
 :::info Required Information
-- **RPC Endpoints**: Find the latest RPC endpoints in the [testnet overview](../../testnet/testnet-overview)
-- **Indexer Endpoint**: Use `https://indexer-storage-testnet-turbo.0g.ai/` for testnet operations
+- **RPC Endpoints**:
+  - Testnet: `https://evmrpc-testnet.0g.ai/`
+  - Mainnet: `https://evmrpc.0g.ai/`
+- **Indexer Endpoints**:
+  - Testnet: `https://indexer-storage-testnet-turbo.0g.ai/`
+  - Mainnet: `https://indexer-storage-turbo.0g.ai`
 - **Private Keys**: Keep your private keys secure and never share them
 :::
 
