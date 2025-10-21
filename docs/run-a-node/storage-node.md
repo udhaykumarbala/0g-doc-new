@@ -12,11 +12,11 @@ This guide details the process of running a storage node, including hardware spe
 |-----------|--------------|------------|
 | Memory    | 32 GB RAM    | 32 GB RAM  |
 | CPU       | 8 cores      | 8 cores    |
-| Disk      | 500GB / 1TB NVMe SSD | Size matches the KV streams it maintains |
+| Disk      | 500GB / 1TB SSD | Size matches the KV streams it maintains |
 | Bandwidth | 100 Mbps (Download / Upload) | - |
 
 :::note
-- For Storage Node: The NVMe SSD ensures fast read/write operations, critical for efficient blob storage and retrieval.
+- For Storage Node: The SSD ensures fast read/write operations, critical for efficient blob storage and retrieval.
 - For Storage KV: The disk size requirement is flexible and should be adjusted based on the volume of KV streams you intend to maintain.
 :::
 ### Next Steps
