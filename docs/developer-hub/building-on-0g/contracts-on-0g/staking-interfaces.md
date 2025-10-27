@@ -7,6 +7,18 @@ title: Staking Interfaces
 
 Welcome to the 0G Chain Staking Interfaces documentation. This guide provides comprehensive information about interacting with the 0G Chain staking system through smart contracts, enabling you to build applications that leverage validator operations and delegations.
 
+:::tip **Running a Validator?**
+If you want to set up and initialize a validator, see the [Validator Initialization Guide](#validator-initialization) below.
+:::
+
+## Quick Navigation
+
+- **[Validator Initialization Guide](#validator-initialization)** - Complete step-by-step setup for becoming a validator
+- **[Contract Interfaces](#contract-interfaces)** - Smart contract reference documentation
+- **[Examples](#examples)** - Smart contract code examples
+
+---
+
 ## Overview
 
 The 0G Chain staking system enables 0G token holders to participate in network consensus and earn rewards through two primary mechanisms:
@@ -63,7 +75,7 @@ Rewards flow through multiple layers:
 ## Contract Interfaces
 
 ### IStakingContract
-`0xea224dBB52F57752044c0C86aD50930091F561B9` (Testnet)
+`0xea224dBB52F57752044c0C86aD50930091F561B9` (Mainnet)
 
 Central registry for validators and global parameters.
 
@@ -199,210 +211,331 @@ contract DelegationHelper {
 }
 ```
 
-## Getting Validator Signature
+## Validator Initialization
 
-### Option 1: Automated Script (Recommended)
+This section covers the complete workflow for setting up and initializing a validator on the 0G Chain.
 
-For quick setup, we provide an automated bash script that handles all signature generation steps:
+### Step 1: Generate Validator Signature
 
-#### Download and Execute
+The validator signature creation process is simplified with a single command:
+
 ```bash
-# Download the script
-curl -O https://raw.githubusercontent.com/0glabs/0g-doc/main/scripts/generate-validator-signature.sh
+# Set your environment variables
+HOMEDIR={your data path}/0g-home/0gchaind-home
+STAKING_ADDRESS=0xea224dBB52F57752044c0C86aD50930091F561B9
+AMOUNT=500000000000  # Amount in wei (e.g., 500 for 500 0G tokens)
 
-# Make it executable
-chmod +x generate-validator-signature.sh
-
-# Run the script
-./generate-validator-signature.sh
+# Generate validator signature
+./bin/0gchaind deposit create-delegation-validator \
+    $STAKING_ADDRESS \
+    $AMOUNT \
+    $HOMEDIR/config/genesis.json \
+    --home $HOMEDIR \
+    --chaincfg.chain-spec=mainnet \
+    --override-rpc-url \
+    --rpc-dial-url https://evmrpc.0g.ai
 ```
-
-The script will prompt you for:
-- `HOMEDIR` (default: `./0g-home/0gchaind-home`)
-- `CHAIN_SPEC` (default: `testnet`)  
-- `VALIDATOR_INITIAL_DELEGATION_IN_ETHER` (default: `32`)
 
 **Output:**
 ```
 ✅ Staking message created successfully!
+Note: This is NOT a transaction receipt; use these values to create a validator initialize transaction by Staking Contract.
 
-pubkey: 0xaa0f99735a6436d6b7ed763c2eaa8452d753c5152a4fb1e4dc0bd7e33bcfc8cd4fac0e2d6cbab941f423c17728fecc56
-validator_address: 0x1e776a6b65892ec60537a885c17b820301e054b9
-signature: 0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
-
-To initialize the validator, you need to call the createAndInitializeValidatorIfNecessary function with the pubkey and signature.
+stakingAddress: 0xea224dBB52F57752044c0C86aD50930091F561B9
+pubkey: 0x8497312cd37eef3a7a50017cfbebcb00a9bc400c5881ffb1011cba1c3f29e5d005a980880b7b919b558b95565bc1e628
+validatorAddress: 0xA47171b1be26C75732766Ea3433a90A724b3590d
+amount: 500000000000
+signature: 0xb1dae1164d931c46178785246203eb1c4496b403a7c417bfb33bdfd3c26b552bdbec8e466ed6712ade0b99cc9b0ee8b004cc766687565ba5b0929a1382997a6cc548cf5e390b69f849933c7ac017fbddc612cb3de285fdf89e6fe32e0ccbfc43
 ```
 
-### Option 2: Manual Steps
+### Step 2: Validate the Signature
 
-For those who want to understand the process or customize the workflow, follow these manual steps:
-
-### Prerequisites
-Your directory structure should look like:
-```
-galileo/
-├── bin/0gchaind
-└── config/
-    ├── genesis.json
-    ├── priv_validator_key.json
-    └── ...
-```
-
-### Step 1: Extract Public Key
-
- `0gchaind-home/config` directory will look like this:
-```
-0gchaind-home/
-├── config/
-    ├── genesis.json
-    ├── priv_validator_key.json
-    └── ...
-```
-
-Make sure to use data path that is used for validator node setup.
+Before submitting the validator initialization transaction, validate the signature:
 
 ```bash
-# Set your home directory
-HOMEDIR={your data path}/0g-home/0gchaind-home
-CHAIN_SPEC=devnet
+# Validate the deposit message
+./bin/0gchaind deposit validate-delegation \
+    {pubkey} \
+    {staking_address} \
+    {amount} \
+    {signature} \
+    $HOMEDIR/config/genesis.json \
+    --home $HOMEDIR \
+    --chaincfg.chain-spec=mainnet \
+    --override-rpc-url \
+    --rpc-dial-url https://evmrpc.0g.ai
+```
 
-# Generate validator keys
-./bin/0gchaind deposit validator-keys --home $HOMEDIR --chaincfg.chain-spec=$CHAIN_SPEC
+**Example:**
+```bash
+./bin/0gchaind deposit validate-delegation \
+    0x8497312cd37eef3a7a50017cfbebcb00a9bc400c5881ffb1011cba1c3f29e5d005a980880b7b919b558b95565bc1e628 \
+    0xea224dBB52F57752044c0C86aD50930091F561B9 \
+    500000000000 \
+    0xb1dae1164d931c46178785246203eb1c4496b403a7c417bfb33bdfd3c26b552bdbec8e466ed6712ade0b99cc9b0ee8b004cc766687565ba5b0929a1382997a6cc548cf5e390b69f849933c7ac017fbddc612cb3de285fdf89e6fe32e0ccbfc43 \
+    $HOMEDIR/config/genesis.json \
+    --home $HOMEDIR \
+    --chaincfg.chain-spec=mainnet \
+    --override-rpc-url \
+    --rpc-dial-url https://evmrpc.0g.ai
 ```
 
 **Output:**
 ```
-Eth/Beacon Pubkey (Compressed 48-byte Hex):
-0xaa0f99735a6436d6b7ed763c2eaa8452d753c5152a4fb1e4dc0bd7e33bcfc8cd4fac0e2d6cbab941f423c17728fecc56
+✅ Deposit message is valid!
 ```
 
-### Step 2: Compute Validator Address
+### Step 3: Prepare Validator Description and Settings
 
-Use the public key from Step 1 to compute the validator's contract address. Choose your preferred method:
+#### Description Structure
+
+The Description struct contains your validator's public information. All fields have character limits that must be respected:
+
+| Field | Max Length | Description |
+|-------|-----------|-------------|
+| `moniker` | 70 chars | Your validator's display name |
+| `identity` | 100 chars | **Optional:** Keybase identity |
+| `website` | 140 chars | Your validator website URL |
+| `securityContact` | 140 chars | Security contact email |
+| `details` | 200 chars | Additional validator description |
+
+**Example Description Object:**
+
+```jsx
+{
+  moniker: "Your Validator Name",      // Max 70 chars
+  identity: "keybase_id",              // Optional
+  website: "https://yoursite.com",     // Max 140 chars
+  securityContact: "security@you.com", // Max 140 chars
+  details: "Professional validator"     // Max 200 chars
+}
+```
+
+#### Commission Rate Configuration
+
+The commission rate determines what percentage of staking rewards your validator keeps
+
+| Value | Commission |
+|-------|-----------|
+| `100` | 0.01% |
+| `1000` | 0.1% |
+| `10000` | 1% |
+| `50000` | 5% |
+| `100000` | 10% |
+
+#### Withdrawal Fee Configuration
+
+The withdrawal fee (in Gwei) is charged when delegators undelegate from your validator.
+
+**Recommended value:** `1` (equivalent to 1 Gneuron, ~1 Gwei)
+
+### Step 4: Execute Initialization Transaction
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-<TabItem value="cast" label="Foundry Cast" default>
+  <TabItem value="chainscan" label="0G Chain Scan (Recommended)" default>
 
-**Recommended method** - simpler syntax and better error handling.
+The easiest way to initialize your validator using the web interface:
 
-```bash
-# Set your params
-STAKING_CONTRACT_ADDRESS=0xea224dBB52F57752044c0C86aD50930091F561B9
-PUBLIC_KEY=0xaa0f99735a6436d6b7ed763c2eaa8452d753c5152a4fb1e4dc0bd7e33bcfc8cd4fac0e2d6cbab941f423c17728fecc56
+1. Navigate to https://chainscan.0g.ai/address/0xea224dBB52F57752044c0C86aD50930091F561B9
+2. Under **Contracts** Tab, click on the **Write As Proxy** button
+3. Find and click on `createAndInitializeValidatorIfNecessary`
+4. Fill in all the required parameters:
+   - **description** (struct):
+     - `moniker`: Your validator name (max 70 chars)
+     - `identity`: Keybase ID (optional)
+     - `website`: Your website URL
+     - `securityContact`: Security contact email
+     - `details`: Additional description
+   - **commissionRate**: Commission percentage (e.g., 10000 for 1%)
+   - **withdrawalFeeInGwei**: Withdrawal fee in Gwei (e.g.,1 Gneuron ~ 1 Gwei)
+   - **pubkey**: The public key from Step 1
+   - **signature**: The signature from Step 1
+5. Set the `payable amount` to **500** OG tokens
+6. Connect your wallet and execute the transaction
 
-# cast call
-cast call \
-    $STAKING_CONTRACT_ADDRESS \
-    "computeValidatorAddress(bytes)(address)" \
-    $PUBLIC_KEY \
-    --rpc-url https://evmrpc-testnet.0g.ai
-```
-**Output:**
-```
-0x1e776a6b65892ec60537a885c17b820301e054b9
+:::tip **Tip**
+Using the Chain Scan interface requires no coding knowledge and is the safest option for most users.
+:::
+
+  </TabItem>
+  <TabItem value="metamask" label="MetaMask / Web3 Wallet">
+
+For users comfortable with wallet interactions:
+
+1. Ensure your wallet is connected to **0G Chain Mainnet**
+2. Go to the contract address: `0xea224dBB52F57752044c0C86aD50930091F561B9`
+3. Use a contract interaction tool like:
+   - [0G Chain Scan](https://chainscan.0g.ai)
+   - Your wallet's built-in contract interaction features
+4. Call `createAndInitializeValidatorIfNecessary` with:
+   - `description`: Struct with all validator details
+   - `commissionRate`: Commission percentage (e.g., 10000 for 1%)
+   - `withdrawalFeeInGwei`: Withdrawal fee in Gwei (~1 Gneuron equivalent)
+   - `pubkey`: Your validator's public key
+   - `signature`: Your validator's signature
+5. Set transaction value to **500 OG tokens** (500000000000000000000 wei)
+6. Confirm the transaction in your wallet
+
+:::warning **Important**
+Ensure your wallet has sufficient funds:
+- 500 OG tokens for initialization
+- Additional gas fees for the transaction
+:::
+
+  </TabItem>
+  <TabItem value="ethersjs" label="Ethers.js (Programmatic)">
+
+For developers who want to automate the process:
+
+```javascript
+const { ethers } = require("ethers");
+
+// Initialize provider and wallet
+const provider = new ethers.JsonRpcProvider("https://evmrpc.0g.ai");
+const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+
+// Staking contract ABI (minimal)
+const stakingABI = [
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "moniker", "type": "string" },
+          { "internalType": "string", "name": "identity", "type": "string" },
+          { "internalType": "string", "name": "website", "type": "string" },
+          { "internalType": "string", "name": "securityContact", "type": "string" },
+          { "internalType": "string", "name": "details", "type": "string" }
+        ],
+        "internalType": "struct IStakingContract.Description",
+        "name": "description",
+        "type": "tuple"
+      },
+      { "internalType": "uint32", "name": "commissionRate", "type": "uint32" },
+      { "internalType": "uint96", "name": "withdrawalFeeInGwei", "type": "uint96" },
+      { "internalType": "bytes", "name": "pubkey", "type": "bytes" },
+      { "internalType": "bytes", "name": "signature", "type": "bytes" }
+    ],
+    "name": "createAndInitializeValidatorIfNecessary",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+];
+
+async function initializeValidator() {
+  const stakingContract = new ethers.Contract(
+    "0xea224dBB52F57752044c0C86aD50930091F561B9",
+    stakingABI,
+    wallet
+  );
+
+  const description = {
+    moniker: "Your Validator Name",
+    identity: "keybase_id",
+    website: "https://yourvalidator.com",
+    securityContact: "security@yourvalidator.com",
+    details: "Professional 0G Chain validator"
+  };
+
+  try {
+    const tx = await stakingContract.createAndInitializeValidatorIfNecessary(
+      description,
+      10000,      // 1% commission
+      1000000,    // 1 Gwei withdrawal fee
+      "0x...",    // Your pubkey
+      "0x...",    // Your signature
+      { value: ethers.parseEther("500") }  // 500 OG tokens
+    );
+
+    console.log("Transaction hash:", tx.hash);
+    const receipt = await tx.wait();
+    console.log("Validator initialized successfully!");
+    console.log("Transaction receipt:", receipt);
+  } catch (error) {
+    console.error("Error initializing validator:", error);
+  }
+}
+
+initializeValidator();
 ```
 
-</TabItem>
-<TabItem value="curl" label="curl/RPC">
-
-Alternative method using direct RPC calls - works without additional tooling.
-
-```bash
-# Set your params
-STAKING_CONTRACT_ADDRESS=0xea224dBB52F57752044c0C86aD50930091F561B9
-PUBLIC_KEY=0xaa0f99735a6436d6b7ed763c2eaa8452d753c5152a4fb1e4dc0bd7e33bcfc8cd4fac0e2d6cbab941f423c17728fecc56
-
-# rpc call
-curl -X POST https://evmrpc-testnet.0g.ai \
--H "Content-Type: application/json" \
--d '{
-    "jsonrpc":"2.0",
-    "method":"eth_call", 
-    "params":[{
-        "to": "'${STAKING_CONTRACT_ADDRESS}'",
-        "data": "0x1ab06aa700000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000030'${PUBLIC_KEY:2:96}'00000000000000000000000000000000"
-    }, "latest"],
-    "id":1
-}'
-```
-**Output:**
-```
-{"jsonrpc":"2.0","id":1,"result":"0x0000000000000000000000001e776a6b65892ec60537a885c17b820301e054b9"}
-```
-Remove the zero paddings to get the validator address.
-```
-0x1e776a6b65892ec60537a885c17b820301e054b9
-```
+:::note **Environment Setup**
+Make sure to set `PRIVATE_KEY` in your `.env` file before running the script.
+:::
 
 </TabItem>
 </Tabs>
 
-### Step 3: Generate Signature
+### Step 5: Verify Initialization
 
-Use the validator's contract address from Step 2 to generate signature.
+After successful initialization, you can verify your validator status:
+
+- Check the transaction on **0G Chain Scan**: https://chainscan.0g.ai
+- Verify your validator status on **0G Explorer**: https://explorer.0g.ai/mainnet/validators
+
+:::info **Activation Time**
+Your validator may initially appear as **inactive** on the explorer. This is normal. Validators typically take **30-60 minutes** to activate on the network after successful initialization.
+
+You can check the transaction status and logs to confirm the initialization was successful while waiting for activation.
+:::
+
+### Troubleshooting
+
+<details>
+<summary><b>Error: "Insufficient funds"</b></summary>
+
+Ensure you have at least 500 OG tokens plus gas fees in your wallet.
 
 ```bash
-# set your params
-VALIDATOR_CONTRACT_ADDRESS=0x1e776a6b65892ec60537a885c17b820301e054b9
-VALIDATOR_INITIAL_DELEGATION_IN_GWEI=32000000000 # 32 ethers
+# Check balance
+cast balance $YOUR_ADDRESS --rpc-url https://evmrpc.0g.ai
+```
 
-# Generate signature for validator initialization
-./bin/0gchaind deposit create-validator \
-    $VALIDATOR_CONTRACT_ADDRESS \
-    $VALIDATOR_INITIAL_DELEGATION_IN_GWEI \
+</details>
+
+<details>
+<summary><b>Error: "Validator already exists"</b></summary>
+
+Your validator has already been created. Use the `getValidator` function to retrieve your validator address:
+
+```javascript
+const validatorAddress = await stakingContract.getValidator("0x...");
+```
+
+</details>
+
+<details>
+<summary><b>Error: "Invalid signature"</b></summary>
+
+Regenerate your signature using 0gchaind with the correct validator contract address and delegation amount:
+
+```bash
+./bin/0gchaind deposit create-delegation-validator \
+    0xea224dBB52F57752044c0C86aD50930091F561B9 \
+    500000000000 \
     $HOMEDIR/config/genesis.json \
     --home $HOMEDIR \
-    --chaincfg.chain-spec=$CHAIN_SPEC
+    --chaincfg.chain-spec=mainnet \
+    --override-rpc-url \
+    --rpc-dial-url https://evmrpc.0g.ai
 ```
 
-**Output:**
-```
-✅ Deposit message created successfully!
+</details>
 
-pubkey: 0xaa0f99735a6436d6b7ed763c2eaa8452d753c5152a4fb1e4dc0bd7e33bcfc8cd4fac0e2d6cbab941f423c17728fecc56
-signature: 0x123456789000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-```
+<details>
+<summary><b>Error: "Description field too long"</b></summary>
 
-## Initialize Validator
-To initialize the validator, you need to call the `createAndInitializeValidatorIfNecessary` function with the public key and signature from the previous step. The value should be set to minimum 32 0G tokens as the minimum initial delegation.
+Ensure all Description fields are within character limits:
+- `moniker`: max 70 chars
+- `identity`: max 100 chars
+- `website`: max 140 chars
+- `securityContact`: max 140 chars
+- `details`: max 200 chars
 
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-interface IStaking {
-    struct Description {
-        string moniker;
-        string identity;
-        string website;
-        string securityContact;
-        string details;
-    }
-    
-    function createAndInitializeValidatorIfNecessary(
-        Description calldata description,
-        uint32 commissionRate,
-        uint96 withdrawalFeeInGwei,
-        bytes calldata pubkey,
-        bytes calldata signature
-    ) external payable returns (address);
-    
-    function getValidator(bytes memory pubkey) external view returns (address);
-    
-    function computeValidatorAddress(bytes calldata pubkey) external view returns (address);
-}
-
-```
-
-- `description`: The validator's description struct
-- `commissionRate`: The validator's commission rate
-- `withdrawalFeeInGwei`: The validator's withdrawal fee
-- `pubkey`: The validator's public key
-- `signature`: The validator's signature
-
+</details>
 
 ## Data Structures
 
@@ -412,10 +545,10 @@ interface IStaking {
 ```solidity
 struct Description {
     string moniker;         // max 70 chars - Validator display name
-    string identity;        // max 3000 chars - Keybase identity  
+    string identity;        // max 100 chars - Keybase identity  
     string website;         // max 140 chars - Website URL
     string securityContact; // max 140 chars - Security contact
-    string details;         // max 280 chars - Additional details
+    string details;         // max 200 chars - Additional details
 }
 ```
 
@@ -444,7 +577,7 @@ struct WithdrawEntry {
 | `communityTaxRate` | Tax on all rewards |
 | `minWithdrawabilityDelay` | Withdrawal delay blocks |
 
-## Troubleshooting
+## General Troubleshooting
 
 <details>
 <summary><b>Error: "Validator not found"</b></summary>
@@ -485,7 +618,7 @@ validator.undelegate{value: fee * 1 gwei}(recipient, shares);
 
 | Network | Staking Contract |
 |---------|------------------|
-| **Testnet** | `0xea224dBB52F57752044c0C86aD50930091F561B9` |
+| **Mainnet** | `0xea224dBB52F57752044c0C86aD50930091F561B9` |
 
 ## Resources
 
