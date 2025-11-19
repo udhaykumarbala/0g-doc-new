@@ -224,11 +224,11 @@ tail -f {your data path}/0g-home/log/geth.log
 Download the latest Galileo testnet package:
 
 ```bash
-wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.2/galileo-v3.0.2.tar.gz
+wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.3/galileo-v3.0.3.tar.gz
 ```
 
 :::note Version Information
-Latest Galileo testnet release: v3.0.2. Check [releases page](https://github.com/0gfoundation/0gchain-NG/releases) for newer versions.
+Latest Galileo testnet release: v3.0.3. Check [releases page](https://github.com/0gfoundation/0gchain-NG/releases) for newer versions.
 :::
 
 ### 2. Extract Package
@@ -244,7 +244,7 @@ tar -xzvf galileo.tar.gz -C ~
 Copy the configuration files and set proper permissions:
 
 ```bash
-cd galileo-v3.0.2
+cd galileo-v3.0.3
 
 cp -r 0g-home {your data path}
 sudo chmod 777 ./bin/geth
@@ -310,7 +310,7 @@ export BLOCK_NUM=1
 Launch the 0gchaind consensus client with testnet parameters:
 
 ```bash
-cd ~/galileo-v3.0.2
+cd ~/galileo-v3.0.3
 
 nohup ./bin/0gchaind start \
     --rpc.laddr tcp://0.0.0.0:26657 \
@@ -330,7 +330,7 @@ nohup ./bin/0gchaind start \
 Launch the Geth execution client:
 
 ```bash
-cd ~/galileo-v3.0.2
+cd ~/galileo-v3.0.3
 
 nohup ./bin/geth \
     --config geth-config.toml \
@@ -436,7 +436,7 @@ To restore your validator from backup:
 
 ```bash
 # For Testnet (Galileo)
-wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.2/galileo-v3.0.2.tar.gz
+wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.3/galileo-v3.0.3.tar.gz
 tar -xzvf galileo.tar.gz -C ~
 
 # For Mainnet (Aristotle)
