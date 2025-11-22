@@ -82,6 +82,13 @@ const sidebars: SidebarsConfig = {
                     'developer-hub/building-on-0g/contracts-on-0g/precompiles/precompiles-wrappedogbase',
                   ],
                 },
+                {
+                  type: 'category',
+                  label: 'Indexing',
+                  items: [
+                    'developer-hub/building-on-0g/indexing/goldsky',
+                  ],
+                },
               ],
             },
             {
