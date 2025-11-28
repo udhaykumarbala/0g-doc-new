@@ -13,6 +13,10 @@ The 0G Compute Network SDK enables developers to integrate AI inference services
 
 In just five minutes, you can initialize your broker to manage operations, set up and fund your account to pay for inference services, and learn how to send inference requests and handle responses.
 
+:::tip Starter Kit Available
+Get started quickly with our [TypeScript Starter Kit](https://github.com/0gfoundation/0g-compute-ts-starter-kit) - a complete example project with best practices.
+:::
+
 ## Quick Start
 
 ### Installation
