@@ -13,6 +13,10 @@ import React, { useState } from 'react';
 
 Test your applications on 0G's infrastructure without real costs or risks.
 
+:::tip Testnet Explorer
+🔍 **[Explore Testnet Activity](https://explorer.0g.ai/testnet/home)**
+:::
+
 ## Network Details
 
 | Parameters | Network Details |
