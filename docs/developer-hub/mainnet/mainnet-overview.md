@@ -12,6 +12,10 @@ import React from 'react';
 
 Build and run production workloads on the 0G Mainnet.
 
+:::tip Mainnet Explorer
+🔍 **[Explore Mainnet Activity](https://explorer.0g.ai/mainnet/home)**
+:::
+
 ## Network Details
 
 | Parameters | Network Details |
