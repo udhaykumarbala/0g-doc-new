@@ -1,10 +1,10 @@
 ---
 id: how-to-get-0g
-title: How to Get 0G
+title: How to Get 0G Token
 sidebar_position: 3
 ---
 
-# How to Get 0G
+# How to Get 0G Token
 
 :::info Network Details
 - **Token**: Native gas token (EVM-compatible)
@@ -35,18 +35,18 @@ The most straightforward way to acquire $0G is through centralized exchanges. Af
 
 ## Bridge to 0G Chain
 
-Use **[XSwap](https://xswap.link/)**, the official bridge for the 0G network, powered by [Chainlink CCIP](https://chain.link/cross-chain).
+Use **[XSwap](https://xswap.link/)**, the official bridge for the 0G network, powered by [Chainlink CCIP](https://docs.chain.link/ccip/directory/mainnet/chain/0g-mainnet).
 
 ### XSwap Bridge
 
-- **URL**: [https://app.xswap.link](https://app.xswap.link)
+- **URL**: [https://xswap.link/bridge?toChain=16661](https://xswap.link/bridge?toChain=16661)
 - **Supported Assets**: USDC and other tokens
 - **Networks**: Ethereum ↔ 0G (with more chains coming)
-- **Security**: Powered by [Chainlink CCIP](https://chain.link/cross-chain) with enterprise-grade security
+- **Security**: Powered by [Chainlink CCIP](https://docs.chain.link/ccip/directory/mainnet/chain/0g-mainnet) with enterprise-grade security
 
 **How to Bridge:**
 
-1. Visit [app.xswap.link](https://app.xswap.link)
+1. Visit [xswap.link/bridge?toChain=16661](https://xswap.link/bridge?toChain=16661)
 2. Connect your wallet (MetaMask, SafePal, etc.)
 3. Select source chain (e.g., Ethereum) and 0G as destination
 4. Choose asset to bridge (e.g., USDC)
