@@ -10,6 +10,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'introduction/understanding-0g',
         'introduction/vision-mission',
+        'introduction/how-to-get-0g',
       ],
     },
     
