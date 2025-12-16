@@ -596,3 +596,14 @@ html[data-theme='dark'] .header-hubs-link:hover {
   font-size: 1.2rem;
   /* letter-spacing: 0.1px; */
 }
+
+/* Hide sidebar toggle button on mobile for index/home page */
+@media screen and (max-width: 996px) {
+  /* Hide hamburger menu on landing page using body class or data attribute */
+  body[class*="docs-doc-page-index"] .navbar__toggle,
+  body[class*="docs-index"] .navbar__toggle,
+  [data-page-id="index"] .navbar__toggle {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

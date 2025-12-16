@@ -82,11 +82,11 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 ### 0G Chain
 **Documentation**: [https://docs.0g.ai/concepts/chain](https://docs.0g.ai/concepts/chain)
 
-Fastest modular AI chain with 2,500+ TPS, sub-second finality, and full EVM compatibility.
+Fastest modular AI chain with 11,000 TPS per Shard, sub-second finality, and full EVM compatibility.
 
 **Key Features**:
 - **Full EVM compatibility** - Use existing Ethereum tools (Hardhat, Foundry, Remix)
-- **2,500+ TPS** with sub-second finality
+- **11,000 TPS per Shard** with sub-second finality
 - **Same as Ethereum development** - just different RPC endpoint
 - Optimized CometBFT consensus
 - Native precompiled contracts for DA and wrapped tokens
