@@ -17,6 +17,66 @@ import TabItem from '@theme/TabItem';
 - **Text-to-Image**: Generate images from text descriptions using Stable Diffusion and similar models
 - **Speech-to-Text**: Transcribe audio to text using Whisper and other speech recognition models
 
+## Available Services
+
+:::info Testnet Services
+
+<details>
+<summary><b>View Testnet Services (3 Available)</b></summary>
+
+| # | Model | Type | Provider | URL | Input Price | Output Price |
+|---|-------|------|----------|-----|-------------|--------------|
+| 1 | `qwen/qwen-2.5-7b-instruct` | Chatbot | `0xa48f01...` | compute-network-6 | 0.00000005 0G | 0.0000001 0G |
+| 2 | `openai/gpt-oss-20b` | Chatbot | `0x8e60d4...` | compute-network-7 | 0.00000005 0G | 0.0000001 0G |
+| 3 | `google/gemma-3-27b-it` | Chatbot | `0x69Eb5a...` | compute-network-8 | 0.00000015 0G | 0.0000004 0G |
+
+**Available Models:**
+- **Qwen 2.5 7B Instruct**: Fast and efficient conversational model
+- **GPT-OSS-20B**: Mid-size open-source GPT alternative
+- **Gemma 3 27B IT**: Google's instruction-tuned model
+
+All testnet services feature TeeML verifiability and are ideal for development and testing.
+
+</details>
+
+:::
+
+:::tip Mainnet Services
+
+<details>
+<summary><b>View Mainnet Services (7 Available)</b></summary>
+
+| # | Model | Type | Provider | Input Price | Output Price |
+|---|-------|------|----------|-------------|--------------|
+| 1 | `deepseek-ai/DeepSeek-V3.1` | Chatbot | `0xd9966e...` | 0.00000049 0G | 0.00000015 0G |
+| 2 | `openai/whisper-large-v3` | Speech-to-Text | `0x36aCff...` | 0.000000049 0G | 0.000000114 0G |
+| 3 | `openai/gpt-oss-120b` | Chatbot | `0xBB3f5b...` | 0.0000001 0G | 0.00000049 0G |
+| 4 | `qwen/qwen2.5-vl-72b-instruct` | Chatbot | `0x4415ef...` | 0.00000049 0G | 0.00000049 0G |
+| 5 | `deepseek/deepseek-chat-v3-0324` | Chatbot | `0x1B3AAe...` | 0.0000003 0G | 0.000001 0G |
+| 6 | `flux-turbo` | Text-to-Image | `0xE29a72...` | 0.0 0G | 0.003 0G |
+| 7 | `openai/gpt-oss-20b` | Chatbot | `0x44ba50...` | 0.00000005 0G | 0.00000011 0G |
+
+**Available Models by Type:**
+
+**Chatbots (5 models):**
+- **DeepSeek V3.1**: Latest high-performance reasoning model
+- **GPT-OSS-120B**: Large-scale open-source GPT model
+- **Qwen 2.5 VL 72B**: Vision-language multimodal model
+- **DeepSeek Chat V3**: Optimized conversational model
+- **GPT-OSS-20B**: Efficient mid-size model
+
+**Speech-to-Text (1 model):**
+- **Whisper Large V3**: OpenAI's state-of-the-art transcription model
+
+**Text-to-Image (1 model):**
+- **Flux Turbo**: Fast high-quality image generation
+
+All mainnet services feature TeeML verifiability for trusted execution in production environments.
+
+</details>
+
+:::
+
 ## Prerequisites
 
 - Node.js >= 22.0.0
