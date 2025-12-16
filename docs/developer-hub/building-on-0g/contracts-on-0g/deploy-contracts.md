@@ -14,9 +14,9 @@ Deploy smart contracts on 0G Chain - an EVM-compatible blockchain with built-in 
 
 ### ⚡ Performance Benefits
 
-- **2,500 TPS**: Higher throughput than Ethereum
+- **11,000 TPS per Shard**: Higher throughput than Ethereum
 - **Low Fees**: Fraction of mainnet costs
-- **Fast Finality**: 1-2 second block times
+- **Sub-second Finality**: Near-instant transaction confirmation
 
 ### 🔧 Latest EVM Compatibility
 

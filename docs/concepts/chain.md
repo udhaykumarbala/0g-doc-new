@@ -42,7 +42,7 @@ This design makes 0G Chain flexible and fast. When new blockchain features come 
 
 
 These optimizations enable 0G Chain to achieve maximum performance:
-- **2,500+ TPS**: Current throughput significantly exceeds traditional blockchain networks
+- **11,000 TPS per Shard**: Current throughput significantly exceeds traditional blockchain networks
 - **Sub-second Finality**: Near-instant transaction confirmation for AI applications
 - **Consistent Performance**: Maintains high throughput even under heavy network load
 
@@ -60,9 +60,9 @@ These optimizations enable 0G Chain to achieve maximum performance:
 <details>
 <summary>**How does 0G achieve high throughput?**</summary>
 
-Currently achieves 2,500 TPS through:
+Currently achieves 11,000 TPS per Shard through:
 
-1. **Optimized CometBFT**: Highly efficient consensus based on Tendermint
+1. **Optimized CometBFT**: Highly efficient consensus based on Tendermind
 2. **Efficient block production**: Tuned for AI-scale data processing
 3. **Fast finality**: Sub-second transaction confirmation
 

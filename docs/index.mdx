@@ -123,6 +123,14 @@ import SocialProofSection from '@site/src/components/SocialProofSection';
 
 
 <style>{`
+  /* Hide sidebar toggle on mobile for landing page */
+  @media screen and (max-width: 996px) {
+    .navbar__toggle {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  }
+
   /* Global font family for landing page */
   .landing-page-custom,
   .landing-page-custom * {
