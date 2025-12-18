@@ -419,6 +419,12 @@ For programmatic integration into your applications.
 pnpm add @0glabs/0g-serving-broker
 ```
 
+::: tip Starter Kits Available
+Get up and running quickly with our comprehensive TypeScript starter kit within minutes. 
+
+- **[TypeScript Starter Kit](https://github.com/0gfoundation/0g-compute-ts-starter-kit)** - Complete examples with TypeScript and CLI tool
+:::
+
 ### Initialize the Broker
 
 <Tabs>
