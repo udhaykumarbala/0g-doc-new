@@ -9,7 +9,13 @@ import TabItem from '@theme/TabItem';
 
 # 0G Compute Inference
 
-0G Compute Network provides decentralized AI inference services, supporting various AI models including Large Language Models (LLM), text-to-image generation, and speech-to-text processing. You can access these services through three different interfaces: Web UI for quick start, CLI for automation, and SDK for application integration.
+0G Compute Network provides decentralized AI inference services, supporting various AI models including Large Language Models (LLM), text-to-image generation, and speech-to-text processing.
+
+## Prerequisites
+
+- Node.js >= 22.0.0
+- A wallet with 0G tokens (either testnet or mainnet)
+- EVM compatible wallet (for Web UI)
 
 ## Supported Service Types
 
@@ -24,8 +30,8 @@ import TabItem from '@theme/TabItem';
 <details>
 <summary><b>View Testnet Services (3 Available)</b></summary>
 
-| # | Model | Type | Provider | URL | Input Price | Output Price |
-|---|-------|------|----------|-----|-------------|--------------|
+| # | Model | Type | Provider | URL | Input Price (per token) | Output Price (per token) |
+|---|-------|------|----------|-----|-------------------------|--------------------------|
 | 1 | `qwen/qwen-2.5-7b-instruct` | Chatbot | `0xa48f01...` | compute-network-6 | 0.00000005 0G | 0.0000001 0G |
 | 2 | `openai/gpt-oss-20b` | Chatbot | `0x8e60d4...` | compute-network-7 | 0.00000005 0G | 0.0000001 0G |
 | 3 | `google/gemma-3-27b-it` | Chatbot | `0x69Eb5a...` | compute-network-8 | 0.00000015 0G | 0.0000004 0G |
@@ -46,8 +52,8 @@ All testnet services feature TeeML verifiability and are ideal for development a
 <details>
 <summary><b>View Mainnet Services (7 Available)</b></summary>
 
-| # | Model | Type | Provider | Input Price | Output Price |
-|---|-------|------|----------|-------------|--------------|
+| # | Model | Type | Provider | Input Price (per token) | Output Price (per token) |
+|---|-------|------|----------|-------------------------|--------------------------|
 | 1 | `deepseek-ai/DeepSeek-V3.1` | Chatbot | `0xd9966e...` | 0.00000049 0G | 0.00000015 0G |
 | 2 | `openai/whisper-large-v3` | Speech-to-Text | `0x36aCff...` | 0.000000049 0G | 0.000000114 0G |
 | 3 | `openai/gpt-oss-120b` | Chatbot | `0xBB3f5b...` | 0.0000001 0G | 0.00000049 0G |
@@ -77,34 +83,44 @@ All mainnet services feature TeeML verifiability for trusted execution in produc
 
 :::
 
-## Prerequisites
+## Choose Your Interface
 
-- Node.js >= 22.0.0
-- A wallet with 0G tokens (for testnet or mainnet)
-- MetaMask or compatible wallet (for Web UI)
+| Feature | Web UI | CLI | SDK |
+|---------|--------|-----|-----|
+| Setup time | ~1 min | ~2 min | ~5 min |
+| Interactive chat | ✅ | ❌ | ❌ |
+| Automation | ❌ | ✅ | ✅ |
+| App integration | ❌ | ❌ | ✅ |
+| Direct API access | ❌ | ❌ | ✅ |
 
-## Quick Start
+<Tabs>
+<TabItem value="web-ui" label="Web UI" default>
 
-Get up and running with 0G Compute inference in under 5 minutes using our Web UI.
+**Best for:** Quick testing, experimentation and direct frontend integration.
 
-### 1. Install & Launch
+### Installation
 
 ```bash
 pnpm add @0glabs/0g-serving-broker -g
+```
 
-# Launch the Web UI
+### Launch Web UI
+
+```bash
 0g-compute-cli ui start-web
 ```
 
 Open `http://localhost:3090` in your browser.
 
-### 2. Connect & Fund
+### Getting Started
+
+#### 1. Connect & Fund
 
 1. **Connect your wallet** (MetaMask recommended)
 2. **Deposit some 0G tokens** using the account dashboard
 3. **Browse available AI models** and their pricing
 
-### 3. Start Using AI Services
+#### 2. Start Using AI Services
 
 **Option A: Chat Interface**
 - Click "Chat" on any chatbot provider
@@ -116,9 +132,12 @@ Open `http://localhost:3090` in your browser.
 - Get step-by-step integration guides
 - Copy-paste ready code examples
 
-## CLI
+</TabItem>
+<TabItem value="cli" label="CLI">
 
-Command-line interface for automation, scripting, and server environments.
+**Best for:** Automation, scripting, and server environments
+
+### Installation
 
 ```bash
 pnpm add @0glabs/0g-serving-broker -g
@@ -179,7 +198,7 @@ Generate an authentication token for direct API calls:
 
 This generates a Bearer token in the format `app-sk-<SECRET>` that you can use for direct API calls.
 
-##### API Usage Examples
+### API Usage Examples
 
 <Tabs>
 <TabItem value="chatbot" label="Chatbot" default>
@@ -201,7 +220,7 @@ curl <service_url>/v1/proxy/chat/completions \
         "content": "You are a helpful assistant."
       },
       {
-        "role": "user", 
+        "role": "user",
         "content": "Hello!"
       }
     ]
@@ -387,7 +406,7 @@ with open('audio.ogg', 'rb') as audio_file:
         model='whisper-large-v3',
         response_format='json'
     )
-    
+
 print(transcription.text)
 ```
 
@@ -397,7 +416,8 @@ print(transcription.text)
 </TabItem>
 </Tabs>
 
-#### Start Local Proxy Server
+### Start Local Proxy Server
+
 Run a local OpenAI-compatible server:
 ```bash
 # Start server on port 3000 (default)
@@ -409,9 +429,10 @@ Run a local OpenAI-compatible server:
 
 Then use any OpenAI-compatible client to connect to `http://localhost:3000`.
 
-## SDK
+</TabItem>
+<TabItem value="sdk" label="SDK">
 
-For programmatic integration into your applications.
+**Best for:** Application integration and programmatic access
 
 ### Installation
 
@@ -419,8 +440,8 @@ For programmatic integration into your applications.
 pnpm add @0glabs/0g-serving-broker
 ```
 
-::: tip Starter Kits Available
-Get up and running quickly with our comprehensive TypeScript starter kit within minutes. 
+:::tip Starter Kits Available
+Get up and running quickly with our comprehensive TypeScript starter kit within minutes.
 
 - **[TypeScript Starter Kit](https://github.com/0gfoundation/0g-compute-ts-starter-kit)** - Complete examples with TypeScript and CLI tool
 :::
@@ -756,7 +777,7 @@ let rawBody = '';
 while (true) {
   const { done, value } = await reader.read();
   if (done) break;
-  
+
   rawBody += decoder.decode(value, { stream: true });
 }
 
@@ -764,18 +785,18 @@ while (true) {
 for (const line of rawBody.split('\n')) {
   const trimmed = line.trim();
   if (!trimmed || trimmed === 'data: [DONE]') continue;
-  
+
   try {
-    const jsonStr = trimmed.startsWith('data:') 
-      ? trimmed.slice(5).trim() 
+    const jsonStr = trimmed.startsWith('data:')
+      ? trimmed.slice(5).trim()
       : trimmed;
     const message = JSON.parse(jsonStr);
-    
+
     // For chatbot, try to get ID from stream data
     if (!streamChatID && (message.id || message.chatID)) {
       streamChatID = message.id || message.chatID;
     }
-    
+
     if (message.usage) {
       usage = message.usage;
     }
@@ -819,7 +840,7 @@ let rawBody = '';
 while (true) {
   const { done, value } = await reader.read();
   if (done) break;
-  
+
   rawBody += decoder.decode(value, { stream: true });
 }
 
@@ -827,10 +848,10 @@ while (true) {
 for (const line of rawBody.split('\n')) {
   const trimmed = line.trim();
   if (!trimmed || trimmed === 'data: [DONE]') continue;
-  
+
   try {
-    const jsonStr = trimmed.startsWith('data:') 
-      ? trimmed.slice(5).trim() 
+    const jsonStr = trimmed.startsWith('data:')
+      ? trimmed.slice(5).trim()
       : trimmed;
     const message = JSON.parse(jsonStr);
     if (message.usage) {
@@ -870,10 +891,15 @@ if (chatID) {
 - **chatID retrieval varies by service type:**
   - **Chatbot**: First try `response.id` or `data.chatID`, then check `ZG-Res-Key` header as fallback
   - **Text-to-Image & Speech-to-Text**: Always get chatID from `ZG-Res-Key` response header
-  - **Streaming responses**: 
+  - **Streaming responses**:
     - **Chatbot streaming**: Check headers first, then try to get `id` or `chatID` from stream data
     - **Speech-to-text streaming**: Get chatID from `ZG-Res-Key` header immediately
 - Usage data format varies by service type but typically includes token counts or request metrics
+
+</TabItem>
+</Tabs>
+
+---
 
 ## Troubleshooting
 

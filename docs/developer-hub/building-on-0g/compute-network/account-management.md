@@ -43,18 +43,31 @@ The account system provides a secure and flexible way to manage funds across dif
 
 - Node.js >= 22.0.0
 - A wallet with 0G tokens (for testnet or mainnet)
-- MetaMask or compatible wallet (for Web UI)
+- EVM compatible wallet (for Web UI)
 
-## Web UI
+## Choose Your Interface
 
-The easiest way to manage your accounts is through the Web UI.
+| Feature | Web UI | CLI | SDK |
+|---------|--------|-----|-----|
+| Setup time | ~1 min | ~2 min | ~5 min |
+| Visual dashboard | ✅ | ❌ | ❌ |
+| Automation | ❌ | ✅ | ✅ |
+| App integration | ❌ | ❌ | ✅ |
 
-### Getting Started with Web UI
+<Tabs>
+<TabItem value="web-ui" label="Web UI" default>
+
+**Best for:** Quick account management with visual dashboard
+
+### Installation
 
 ```bash
 pnpm add @0glabs/0g-serving-broker -g
+```
 
-# Launch the Web UI
+### Launch Web UI
+
+```bash
 0g-compute-cli ui start-web
 ```
 
@@ -66,14 +79,14 @@ Access the Web UI at `http://localhost:3090/wallet` where you can:
 - Monitor spending and usage
 - Request refunds with a visual interface
 
-## CLI
+</TabItem>
+<TabItem value="cli" label="CLI">
 
-The CLI provides command-line tools for account management, ideal for automation and scripting.
+**Best for:** Automation, scripting, and server environments
 
-### Setup
+### Installation
 
 ```bash
-# Install the CLI tool globally
 pnpm add @0glabs/0g-serving-broker -g
 ```
 
@@ -178,9 +191,10 @@ Withdraw funds from main account to your wallet:
 0g-compute-cli refund --amount 5
 ```
 
-## SDK
+</TabItem>
+<TabItem value="sdk" label="SDK">
 
-For programmatic account management in your applications.
+**Best for:** Application integration and programmatic access
 
 ### Installation
 
@@ -243,6 +257,11 @@ await broker.ledger.retrieveFund("fine-tuning");
 ```typescript
 await broker.ledger.refund(5); // Withdraw 5 0G
 ```
+
+</TabItem>
+</Tabs>
+
+---
 
 ## Best Practices
 
