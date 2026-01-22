@@ -57,7 +57,7 @@ All testnet services feature TeeML verifiability and are ideal for development a
 | 1 | `DeepSeek-V3.1` | Chatbot | `0xd9966e...` | 0.49 0G | 1.50 0G |
 | 2 | `deepseek-chat-v3-0324` | Chatbot | `0x1B3AAe...` | 0.30 0G | 1.00 0G |
 | 3 | `gpt-oss-120b` | Chatbot | `0xBB3f5b...` | 0.10 0G | 0.49 0G |
-| 4 | `qwen2.5-vl-72b-instruct` | Chatbot | `0x4415ef...` | 0.49 0G | 0.49 0G |
+| 4 | `qwen3-vl-30b-a3b-instruct` | Chatbot | `0x4415ef...` | 0.49 0G | 0.49 0G |
 | 5 | `gpt-oss-20b` | Chatbot | `0x44ba50...` | 0.05 0G | 0.11 0G |
 | 6 | `whisper-large-v3` | Speech-to-Text | `0x36aCff...` | 0.05 0G | 0.11 0G |
 | 7 | `flux-turbo` | Text-to-Image | `0xE29a72...` | - | 0.003 0G/image |
