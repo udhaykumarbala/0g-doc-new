@@ -30,11 +30,11 @@ import TabItem from '@theme/TabItem';
 <details>
 <summary><b>View Testnet Services (3 Available)</b></summary>
 
-| # | Model | Type | Provider | URL | Input Price (per token) | Output Price (per token) |
-|---|-------|------|----------|-----|-------------------------|--------------------------|
-| 1 | `qwen/qwen-2.5-7b-instruct` | Chatbot | `0xa48f01...` | compute-network-6 | 0.00000005 0G | 0.0000001 0G |
-| 2 | `openai/gpt-oss-20b` | Chatbot | `0x8e60d4...` | compute-network-7 | 0.00000005 0G | 0.0000001 0G |
-| 3 | `google/gemma-3-27b-it` | Chatbot | `0x69Eb5a...` | compute-network-8 | 0.00000015 0G | 0.0000004 0G |
+| # | Model | Type | Provider | Input (per 1M tokens) | Output (per 1M tokens) |
+|---|-------|------|----------|----------------------|------------------------|
+| 1 | `qwen-2.5-7b-instruct` | Chatbot | `0xa48f01...` | 0.05 0G | 0.10 0G |
+| 2 | `gpt-oss-20b` | Chatbot | `0x8e60d4...` | 0.05 0G | 0.10 0G |
+| 3 | `gemma-3-27b-it` | Chatbot | `0x69Eb5a...` | 0.15 0G | 0.40 0G |
 
 **Available Models:**
 - **Qwen 2.5 7B Instruct**: Fast and efficient conversational model
@@ -52,20 +52,20 @@ All testnet services feature TeeML verifiability and are ideal for development a
 <details>
 <summary><b>View Mainnet Services (7 Available)</b></summary>
 
-| # | Model | Type | Provider | Input Price (per token) | Output Price (per token) |
-|---|-------|------|----------|-------------------------|--------------------------|
-| 1 | `deepseek-ai/DeepSeek-V3.1` | Chatbot | `0xd9966e...` | 0.00000049 0G | 0.0000015 0G |
-| 2 | `openai/whisper-large-v3` | Speech-to-Text | `0x36aCff...` | 0.000000049 0G | 0.000000114 0G |
-| 3 | `openai/gpt-oss-120b` | Chatbot | `0xBB3f5b...` | 0.0000001 0G | 0.00000049 0G |
-| 4 | `qwen/qwen2.5-vl-72b-instruct` | Chatbot | `0x4415ef...` | 0.00000049 0G | 0.00000049 0G |
-| 5 | `deepseek/deepseek-chat-v3-0324` | Chatbot | `0x1B3AAe...` | 0.0000003 0G | 0.000001 0G |
-| 6 | `flux-turbo` | Text-to-Image | `0xE29a72...` | 0.0 0G | 0.003 0G |
-| 7 | `openai/gpt-oss-20b` | Chatbot | `0x44ba50...` | 0.00000005 0G | 0.00000011 0G |
+| # | Model | Type | Provider | Input (per 1M tokens) | Output (per 1M tokens) |
+|---|-------|------|----------|----------------------|------------------------|
+| 1 | `DeepSeek-V3.2` | Chatbot | `0xd9966e...` | 0.3 0G | 0.48 0G |
+| 2 | `deepseek-chat-v3-0324` | Chatbot | `0x1B3AAe...` | 0.30 0G | 1.00 0G |
+| 3 | `gpt-oss-120b` | Chatbot | `0xBB3f5b...` | 0.10 0G | 0.49 0G |
+| 4 | `qwen3-vl-30b-a3b-instruct` | Chatbot | `0x4415ef...` | 0.49 0G | 0.49 0G |
+| 5 | `gpt-oss-20b` | Chatbot | `0x44ba50...` | 0.05 0G | 0.11 0G |
+| 6 | `whisper-large-v3` | Speech-to-Text | `0x36aCff...` | 0.05 0G | 0.11 0G |
+| 7 | `z-image` | Text-to-Image | `0xE29a72...` | - | 0.003 0G/image |
 
 **Available Models by Type:**
 
 **Chatbots (5 models):**
-- **DeepSeek V3.1**: Latest high-performance reasoning model
+- **DeepSeek V3.2**: Latest high-performance reasoning model
 - **GPT-OSS-120B**: Large-scale open-source GPT model
 - **Qwen 2.5 VL 72B**: Vision-language multimodal model
 - **DeepSeek Chat V3**: Optimized conversational model
@@ -75,7 +75,7 @@ All testnet services feature TeeML verifiability and are ideal for development a
 - **Whisper Large V3**: OpenAI's state-of-the-art transcription model
 
 **Text-to-Image (1 model):**
-- **Flux Turbo**: Fast high-quality image generation
+- **Z-Image**: Fast high-quality image generation
 
 All mainnet services feature TeeML verifiability for trusted execution in production environments.
 
@@ -803,7 +803,7 @@ for (const line of rawBody.split('\n')) {
   } catch {}
 }
 
-// Use chatID from stream data if available, otherwise use header
+// Use chatID from header if available, otherwise use chatID from stream data
 const finalChatID = chatID || streamChatID;
 
 // Process with chatID for verification if available
@@ -888,11 +888,12 @@ if (chatID) {
 - Always call `processResponse` after receiving responses to maintain proper fee management
 - The SDK automatically handles fund transfers to prevent service interruptions
 - For verifiable TEE services, the method also validates response integrity
+- **chatID retrieval principle**: Always prioritize `ZG-Res-Key` from response headers. Only use fallback methods when header is not present.
 - **chatID retrieval varies by service type:**
-  - **Chatbot**: First try `ZG-Res-Key` header, then check `response.id` or `data.chatID` as fallback
+  - **Chatbot**: First try `ZG-Res-Key` header, then check `data.id` (completion ID from response body) as fallback
   - **Text-to-Image & Speech-to-Text**: Always get chatID from `ZG-Res-Key` response header
   - **Streaming responses**:
-    - **Chatbot streaming**: Check headers first, then try to get `id` or `chatID` from stream data
+    - **Chatbot streaming**: Check headers first, then try to get `id` from stream data as fallback
     - **Speech-to-text streaming**: Get chatID from `ZG-Res-Key` header immediately
 - Usage data format varies by service type but typically includes token counts or request metrics
 

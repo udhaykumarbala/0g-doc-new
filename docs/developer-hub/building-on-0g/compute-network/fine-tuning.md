@@ -43,10 +43,10 @@ The Fine-tuning CLI requires an account to pay for service fees via the 0G Compu
 
 ```bash
 # Deposit funds to your account
-0g-compute-cli deposit --amount 0.1
+0g-compute-cli deposit --amount 3
 
 # Transfer funds to a provider for fine-tuning
-0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 0.1
+0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 1
 ```
 
 ### List Providers
