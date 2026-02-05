@@ -53,6 +53,7 @@ go get github.com/0gfoundation/0g-storage-client
 import (
     "context"
     "github.com/0gfoundation/0g-storage-client/common/blockchain"
+    "github.com/0gfoundation/0g-storage-client/common"
     "github.com/0gfoundation/0g-storage-client/indexer"
     "github.com/0gfoundation/0g-storage-client/transfer"
     "github.com/0gfoundation/0g-storage-client/core"
@@ -69,20 +70,16 @@ w3client := blockchain.MustNewWeb3(evmRpc, privateKey)
 defer w3client.Close()
 
 // Create indexer client for node management
-indexerClient, err := indexer.NewClient(indRpc)
+indexerClient, err := indexer.NewClient(indRpc, indexer.IndexerClientOption{
+    LogOption: common.LogOption{},
+})
 if err != nil {
     // Handle error
 }
 ```
 
 **Parameters:**
-- `evmRpc`: 0G Chain RPC endpoint
-  - Testnet: `https://evmrpc-testnet.0g.ai/`
-  - Mainnet: `https://evmrpc.0g.ai/`
-- `privateKey`: Your Ethereum private key for signing transactions
-- `indRpc`: Indexer RPC endpoint
-  - Testnet: `https://indexer-storage-testnet-turbo.0g.ai`
-  - Mainnet: `https://indexer-storage-turbo.0g.ai`
+`evmRpc` is the chain RPC endpoint, `privateKey` is your signer key, and `indRpc` is the indexer RPC endpoint. Use the current values published in the network overview docs for your network.
 
 ## Core Operations
 
@@ -91,41 +88,44 @@ if err != nil {
 Select storage nodes before performing file operations:
 
 ```go
-nodes, err := indexerClient.SelectNodes(ctx, segmentNumber, expectedReplicas, excludedNodes)
+nodes, err := indexerClient.SelectNodes(ctx, expectedReplicas, droppedNodes, method, fullTrusted)
 if err != nil {
     // Handle error
 }
 ```
 
 **Parameters:**
-- `ctx`: Context for operation management
-- `segmentNumber`: Identifies which storage segment to use
-- `expectedReplicas`: Number of file copies to maintain (minimum 1)
-- `excludedNodes`: List of nodes to exclude from selection
+`ctx` is the context for the operation. `expectedReplicas` is the number of replicas to maintain. `droppedNodes` is a list of nodes to exclude, `method` can be `min`, `max`, `random`, or a positive number string, and `fullTrusted` limits selection to trusted nodes.
 
 ### File Upload
 
-Upload files to the network:
+Upload files to the network with the indexer client:
 
 ```go
-// Create uploader
-uploader, err := transfer.NewUploader(ctx, w3client, nodes)
+file, err := core.Open(filePath)
 if err != nil {
     // Handle error
 }
+defer file.Close()
 
-// Upload file
-txHash, err := uploader.UploadFile(ctx, filePath)
+fragmentSize := int64(4 * 1024 * 1024 * 1024)
+opt := transfer.UploadOption{
+    ExpectedReplica:  1,
+    TaskSize:         10,
+    SkipTx:           true,
+    FinalityRequired: transfer.TransactionPacked,
+    FastMode:         true,
+    Method:           "min",
+    FullTrusted:      true,
+}
+
+txHashes, roots, err := indexerClient.SplitableUpload(ctx, w3client, file, fragmentSize, opt)
 if err != nil {
     // Handle error
 }
 ```
 
-**Parameters:**
-- `ctx`: Context for upload operation
-- `w3client`: Web3 client instance
-- `nodes`: Selected storage nodes
-- `filePath`: Path to the file being uploaded
+`fragmentSize` controls the split size for large files. The returned `roots` contain the merkle root(s) to download later.
 
 ### File Hash Calculation
 
@@ -148,24 +148,14 @@ Save the root hash - you'll need it to download the file later!
 Download files from the network:
 
 ```go
-// Create downloader
-downloader, err := transfer.NewDownloader(nodes)
-if err != nil {
-    // Handle error
-}
-
-// Download with optional verification
-err = downloader.Download(ctx, rootHash, outputPath, withProof)
+rootHex := rootHash.String()
+err = indexerClient.Download(ctx, rootHex, outputPath, withProof)
 if err != nil {
     // Handle error
 }
 ```
 
-**Parameters:**
-- `ctx`: Context for download operation
-- `rootHash`: File's unique identifier (Merkle root hash)
-- `outputPath`: Where to save the downloaded file
-- `withProof`: Enable/disable Merkle proof verification (true/false)
+`withProof` enables merkle proof verification during download.
 
 ## Best Practices
 
@@ -208,17 +198,9 @@ import { ethers } from 'ethers';
 
 ```javascript
 // Network Constants - Choose your network
-// Testnet
-const TESTNET_RPC_URL = 'https://evmrpc-testnet.0g.ai/';
-const TESTNET_INDEXER_RPC = 'https://indexer-storage-testnet-turbo.0g.ai';
-
-// Mainnet
-const MAINNET_RPC_URL = 'https://evmrpc.0g.ai/';
-const MAINNET_INDEXER_RPC = 'https://indexer-storage-turbo.0g.ai';
-
-// Use the appropriate constants for your network
-const RPC_URL = TESTNET_RPC_URL; // or MAINNET_RPC_URL
-const INDEXER_RPC = TESTNET_INDEXER_RPC; // or MAINNET_INDEXER_RPC
+// Use the current endpoints from the network overview docs
+const RPC_URL = '<blockchain_rpc_endpoint>';
+const INDEXER_RPC = '<storage_indexer_endpoint>';
 
 // Initialize provider and signer
 const privateKey = 'YOUR_PRIVATE_KEY'; // Replace with your private key
@@ -239,27 +221,27 @@ Complete upload workflow:
 async function uploadFile(filePath) {
   // Create file object from file path
   const file = await ZgFile.fromFilePath(filePath);
-  
+
   // Generate Merkle tree for verification
   const [tree, treeErr] = await file.merkleTree();
   if (treeErr !== null) {
     throw new Error(`Error generating Merkle tree: ${treeErr}`);
   }
-  
+
   // Get root hash for future reference
   console.log("File Root Hash:", tree?.rootHash());
-  
+
   // Upload to network
   const [tx, uploadErr] = await indexer.upload(file, RPC_URL, signer);
   if (uploadErr !== null) {
     throw new Error(`Upload error: ${uploadErr}`);
   }
-  
+
   console.log("Upload successful! Transaction:", tx);
-  
+
   // Always close the file when done
   await file.close();
-  
+
   return { rootHash: tree?.rootHash(), txHash: tx };
 }
 ```
@@ -290,18 +272,18 @@ async function uploadToKV(streamId, key, value) {
   if (err !== null) {
     throw new Error(`Error selecting nodes: ${err}`);
   }
-  
+
   const batcher = new Batcher(1, nodes, flowContract, RPC_URL);
-  
+
   const keyBytes = Uint8Array.from(Buffer.from(key, 'utf-8'));
   const valueBytes = Uint8Array.from(Buffer.from(value, 'utf-8'));
   batcher.streamDataBuilder.set(streamId, keyBytes, valueBytes);
-  
+
   const [tx, batchErr] = await batcher.exec();
   if (batchErr !== null) {
     throw new Error(`Batch execution error: ${batchErr}`);
   }
-  
+
   console.log("KV upload successful! TX:", tx);
 }
 
@@ -321,7 +303,7 @@ For browser environments, use the ESM build:
 ```html
 <script type="module">
   import { Blob, Indexer } from "./dist/zgstorage.esm.js";
-  
+
   // Create file object from blob
   const file = new Blob(blob);
   const [tree, err] = await file.merkleTree();
@@ -343,10 +325,10 @@ async function uploadStream() {
   const stream = new Readable();
   stream.push('Hello, 0G Storage!');
   stream.push(null);
-  
+
   const file = await ZgFile.fromStream(stream, 'hello.txt');
   const [tx, err] = await indexer.upload(file, RPC_URL, signer);
-  
+
   if (err === null) {
     console.log("Stream uploaded!");
   }
