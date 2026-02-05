@@ -60,11 +60,11 @@ import TabItem from '@theme/TabItem';
 Download the latest Aristotle mainnet package:
 
 ```bash
-wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/1.0.3/aristotle-v1.0.3.tar.gz
+wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.4/Aristotle-v1.0.4.tar.gz
 ```
 
 :::note Version Information
-Latest Aristotle mainnet release: v1.0.3. Check [releases page](https://github.com/0gfoundation/0gchain-Aristotle/releases) for newer versions.
+Latest Aristotle mainnet release: v1.0.4. Check [releases page](https://github.com/0gfoundation/0gchain-Aristotle/releases) for newer versions.
 :::
 
 ### 2. Extract Package
@@ -72,7 +72,7 @@ Latest Aristotle mainnet release: v1.0.3. Check [releases page](https://github.c
 Extract the Aristotle node package to your home directory:
 
 ```bash
-tar -xzvf aristotle-v1.0.3.tar.gz -C ~
+tar -xzvf Aristotle-v1.0.4.tar.gz -C ~
 ```
 
 ### 3. Create Data Directory and Copy Configuration
@@ -80,7 +80,7 @@ tar -xzvf aristotle-v1.0.3.tar.gz -C ~
 Create your data directory and copy the default configuration:
 
 ```bash
-cd aristotle-v1.0.3
+cd Aristotle-v1.0.4
 
 cp -r 0g-home {your data path}
 sudo chmod 777 ./bin/geth
@@ -169,7 +169,7 @@ export BLOCK_NUM=1
 Launch the 0gchaind consensus client with validator-specific parameters:
 
 ```bash
-cd aristotle-v1.0.3
+cd Aristotle-v1.0.4
 
 nohup ./bin/0gchaind start \
     --rpc.laddr tcp://0.0.0.0:26657 \
@@ -193,7 +193,7 @@ nohup ./bin/0gchaind start \
 Launch the Geth execution client:
 
 ```bash
-cd aristotle-v1.0.3
+cd Aristotle-v1.0.4
 
 nohup ./bin/geth \
     --config geth-config.toml \
@@ -224,11 +224,11 @@ tail -f {your data path}/0g-home/log/geth.log
 Download the latest Galileo testnet package:
 
 ```bash
-wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.3/galileo-v3.0.3.tar.gz
+wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.4/Galileo-v3.0.4.tar.gz
 ```
 
 :::note Version Information
-Latest Galileo testnet release: v3.0.3. Check [releases page](https://github.com/0gfoundation/0gchain-NG/releases) for newer versions.
+Latest Galileo testnet release: v3.0.4. Check [releases page](https://github.com/0gfoundation/0gchain-NG/releases) for newer versions.
 :::
 
 ### 2. Extract Package
@@ -236,7 +236,7 @@ Latest Galileo testnet release: v3.0.3. Check [releases page](https://github.com
 Extract the package to your home directory:
 
 ```bash
-tar -xzvf galileo.tar.gz -C ~
+tar -xzvf Galileo-v3.0.4.tar.gz -C ~
 ```
 
 ### 3. Create Data Directory and Copy Configuration
@@ -244,7 +244,7 @@ tar -xzvf galileo.tar.gz -C ~
 Copy the configuration files and set proper permissions:
 
 ```bash
-cd galileo-v3.0.3
+cd Galileo-v3.0.4
 
 cp -r 0g-home {your data path}
 sudo chmod 777 ./bin/geth
@@ -310,7 +310,7 @@ export BLOCK_NUM=1
 Launch the 0gchaind consensus client with testnet parameters:
 
 ```bash
-cd ~/galileo-v3.0.3
+cd ~/Galileo-v3.0.4
 
 nohup ./bin/0gchaind start \
     --rpc.laddr tcp://0.0.0.0:26657 \
@@ -330,7 +330,7 @@ nohup ./bin/0gchaind start \
 Launch the Geth execution client:
 
 ```bash
-cd ~/galileo-v3.0.3
+cd ~/Galileo-v3.0.4
 
 nohup ./bin/geth \
     --config geth-config.toml \
@@ -436,12 +436,12 @@ To restore your validator from backup:
 
 ```bash
 # For Testnet (Galileo)
-wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.3/galileo-v3.0.3.tar.gz
-tar -xzvf galileo.tar.gz -C ~
+wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.4/Galileo-v3.0.4.tar.gz
+tar -xzvf Galileo-v3.0.4.tar.gz -C ~
 
 # For Mainnet (Aristotle)
-wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/1.0.3/aristotle-v1.0.3.tar.gz
-tar -xzvf aristotle.tar.gz -C ~
+wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.4/Aristotle-v1.0.4.tar.gz
+tar -xzvf Aristotle-v1.0.4.tar.gz -C ~
 
 # Verify extraction
 ls -la {network}-v{version}/

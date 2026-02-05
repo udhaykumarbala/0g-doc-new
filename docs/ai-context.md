@@ -429,7 +429,7 @@ sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
 # Clone and build
-git clone -b v1.0.3 https://github.com/0gfoundation/0gchain-Aristotle
+git clone -b v1.0.4 https://github.com/0gfoundation/0gchain-Aristotle
 cd 0gchain-Aristotle
 make install
 
@@ -437,13 +437,13 @@ make install
 0gchaind init <YOUR_MONIKER> --chain-id zgtendermint_16661-1
 
 # Configure
-wget -O ~/.0gchain/config/genesis.json https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.3/genesis.json
+wget -O ~/.0gchain/config/genesis.json https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.4/genesis.json
 ```
 
 **Testnet (Galileo)**:
 ```bash
 # Clone and build
-git clone -b v3.0.3 https://github.com/0gfoundation/0gchain-NG
+git clone -b v3.0.4 https://github.com/0gfoundation/0gchain-NG
 cd 0gchain-NG
 make install
 
@@ -451,7 +451,7 @@ make install
 0gchaind init <YOUR_MONIKER> --chain-id zgtendermint_16602-1
 
 # Configure
-wget -O ~/.0gchain/config/genesis.json https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.3/genesis.json
+wget -O ~/.0gchain/config/genesis.json https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.4/genesis.json
 ```
 
 **Documentation**: [https://docs.0g.ai/run-a-node/validator-node](https://docs.0g.ai/run-a-node/validator-node)
