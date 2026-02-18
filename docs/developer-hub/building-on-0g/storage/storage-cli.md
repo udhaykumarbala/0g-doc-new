@@ -62,19 +62,23 @@ The CLI provides a comprehensive set of commands for storage operations:
 Available Commands:
   upload      Upload file to 0G Storage network
   download    Download file from 0G Storage network
+  upload-dir  Upload directory to 0G Storage network
+  download-dir Download directory from 0G Storage network
+  diff-dir    Diff directory from 0G Storage network
   gen         Generate test files
   kv-write    Write to KV streams
   kv-read     Read KV streams
   gateway     Start gateway service
   indexer     Start indexer service
+  deploy      Deploy storage contracts
   completion  Generate shell completion scripts
   help        Get help for any command
 
 Global Flags:
-  --gas-limit uint                Custom gas limit for transactions
-  --gas-price uint                Custom gas price for transactions
-  --log-level string              Set log level (default "info")
-  --log-color-disabled            Disable colorful log output
+  --gas-limit uint                Custom gas limit to send transaction
+  --gas-price uint                Custom gas price to send transaction
+  --log-level string              Log level (default "info")
+  --log-color-disabled            Force to disable colorful logs
   --rpc-retry-count int           Retry count for rpc request (default 5)
   --rpc-retry-interval duration   Retry interval for rpc request (default 5s)
   --rpc-timeout duration          Timeout for single rpc request (default 30s)
@@ -85,7 +89,7 @@ Global Flags:
 
 ### File Upload
 
-Upload files to the 0G Storage network using the indexer service:
+Upload files to the 0G Storage network using the indexer service or explicit nodes:
 
 ```bash
 0g-storage-client upload \
@@ -96,20 +100,17 @@ Upload files to the 0G Storage network using the indexer service:
 ```
 
 **Parameters:**
-- `--url`: 0G Chain RPC endpoint
-  - Testnet: `https://evmrpc-testnet.0g.ai/`
-  - Mainnet: `https://evmrpc.0g.ai/`
-- `--key`: Your private key for signing transactions
-- `--indexer`: Storage indexer endpoint
-  - Testnet: `https://indexer-storage-testnet-turbo.0g.ai/`
-  - Mainnet: `https://indexer-storage-turbo.0g.ai`
-- `--file`: Path to the file you want to upload
+`--url` is the chain RPC endpoint, `--key` is your private key, and `--file` is the path to the file you want to upload. Use exactly one of `--indexer` or `--node`.
 
-The indexer automatically determines the optimal storage nodes based on their shard configurations.
+Common flags include `--tags`, `--submitter`, `--expected-replica`, `--skip-tx`, `--finality-required`, `--task-size`, `--fast-mode`, `--fragment-size`, `--routines`, `--fee`, `--nonce`, `--max-gas-price`, `--n-retries`, `--step`, `--method`, `--full-trusted`, `--timeout`, `--flow-address`, and `--market-address`.
+
+Fee notes (turbo):
+- `unitPrice = 11 / pricePerToken / 1024 * 256`. If `pricePerToken = 1`, then `unitPrice = 2.75` (tokens), or `2.75e18` a0gi.
+- `pricePerSector(256B)/month = lifetimeMonth * unitPrice * 1e18 / 1024 / 1024 / 1024` (no `/12` since $11 is per TB per month).
 
 ### File Download
 
-Download files from the network using the indexer:
+Download files from the network using the indexer or explicit nodes:
 
 ```bash
 0g-storage-client download \
@@ -119,9 +120,7 @@ Download files from the network using the indexer:
 ```
 
 **Parameters:**
-- `--indexer`: Storage indexer endpoint
-- `--root`: File's Merkle root hash (obtained during upload)
-- `--file`: Where to save the downloaded file
+`--file` is the output path. Use exactly one of `--indexer` or `--node`. Use exactly one of `--root` or `--roots`.
 
 ### Download with Verification
 
@@ -137,23 +136,50 @@ Enable proof verification for enhanced security:
 
 The `--proof` flag requests cryptographic proof of data integrity from the storage node.
 
+### Directory Upload
+
+Upload an entire directory using explicit storage nodes:
+
+```bash
+0g-storage-client upload-dir \
+  --url <blockchain_rpc_endpoint> \
+  --key <private_key> \
+  --node <storage_node_endpoint> \
+  --file <directory_path>
+```
+
+### Directory Download
+
+Download a directory by root:
+
+```bash
+0g-storage-client download-dir \
+  --indexer <storage_indexer_endpoint> \
+  --root <directory_root_hash> \
+  --file <output_directory>
+```
+
+### Directory Diff
+
+Compare a local directory with the on-chain version:
+
+```bash
+0g-storage-client diff-dir \
+  --indexer <storage_indexer_endpoint> \
+  --root <directory_root_hash> \
+  --file <local_directory>
+```
+
 ## Practical Examples
 
 ### Upload Example
 
 ```bash
-# Upload a document to 0G Storage (Testnet)
+# Upload a document to 0G Storage
 0g-storage-client upload \
-  --url https://evmrpc-testnet.0g.ai \
+  --url <blockchain_rpc_endpoint> \
   --key YOUR_PRIVATE_KEY \
-  --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
-  --file ./documents/report.pdf
-
-# Upload a document to 0G Storage (Mainnet)
-0g-storage-client upload \
-  --url https://evmrpc.0g.ai \
-  --key YOUR_PRIVATE_KEY \
-  --indexer https://indexer-storage-turbo.0g.ai \
+  --indexer <storage_indexer_endpoint> \
   --file ./documents/report.pdf
 
 # Output:
@@ -165,28 +191,15 @@ The `--proof` flag requests cryptographic proof of data integrity from the stora
 ### Download Example
 
 ```bash
-# Download file using root hash (Testnet)
+# Download file using root hash
 0g-storage-client download \
-  --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
+  --indexer <storage_indexer_endpoint> \
   --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
   --file ./downloads/report.pdf
 
-# Download file using root hash (Mainnet)
+# With verification
 0g-storage-client download \
-  --indexer https://indexer-storage-turbo.0g.ai \
-  --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
-  --file ./downloads/report.pdf
-
-# With verification (Testnet)
-0g-storage-client download \
-  --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
-  --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
-  --file ./downloads/report.pdf \
-  --proof
-
-# With verification (Mainnet)
-0g-storage-client download \
-  --indexer https://indexer-storage-turbo.0g.ai \
+  --indexer <storage_indexer_endpoint> \
   --root 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 \
   --file ./downloads/report.pdf \
   --proof
@@ -210,22 +223,14 @@ Write multiple key-value pairs in a single operation:
 
 **Important:** `--stream-keys` and `--stream-values` are comma-separated string lists and their length must be equal.
 
+You can use `--indexer` for node selection or pass storage nodes directly with `--node`. If `--indexer` is omitted, `--node` is required.
+
 **Example:**
 ```bash
-# Testnet
 0g-storage-client kv-write \
-  --url https://evmrpc-testnet.0g.ai \
+  --url <blockchain_rpc_endpoint> \
   --key YOUR_PRIVATE_KEY \
-  --indexer https://indexer-storage-testnet-turbo.0g.ai/ \
-  --stream-id 1 \
-  --stream-keys "key1,key2,key3" \
-  --stream-values "value1,value2,value3"
-
-# Mainnet
-0g-storage-client kv-write \
-  --url https://evmrpc.0g.ai \
-  --key YOUR_PRIVATE_KEY \
-  --indexer https://indexer-storage-turbo.0g.ai \
+  --indexer <storage_indexer_endpoint> \
   --stream-id 1 \
   --stream-keys "key1,key2,key3" \
   --stream-values "value1,value2,value3"
@@ -344,7 +349,7 @@ The indexer service provides two types of storage node discovery:
 ### Trusted Nodes
 Well-maintained nodes that provide stable and reliable service.
 
-### Discovered Nodes  
+### Discovered Nodes
 Nodes discovered automatically through the P2P network.
 
 The indexer intelligently routes data to appropriate storage nodes based on their shard configurations, eliminating the need to manually specify storage nodes or contract addresses.
@@ -354,13 +359,7 @@ The indexer intelligently routes data to appropriate storage nodes based on thei
 ### Network Configuration
 
 :::info Required Information
-- **RPC Endpoints**:
-  - Testnet: `https://evmrpc-testnet.0g.ai/`
-  - Mainnet: `https://evmrpc.0g.ai/`
-- **Indexer Endpoints**:
-  - Testnet: `https://indexer-storage-testnet-turbo.0g.ai/`
-  - Mainnet: `https://indexer-storage-turbo.0g.ai`
-- **Private Keys**: Keep your private keys secure and never share them
+**RPC endpoints** and **indexer endpoints** are published in the network overview docs. Use the current values for your network. Keep private keys secure and never share them.
 :::
 
 ### File Management
@@ -377,8 +376,16 @@ The indexer helps users find suitable storage nodes:
 
 ```bash
 0g-storage-client indexer \
-  --listen :8080 \
+  --endpoint :12345 \
   --node <storage_node_endpoint>
+```
+
+Or start with a trusted node list:
+
+```bash
+0g-storage-client indexer \
+  --endpoint :12345 \
+  --trusted <node1,node2>
 ```
 
 ### Gateway Service
@@ -387,8 +394,15 @@ Run a gateway to provide HTTP access to storage:
 
 ```bash
 0g-storage-client gateway \
-  --listen :9000 \
-  --node <storage_node_endpoint>
+  --nodes <storage_node_endpoint>
+```
+
+Optionally specify a local file repo:
+
+```bash
+0g-storage-client gateway \
+  --nodes <storage_node_endpoint> \
+  --repo <local_path>
 ```
 
 ## Automation Examples
@@ -412,7 +426,7 @@ ROOT_HASH=$(0g-storage-client upload \
   --url $RPC_URL \
   --key $PRIVATE_KEY \
   --indexer $INDEXER_URL \
-  --file $BACKUP_FILE | grep "Root hash" | cut -d' ' -f3)
+  --file $BACKUP_FILE | grep "root =" | awk '{print $NF}')
 
 # Save root hash
 echo "${DATE}: ${ROOT_HASH}" >> /backups/manifest.txt

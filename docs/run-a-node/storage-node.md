@@ -61,9 +61,9 @@ Start by installing all the essential tools and libraries required to build the 
 
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```   
+    ```
 
- **Download the Source Code**: 
+ **Download the Source Code**:
 
     ```bash
     git clone -b <latest_tag> https://github.com/0gfoundation/0g-storage-node.git
@@ -85,12 +85,131 @@ This compiles the Rust code into an executable binary. The `--release` flag opti
 Navigate to the run directory and configure your storage node for either testnet or mainnet.
 
 :::info Config File References
-The official configuration files are available in the [0G Storage Node GitHub repository](https://github.com/0gfoundation/0g-storage-node/tree/main/run):
-- Testnet: `config-testnet-turbo.toml`
-- Mainnet: `config-mainnet-turbo.toml`
+The official configuration files are in the `run/` directory. Currently only `turbo` is available:
+```
+run/config-testnet-turbo.toml
+run/config-mainnet-turbo.toml
+```
 
 Always use the latest versions from the repository as they contain the most up-to-date network parameters.
 :::
+
+**Turbo vs Standard**
+Both `turbo` and `standard` configs are identical in structure and fields. The only difference is pricing; choose the file that matches the pricing tier you want to run.
+
+**Where The Full Config Is Explained**
+The most detailed, up-to-date comments for every field live in `run/config-testnet-turbo.toml` (and the corresponding `run/config-testnet-standard.toml`). Use those files as the authoritative field-by-field explanation.
+
+**Key Fields (Same Wording As `run/config-testnet-turbo.toml`)**
+`network_boot_nodes`
+Note: List of nodes to bootstrap UDP discovery. Note, `network_enr_address` should be configured as well to enable UDP discovery.
+
+`log_contract_address`
+Note: Flow contract address to sync event logs.
+
+`mine_contract_address`
+Note: Mine contract address for incentive.
+
+`reward_contract_address`
+Note: Reward contract address.
+
+`db_max_num_sectors`
+Note: The max number of chunk entries to store in db. Each entry is 256B, so the db size is roughly limited to `256 * db_max_num_sectors` Bytes. If this limit is reached, the node will update its `shard_position` and store only half data.
+
+`chunk_pool_write_window_size`
+Note: Maximum number of threads to upload segments of a single file simultaneously.
+
+`chunk_pool_max_writings`
+Note: Maximum number of threads to upload segments for all files simultaneously.
+
+`auto_sync_enabled`
+Note: Enable file sync among peers automatically. When enabled, each node will store all files, and sufficient disk space is required.
+
+`neighbors_only`
+Note: Indicates whether to sync file from neighbor nodes only. This is to avoid flooding file announcements in the whole network, which leads to high latency or even timeout to sync files.
+
+**CLI Options**
+CLI flags override values in `config.toml`.
+- `-c`, `--config <FILE>`: Sets a custom config file.
+- `--log-config-file [FILE]`: Sets log configuration file (Default: `log_config`).
+- `--miner-key [KEY]`: Sets miner private key (Default: None).
+- `--blockchain-rpc-endpoint [URL]`: Sets blockchain RPC endpoint (Default: `http://127.0.0.1:8545`).
+- `--db-max-num-chunks [NUM]`: Sets the max number of chunks to store in DB (Default: None).
+- `--network-enr-address [URL]`: Sets the network ENR address (Default: None).
+
+**Configuration Reference**
+Full configuration keys are defined in `node/src/config/mod.rs` and log sync behavior is implemented in `node/log_entry_sync/src/sync_manager/config.rs`.
+
+**Network**
+- `network_dir`: Directory for node keyfile and network data (Default: `network`).
+- `network_listen_address`: IP address to listen on (Default: `0.0.0.0`).
+- `network_enr_address`: Public address advertised in ENR (Default: None).
+- `network_enr_tcp_port`: TCP port advertised in ENR (Default: `1234`).
+- `network_enr_udp_port`: UDP port advertised in ENR (Default: `1234`).
+- `network_libp2p_port`: Libp2p TCP port (Default: `1234`).
+- `network_discovery_port`: Discovery UDP port (Default: `1234`).
+- `network_target_peers`: Target number of connected peers (Default: `50`).
+- `network_boot_nodes`: ENR boot nodes list for discovery (Default: empty list).
+- `network_libp2p_nodes`: Initial libp2p peers to connect to (Default: empty list).
+- `network_private`: Enable private mode (Default: `false`).
+- `network_disable_discovery`: Disable discovery protocol (Default: `false`).
+- `network_find_chunks_enabled`: Enable find-chunks behavior (Default: `false`).
+
+**Discv5**
+- `discv5_request_timeout_secs`: Timeout per UDP request (Default: `5`).
+- `discv5_query_peer_timeout_secs`: Timeout to mark a query peer unresponsive (Default: `2`).
+- `discv5_request_retries`: Retry count for UDP requests (Default: `1`).
+- `discv5_query_parallelism`: Parallelism per query (Default: `5`).
+- `discv5_report_discovered_peers`: Emit discovered ENRs during traversal (Default: `false`).
+- `discv5_disable_packet_filter`: Disable incoming packet filter (Default: `false`).
+- `discv5_disable_ip_limit`: Disable /24 subnet limit in kbuckets (Default: `false`).
+- `discv5_disable_enr_network_id`: Disable ENR network ID checks (Default: `false`).
+
+**Log Sync**
+- `blockchain_rpc_endpoint`: RPC endpoint to sync EVM logs (Default: `http://127.0.0.1:8545`).
+- `log_contract_address`: Flow contract address to sync logs from (Default: empty).
+- `log_sync_start_block_number`: Block number to start syncing logs (Default: `0`).
+- `force_log_sync_from_start_block_number`: Force sync from start block even if progress exists (Default: `false`).
+- `confirmation_block_count`: Blocks required for confirmation to handle reorgs (Default: `3`).
+- `log_page_size`: Max number of logs per poll (Default: `999`).
+- `max_cache_data_size`: Max cached data size in bytes (Default: `104857600`).
+- `cache_tx_seq_ttl`: Cache TTL for tx sequence entries (Default: `500`).
+- `rate_limit_retries`: Retries after RPC timeouts (Default: `100`).
+- `timeout_retries`: Retries for rate-limited responses (Default: `100`).
+- `initial_backoff`: Initial backoff in ms before retry (Default: `500`).
+- `recover_query_delay`: Delay in ms between paginated getLogs calls (Default: `50`).
+- `default_finalized_block_count`: Finality lag assumed behind latest block (Default: `100`).
+- `remove_finalized_block_interval_minutes`: Interval in minutes to prune finalized blocks (Default: `30`).
+- `watch_loop_wait_time_ms`: Watch loop delay in ms (Default: `500`).
+- `blockchain_rpc_timeout_secs`: RPC connect/read timeout in seconds (Default: `120`).
+
+**Chunk Pool**
+- `chunk_pool_write_window_size`: Max threads per file upload (Default: `4`).
+- `chunk_pool_max_cached_chunks_all`: Max cached chunk bytes across all files (Default: `4194304`).
+- `chunk_pool_max_writings`: Max concurrent file uploads (Default: `16`).
+- `chunk_pool_expiration_time_secs`: Cached chunk expiration in seconds (Default: `300`).
+
+**Database**
+- `db_dir`: Directory to store data (Default: `db`).
+- `db_max_num_sectors`: Max number of chunk entries to store (Default: None).
+- `prune_check_time_s`: Interval to check prune conditions in seconds (Default: `60`).
+- `prune_batch_size`: Number of entries per prune batch (Default: `16384`).
+- `prune_batch_wait_time_ms`: Wait between prune batches in ms (Default: `1000`).
+- `merkle_node_cache_capacity`: Merkle node cache capacity in bytes (Default: `33554432`).
+
+**Misc**
+- `log_config_file`: Log configuration file name (Default: `log_config`).
+- `log_directory`: Directory for log output (Default: `log`).
+
+**Mining**
+- `mine_contract_address`: Mine contract address (Default: empty).
+- `miner_id`: Optional miner ID (Default: None).
+- `miner_key`: Miner private key (Default: None).
+- `miner_cpu_percentage`: CPU usage percentage for mining (Default: `100`).
+- `mine_iter_batch_size`: Mining iteration batch size (Default: `100`).
+- `reward_contract_address`: Reward contract address (Default: empty).
+- `shard_position`: Shard selector in `<shard_id>/<shard_number>` format (Default: None).
+- `mine_context_query_seconds`: Interval to query mine context in seconds (Default: `5`).
 
 <Tabs>
   <TabItem value="testnet" label="Testnet">
@@ -108,14 +227,17 @@ cp config-testnet-turbo.toml config.toml
 
 ```toml
 # Contract addresses for testnet
-log_contract_address = "0x22E03a6A89B950F1c82ec5e74F8eCa321a105296" # Flow contract
-mine_contract_address = "0x00A9E9604b0538e06b268Fb297Df333337f9593b" # Mine contract
+log_contract_address = "FLOW_CONTRACT_ADDRESS"
+mine_contract_address = "MINE_CONTRACT_ADDRESS"
 
 # Testnet RPC endpoint
 blockchain_rpc_endpoint = "https://evmrpc-testnet.0g.ai"
 
 # Start sync block number for testnet
-log_sync_start_block_number = 326165
+log_sync_start_block_number = 1
+
+# Reward contract for testnet
+reward_contract_address = "REWARD_CONTRACT_ADDRESS"
 
 # Your private key for mining (64 chars, no '0x' prefix)
 miner_key = "YOUR_PRIVATE_KEY"
@@ -229,9 +351,9 @@ cp config-mainnet-turbo.toml config.toml
 
 ```toml
 # Contract addresses for mainnet
-log_contract_address = "0x62D4144dB0F0a6fBBaeb6296c785C71B3D57C526" # Flow contract
-mine_contract_address = "0xCd01c5Cd953971CE4C2c9bFb95610236a7F414fe" # Mine contract
-reward_contract_address = "0x457aC76B58ffcDc118AABD6DbC63ff9072880870" # Reward contract
+log_contract_address = "FLOW_CONTRACT_ADDRESS"
+mine_contract_address = "MINE_CONTRACT_ADDRESS"
+reward_contract_address = "REWARD_CONTRACT_ADDRESS"
 
 # Mainnet RPC endpoint
 blockchain_rpc_endpoint = "https://evmrpc.0g.ai"
@@ -342,7 +464,7 @@ cd run
 </TabItem>
 </Tabs>
 
-## Snapshot 
+## Snapshot
 Make sure to only include `flow_db` and delete `data_db` under `db` folder when you use a snapshot from a 3rd party !
 > Using others' `data_db` will make the node mine for others!
 
@@ -391,7 +513,7 @@ Follow the same steps to install dependencies and Rust as in the storage node se
 
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```   
+    ```
 
 #### 1. Download the Source Code
 
@@ -487,7 +609,7 @@ For long-running sessions, consider using `tmux` or `screen` to run the node in 
 2. Updating the node:
 
  To update to the latest version, pull the latest changes from the repository and rebuild:
-  
+
  ```bash
    git pull
    cargo build --release

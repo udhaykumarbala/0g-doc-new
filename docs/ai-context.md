@@ -23,7 +23,7 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 | **Storage Explorer** | https://storagescan-galileo.0g.ai |
 | **Validator Dashboard** | https://testnet.0g.explorers.guru |
 | **Faucet** | https://faucet.0g.ai (0.1 0G/day) |
-| **Storage Start Block** | 326165 |
+| **Storage Start Block** | 1 |
 | **DA Start Block** | 940000 |
 
 **Documentation**: [https://docs.0g.ai/developer-hub/testnet/testnet-overview](https://docs.0g.ai/developer-hub/testnet/testnet-overview)
@@ -179,7 +179,7 @@ Decentralized storage offering 95% lower costs than AWS with instant retrieval.
 
 TypeScript/JavaScript:
 ```bash
-npm install @0g-ai/0g-ts-sdk
+npm install @0glabs/0g-ts-sdk ethers
 ```
 
 Python:
@@ -196,17 +196,19 @@ go get github.com/0gfoundation/0g-storage-client
 
 TypeScript - Upload File:
 ```typescript
-import { ZgFile, Indexer, getFlowContract } from "@0g-ai/0g-ts-sdk";
+import { ZgFile, Indexer } from "@0glabs/0g-ts-sdk";
 import { ethers } from "ethers";
 
 const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
-const flowContract = getFlowContract("0x22E03a6A89B950F1c82ec5e74F8eCa321a105296", signer);
 const indexer = new Indexer("https://indexer-storage-testnet-turbo.0g.ai");
 
 const file = await ZgFile.fromFilePath("/path/to/file");
-const [tree, err] = await file.merkleTree();
-await file.upload(flowContract, indexer);
+const [tree, treeErr] = await file.merkleTree();
+console.log("Root Hash:", tree?.rootHash());
+
+const [tx, uploadErr] = await indexer.upload(file, "https://evmrpc-testnet.0g.ai", signer);
+await file.close();
 ```
 
 Python - Upload File:
@@ -225,15 +227,35 @@ root_hash = client.upload_file("/path/to/file")
 **CLI Tool**:
 ```bash
 # Install
-git clone https://github.com/0gfoundation/0g-storage-cli
-cd 0g-storage-cli
-cargo install --path .
+git clone https://github.com/0gfoundation/0g-storage-client.git
+cd 0g-storage-client
+go build
 
-# Upload
-0g-storage-cli upload --file /path/to/file --url https://indexer-storage-testnet-turbo.0g.ai
+# Upload file
+0g-storage-client upload \
+  --url https://evmrpc-testnet.0g.ai \
+  --key YOUR_PRIVATE_KEY \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
+  --file /path/to/file
 
-# Download
-0g-storage-cli download --root <ROOT_HASH> --file output.dat
+# Download file
+0g-storage-client download \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
+  --root <ROOT_HASH> \
+  --file output.dat
+
+# Upload directory
+0g-storage-client upload-dir \
+  --url https://evmrpc-testnet.0g.ai \
+  --key YOUR_PRIVATE_KEY \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
+  --file /path/to/directory
+
+# Download directory
+0g-storage-client download-dir \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
+  --root <DIRECTORY_ROOT_HASH> \
+  --file /path/to/output
 ```
 
 **Documentation Links**:
@@ -243,7 +265,7 @@ cargo install --path .
 **GitHub Repositories**:
 - Storage Node: https://github.com/0gfoundation/0g-storage-node
 - Storage KV: https://github.com/0gfoundation/0g-storage-kv
-- Storage CLI: https://github.com/0gfoundation/0g-storage-cli
+- Storage Client/CLI: https://github.com/0gfoundation/0g-storage-client
 - TypeScript SDK: https://github.com/0gfoundation/0g-ts-sdk
 - Python SDK: https://github.com/0gfoundation/0g-storage-client
 - Go SDK: https://github.com/0gfoundation/0g-storage-client
@@ -478,8 +500,9 @@ cargo build --release
 # config.toml
 log_contract_address = "0x22E03a6A89B950F1c82ec5e74F8eCa321a105296"
 mine_contract_address = "0x00A9E9604b0538e06b268Fb297Df333337f9593b"
+reward_contract_address = "0xA97B57b4BdFEA2D0a25e535bd849ad4e6C440A69"
 blockchain_rpc_endpoint = "https://evmrpc-testnet.0g.ai"
-log_sync_start_block_number = 326165
+log_sync_start_block_number = 1
 miner_key = "YOUR_PRIVATE_KEY"
 ```
 
@@ -629,23 +652,25 @@ response = client.chat.completions.create(
 ### Storage Starter Kit
 **TypeScript Example**:
 ```bash
-npm install @0g-ai/0g-ts-sdk ethers
+npm install @0glabs/0g-ts-sdk ethers
 ```
 ```typescript
-import { ZgFile, Indexer, getFlowContract } from "@0g-ai/0g-ts-sdk";
+import { ZgFile, Indexer } from "@0glabs/0g-ts-sdk";
 import { ethers } from "ethers";
 
 const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
-const flowContract = getFlowContract("0x22E03a6A89B950F1c82ec5e74F8eCa321a105296", signer);
 const indexer = new Indexer("https://indexer-storage-testnet-turbo.0g.ai");
 
 // Upload file
 const file = await ZgFile.fromFilePath("/path/to/file");
-await file.upload(flowContract, indexer);
+const [tree, treeErr] = await file.merkleTree();
+console.log("Root Hash:", tree?.rootHash());
+const [tx, uploadErr] = await indexer.upload(file, "https://evmrpc-testnet.0g.ai", signer);
+await file.close();
 
 // Download file
-await indexer.downloadFile(rootHash, "/path/to/output");
+const err = await indexer.download(rootHash, "/path/to/output", true);
 ```
 
 **Python Example**:
@@ -754,19 +779,19 @@ await window.ethereum.request({
 
 **Storage Upload (CLI)**:
 ```bash
-0g-storage-cli upload \
-  --file /path/to/file \
-  --url https://indexer-storage-testnet-turbo.0g.ai \
-  --contract 0x22E03a6A89B950F1c82ec5e74F8eCa321a105296 \
-  --key YOUR_PRIVATE_KEY
+0g-storage-client upload \
+  --url https://evmrpc-testnet.0g.ai \
+  --key YOUR_PRIVATE_KEY \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
+  --file /path/to/file
 ```
 
 **Storage Download (CLI)**:
 ```bash
-0g-storage-cli download \
+0g-storage-client download \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
   --root ROOT_HASH \
-  --file output.dat \
-  --url https://indexer-storage-testnet-turbo.0g.ai
+  --file output.dat
 ```
 
 **Check Node Status**:
