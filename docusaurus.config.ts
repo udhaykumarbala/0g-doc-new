@@ -72,6 +72,23 @@ const config: Config = {
     ],
     // Add security headers plugin
     require.resolve('./src/plugins/security-headers-plugin'),
+    // Enable LLM-compatible markdown endpoints (e.g., /page.md returns raw markdown)
+    // See: https://github.com/0gfoundation/0g-doc/issues/242
+    require.resolve('./src/plugins/markdown-endpoint-plugin'),
+    // Generate llms.txt and llms-full.txt for AI tools (industry standard)
+    // See: https://llmstxt.org/
+    [
+      'docusaurus-plugin-llms',
+      {
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        docsDir: 'docs',
+        title: '0G Documentation',
+        description: '0G is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace.',
+        llmsTxtFilename: 'llms.txt',
+        llmsFullTxtFilename: 'llms-full.txt',
+      },
+    ],
   ],
 
   headTags: [
