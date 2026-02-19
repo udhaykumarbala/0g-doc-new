@@ -8,7 +8,8 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
         { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Content-Signal", "value": "ai-train=yes, search=yes, ai-input=yes" }
       ]
     },
     {
@@ -18,7 +19,8 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
         { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Content-Signal", "value": "ai-train=yes, search=yes, ai-input=yes" }
       ]
     },
     {
@@ -28,7 +30,8 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
         { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Content-Signal", "value": "ai-train=yes, search=yes, ai-input=yes" }
       ]
     },
     {
@@ -38,7 +41,8 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
         { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Content-Signal", "value": "ai-train=yes, search=yes, ai-input=yes" }
       ]
     }
   ]
