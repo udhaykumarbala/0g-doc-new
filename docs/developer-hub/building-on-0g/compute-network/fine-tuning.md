@@ -8,6 +8,10 @@ sidebar_position: 5
 
 Customize AI models with your own data using 0G's distributed GPU network.
 
+:::tip Example Repository
+Want a complete working example? Check out the **[0G Fine-Tuning Example](https://github.com/0gfoundation/fine-tuning-example)** repository with sample datasets, training configs, and step-by-step scripts.
+:::
+
 ## Quick Start
 
 ### Prerequisites
