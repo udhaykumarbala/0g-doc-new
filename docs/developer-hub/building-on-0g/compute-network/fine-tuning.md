@@ -2,6 +2,7 @@
 id: fine-tuning
 title: Fine-tuning
 sidebar_position: 5
+description: "Fine-tune AI models on 0G Compute Network. Prepare datasets, configure training, monitor tasks, and deploy LoRA adapters using the CLI."
 ---
 
 # Fine-tuning

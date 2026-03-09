@@ -1,6 +1,7 @@
 ---
 id: precompiles-dasigners
 title: DASigners
+description: "DASigners precompile reference for 0G Chain. Register signers, query quorums and epochs, and verify data availability via EVM smart contract calls."
 ---
 # Overview
 

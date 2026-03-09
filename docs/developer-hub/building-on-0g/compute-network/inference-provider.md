@@ -2,6 +2,7 @@
 id: inference-provider
 title: Inference Provider
 sidebar_position: 2
+description: "Set up an inference provider on 0G Compute Network. Monetize GPUs with TEE verification, automated billing, and OpenAI-compatible service endpoints."
 ---
 
 import Tabs from '@theme/Tabs';

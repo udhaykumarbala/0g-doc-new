@@ -2,6 +2,7 @@
 id: sale-structure
 title: Sale Structure & Timeline
 sidebar_position: 3
+description: "0G AI Alignment Node Sale structure, timeline, whitelist and public sale phases, and 32-tier pricing breakdown."
 ---
 
 # Sale Structure, Dates, and Tiers

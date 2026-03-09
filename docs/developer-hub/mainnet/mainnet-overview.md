@@ -2,6 +2,7 @@
 id: mainnet-overview
 title: Mainnet Overview
 sidebar_position: 1
+description: "0G Mainnet network details including Chain ID, RPC endpoints, contract addresses, and wallet setup for production deployments."
 ---
 
 import OKXButton from '@site/src/components/OKXButton';

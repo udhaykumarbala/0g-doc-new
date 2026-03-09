@@ -2,6 +2,7 @@
 id: ai-alignment
 title: AI Alignment Nodes
 sidebar_position: 7
+description: "Discover how 0G AI Alignment Nodes monitor AI systems, ensure safe behavior, and provide decentralized oversight for trustworthy AI operations."
 ---
 
 # AI Alignment Nodes: Ensuring Safe Decentralized AI

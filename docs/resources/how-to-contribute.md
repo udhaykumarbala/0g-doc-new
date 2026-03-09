@@ -2,6 +2,7 @@
 id: how-to-contribute
 title: How to Contribute?
 sidebar_position: 4
+description: "Learn how to contribute to the 0G open-source project, including contribution guidelines and community participation."
 ---
 
 # Contribute to 0G Blockchain

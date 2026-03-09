@@ -2,6 +2,7 @@
 id: node-holder-benefits
 title: Node Holder Benefits
 sidebar_position: 2
+description: "Explore the rewards and benefits of holding a 0G AI Alignment Node, including up to 15% ecosystem supply allocation over 3 years."
 ---
 
 # Node Holder Benefits

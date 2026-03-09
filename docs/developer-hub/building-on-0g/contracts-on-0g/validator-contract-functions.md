@@ -1,6 +1,7 @@
 ---
 id: validator-contract-functions
 title: Validator Contract Functions
+description: "Complete function reference for 0G Chain validator contracts. View and write functions for delegations, rewards, commission, and withdrawal management."
 ---
 
 # Validator Contract Functions

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+description: "Guide to running a 0G archival node for complete historical blockchain data storage, including setup, snapshots, and deployment steps."
 ---
 
 # Archival Node

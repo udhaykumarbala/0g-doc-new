@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /search
+Disallow: /search?
+
+Sitemap: https://docs.0g.ai/sitemap.xml

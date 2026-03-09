@@ -2,6 +2,7 @@
 id: disclaimer
 title: Node Disclaimer
 sidebar_position: 4
+description: "Legal disclaimer for the 0G Node License NFT sale, covering eligibility restrictions, terms, and regulatory disclosures."
 ---
 
 # Node Disclaimer

@@ -2,6 +2,7 @@
 id: introduction
 title: Building on 0G
 sidebar_position: 1
+description: "Get started building on 0G. Add storage, compute, and DA services to any EVM, non-EVM, or Web2 application without migration."
 ---
 
 # Building on 0G

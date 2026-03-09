@@ -1,6 +1,7 @@
 ---
 id: storage-cli
 title: Storage CLI
+description: "Use the 0G Storage CLI to upload, download, and manage files and directories. Includes KV operations, REST API gateway, and automation examples."
 ---
 
 import Tabs from '@theme/Tabs';

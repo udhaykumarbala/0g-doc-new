@@ -2,6 +2,7 @@
 id: ai-alignment-node-user-guide
 title: 0G AI Alignment Node - Guide
 sidebar_label: AI Alignment Node - Guide
+description: "User guide for running a 0G AI Alignment Node or delegating to a NAAS provider, with setup instructions and monitoring tips."
 ---
 
 # 0G AI Alignment Node - Guide

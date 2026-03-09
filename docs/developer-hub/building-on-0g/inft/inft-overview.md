@@ -2,6 +2,7 @@
 id: inft-overview
 title: INFTs Overview
 sidebar_position: 1
+description: "Developer overview of INFTs (Intelligent NFTs) for tokenizing AI agents. Covers ERC-7857, secure transfers, encryption, and 0G infrastructure integration."
 ---
 
 # INFTs: Tokenizing AI Agents

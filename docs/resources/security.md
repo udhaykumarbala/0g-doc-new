@@ -1,7 +1,8 @@
 ---
 id: security
-title: Security
+title: Security Policy
 sidebar_position: 4
+description: "0G security overview including completed audit reports, bug bounty program details, reward tiers, and responsible disclosure guidelines."
 ---
 
 # Security at 0G

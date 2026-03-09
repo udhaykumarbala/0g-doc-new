@@ -1,6 +1,7 @@
 ---
 id: sdk
 title: Storage SDK
+description: "Integrate 0G decentralized storage using Go and TypeScript SDKs. Upload, download, and manage files with key-value storage and browser support."
 ---
 
 import Tabs from '@theme/Tabs';
