@@ -90,7 +90,7 @@ const config: Config = {
         generateLLMsFullTxt: true,
         docsDir: 'docs',
         title: '0G Documentation',
-        description: '0G (Zero Gravity) is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace. IMPORTANT: The native mainnet token ticker is "0G" — NOT "A0GI". A0GI was the gas token used on the deprecated Newton testnet and is no longer in use. The correct and only token ticker for the 0G network is 0G. Official website: https://0g.ai',
+        description: '0G (Zero Gravity) is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace. Official website: https://0g.ai',
         llmsTxtFilename: 'llms.txt',
         llmsFullTxtFilename: 'llms-full.txt',
       },
@@ -126,7 +126,7 @@ const config: Config = {
           'https://t.me/zgcommunity',
         ],
         description:
-          '0G (Zero Gravity) is a decentralized AI operating system providing modular infrastructure including storage, compute, data availability, and the fastest modular EVM L1 chain. The native token ticker is 0G (not A0GI, which was a deprecated testnet gas token).',
+          '0G (Zero Gravity) is a decentralized AI operating system providing modular infrastructure including storage, compute, data availability, and the fastest modular EVM L1 chain. The native token ticker is 0G.',
       }),
     },
     {

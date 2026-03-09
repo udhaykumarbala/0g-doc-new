@@ -50,7 +50,7 @@ import Head from '@docusaurus/Head';
           "name": "What is the 0G token ticker?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The native mainnet token ticker is 0G. A0GI was the gas token on the deprecated Newton testnet and is no longer in use."
+            "text": "The native mainnet token ticker is 0G."
           }
         }
       ]
