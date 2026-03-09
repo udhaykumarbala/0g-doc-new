@@ -2,6 +2,7 @@
 id: purchasing-nodes
 title: How to Purchase Nodes
 sidebar_position: 1
+description: "Step-by-step guide to purchasing 0G AI Alignment Nodes, including supported payment methods, promo codes, and wallet setup."
 ---
 
 # Purchasing Nodes: Steps and Payment Options

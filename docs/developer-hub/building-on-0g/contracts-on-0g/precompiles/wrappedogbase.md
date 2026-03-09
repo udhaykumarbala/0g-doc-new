@@ -1,6 +1,7 @@
 ---
 id: precompiles-wrappedogbase
 title: Wrapped 0G Base
+description: "Wrapped0GBase precompile for 0G Chain. Wrap and unwrap native 0G tokens as ERC20 with quota-based mint and burn functions for DeFi compatibility."
 ---
 
 # Overview

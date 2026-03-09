@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+description: "Guide to running a 0G validator node — secure the network, process transactions, and earn rewards by staking 0G tokens."
 ---
 
 # Validator Node

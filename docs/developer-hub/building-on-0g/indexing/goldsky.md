@@ -2,6 +2,7 @@
 id: goldsky
 title: Goldsky Subgraphs
 sidebar_position: 1
+description: "Index 0G Chain data with Goldsky subgraphs and Mirror streaming. Query onchain data via GraphQL or stream it directly to your database."
 ---
 
 # Indexing 0G with Goldsky

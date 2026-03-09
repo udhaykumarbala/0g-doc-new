@@ -2,6 +2,7 @@
 id: da-deep-dive
 title: Technical Deep Dive
 sidebar_position: 3
+description: "Technical deep dive into 0G DA architecture covering erasure encoding, KZG commitments, DA sampling, difficulty adjustment, and the economic model."
 ---
 
 # 0G DA Technical Deep Dive

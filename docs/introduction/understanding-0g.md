@@ -1,6 +1,7 @@
 ---
 id: understanding-0g
 title: Understanding 0G
+description: "Learn what 0G (Zero Gravity) is — the first decentralized AI L1 chain with modular storage, compute, data availability, and the native 0G token."
 sidebar_position: 1
 ---
 

@@ -2,6 +2,7 @@
 id: eligibility
 title: Eligibility & Disclaimer
 sidebar_position: 4
+description: "Eligibility requirements and whitelist participation details for the 0G AI Alignment Node Sale, including disclaimers."
 ---
 
 # Eligibility and Whitelist Participation

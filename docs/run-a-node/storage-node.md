@@ -1,3 +1,9 @@
+---
+title: Storage Node
+sidebar_position: 3
+description: "Complete guide to running a 0G storage node, including hardware requirements, configuration, sharding, and Storage KV setup."
+---
+
 # Storage Node
 ---
 import Tabs from '@theme/Tabs';

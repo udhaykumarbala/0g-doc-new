@@ -2,6 +2,7 @@
 id: glossary
 title: Glossary
 sidebar_position: 4
+description: "Comprehensive glossary of technical terms used in the 0G ecosystem, including blockchain, AI, storage, and DA concepts."
 ---
 
 # Glossary

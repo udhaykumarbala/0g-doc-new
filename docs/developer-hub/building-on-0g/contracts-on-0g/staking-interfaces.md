@@ -1,6 +1,7 @@
 ---
 id: staking-interfaces
 title: Staking Interfaces
+description: "0G Chain staking smart contract interfaces for validators and delegators. Covers validator creation, delegation, rewards, and initialization guide."
 ---
 
 # Staking Interfaces

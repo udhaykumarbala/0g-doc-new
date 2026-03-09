@@ -2,6 +2,7 @@
 id: testnet-overview
 title: Testnet Overview
 sidebar_position: 1
+description: "0G Galileo Testnet network details including Chain ID, RPC endpoints, faucet access, contract addresses, and wallet setup."
 ---
 
 import OKXButton from '@site/src/components/OKXButton';

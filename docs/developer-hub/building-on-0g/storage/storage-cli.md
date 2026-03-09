@@ -1,6 +1,7 @@
 ---
 id: storage-cli
 title: Storage CLI
+description: "Use the 0G Storage CLI to upload, download, and manage files and directories. Includes KV operations, REST API gateway, and automation examples."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -105,7 +106,7 @@ Upload files to the 0G Storage network using the indexer service or explicit nod
 Common flags include `--tags`, `--submitter`, `--expected-replica`, `--skip-tx`, `--finality-required`, `--task-size`, `--fast-mode`, `--fragment-size`, `--routines`, `--fee`, `--nonce`, `--max-gas-price`, `--n-retries`, `--step`, `--method`, `--full-trusted`, `--timeout`, `--flow-address`, and `--market-address`.
 
 Fee notes (turbo):
-- `unitPrice = 11 / pricePerToken / 1024 * 256`. If `pricePerToken = 1`, then `unitPrice = 2.75` (tokens), or `2.75e18` a0gi.
+- `unitPrice = 11 / pricePerToken / 1024 * 256`. If `pricePerToken = 1`, then `unitPrice = 2.75` (tokens), or `2.75e18` 0G.
 - `pricePerSector(256B)/month = lifetimeMonth * unitPrice * 1e18 / 1024 / 1024 / 1024` (no `/12` since $11 is per TB per month).
 
 ### File Download

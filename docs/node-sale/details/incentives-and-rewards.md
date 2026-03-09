@@ -2,6 +2,7 @@
 id: incentives-and-rewards
 title: Incentives & Rewards
 sidebar_position: 2
+description: "Details on 0G node sale incentives, referral commissions, rebate programs, vesting schedules, and community rewards."
 ---
 
 

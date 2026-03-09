@@ -3,6 +3,7 @@ id: account-management
 title: Account
 sidebar_position: 2
 sidebar_label: Account
+description: "Manage your 0G Compute Network account. Deposit, transfer, and withdraw funds across provider sub-accounts via Web UI, CLI, or SDK."
 ---
 
 import Tabs from '@theme/Tabs';

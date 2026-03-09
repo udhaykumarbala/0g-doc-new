@@ -2,6 +2,7 @@
 id: how-to-get-0g
 title: How to Get 0G Token
 sidebar_position: 3
+description: "Learn how to buy, bridge, and swap 0G tokens through exchanges, XSwap bridge, and 0G Hub. Includes wallet setup and supported trading pairs."
 ---
 
 # How to Get 0G Token

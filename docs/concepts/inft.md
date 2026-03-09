@@ -2,6 +2,7 @@
 id: inft
 title: INFT
 sidebar_position: 5
+description: "Learn about INFTs (Intelligent NFTs) — a new token standard for true AI agent ownership with encrypted intelligence, secure transfers, and ERC-7857."
 ---
 
 # INFTs: Intelligent NFTs for AI

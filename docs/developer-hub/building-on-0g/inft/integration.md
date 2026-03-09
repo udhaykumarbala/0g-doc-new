@@ -2,6 +2,7 @@
 id: integration
 title: INFT Integration Guide
 sidebar_position: 2
+description: "Step-by-step guide to build INFTs on 0G. Deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
 ---
 
 # INFT Integration Guide

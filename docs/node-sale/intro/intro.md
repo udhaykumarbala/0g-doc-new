@@ -2,6 +2,7 @@
 id: intro
 title: Introduction
 sidebar_position: 1
+description: "Introduction to 0G AI Alignment Nodes, their role in monitoring decentralized network protocols, and why to run a node."
 ---
 
 ## Purpose and Benefits of the 0G AI Alignment Node Sale

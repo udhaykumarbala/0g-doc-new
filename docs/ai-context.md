@@ -2,6 +2,7 @@
 id: ai-context
 title: AI Coding Context
 sidebar_class_name: hidden
+description: "Comprehensive 0G infrastructure context for AI coding assistants, including network configs, contract addresses, and SDK examples."
 ---
 
 # 0G AI Context for Coding Assistants
