@@ -2,6 +2,7 @@
 id: fine-tuning-provider
 title: Fine-tuning Provider
 sidebar_position: 4
+description: "Become a fine-tuning provider on 0G Compute Network. Set up TEE-secured GPU infrastructure with Docker and Intel TDX for model training services."
 ---
 
 # Become a Fine-tuning Provider

@@ -2,6 +2,7 @@
 id: compliance-and-regulatory
 title: Compliance and Regulatory Requirements
 sidebar_position: 3
+description: "Compliance and regulatory requirements for the 0G Node Sale, including Regulation S guidelines and information disclosure policies."
 ---
 
 # Compliance and Regulatory Requirements

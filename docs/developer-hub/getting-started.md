@@ -1,6 +1,7 @@
 ---
 id: getting-started
 title: Getting Started
+description: "Get started building on 0G — quickstart guides for storage, compute, data availability, and deploying smart contracts on the 0G Chain."
 sidebar_position: 1
 ---
 

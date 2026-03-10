@@ -2,6 +2,7 @@
 id: op-stack-on-0g-da
 title: OP Stack on 0G DA
 sidebar_position: 1
+description: "Deploy an OP Stack rollup using 0G DA for data availability. Full guide covering DA server setup, contract deployment, and L2 configuration."
 ---
 
 import Tabs from '@theme/Tabs';

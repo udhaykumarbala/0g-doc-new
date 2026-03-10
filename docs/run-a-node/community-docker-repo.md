@@ -1,3 +1,9 @@
+---
+title: Community Docker Repository
+sidebar_position: 6
+description: "Community-maintained Docker images for running 0G nodes, including validator and DA node containers from third-party contributors."
+---
+
 # Community Docker Repository
 ---
 

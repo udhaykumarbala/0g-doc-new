@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: "Overview of running nodes on the 0G network — validator, storage, DA, and archival nodes. Earn rewards by securing the network."
 ---
 
 # Overview

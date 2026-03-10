@@ -13,6 +13,7 @@ const config: Config = {
   organizationName: '0G Labs',
   projectName: '0g-docs',
 
+  trailingSlash: false,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -51,6 +52,11 @@ const config: Config = {
           trackingID: 'G-2GB2FSF7Q7',
           anonymizeIP: true,
         },
+        sitemap: {
+          changefreq: 'weekly' as const,
+          priority: 0.5,
+          ignorePatterns: ['/search', '/search/**'],
+        },
       } satisfies Preset.Options,
     ],
   ],
@@ -84,7 +90,7 @@ const config: Config = {
         generateLLMsFullTxt: true,
         docsDir: 'docs',
         title: '0G Documentation',
-        description: '0G is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace.',
+        description: '0G (Zero Gravity) is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace. Official website: https://0g.ai',
         llmsTxtFilename: 'llms.txt',
         llmsFullTxtFilename: 'llms-full.txt',
       },
@@ -103,9 +109,50 @@ const config: Config = {
         })(window, document, "clarity", "script", "tr0w896qhb");
       `,
     },
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: '0G Labs',
+        alternateName: 'Zero Gravity',
+        url: 'https://0g.ai',
+        logo: 'https://docs.0g.ai/img/0G-Logo-Light.svg',
+        sameAs: [
+          'https://x.com/0g_labs',
+          'https://github.com/0gfoundation',
+          'https://discord.gg/0glabs',
+          'https://t.me/zgcommunity',
+        ],
+        description:
+          '0G (Zero Gravity) is a decentralized AI operating system providing modular infrastructure including storage, compute, data availability, and the fastest modular EVM L1 chain. The native token ticker is 0G.',
+      }),
+    },
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: '0G Documentation',
+        url: 'https://docs.0g.ai',
+        publisher: {
+          '@type': 'Organization',
+          name: '0G Labs',
+        },
+      }),
+    },
   ],
 
   themeConfig: {
+    metadata: [
+      { name: 'twitter:site', content: '@0g_labs' },
+      { name: 'twitter:creator', content: '@0g_labs' },
+      { property: 'og:image', content: 'https://docs.0g.ai/img/og-image.png' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: '0G Documentation' },
+    ],
     navbar: {
       title: 'Documentation',
       logo: {
@@ -146,7 +193,18 @@ const config: Config = {
           title: 'Docs',
           items: [
             { label: 'Introduction', to: '/' },
+            { label: 'Developer Hub', to: '/developer-hub/getting-started' },
             { label: 'Run a Node', to: '/run-a-node/overview' },
+          ],
+        },
+        {
+          title: 'Products',
+          items: [
+            { label: '0G Website', href: 'https://0g.ai' },
+            { label: 'ChainScan (Mainnet Explorer)', href: 'https://chainscan.0g.ai' },
+            { label: 'StorageScan (Storage Explorer)', href: 'https://storagescan.0g.ai' },
+            { label: 'Builder Hub', href: 'https://build.0g.ai' },
+            { label: 'Ecosystem Explorer', href: 'https://explorer.0g.ai' },
           ],
         },
         {
@@ -154,7 +212,7 @@ const config: Config = {
           items: [
             { label: 'Discord', href: 'https://discord.gg/0glabs' },
             { label: 'Telegram', href: 'https://t.me/zgcommunity' },
-            { label: 'X(Twitter)', href: 'https://x.com/0g_labs' },
+            { label: 'X (Twitter)', href: 'https://x.com/0g_labs' },
           ],
         },
         {
@@ -162,6 +220,7 @@ const config: Config = {
           items: [
             { label: 'Blog', href: 'https://0g.ai/blog' },
             { label: 'GitHub', href: 'https://github.com/0gfoundation' },
+            { label: '0G Foundation', href: 'https://0gfoundation.ai' },
           ],
         },
       ],

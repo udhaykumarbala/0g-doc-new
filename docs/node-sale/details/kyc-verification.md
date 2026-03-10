@@ -2,6 +2,7 @@
 id: kyc-verification
 title: KYC Verification Guide
 sidebar_position: 4
+description: "Complete KYC verification guide for the 0G Alignment Node Portal using Blockpass, including document requirements and wallet signing."
 ---
 
 # KYC Verification Guide

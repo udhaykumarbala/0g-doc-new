@@ -2,6 +2,7 @@
 id: da-integration
 title: DA Client Nodes
 sidebar_position: 2
+description: "Set up 0G DA Client, Encoder, and Retriever nodes. Includes hardware requirements, Docker installation, and configuration reference."
 ---
 
 import Tabs from '@theme/Tabs';

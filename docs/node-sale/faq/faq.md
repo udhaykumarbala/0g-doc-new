@@ -1,15 +1,69 @@
 ---
 id: faq
 title: FAQ
+description: "Frequently asked questions about 0G AI Alignment Nodes — purchasing, hardware requirements, rewards, KYC, tokenomics, and node operations."
 sidebar_position: 1
 ---
+
+import Head from '@docusaurus/Head';
+
+<Head>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where do I purchase AI Alignment Nodes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can purchase AI Alignment Nodes at https://node.0gfoundation.ai/"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the hardware requirements for 0G AI Alignment Nodes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "0G AI Alignment nodes can run on laptops, desktops, mobiles, or cloud instances. Minimum: 64MB RAM, 1 x86 CPU Core @2.1GHz, 10GB Disk Space, 10Mbps Internet Connection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When can I begin operating my 0G node?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI Alignment utility went live in 2025 after 0G Mainnet Launch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the node license NFTs transferable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Alignment Node license gives buyers lifetime access. The NFTs are non-transferable for the first year after the node sale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 0G token ticker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The native mainnet token ticker is 0G."
+          }
+        }
+      ]
+    })}
+  </script>
+</Head>
 
 # Frequently Asked Questions
 
 ### Where do I purchase AI Alignment Nodes?
 https://node.0gfoundation.ai/
 ### How do I purchase AI Alignment Nodes?
-See the step by step guide [here](docs/node-sale/details/purchasing-nodes.md).
+See the step by step guide [here](/node-sale/details/purchasing-nodes).
 ### Who can participate in the Node Sale?
 The 0G AI Alignment Node Sale is open to community members in eligible regions who meet the necessary criteria. Please review all disclaimers and important details regarding the 0G Node Sale by visiting our disclaimer [here](https://0gfoundation.ai/disclaimer). Only persons who meet the requirements for the sale are allowed to participate. KYC will be required from the purchaser before any receipt of rewards. 
 ### Are Whitelist and Public Allocations Separate?

@@ -2,6 +2,7 @@
 id: arbitrum-nitro-on-0g-da
 title: Arbitrum Nitro on 0G DA
 sidebar_position: 2
+description: "Run an Arbitrum Nitro rollup with 0G DA for cost-effective data availability. Includes DA provider integration and setup prerequisites."
 ---
 
 # Run an Arbitrum Nitro Rollup on 0G DA

@@ -1,6 +1,7 @@
 ---
 id: precompiles-overview
-title: Overview
+title: Precompiles Overview
+description: "Overview of 0G Chain precompiled contracts including DASigners and Wrapped0GBase. Gas-efficient native operations for DA and DeFi integration."
 ---
 
 # 0G Chain Precompiles

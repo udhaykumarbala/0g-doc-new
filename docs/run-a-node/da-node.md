@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+description: "Step-by-step guide to setting up a 0G Data Availability node, including Docker and source builds, BLS key generation, and signer registration."
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

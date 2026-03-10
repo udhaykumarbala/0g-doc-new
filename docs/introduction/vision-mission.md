@@ -1,6 +1,7 @@
 ---
 id: vision-mission
 title: Vision & Mission
+description: "0G's mission is to make AI a public good through decentralized infrastructure — enabling open, censorship-resistant, and user-owned AI development."
 sidebar_position: 3
 ---
 

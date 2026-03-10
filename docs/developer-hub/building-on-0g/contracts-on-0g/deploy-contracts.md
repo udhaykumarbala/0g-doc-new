@@ -1,6 +1,7 @@
 ---
 id: deploy-contracts
 title: Deploy Contracts on 0G Chain
+description: "Deploy and verify smart contracts on 0G Chain using Hardhat, Foundry, or Truffle. Includes EVM configuration, network setup, and precompile access."
 ---
 
 import Tabs from '@theme/Tabs';

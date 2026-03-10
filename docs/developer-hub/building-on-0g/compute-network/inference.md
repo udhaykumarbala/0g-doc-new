@@ -2,6 +2,7 @@
 id: inference
 title: Inference
 sidebar_position: 3
+description: "Run decentralized AI inference on 0G Compute Network. Use LLMs, image generation, and speech-to-text via Web UI, CLI, or SDK with OpenAI compatibility."
 ---
 
 import Tabs from '@theme/Tabs';
