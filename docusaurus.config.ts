@@ -147,8 +147,8 @@ const config: Config = {
 
   themeConfig: {
     metadata: [
-      { name: 'twitter:site', content: '@0g_labs' },
-      { name: 'twitter:creator', content: '@0g_labs' },
+      { name: 'twitter:site', content: '@0G_labs' },
+      { name: 'twitter:creator', content: '@0G_labs' },
       { property: 'og:image', content: 'https://docs.0g.ai/img/og-image.png' },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: '0G Documentation' },
