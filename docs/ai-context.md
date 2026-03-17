@@ -19,11 +19,13 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 | **Network Name** | 0G-Galileo-Testnet |
 | **Chain ID** | 16602 |
 | **Token Symbol** | 0G |
-| **RPC Endpoint** | https://evmrpc-testnet.0g.ai |
+| **RPC Endpoint** | https://evmrpc-testnet.0g.ai (development only — use 3rd party RPCs for production) |
 | **Block Explorer** | https://chainscan-galileo.0g.ai |
 | **Storage Explorer** | https://storagescan-galileo.0g.ai |
 | **Validator Dashboard** | https://testnet.0g.explorers.guru |
 | **Faucet** | https://faucet.0g.ai (0.1 0G/day) |
+| **Faucet (Google Cloud)** | https://cloud.google.com/application/web3/faucet/0g/galileo |
+| **Storage Indexer** | https://indexer-storage-testnet-turbo.0g.ai |
 | **Storage Start Block** | 1 |
 | **DA Start Block** | 940000 |
 
@@ -182,6 +184,8 @@ Decentralized storage offering 95% lower costs than AWS with instant retrieval.
 - Two storage layers: Log (immutable) + KV (mutable)
 - Proof of Random Access (PoRA) consensus
 
+**Flow Contract Note**: The Flow contract (`log_contract_address`) manages on-chain data flow for storage operations. For **TypeScript SDK file uploads**, the flow contract is handled internally by the Indexer — you only need the EVM RPC URL. For **KV operations**, the flow contract address is still required when constructing a `Batcher`. For **Go SDK**, the indexer client also handles flow contract interaction internally. The flow contract addresses are listed in the contract tables above.
+
 **SDK Installation**:
 
 TypeScript/JavaScript:
@@ -189,15 +193,14 @@ TypeScript/JavaScript:
 npm install @0gfoundation/0g-ts-sdk ethers
 ```
 
-Python:
-```bash
-pip install 0g-storage-client
-```
-
 Go:
 ```bash
 go get github.com/0gfoundation/0g-storage-client
 ```
+
+**Starter Kits** (recommended for getting started quickly):
+- TypeScript: https://github.com/0gfoundation/0g-storage-ts-starter-kit
+- Go: https://github.com/0gfoundation/0g-storage-go-starter-kit
 
 **Quick Start Examples**:
 
@@ -210,6 +213,7 @@ const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 const indexer = new Indexer("https://indexer-storage-testnet-turbo.0g.ai");
 
+// Upload — flow contract is resolved internally by the Indexer
 const file = await ZgFile.fromFilePath("/path/to/file");
 const [tree, treeErr] = await file.merkleTree();
 console.log("Root Hash:", tree?.rootHash());
@@ -218,20 +222,21 @@ const [tx, uploadErr] = await indexer.upload(file, "https://evmrpc-testnet.0g.ai
 await file.close();
 ```
 
-Python - Upload File:
-```python
-from storage_client import ZgStorageClient
+TypeScript - KV Operations (requires flow contract):
+```typescript
+import { Batcher, KvClient } from "@0gfoundation/0g-ts-sdk";
 
-client = ZgStorageClient(
-    rpc_endpoint="https://evmrpc-testnet.0g.ai",
-    contract_address="0x22E03a6A89B950F1c82ec5e74F8eCa321a105296",
-    private_key="YOUR_PRIVATE_KEY"
-)
+// KV upload needs the flow contract address
+const batcher = new Batcher(1, nodes, flowContract, RPC_URL);
+batcher.streamDataBuilder.set(streamId, keyBytes, valueBytes);
+const [tx, err] = await batcher.exec();
 
-root_hash = client.upload_file("/path/to/file")
+// KV read
+const kvClient = new KvClient("<kv_node_url>");
+const value = await kvClient.getValue(streamId, encodedKey);
 ```
 
-**CLI Tool**:
+**CLI Tool** (Go — built from 0g-storage-client):
 ```bash
 # Install
 git clone https://github.com/0gfoundation/0g-storage-client.git
@@ -245,24 +250,44 @@ go build
   --indexer https://indexer-storage-testnet-turbo.0g.ai \
   --file /path/to/file
 
-# Download file
-0g-storage-client download \
-  --indexer https://indexer-storage-testnet-turbo.0g.ai \
-  --root <ROOT_HASH> \
-  --file output.dat
-
-# Upload directory
-0g-storage-client upload-dir \
+# Upload with client-side encryption (AES-256-CTR)
+0g-storage-client upload \
   --url https://evmrpc-testnet.0g.ai \
   --key YOUR_PRIVATE_KEY \
   --indexer https://indexer-storage-testnet-turbo.0g.ai \
-  --file /path/to/directory
+  --file /path/to/file \
+  --encryption-key <hex_key>
 
-# Download directory
-0g-storage-client download-dir \
+# Download file (--proof enables merkle verification)
+0g-storage-client download \
   --indexer https://indexer-storage-testnet-turbo.0g.ai \
-  --root <DIRECTORY_ROOT_HASH> \
-  --file /path/to/output
+  --root <ROOT_HASH> \
+  --file output.dat \
+  --proof
+
+# KV write
+0g-storage-client kv-write \
+  --url https://evmrpc-testnet.0g.ai \
+  --key YOUR_PRIVATE_KEY \
+  --indexer https://indexer-storage-testnet-turbo.0g.ai \
+  --stream-id <STREAM_ID> \
+  --stream-keys <KEYS> \
+  --stream-values <VALUES>
+
+# KV read
+0g-storage-client kv-read \
+  --node <KV_NODE_URL> \
+  --stream-id <STREAM_ID> \
+  --stream-keys <KEYS>
+```
+
+**Indexer REST API** (HTTP gateway for file operations):
+```
+GET  /file?root=0x...              # Download file by merkle root
+GET  /file?txSeq=7                 # Download file by tx sequence
+GET  /file/{root}/path/to/file     # Download file from folder
+GET  /file/info/{cid}              # Query file info
+POST /file/segment                 # Upload file segment (JSON: txSeq/root, index, data, proof)
 ```
 
 **Documentation Links**:
@@ -272,10 +297,8 @@ go build
 **GitHub Repositories**:
 - Storage Node: https://github.com/0gfoundation/0g-storage-node
 - Storage KV: https://github.com/0gfoundation/0g-storage-kv
-- Storage Client/CLI: https://github.com/0gfoundation/0g-storage-client
+- Go Client/CLI: https://github.com/0gfoundation/0g-storage-client
 - TypeScript SDK: https://github.com/0gfoundation/0g-ts-sdk
-- Python SDK: https://github.com/0gfoundation/0g-storage-client
-- Go SDK: https://github.com/0gfoundation/0g-storage-client
 
 ### 0G Compute
 **Documentation**: [https://docs.0g.ai/concepts/compute](https://docs.0g.ai/concepts/compute)
@@ -411,139 +434,76 @@ Scalable data availability layer for rollups with 50 Gbps throughput.
 ### INFT (Intelligent NFTs)
 **Documentation**: [https://docs.0g.ai/concepts/inft](https://docs.0g.ai/concepts/inft)
 
-NFT standard (ERC-7857) for tokenizing AI agents with complete intelligence.
+ERC-7857 is an NFT standard for tokenizing AI agents. It extends ERC-721 with encrypted metadata, secure re-encryption on transfer via TEE/ZKP oracles, cloning, and usage authorization. The reference implementation uses upgradeable beacon proxies and OpenZeppelin AccessControl.
 
-**Key Features**:
-- Extends ERC-721 standard
-- Encrypted metadata storage via 0G Storage
-- Secure re-encryption for ownership transfer
-- Oracle verification
-- True AI ownership transfer
+**GitHub Repository**: https://github.com/0gfoundation/0g-agent-nft
 
-**Use Cases**:
-- AI Trading Bots
-- Personal Assistants
-- Game Characters
-- Content Creation AI
-- Research Tools
+**Core Interface (IERC7857)**:
+```solidity
+interface IERC7857 is IERC721, IERC7857Metadata {
+    // Transfer token with encrypted metadata re-encryption
+    function iTransferFrom(
+        address _from,
+        address _to,
+        uint256 _tokenId,
+        TransferValidityProof[] calldata _proofs
+    ) external;
+
+    // Delegate access-proof signing to an assistant address
+    function delegateAccess(address _assistant) external;
+
+    // Get the verifier contract (TEE or ZKP oracle)
+    function verifier() external view returns (IERC7857DataVerifier);
+}
+```
+
+**Key Data Structures**:
+```solidity
+struct IntelligentData {
+    string dataDescription;
+    bytes32 dataHash;
+}
+
+struct TransferValidityProof {
+    AccessProof accessProof;      // Signed by receiver
+    OwnershipProof ownershipProof; // Signed by TEE/ZKP oracle
+}
+
+struct OwnershipProof {
+    OracleType oracleType; // TEE or ZKP
+    bytes32 dataHash;
+    bytes sealedKey;       // Encryption key sealed for receiver
+    bytes targetPubkey;
+    bytes nonce;
+    bytes proof;
+}
+
+enum OracleType { TEE, ZKP }
+```
+
+**Extensions**:
+- **Cloneable** (`IERC7857Cloneable`): `iCloneFrom()` — creates a new token with the same encrypted metadata
+- **Authorize** (`IERC7857Authorize`): `authorizeUsage()` / `revokeAuthorization()` — grant usage rights without ownership transfer (max 100 users per token, cleared on transfer)
+- **Data Storage** (`ERC7857IDataStorageUpgradeable`): On-chain storage for arrays of `IntelligentData` per token
+
+**Architecture**:
+- **AgentNFT**: Main contract — minting, creator tracking, mint fees. Roles: `ADMIN_ROLE`, `OPERATOR_ROLE`, `MINTER_ROLE`
+- **Verifier**: Orchestrates TEE/ZKP proof verification with replay protection (nonce-based, 7-day expiry)
+- **TeeVerifier**: ECDSA signature verification against a registered TEE oracle address
+- **AgentMarket**: Marketplace with order/offer model, EIP-712 signatures, platform + partner fee distribution, and native/ERC20 payment support
+
+**Transfer Flow**:
+1. Receiver signs `AccessProof` (proving they want the data)
+2. TEE/ZKP oracle decrypts metadata, re-encrypts with receiver's public key, produces `OwnershipProof` with `sealedKey`
+3. `iTransferFrom()` calls `verifier.verifyTransferValidity()` to validate both proofs
+4. Token ownership transfers and `PublishedSealedKey` event emits for receiver to decrypt
+
+**Use Cases**: AI Trading Bots, Personal Assistants, Game Characters, Content Creation AI, Research Tools
 
 **Documentation Links**:
 - INFT Overview: [https://docs.0g.ai/developer-hub/building-on-0g/inft/inft-overview](https://docs.0g.ai/developer-hub/building-on-0g/inft/inft-overview)
 - ERC-7857 Standard: [https://docs.0g.ai/developer-hub/building-on-0g/inft/erc7857](https://docs.0g.ai/developer-hub/building-on-0g/inft/erc7857)
 - Integration Guide: [https://docs.0g.ai/developer-hub/building-on-0g/inft/integration](https://docs.0g.ai/developer-hub/building-on-0g/inft/integration)
-
-## Running Nodes
-
-### Hardware Requirements
-
-| Node Type | Memory | CPU | Disk | Bandwidth | Purpose |
-|-----------|--------|-----|------|-----------|---------|
-| **Validator (Mainnet)** | 64 GB | 8 cores | 1 TB NVMe | 100 Mbps | Transaction validation |
-| **Validator (Testnet)** | 64 GB | 8 cores | 4 TB NVMe | 100 Mbps | Transaction validation |
-| **Storage Node** | 32 GB | 8 cores | 500GB-1TB SSD | 100 Mbps | Data storage |
-| **Storage KV** | 32 GB | 8 cores | Flexible | - | Key-value storage |
-| **DA Node** | 16 GB | 8 cores | 1 TB NVMe | 100 Mbps | Blob verification |
-| **Archival Node** | 64 GB | 8 cores | Large NVMe | 100 Mbps | Historical data |
-
-### Validator Node Setup
-
-**Mainnet (Aristotle)**:
-```bash
-# Install dependencies
-sudo apt update && sudo apt install -y make gcc jq curl git lz4 build-essential
-
-# Install Go
-wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-
-# Clone and build
-git clone -b v1.0.4 https://github.com/0gfoundation/0gchain-Aristotle
-cd 0gchain-Aristotle
-make install
-
-# Initialize
-0gchaind init <YOUR_MONIKER> --chain-id zgtendermint_16661-1
-
-# Configure
-wget -O ~/.0gchain/config/genesis.json https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.4/genesis.json
-```
-
-**Testnet (Galileo)**:
-```bash
-# Clone and build
-git clone -b v3.0.4 https://github.com/0gfoundation/0gchain-NG
-cd 0gchain-NG
-make install
-
-# Initialize
-0gchaind init <YOUR_MONIKER> --chain-id zgtendermint_16602-1
-
-# Configure
-wget -O ~/.0gchain/config/genesis.json https://github.com/0gfoundation/0gchain-NG/releases/download/v3.0.4/genesis.json
-```
-
-**Documentation**: [https://docs.0g.ai/run-a-node/validator-node](https://docs.0g.ai/run-a-node/validator-node)
-
-### Storage Node Setup
-
-**Build from Source**:
-```bash
-# Install dependencies
-sudo apt-get update
-sudo apt-get install clang cmake build-essential pkg-config libssl-dev protobuf-compiler
-
-# Install Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Clone and build
-git clone -b <latest_tag> https://github.com/0gfoundation/0g-storage-node.git
-cd 0g-storage-node
-cargo build --release
-```
-
-**Configuration (Testnet)**:
-```toml
-# config.toml
-log_contract_address = "0x22E03a6A89B950F1c82ec5e74F8eCa321a105296"
-mine_contract_address = "0x00A9E9604b0538e06b268Fb297Df333337f9593b"
-reward_contract_address = "0xA97B57b4BdFEA2D0a25e535bd849ad4e6C440A69"
-blockchain_rpc_endpoint = "https://evmrpc-testnet.0g.ai"
-log_sync_start_block_number = 1
-miner_key = "YOUR_PRIVATE_KEY"
-```
-
-**Configuration (Mainnet)**:
-```toml
-# config.toml
-log_contract_address = "0x62D4144dB0F0a6fBBaeb6296c785C71B3D57C526"
-mine_contract_address = "0xCd01c5Cd953971CE4C2c9bFb95610236a7F414fe"
-reward_contract_address = "0x457aC76B58ffcDc118AABD6DbC63ff9072880870"
-blockchain_rpc_endpoint = "https://evmrpc.0g.ai"
-log_sync_start_block_number = 2387557
-miner_key = "YOUR_PRIVATE_KEY"
-```
-
-**Sharding Configuration**:
-```toml
-# Format: shard_id/shard_number where shard_number is 2^n
-# Only applies on first startup if no stored shard config in db
-shard_position = "0/2"
-```
-
-Sharding allows controlling how much data your node stores:
-- `"0/2"` or `"1/2"` = 50% of total data (each on specific ranges)
-- `"0/4"` to `"3/4"` = 25% of total data each
-- Initial setup is deterministic (shard_id maps to specific range)
-- Auto-splitting is NOT deterministic (random assignment when capacity exceeded)
-
-**Run Storage Node**:
-```bash
-cd run
-../target/release/zgs_node --config config.toml --miner-key <your_private_key>
-```
-
-**Documentation**: [https://docs.0g.ai/run-a-node/storage-node](https://docs.0g.ai/run-a-node/storage-node)
 
 ## Developer Tools
 
@@ -669,35 +629,42 @@ const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
 const signer = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
 const indexer = new Indexer("https://indexer-storage-testnet-turbo.0g.ai");
 
-// Upload file
+// Upload file — flow contract handled internally by Indexer
 const file = await ZgFile.fromFilePath("/path/to/file");
 const [tree, treeErr] = await file.merkleTree();
 console.log("Root Hash:", tree?.rootHash());
 const [tx, uploadErr] = await indexer.upload(file, "https://evmrpc-testnet.0g.ai", signer);
 await file.close();
 
-// Download file
+// Download file (withProof=true enables merkle verification)
 const err = await indexer.download(rootHash, "/path/to/output", true);
 ```
 
-**Python Example**:
+**Go Example**:
 ```bash
-pip install 0g-storage-client
+go get github.com/0gfoundation/0g-storage-client
 ```
-```python
-from storage_client import ZgStorageClient
-
-client = ZgStorageClient(
-    rpc_endpoint="https://evmrpc-testnet.0g.ai",
-    contract_address="0x22E03a6A89B950F1c82ec5e74F8eCa321a105296",
-    private_key="YOUR_PRIVATE_KEY"
+```go
+import (
+    "github.com/0gfoundation/0g-storage-client/common/blockchain"
+    "github.com/0gfoundation/0g-storage-client/indexer"
+    "github.com/0gfoundation/0g-storage-client/transfer"
+    "github.com/0gfoundation/0g-storage-client/core"
 )
 
-# Upload
-root_hash = client.upload_file("/path/to/file")
+// Initialize clients
+w3client := blockchain.MustNewWeb3(evmRpc, privateKey)
+defer w3client.Close()
+indexerClient, _ := indexer.NewClient(indexerRpc, indexer.IndexerClientOption{})
 
-# Download
-client.download_file(root_hash, "/path/to/output")
+// Upload — flow contract handled internally by indexer
+file, _ := core.Open(filePath)
+defer file.Close()
+opt := transfer.UploadOption{ExpectedReplica: 1, FastMode: true}
+txHashes, roots, _ := indexerClient.SplitableUpload(ctx, w3client, file, 4*1024*1024*1024, opt)
+
+// Download
+indexerClient.Download(ctx, rootHash, outputPath, true)
 ```
 
 ### Chain/Smart Contract Starter Kit
@@ -801,18 +768,6 @@ await window.ethereum.request({
   --file output.dat
 ```
 
-**Check Node Status**:
-```bash
-# Validator
-0gchaind status 2>&1 | jq .
-
-# Storage Node
-curl http://localhost:5678/status
-
-# DA Node
-curl http://localhost:34000/health
-```
-
 ## Community & Support
 
 ### Official Links
@@ -844,9 +799,6 @@ curl http://localhost:34000/health
 ---
 
 ## Additional Resources
-
-### Node Sale Information
-**Documentation**: [https://docs.0g.ai/node-sale/node-sale-index](https://docs.0g.ai/node-sale/node-sale-index)
 
 ### Security
 **Documentation**: [https://docs.0g.ai/resources/security](https://docs.0g.ai/resources/security)
