@@ -42,7 +42,7 @@ jobs:
           REPORT="${REPORT}|-----|---------|----------------|"$'\n'
 
           check_npm "@0gfoundation/0g-ts-sdk" "TypeScript Storage SDK"
-          check_npm "@0gfoundation/0g-cc" "0G Code to Coin (MCP)"
+          check_npm "@0glabs/0g-serving-broker" "Compute CLI"
 
           REPORT="${REPORT}"$'\n'
 
@@ -64,14 +64,7 @@ jobs:
           REPORT="${REPORT}| Component | Repository | Latest Tag |"$'\n'
           REPORT="${REPORT}|-----------|------------|------------|"$'\n'
 
-          check_gh_release "0gfoundation/0g-ts-sdk" "TypeScript SDK"
           check_gh_release "0gfoundation/0g-storage-client" "Go Storage Client/CLI"
-          check_gh_release "0gfoundation/0g-storage-node" "Storage Node"
-          check_gh_release "0gfoundation/0g-storage-kv" "Storage KV"
-          check_gh_release "0gfoundation/0g-da-op-plasma" "DA OP Stack Integration"
-          check_gh_release "0gfoundation/nitro" "DA Arbitrum Nitro"
-          check_gh_release "0gfoundation/0g-storage-ts-starter-kit" "TS Starter Kit"
-          check_gh_release "0gfoundation/0g-storage-go-starter-kit" "Go Starter Kit"
 
           REPORT="${REPORT}"$'\n'
 
