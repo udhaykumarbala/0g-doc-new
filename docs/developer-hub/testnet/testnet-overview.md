@@ -27,6 +27,7 @@ Test your applications on 0G's infrastructure without real costs or risks.
 | **Token Symbol** | 0G |
 | **Block Explorer** | ```https://chainscan-galileo.0g.ai``` |
 | **Faucet** | https://faucet.0g.ai |
+| **Faucet (Google Cloud)** | https://cloud.google.com/application/web3/faucet/0g/galileo |
 
 
 #### ✅ 3rd Party RPCs (Recommended for production)
@@ -87,7 +88,7 @@ export const AddNetworkSection = () => {
 
 ### Step 2: Get Test Tokens
 
-Visit the [0G Faucet](https://faucet.0g.ai) to receive free testnet tokens. **Daily Limit**: 0.1 0G per wallet.
+Visit the [0G Faucet](https://faucet.0g.ai) or the [Google Cloud Faucet](https://cloud.google.com/application/web3/faucet/0g/galileo) to receive free testnet tokens. **Daily Limit**: 0.1 0G per wallet.
 
 
 ### Step 3: Start Building
@@ -134,6 +135,6 @@ This endpoint is for development purposes and should not be used in production a
 </details>
 
 ## Faucet
-- Use the [official Faucet](https://faucet.0g.ai) to request tokens. Each user can receive up to 0.1 0G token per day, which is sufficient for most testing needs.
+- Use the [official Faucet](https://faucet.0g.ai) or the [Google Cloud Faucet](https://cloud.google.com/application/web3/faucet/0g/galileo) to request tokens. Each user can receive up to 0.1 0G token per day, which is sufficient for most testing needs.
 
 - If you require more than 0.1 0G token per day, please reach out in our vibrant [discord](https://discord.com/invite/0glabs) community to request additional tokens.
