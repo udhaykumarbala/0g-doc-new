@@ -2,8 +2,8 @@ name: Weekly AI Context Review
 
 on:
   schedule:
-    # Every Monday at 09:00 UTC
-    - cron: '0 9 * * 1'
+    # Every 3 days at 09:00 UTC (Mon, Thu, Sun)
+    - cron: '0 9 */3 * *'
   workflow_dispatch: # Allow manual trigger
 
 permissions:
