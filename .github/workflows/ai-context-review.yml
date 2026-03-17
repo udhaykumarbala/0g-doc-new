@@ -1,0 +1,165 @@
+name: Weekly AI Context Review
+
+on:
+  schedule:
+    # Every 3 days at 09:00 UTC (Mon, Thu, Sun)
+    - cron: '0 9 */3 * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  review:
+    name: Check SDK versions & endpoints
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check SDK versions and endpoints
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          REPORT=""
+          HAS_UPDATES=false
+
+          # ── npm packages ──────────────────────────────────────
+          check_npm() {
+            local pkg="$1"
+            local label="$2"
+            local version
+            version=$(npm view "$pkg" version 2>/dev/null || echo "NOT_FOUND")
+            echo "$label: $version"
+            REPORT="${REPORT}| ${label} | \`${pkg}\` | \`${version}\` |"$'\n'
+          }
+
+          REPORT="${REPORT}### npm Packages"$'\n\n'
+          REPORT="${REPORT}| SDK | Package | Latest Version |"$'\n'
+          REPORT="${REPORT}|-----|---------|----------------|"$'\n'
+
+          check_npm "@0gfoundation/0g-ts-sdk" "TypeScript Storage SDK"
+          check_npm "@0glabs/0g-serving-broker" "Compute CLI"
+
+          REPORT="${REPORT}"$'\n'
+
+          # ── GitHub releases ───────────────────────────────────
+          check_gh_release() {
+            local repo="$1"
+            local label="$2"
+            local tag
+            tag=$(gh api "repos/${repo}/releases/latest" --jq '.tag_name' 2>/dev/null || echo "NONE")
+            if [ "$tag" = "NONE" ]; then
+              # Fallback: check tags if no formal release
+              tag=$(gh api "repos/${repo}/tags?per_page=1" --jq '.[0].name' 2>/dev/null || echo "NOT_FOUND")
+            fi
+            echo "$label: $tag"
+            REPORT="${REPORT}| ${label} | [${repo}](https://github.com/${repo}) | \`${tag}\` |"$'\n'
+          }
+
+          REPORT="${REPORT}### GitHub Releases / Tags"$'\n\n'
+          REPORT="${REPORT}| Component | Repository | Latest Tag |"$'\n'
+          REPORT="${REPORT}|-----------|------------|------------|"$'\n'
+
+          check_gh_release "0gfoundation/0g-storage-client" "Go Storage Client/CLI"
+
+          REPORT="${REPORT}"$'\n'
+
+          # ── Endpoint health checks ───────────────────────────
+          check_endpoint() {
+            local url="$1"
+            local label="$2"
+            local status
+            status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$url" 2>/dev/null || echo "TIMEOUT")
+            local icon="✅"
+            if [ "$status" != "200" ] && [ "$status" != "301" ] && [ "$status" != "302" ]; then
+              icon="❌"
+              HAS_UPDATES=true
+            fi
+            REPORT="${REPORT}| ${icon} | ${label} | \`${url}\` | ${status} |"$'\n'
+          }
+
+          REPORT="${REPORT}### Endpoint Health"$'\n\n'
+          REPORT="${REPORT}| Status | Label | URL | HTTP Code |"$'\n'
+          REPORT="${REPORT}|--------|-------|-----|-----------|"$'\n'
+
+          check_endpoint "https://evmrpc-testnet.0g.ai" "Testnet RPC"
+          check_endpoint "https://evmrpc.0g.ai" "Mainnet RPC"
+          check_endpoint "https://indexer-storage-testnet-turbo.0g.ai" "Testnet Storage Indexer"
+          check_endpoint "https://indexer-storage-turbo.0g.ai" "Mainnet Storage Indexer"
+          check_endpoint "https://chainscan-galileo.0g.ai" "Testnet Explorer"
+          check_endpoint "https://chainscan.0g.ai" "Mainnet Explorer"
+          check_endpoint "https://storagescan-galileo.0g.ai" "Testnet Storage Explorer"
+          check_endpoint "https://faucet.0g.ai" "Faucet"
+          check_endpoint "https://cloud.google.com/application/web3/faucet/0g/galileo" "Google Cloud Faucet"
+
+          REPORT="${REPORT}"$'\n'
+
+          # ── Contract addresses diff ───────────────────────────
+          REPORT="${REPORT}### Contract Addresses (from ai-context.md)"$'\n\n'
+          REPORT="${REPORT}Verify these against the latest deployment:"$'\n\n'
+          REPORT="${REPORT}**Testnet:**"$'\n'
+          REPORT="${REPORT}$(grep -E '^\| \*\*(Flow|Mine|Reward|DAEntrance)\*\*' docs/ai-context.md | head -4)"$'\n\n'
+          REPORT="${REPORT}**Mainnet:**"$'\n'
+          REPORT="${REPORT}$(grep -E '^\| \*\*(Flow|Mine|Reward)\*\*' docs/ai-context.md | tail -3)"$'\n\n'
+
+          # ── TS SDK README diff check ──────────────────────────
+          REPORT="${REPORT}### SDK README Changes"$'\n\n'
+
+          TS_README=$(curl -sL "https://raw.githubusercontent.com/0gfoundation/0g-ts-sdk/main/README.md" 2>/dev/null)
+          if echo "$TS_README" | grep -qi "breaking\|migration\|deprecated\|removed"; then
+            REPORT="${REPORT}⚠️ **TypeScript SDK README** may contain breaking changes or deprecation notices — review manually."$'\n'
+            HAS_UPDATES=true
+          else
+            REPORT="${REPORT}✅ TypeScript SDK README — no breaking change keywords detected."$'\n'
+          fi
+
+          GO_README=$(curl -sL "https://raw.githubusercontent.com/0gfoundation/0g-storage-client/main/README.md" 2>/dev/null)
+          if echo "$GO_README" | grep -qi "breaking\|migration\|deprecated\|removed"; then
+            REPORT="${REPORT}⚠️ **Go SDK README** may contain breaking changes or deprecation notices — review manually."$'\n'
+            HAS_UPDATES=true
+          else
+            REPORT="${REPORT}✅ Go SDK README — no breaking change keywords detected."$'\n'
+          fi
+
+          REPORT="${REPORT}"$'\n'
+
+          # ── Save outputs ──────────────────────────────────────
+          echo "has_updates=$HAS_UPDATES" >> "$GITHUB_OUTPUT"
+
+          # Write report to file (multi-line safe)
+          cat > /tmp/report.md << 'HEADER'
+          ## Weekly AI Context Page Review
+
+          Automated review of SDK versions, endpoints, and contract addresses referenced in `docs/ai-context.md`.
+
+          HEADER
+          echo "$REPORT" >> /tmp/report.md
+          echo "" >> /tmp/report.md
+          echo "---" >> /tmp/report.md
+          echo "*Review `docs/ai-context.md` and update any stale information. Close this issue when done.*" >> /tmp/report.md
+
+      - name: Create or update issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Automated] Weekly AI Context Page Review — $(date +%Y-%m-%d)"
+          BODY=$(cat /tmp/report.md)
+
+          # Close previous auto-review issues
+          gh issue list \
+            --label "ai-context-review" \
+            --state open \
+            --json number \
+            --jq '.[].number' | while read -r num; do
+            gh issue close "$num" --comment "Superseded by new weekly review."
+          done
+
+          # Create new issue
+          gh issue create \
+            --title "$TITLE" \
+            --body "$BODY" \
+            --label "ai-context-review,documentation"
