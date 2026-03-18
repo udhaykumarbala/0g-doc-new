@@ -20,20 +20,24 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check SDK versions and endpoints
+        id: check
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           NL=$'\n'
           REPORT=""
+          HAS_ISSUES=false
 
           # ── helpers ─────────────────────────────────────────────
           add() { REPORT="${REPORT}${1}${NL}"; }
+          flag() { HAS_ISSUES=true; }
 
           check_npm() {
             local pkg="$1" label="$2"
             local version
             version=$(npm view "$pkg" version 2>/dev/null || echo "NOT_FOUND")
             echo "$label: $version"
+            if [ "$version" = "NOT_FOUND" ]; then flag; fi
             add "| ${label} | \`${pkg}\` | \`${version}\` |"
           }
 
@@ -45,6 +49,7 @@ jobs:
               tag=$(gh api "repos/${repo}/tags?per_page=1" --jq '.[0].name' 2>/dev/null || echo "NOT_FOUND")
             fi
             echo "$label: $tag"
+            if [ "$tag" = "NOT_FOUND" ]; then flag; fi
             add "| ${label} | [${repo}](https://github.com/${repo}) | \`${tag}\` |"
           }
 
@@ -55,6 +60,7 @@ jobs:
             local icon="✅"
             if [ "$status" != "200" ] && [ "$status" != "301" ] && [ "$status" != "302" ]; then
               icon="❌"
+              flag
             fi
             add "| ${icon} | ${label} | \`${url}\` | ${status} |"
           }
@@ -92,30 +98,13 @@ jobs:
           check_endpoint "https://cloud.google.com/application/web3/faucet/0g/galileo" "Google Cloud Faucet"
           add ""
 
-          # ── Contract addresses ──────────────────────────────────
-          add "### Contract Addresses (from ai-context.md)"
-          add ""
-          add "Verify these against the latest deployment:"
-          add ""
-          if [ -f docs/ai-context.md ]; then
-            add "**Testnet:**"
-            TESTNET=$(grep -E '^\| \*\*(Flow|Mine|Reward|DAEntrance)\*\*' docs/ai-context.md | head -4)
-            add "$TESTNET"
-            add ""
-            add "**Mainnet:**"
-            MAINNET=$(grep -E '^\| \*\*(Flow|Mine|Reward)\*\*' docs/ai-context.md | tail -3)
-            add "$MAINNET"
-          else
-            add "⚠️ \`docs/ai-context.md\` not found in this branch."
-          fi
-          add ""
-
           # ── SDK README keyword scan ─────────────────────────────
           add "### SDK README Changes"
           add ""
           TS_README=$(curl -sL "https://raw.githubusercontent.com/0gfoundation/0g-ts-sdk/main/README.md" 2>/dev/null)
           if echo "$TS_README" | grep -qi "breaking\|migration\|deprecated"; then
             add "⚠️ **TypeScript SDK README** may contain breaking changes or deprecation notices — review manually."
+            flag
           else
             add "✅ TypeScript SDK README — no breaking change keywords detected."
           fi
@@ -123,11 +112,14 @@ jobs:
           GO_README=$(curl -sL "https://raw.githubusercontent.com/0gfoundation/0g-storage-client/main/README.md" 2>/dev/null)
           if echo "$GO_README" | grep -qi "breaking\|migration\|deprecated"; then
             add "⚠️ **Go SDK README** may contain breaking changes or deprecation notices — review manually."
+            flag
           else
             add "✅ Go SDK README — no breaking change keywords detected."
           fi
 
-          # ── Write report file ───────────────────────────────────
+          # ── Write report and flag ───────────────────────────────
+          echo "has_issues=$HAS_ISSUES" >> "$GITHUB_OUTPUT"
+
           {
             echo "## AI Context Page Review"
             echo ""
@@ -138,7 +130,8 @@ jobs:
             echo "*Review \`docs/ai-context.md\` and update any stale information. Close this issue when done.*"
           } > /tmp/report.md
 
-      - name: Create or update issue
+      - name: Create issue if problems found
+        if: steps.check.outputs.has_issues == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -160,3 +153,7 @@ jobs:
             --title "[Automated] AI Context Review — $(date +%Y-%m-%d)" \
             --body-file /tmp/report.md \
             --label "ai-context-review,documentation"
+
+      - name: All clear
+        if: steps.check.outputs.has_issues != 'true'
+        run: echo "✅ All checks passed — no issue created."
