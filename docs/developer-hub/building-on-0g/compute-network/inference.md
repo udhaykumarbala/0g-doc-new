@@ -175,7 +175,7 @@ Before using inference services, you need to fund your account. For detailed acc
 ```bash
 0g-compute-cli deposit --amount 10
 0g-compute-cli get-account
-0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 5
+0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 1
 ```
 
 ### CLI Commands
@@ -193,8 +193,8 @@ Check provider's TEE attestation and reliability before using:
 
 This command outputs the provider's report and verifies their Trusted Execution Environment (TEE) status.
 
-#### Acknowledge Provider
-Before using a provider, acknowledge them on-chain:
+#### Acknowledge Provider (Optional)
+If you already used `transfer-fund` to fund a provider, acknowledgement happens automatically. This command is only needed if you want to acknowledge without transferring funds:
 ```bash
 0g-compute-cli inference acknowledge-provider --provider <PROVIDER_ADDRESS>
 ```
@@ -514,6 +514,16 @@ export default {
 ```
 :::
 
+:::warning Manual Fund Management Required in Browser
+In browser environments, the SDK does **not** auto-fund provider sub-accounts. Auto-funding requires a wallet signature for each transfer, which would trigger unexpected wallet popups (e.g. MetaMask) during active chat sessions — a poor user experience.
+
+**For browser dApps, you must manage funds manually:**
+1. Deposit to your main account: `await broker.ledger.depositFund(10)`
+2. Transfer to the provider sub-account: `await broker.ledger.transferFund(providerAddress, 'inference', amount)`
+
+In Node.js environments (server-side), the SDK provides background auto-funding that periodically checks provider sub-account balances and tops up from the ledger as needed.
+:::
+
 </TabItem>
 </Tabs>
 
@@ -529,16 +539,82 @@ const imageServices = services.filter(s => s.serviceType === 'text-to-image');
 const speechServices = services.filter(s => s.serviceType === 'speech-to-text');
 ```
 
+### Verify Provider (Optional)
+
+All providers listed on the 0G Compute Network have already been verified by the 0G team. This step is optional and intended for users who want to independently verify a provider's TEE attestation.
+
+The SDK performs automated checks and provides guidance for manual verification steps.
+
+**Automated checks:**
+- TEE signer address match (contract vs attestation report)
+- Docker Compose hash verification (calculated vs event log)
+
+**Manual steps** (instructions included in output):
+- Docker image integrity verification via [sigstore](https://search.sigstore.dev/)
+- Full quote verification using [dstack-verifier](https://github.com/Dstack-TEE/dstack)
+
+```typescript
+// Verify with real-time step output
+const result = await broker.inference.verifyService(
+  providerAddress,
+  './reports',              // directory to save attestation reports
+  (step) => console.log(step.message)  // optional: print each step as it happens
+);
+
+// Check automated verification results programmatically
+if (result.signerVerification.allMatch && result.composeVerification.passed) {
+  console.log('Automated checks passed');
+} else {
+  console.warn('Automated checks failed — review result for details');
+}
+
+// Access structured data
+console.log('Signer match:', result.signerVerification.allMatch);
+console.log('Compose hash:', result.composeVerification.passed);
+console.log('Docker images:', result.dockerImages);
+console.log('Reports saved to:', result.outputDirectory);
+```
+
+:::caution Automated checks are not a full verification
+`verifyService` can only verify signer address and compose hash automatically. To fully verify a provider's TEE environment, you must also follow the manual steps in the output — including running dstack-verifier and checking image integrity via sigstore.
+:::
+
 ### Account Management
 
 For detailed account operations, see [Account Management](./account-management).
 
+:::info Minimum Balance Requirements
+- **Ledger creation** (`depositFund`): Requires a minimum of **3 0G** for initial deposit
+- **Provider sub-account**: Each provider requires a minimum locked balance of **1 0G** to serve requests. Transfers below this amount may result in rejected requests.
+
+In Node.js environments, the SDK provides background auto-funding that periodically checks provider sub-account balances and tops up from the ledger when insufficient. In browser environments, you must transfer funds manually.
+:::
+
+<Tabs>
+<TabItem value="nodejs-account" label="Node.js" default>
+
 ```typescript
-const account = await broker.ledger.getLedger();
+// Deposit to main account
 await broker.ledger.depositFund(10);
-// Required before first use of a provider
-await broker.inference.acknowledgeProviderSigner(providerAddress);
+
+// Node.js: SDK provides background auto-funding that periodically checks
+// provider sub-account balances and tops up from the ledger when needed.
 ```
+
+</TabItem>
+<TabItem value="browser-account" label="Browser">
+
+```typescript
+// Deposit to main account
+await broker.ledger.depositFund(10);
+
+// Browser: manually transfer funds to provider sub-account (minimum 1 0G).
+// This also auto-acknowledges the provider's TEE signer on-chain.
+await broker.ledger.transferFund(providerAddress, 'inference', BigInt(1) * BigInt(10 ** 18));
+```
+
+</TabItem>
+</Tabs>
 
 ### Make Inference Requests
 
@@ -565,6 +641,15 @@ const response = await fetch(`${endpoint}/chat/completions`, {
 
 const data = await response.json();
 const answer = data.choices[0].message.content;
+
+// Optional: verify response integrity via TEE signature (see Response Processing below)
+const chatID = response.headers.get("ZG-Res-Key") || data.id;
+if (chatID) {
+  const isValid = await broker.inference.processResponse(
+    providerAddress,
+    chatID
+  );
+}
 ```
 
 </TabItem>
@@ -573,20 +658,12 @@ const answer = data.choices[0].message.content;
 ```typescript
 const prompt = "A cute baby sea otter";
 
-const body = JSON.stringify({
-    model,
-    prompt,
-    n: 1,
-    size: "1024x1024"
-  });
-
 // Get service metadata
 const { endpoint, model } = await broker.inference.getServiceMetadata(providerAddress);
 
 // Generate auth headers
 const headers = await broker.inference.getRequestHeaders(
-  providerAddress,
-  body
+  providerAddress
 );
 
 // Make request
@@ -603,6 +680,12 @@ const response = await fetch(`${endpoint}/images/generations`, {
 
 const data = await response.json();
 const imageUrl = data.data[0].url;
+
+// Optional: verify response integrity via TEE signature
+const chatID = response.headers.get("ZG-Res-Key");
+if (chatID) {
+  const isValid = await broker.inference.processResponse(providerAddress, chatID);
+}
 ```
 
 </TabItem>
@@ -631,25 +714,38 @@ const response = await fetch(`${endpoint}/audio/transcriptions`, {
 
 const data = await response.json();
 const transcription = data.text;
+
+// Optional: verify response integrity via TEE signature
+const chatID = response.headers.get("ZG-Res-Key");
+if (chatID) {
+  const isValid = await broker.inference.processResponse(
+    providerAddress,
+    chatID
+  );
+}
 ```
 
 </TabItem>
 </Tabs>
 
-### Response Verification
+### Response Processing & Verification
 
-The `processResponse` method handles response verification and automatic fee management. Both parameters are optional:
+:::tip processResponse is optional
+Use `processResponse` when you want to **verify response integrity** via the provider's TEE signature. Pass the `chatID` from the response header (`ZG-Res-Key`) to enable verification.
+:::
 
-- **`receivedContent`**: The usage data from the service response. When provided, the SDK caches accumulated usage and automatically transfers funds from your main account to the provider's sub-account to prevent service interruptions.
-- **`chatID`**: Response identifier for verifiable TEE services. Different service types handle this differently.
+The `processResponse` method verifies that an inference response came from a genuine TEE environment by checking the provider's signature for the given `chatID`.
+
+**Parameters:**
+- **`providerAddress`**: The address of the provider.
+- **`chatID`**: Response identifier for TEE verification. Get from `ZG-Res-Key` response header, or fall back to `data.id` for chatbot responses. Returns `null` if omitted (verification skipped).
 
 <Tabs>
 <TabItem value="chatbot-verify" label="Chatbot" default>
 
-For chatbot services, pass the usage data from the response to enable automatic fee management:
+For chatbot services, verify the response using the `chatID` from headers or response body:
 
 ```typescript
-// Standard chat completion
 const response = await fetch(`${endpoint}/chat/completions`, {
   method: "POST",
   headers: { "Content-Type": "application/json", ...headers },
@@ -658,37 +754,26 @@ const response = await fetch(`${endpoint}/chat/completions`, {
 
 const data = await response.json();
 
-// Process response for automatic fee management
-if (data.usage) {
-  await broker.inference.processResponse(
-    providerAddress,
-    undefined,              // chatID is undefined for non-verifiable responses
-    JSON.stringify(data.usage)  // Pass usage data for fee calculation
-  );
-}
-
-// For verifiable TEE services with chatID
-// Check response headers first
+// Get chatID: prioritize ZG-Res-Key header, fall back to response body
 let chatID = response.headers.get("ZG-Res-Key") || response.headers.get("zg-res-key");
-
-// If not found in response headers, check response body
 if (!chatID) {
   chatID = data.id || data.chatID;
 }
 
+// Verify response integrity via TEE signature
 if (chatID) {
   const isValid = await broker.inference.processResponse(
     providerAddress,
-    chatID,           // Verify the response integrity
-    JSON.stringify(data.usage)  // Also manage fees
+    chatID
   );
+  console.log("Response valid:", isValid);
 }
 ```
 
 </TabItem>
 <TabItem value="text-to-image-verify" label="Text-to-Image">
 
-For text-to-image services, pass the original request data for input-based fee calculation:
+For text-to-image services, verify using the `chatID` from response headers:
 
 ```typescript
 const requestBody = {
@@ -710,25 +795,18 @@ const data = await response.json();
 const chatID = response.headers.get("ZG-Res-Key") || response.headers.get("zg-res-key");
 
 if (chatID) {
-  // Process response with chatID for verification and fee calculation
   const isValid = await broker.inference.processResponse(
     providerAddress,
-    chatID                        // Verify the response integrity
+    chatID
   );
   console.log("Response valid:", isValid);
-} else {
-  // Fallback: process without verification if no chatID
-  await broker.inference.processResponse(
-    providerAddress,
-    undefined                     // No chatID available
-  );
 }
 ```
 
 </TabItem>
 <TabItem value="speech-to-text-verify" label="Speech-to-Text">
 
-For speech-to-text services, pass the usage data if available:
+For speech-to-text services, verify using the `chatID` from response headers:
 
 ```typescript
 const formData = new FormData();
@@ -747,20 +825,11 @@ const data = await response.json();
 const chatID = response.headers.get("ZG-Res-Key") || response.headers.get("zg-res-key");
 
 if (chatID) {
-  // Process response with chatID for verification and fee calculation
   const isValid = await broker.inference.processResponse(
     providerAddress,
-    chatID,                      // Verify the response integrity
-    JSON.stringify(data.usage || {}) // Pass usage for fee calculation
+    chatID
   );
   console.log("Response valid:", isValid);
-} else if (data.usage) {
-  // Fallback: process without verification if no chatID but usage available
-  await broker.inference.processResponse(
-    providerAddress,
-    undefined,                   // No chatID available
-    JSON.stringify(data.usage)   // Pass usage for fee calculation
-  );
 }
 ```
 
@@ -776,8 +845,7 @@ For streaming responses, handle chatID differently based on service type:
 // For chatbot streaming, first check headers then try to get ID from stream
 let chatID = response.headers.get("ZG-Res-Key") || response.headers.get("zg-res-key");
 
-let usage = null;
-let streamChatID = null; // Will try to get from stream data
+let streamChatID = null;
 const decoder = new TextDecoder();
 const reader = response.body.getReader();
 
@@ -790,7 +858,7 @@ while (true) {
   rawBody += decoder.decode(value, { stream: true });
 }
 
-// Parse usage and chatID from stream data
+// Parse chatID from stream data as fallback
 for (const line of rawBody.split('\n')) {
   const trimmed = line.trim();
   if (!trimmed || trimmed === 'data: [DONE]') continue;
@@ -801,35 +869,21 @@ for (const line of rawBody.split('\n')) {
       : trimmed;
     const message = JSON.parse(jsonStr);
 
-    // For chatbot, try to get ID from stream data
     if (!streamChatID && (message.id || message.chatID)) {
       streamChatID = message.id || message.chatID;
-    }
-
-    if (message.usage) {
-      usage = message.usage;
     }
   } catch {}
 }
 
-// Use chatID from header if available, otherwise use chatID from stream data
+// Use chatID from header if available, otherwise from stream data
 const finalChatID = chatID || streamChatID;
 
-// Process with chatID for verification if available
 if (finalChatID) {
   const isValid = await broker.inference.processResponse(
     providerAddress,
-    finalChatID,
-    JSON.stringify(usage || {})
+    finalChatID
   );
   console.log("Chatbot streaming response valid:", isValid);
-} else if (usage) {
-  // Fallback: process without verification
-  await broker.inference.processResponse(
-    providerAddress,
-    undefined,
-    JSON.stringify(usage)
-  );
 }
 ```
 
@@ -840,50 +894,12 @@ if (finalChatID) {
 // For speech-to-text streaming, get chatID from headers
 const chatID = response.headers.get("ZG-Res-Key") || response.headers.get("zg-res-key");
 
-let usage = null;
-const decoder = new TextDecoder();
-const reader = response.body.getReader();
-
-// Process stream
-let rawBody = '';
-while (true) {
-  const { done, value } = await reader.read();
-  if (done) break;
-
-  rawBody += decoder.decode(value, { stream: true });
-}
-
-// Parse usage from stream data
-for (const line of rawBody.split('\n')) {
-  const trimmed = line.trim();
-  if (!trimmed || trimmed === 'data: [DONE]') continue;
-
-  try {
-    const jsonStr = trimmed.startsWith('data:')
-      ? trimmed.slice(5).trim()
-      : trimmed;
-    const message = JSON.parse(jsonStr);
-    if (message.usage) {
-      usage = message.usage;
-    }
-  } catch {}
-}
-
-// Process with chatID for verification if available
 if (chatID) {
   const isValid = await broker.inference.processResponse(
     providerAddress,
-    chatID,
-    JSON.stringify(usage || {})
+    chatID
   );
   console.log("Audio streaming response valid:", isValid);
-} else if (usage) {
-  // Fallback: process without verification
-  await broker.inference.processResponse(
-    providerAddress,
-    undefined,
-    JSON.stringify(usage)
-  );
 }
 ```
 
@@ -894,17 +910,12 @@ if (chatID) {
 </Tabs>
 
 **Key Points:**
-- Always call `processResponse` after receiving responses to maintain proper fee management
-- The SDK automatically handles fund transfers to prevent service interruptions
-- For verifiable TEE services, the method also validates response integrity
-- **chatID retrieval principle**: Always prioritize `ZG-Res-Key` from response headers. Only use fallback methods when header is not present.
-- **chatID retrieval varies by service type:**
-  - **Chatbot**: First try `ZG-Res-Key` header, then check `data.id` (completion ID from response body) as fallback
-  - **Text-to-Image & Speech-to-Text**: Always get chatID from `ZG-Res-Key` response header
-  - **Streaming responses**:
-    - **Chatbot streaming**: Check headers first, then try to get `id` from stream data as fallback
-    - **Speech-to-text streaming**: Get chatID from `ZG-Res-Key` header immediately
-- Usage data format varies by service type but typically includes token counts or request metrics
+- **`processResponse` is optional.** Use it when you want to verify response integrity via TEE signature.
+- Pass the `chatID` parameter to enable verification. Without `chatID`, the method returns `null` (verification skipped).
+- **chatID retrieval**: Always prioritize `ZG-Res-Key` from response headers. Only use fallback methods when header is not present.
+  - **Chatbot**: First try `ZG-Res-Key` header, then check `data.id` as fallback
+  - **Text-to-Image & Speech-to-Text**: Get chatID from `ZG-Res-Key` response header
+  - **Streaming**: Check headers first, then try to get `id` from stream data as fallback
 
 </TabItem>
 </Tabs>
@@ -918,39 +929,45 @@ if (chatID) {
 <details>
 <summary><b>Error: Insufficient balance</b></summary>
 
-Your account doesn't have enough funds. Add more using CLI or SDK:
+Your provider sub-account doesn't have enough funds. Each provider requires a minimum locked balance of **1 0G** to serve requests.
 
 CLI:
 
 #### Deposit to Main Account
 ```bash
-0g-compute-cli deposit --amount 5
+0g-compute-cli deposit --amount 10
 ```
 
-#### Transfer to Provider Sub-Account
+#### Transfer to Provider Sub-Account (minimum 1 0G recommended)
 ```bash
-0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 5
+0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 1
 ```
 
 SDK:
 ```typescript
-await broker.ledger.depositFund(1);
+// Deposit to main account
+await broker.ledger.depositFund(10);
+// Transfer to provider sub-account (minimum 1 0G recommended)
+await broker.ledger.transferFund(providerAddress, 'inference', BigInt(1) * BigInt(10 ** 18));
 ```
+
+> **Note:** In Node.js, the SDK provides background auto-funding that periodically checks sub-account balances and tops up when insufficient. In browser environments, you must transfer funds manually.
 </details>
 
 <details>
 <summary><b>Error: Provider not acknowledged</b></summary>
 
-You need to acknowledge the provider before using their service:
+You need to acknowledge the provider before using their service. The easiest way is to transfer funds, which auto-acknowledges:
 
 CLI:
 ```bash
-0g-compute-cli inference acknowledge-provider --provider <PROVIDER_ADDRESS>
+0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 1
 ```
 
 SDK:
 ```typescript
-await broker.inference.acknowledgeProviderSigner(providerAddress);
+// transferFund auto-acknowledges the provider's TEE signer
+await broker.ledger.transferFund(providerAddress, 'inference', BigInt(1) * BigInt(10 ** 18));
 ```
 </details>
 
@@ -959,7 +976,7 @@ await broker.inference.acknowledgeProviderSigner(providerAddress);
 
 Transfer funds to the specific provider sub-account:
 ```bash
-0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 5
+0g-compute-cli transfer-fund --provider <PROVIDER_ADDRESS> --amount 1
 ```
 
 Check your account balance:
