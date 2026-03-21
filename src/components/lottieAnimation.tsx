@@ -20,7 +20,7 @@ const LottieAnimation = () => {
       {() =>
         LottieComponent ? (
           <LottieComponent
-            src="https://cdn.lottielab.com/l/3cp3bJwTzHxWRS.json"
+            src="/animations/future-of-ai.json"
             autoplay
           />
         ) : null
