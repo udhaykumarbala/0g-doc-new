@@ -27,12 +27,18 @@ Both SDKs provide a streamlined interface to interact with the 0G Storage networ
 ## Quick Start Resources
 
 :::tip Starter Kits Available
-Get up and running quickly with our comprehensive starter kits:
+Get up and running quickly with our starter kits:
 
-- **[TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit)** - Complete examples with Express.js server and CLI tool
+- **[TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit)** - CLI scripts, importable library, and browser UI with MetaMask wallet connect. Supports turbo/standard modes.
 - **[Go Starter Kit](https://github.com/0gfoundation/0g-storage-go-starter-kit)** - Ready-to-use examples with Gin server and CLI tool
 
-Both repositories include working examples, API documentation, and everything you need to start building.
+```bash
+# TypeScript — upload a file in under 5 minutes
+git clone https://github.com/0gfoundation/0g-storage-ts-starter-kit
+cd 0g-storage-ts-starter-kit && npm install
+cp .env.example .env   # Add your PRIVATE_KEY
+npm run upload -- ./file.txt
+```
 :::
 
 <Tabs>
@@ -191,60 +197,69 @@ npm install @0gfoundation/0g-ts-sdk ethers
 ### Import Required Modules
 
 ```javascript
-import { ZgFile, Indexer, Batcher, KvClient } from '@0gfoundation/0g-ts-sdk';
+import { ZgFile, Indexer, MemData } from '@0gfoundation/0g-ts-sdk';
 import { ethers } from 'ethers';
 ```
 
 ### Initialize Configuration
 
 ```javascript
-// Network Constants - Choose your network
-// Use the current endpoints from the network overview docs
-const RPC_URL = '<blockchain_rpc_endpoint>';
-const INDEXER_RPC = '<storage_indexer_endpoint>';
+// Network endpoints — see network overview docs for current values
+// Turbo indexer (recommended):
+const RPC_URL = 'https://evmrpc-testnet.0g.ai';
+const INDEXER_RPC = 'https://indexer-storage-testnet-turbo.0g.ai';
 
 // Initialize provider and signer
-const privateKey = 'YOUR_PRIVATE_KEY'; // Replace with your private key
 const provider = new ethers.JsonRpcProvider(RPC_URL);
-const signer = new ethers.Wallet(privateKey, provider);
+const signer = new ethers.Wallet('YOUR_PRIVATE_KEY', provider);
 
-// Initialize indexer
+// Initialize indexer — flow contract is auto-discovered
 const indexer = new Indexer(INDEXER_RPC);
 ```
+
+:::info Turbo vs Standard
+0G Storage has two independent networks: **Turbo** (faster, higher fees) and **Standard** (slower, lower fees). Each uses a different indexer URL. The SDK auto-discovers the correct flow contract from the indexer. See [Testnet](/developer-hub/testnet/testnet-overview) or [Mainnet](/developer-hub/mainnet/mainnet-overview) for current endpoints.
+:::
 
 ## Core Operations
 
 ### File Upload
 
-Complete upload workflow:
+Upload a file from the filesystem:
 
 ```javascript
 async function uploadFile(filePath) {
-  // Create file object from file path
   const file = await ZgFile.fromFilePath(filePath);
 
-  // Generate Merkle tree for verification
+  // Must call merkleTree() before upload — populates internal state
   const [tree, treeErr] = await file.merkleTree();
-  if (treeErr !== null) {
-    throw new Error(`Error generating Merkle tree: ${treeErr}`);
-  }
+  if (treeErr !== null) throw new Error(`Merkle tree error: ${treeErr}`);
 
-  // Get root hash for future reference
-  console.log("File Root Hash:", tree?.rootHash());
+  console.log("Root Hash:", tree?.rootHash());
 
-  // Upload to network
   const [tx, uploadErr] = await indexer.upload(file, RPC_URL, signer);
-  if (uploadErr !== null) {
-    throw new Error(`Upload error: ${uploadErr}`);
+  if (uploadErr !== null) throw new Error(`Upload error: ${uploadErr}`);
+
+  await file.close(); // Always close when done
+
+  // Handle both single and fragmented (>4GB) responses
+  if ('rootHash' in tx) {
+    return { rootHash: tx.rootHash, txHash: tx.txHash };
+  } else {
+    return { rootHashes: tx.rootHashes, txHashes: tx.txHashes };
   }
-
-  console.log("Upload successful! Transaction:", tx);
-
-  // Always close the file when done
-  await file.close();
-
-  return { rootHash: tree?.rootHash(), txHash: tx };
 }
+```
+
+### Upload In-Memory Data
+
+Upload strings or buffers without writing to disk using `MemData`:
+
+```javascript
+const data = new TextEncoder().encode('Hello, 0G Storage!');
+const memData = new MemData(data);
+const [tree, treeErr] = await memData.merkleTree();
+const [tx, err] = await indexer.upload(memData, RPC_URL, signer);
 ```
 
 ### File Download
@@ -299,48 +314,31 @@ async function downloadFromKV(streamId, key) {
 
 ### Browser Support
 
-For browser environments, use the ESM build:
+For browser environments, use the SDK's `Blob` class (alias it to avoid collision with native `Blob`):
 
-```html
-<script type="module">
-  import { Blob, Indexer } from "./dist/zgstorage.esm.js";
+```javascript
+import { Blob as ZgBlob, Indexer } from '@0gfoundation/0g-ts-sdk';
+import { BrowserProvider } from 'ethers';
 
-  // Create file object from blob
-  const file = new Blob(blob);
-  const [tree, err] = await file.merkleTree();
-  if (err === null) {
-    console.log("File Root Hash:", tree.rootHash());
-  }
-</script>
+// Connect wallet via MetaMask
+const provider = new BrowserProvider(window.ethereum);
+await provider.send('eth_requestAccounts', []);
+const signer = await provider.getSigner();
+
+// Upload a browser File object
+const zgBlob = new ZgBlob(fileInput.files[0]);
+const [tree, treeErr] = await zgBlob.merkleTree();
+const indexer = new Indexer(INDEXER_RPC);
+const [tx, err] = await indexer.upload(zgBlob, RPC_URL, signer);
 ```
 
-### Stream Support
+:::note Browser Downloads
+`indexer.download()` uses `fs.appendFileSync` internally and does not work in browsers. For browser downloads, use `StorageNode.downloadSegmentByTxSeq()` to fetch segments manually and reassemble in memory. See the [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit) `web/src/storage.ts` for a complete working implementation.
+:::
 
-Work with streams for efficient data handling:
-
-```typescript
-import { Readable } from 'stream';
-
-// Upload from stream
-async function uploadStream() {
-  const stream = new Readable();
-  stream.push('Hello, 0G Storage!');
-  stream.push(null);
-
-  const file = await ZgFile.fromStream(stream, 'hello.txt');
-  const [tx, err] = await indexer.upload(file, RPC_URL, signer);
-
-  if (err === null) {
-    console.log("Stream uploaded!");
-  }
-}
-
-// Download as stream
-async function downloadStream(rootHash) {
-  const stream = await indexer.downloadFileAsStream(rootHash);
-  stream.pipe(fs.createWriteStream('output.txt'));
-}
-```
+:::caution Vite/Webpack Setup
+The SDK imports Node.js modules (`fs`, `crypto`) at load time. You need polyfills and stub aliases for browser bundlers. See the starter kit's `web/vite.config.ts` for a working Vite configuration with `vite-plugin-node-polyfills`.
+:::
 
 ## Best Practices
 
@@ -353,7 +351,7 @@ async function downloadStream(rootHash) {
 ## Additional Resources
 
 - [TypeScript SDK Repository](https://github.com/0gfoundation/0g-ts-sdk)
-- [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit)
+- [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit) — Scripts, library, and browser UI with MetaMask
 
 </TabItem>
 </Tabs>
