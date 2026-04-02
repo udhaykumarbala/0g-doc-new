@@ -199,7 +199,7 @@ go get github.com/0gfoundation/0g-storage-client
 ```
 
 **Starter Kits** (recommended for getting started quickly):
-- TypeScript: https://github.com/0gfoundation/0g-storage-ts-starter-kit
+- TypeScript: https://github.com/0gfoundation/0g-storage-ts-starter-kit — CLI scripts (`npm run upload`), importable library (`uploadFile`, `downloadFile`, `uploadData`, `batchUpload`), and browser UI with MetaMask. Supports turbo/standard storage modes.
 - Go: https://github.com/0gfoundation/0g-storage-go-starter-kit
 
 **Quick Start Examples**:
