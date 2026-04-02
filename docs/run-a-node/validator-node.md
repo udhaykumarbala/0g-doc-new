@@ -61,7 +61,7 @@ import TabItem from '@theme/TabItem';
 Download the latest Aristotle mainnet package:
 
 ```bash
-wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.4/Aristotle-v1.0.4.tar.gz
+wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/1.0.4/aristotle-v1.0.4.tar.gz
 ```
 
 :::note Version Information
@@ -73,7 +73,7 @@ Latest Aristotle mainnet release: v1.0.4. Check [releases page](https://github.c
 Extract the Aristotle node package to your home directory:
 
 ```bash
-tar -xzvf Aristotle-v1.0.4.tar.gz -C ~
+tar -xzvf aristotle-v1.0.4.tar.gz -C ~
 ```
 
 ### 3. Create Data Directory and Copy Configuration
@@ -441,8 +441,8 @@ wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/downl
 tar -xzvf Galileo-v3.0.4.tar.gz -C ~
 
 # For Mainnet (Aristotle)
-wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.4/Aristotle-v1.0.4.tar.gz
-tar -xzvf Aristotle-v1.0.4.tar.gz -C ~
+wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/1.0.4/aristotle-v1.0.4.tar.gz
+tar -xzvf aristotle-v1.0.4.tar.gz -C ~
 
 # Verify extraction
 ls -la {network}-v{version}/
