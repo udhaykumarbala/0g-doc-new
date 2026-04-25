@@ -267,7 +267,7 @@ const [tx, err] = await indexer.upload(memData, RPC_URL, signer);
 Download with optional verification:
 
 ```javascript
-async function downloadFile(rootHash, outputPath) {
+async function downloadFromIndexer(rootHash, outputPath) {
   // withProof = true enables Merkle proof verification
   const err = await indexer.download(rootHash, outputPath, true);
   if (err !== null) {
@@ -338,6 +338,93 @@ const [tx, err] = await indexer.upload(zgBlob, RPC_URL, signer);
 
 :::caution Vite/Webpack Setup
 The SDK imports Node.js modules (`fs`, `crypto`) at load time. You need polyfills and stub aliases for browser bundlers. See the starter kit's `web/vite.config.ts` for a working Vite configuration with `vite-plugin-node-polyfills`.
+:::
+
+### Encryption & Decryption
+
+:::note
+Requires the [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit) v1.2.6 or later.
+:::
+
+Files are encrypted client-side before upload — the 0G network never sees plaintext. A compact header (17–50 bytes) is prepended to each file so the SDK can auto-detect the encryption mode on download.
+
+The encryption API uses `uploadFile` / `downloadFile` convenience wrappers from the starter kit (`./src/index.js`), distinct from the `indexer.upload()` / `indexer.download()` calls shown above.
+
+| Mode | Key material | Header size |
+|------|-------------|-------------|
+| `aes256` | 32-byte symmetric key | 17 bytes |
+| `ecies` | secp256k1 keypair | 50 bytes |
+
+#### AES-256
+
+```javascript
+import {
+  uploadFile, downloadFile, getConfig, generateAes256Key,
+} from './src/index.js';
+
+const key = generateAes256Key(); // save this — there is no server-side recovery
+
+const { rootHash } = await uploadFile('./secret.txt', getConfig({
+  encryption: { type: 'aes256', key },
+}));
+
+// Wrong key returns raw ciphertext without throwing — verify mode with peekHeader first
+await downloadFile(rootHash, './out.txt', getConfig({
+  decryption: { symmetricKey: key },
+}));
+```
+
+#### ECIES
+
+ECIES uses asymmetric encryption. For encrypt-to-self, your wallet's existing secp256k1 key works for both storage signing and decryption. Pass any recipient's compressed public key to encrypt for someone else.
+
+```javascript
+import {
+  uploadFile, downloadFile, getConfig, pubKeyFromPrivateKey,
+} from './src/index.js';
+
+// Derive recipient public key (can be a different recipient's key)
+const recipientPubKey = pubKeyFromPrivateKey(privateKey);
+
+const { rootHash } = await uploadFile('./secret.txt', getConfig({
+  encryption: { type: 'ecies', recipientPubKey },
+}));
+
+// Wrong key returns raw ciphertext without throwing — verify mode with peekHeader first
+await downloadFile(rootHash, './out.txt', getConfig({
+  decryption: { privateKey },
+}));
+```
+
+#### Detecting encryption mode
+
+Call `peekHeader` before downloading if you are unsure whether a file is encrypted.
+
+```javascript
+import { peekHeader, getConfig } from './src/index.js';
+
+const header = await peekHeader(rootHash, getConfig());
+// returns null for plaintext files
+// header.version === 1 → aes256
+// header.version === 2 → ecies
+```
+
+#### Environment variables
+
+```env
+# AES-256
+ENCRYPTION_MODE=aes256
+ENCRYPTION_KEY=0x<64 hex chars>
+DECRYPTION_KEY=0x<64 hex chars>
+
+# ECIES
+ENCRYPTION_MODE=ecies
+RECIPIENT_PUBKEY=0x<33-byte compressed pubkey>
+RECIPIENT_PRIVKEY=0x<private key>
+```
+
+:::note
+Large encrypted files are fully buffered in memory during decryption. For files over a few hundred MB, plan your memory budget accordingly.
 :::
 
 ## Best Practices
