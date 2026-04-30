@@ -343,12 +343,10 @@ The SDK imports Node.js modules (`fs`, `crypto`) at load time. You need polyfill
 ### Encryption & Decryption
 
 :::note
-Requires the [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit) v1.2.6 or later.
+Requires `@0gfoundation/0g-ts-sdk` v1.2.6 or later.
 :::
 
-Files are encrypted client-side before upload — the 0G network never sees plaintext. A compact header (17–50 bytes) is prepended to each file so the SDK can auto-detect the encryption mode on download.
-
-The encryption API uses `uploadFile` / `downloadFile` convenience wrappers from the starter kit (`./src/index.js`), distinct from the `indexer.upload()` / `indexer.download()` calls shown above.
+Files are encrypted client-side before upload — the 0G network never sees plaintext. A compact header (17–50 bytes) is prepended so the SDK can auto-detect encryption mode on download.
 
 | Mode | Key material | Header size |
 |------|-------------|-------------|
@@ -358,73 +356,67 @@ The encryption API uses `uploadFile` / `downloadFile` convenience wrappers from 
 #### AES-256
 
 ```javascript
-import {
-  uploadFile, downloadFile, getConfig, generateAes256Key,
-} from './src/index.js';
+import { ZgFile, Indexer } from '@0gfoundation/0g-ts-sdk';
+import { ethers } from 'ethers';
 
-const key = generateAes256Key(); // save this — there is no server-side recovery
+const indexer = new Indexer(indexerRpc);
+const signer = new ethers.Wallet(privateKey, provider);
 
-const { rootHash } = await uploadFile('./secret.txt', getConfig({
+// save this: there is no server-side recovery
+const key = crypto.randomBytes(32); // Node.js — or crypto.getRandomValues in browser
+
+const file = await ZgFile.fromFilePath('./secret.txt');
+const [tx, err] = await indexer.upload(file, rpcUrl, signer, {
   encryption: { type: 'aes256', key },
-}));
+});
 
-// Wrong key returns raw ciphertext without throwing — verify mode with peekHeader first
-await downloadFile(rootHash, './out.txt', getConfig({
+// Download + decrypt
+const [blob, dlErr] = await indexer.downloadToBlob(rootHash, {
+  proof: true,
   decryption: { symmetricKey: key },
-}));
+});
 ```
 
 #### ECIES
 
-ECIES uses asymmetric encryption. For encrypt-to-self, your wallet's existing secp256k1 key works for both storage signing and decryption. Pass any recipient's compressed public key to encrypt for someone else.
+For encrypt-to-self, your wallet's existing secp256k1 key works for both storage signing and decryption. Pass any recipient's compressed public key to encrypt for someone else.
 
 ```javascript
-import {
-  uploadFile, downloadFile, getConfig, pubKeyFromPrivateKey,
-} from './src/index.js';
+import { ZgFile, Indexer } from '@0gfoundation/0g-ts-sdk';
+import { ethers } from 'ethers';
 
-// Derive recipient public key (can be a different recipient's key)
-const recipientPubKey = pubKeyFromPrivateKey(privateKey);
+const wallet = new ethers.Wallet(privateKey, provider);
+const recipientPubKey = ethers.SigningKey.computePublicKey(
+  wallet.signingKey.publicKey, true  // true = compressed 33-byte key
+);
 
-const { rootHash } = await uploadFile('./secret.txt', getConfig({
+const file = await ZgFile.fromFilePath('./secret.txt');
+const [tx, err] = await indexer.upload(file, rpcUrl, signer, {
   encryption: { type: 'ecies', recipientPubKey },
-}));
+});
 
-// Wrong key returns raw ciphertext without throwing — verify mode with peekHeader first
-await downloadFile(rootHash, './out.txt', getConfig({
+// Download + decrypt
+const [blob, dlErr] = await indexer.downloadToBlob(rootHash, {
+  proof: true,
   decryption: { privateKey },
-}));
+});
 ```
 
 #### Detecting encryption mode
 
-Call `peekHeader` before downloading if you are unsure whether a file is encrypted.
-
 ```javascript
-import { peekHeader, getConfig } from './src/index.js';
+import { Indexer } from '@0gfoundation/0g-ts-sdk';
 
-const header = await peekHeader(rootHash, getConfig());
+const [header, err] = await indexer.peekHeader(rootHash);
 // returns null for plaintext files
 // header.version === 1 → aes256
 // header.version === 2 → ecies
 ```
 
-#### Environment variables
-
-```env
-# AES-256
-ENCRYPTION_MODE=aes256
-ENCRYPTION_KEY=0x<64 hex chars>
-DECRYPTION_KEY=0x<64 hex chars>
-
-# ECIES
-ENCRYPTION_MODE=ecies
-RECIPIENT_PUBKEY=0x<33-byte compressed pubkey>
-RECIPIENT_PRIVKEY=0x<private key>
-```
-
 :::note
-Large encrypted files are fully buffered in memory during decryption. For files over a few hundred MB, plan your memory budget accordingly.
+Wrong key does not throw — `downloadToBlob` silently returns raw ciphertext if the key doesn't match. Call `peekHeader` first if you are unsure whether a file is encrypted.
+
+`indexer.download()` does not support decryption. For encrypted files, always use `indexer.downloadToBlob()`. Large files will be fully buffered in memory.
 :::
 
 ## Best Practices
