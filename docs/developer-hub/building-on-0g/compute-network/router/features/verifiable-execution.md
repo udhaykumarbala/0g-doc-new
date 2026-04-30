@@ -85,7 +85,7 @@ If you need an independent guarantee, **all the inputs the Router uses are publi
 
 ## Independent verification (advanced)
 
-You don't have to trust the Router's `tee_verified` flag — the underlying inputs are all public, and the `@0glabs/0g-serving-broker` SDK ships a one-shot helper that does the whole verification for you.
+You don't have to trust the Router's `tee_verified` flag — the underlying inputs are all public, and the `@0gfoundation/0g-compute-ts-sdk` SDK ships a one-shot helper that does the whole verification for you.
 
 ### With the SDK (recommended)
 
@@ -93,7 +93,7 @@ The `chatID` required for verification comes from the **`ZG-Res-Key` response he
 
 ```typescript
 import { ethers } from "ethers";
-import { createZGComputeNetworkBroker } from "@0glabs/0g-serving-broker";
+import { createZGComputeNetworkBroker } from "@0gfoundation/0g-compute-ts-sdk";
 
 // Any wallet works — processResponse only reads the chain and calls the provider's public signature endpoint.
 const rpc = new ethers.JsonRpcProvider("https://evmrpc.0g.ai");

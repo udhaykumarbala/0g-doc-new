@@ -21,7 +21,7 @@ This guide provides a comprehensive walkthrough for setting up and offering comp
 
 ### Download the Installation Package
 
-- **Visit the Releases Page:** [0G Serving Broker Releases](https://github.com/0gfoundation/0g-serving-broker/releases)
+- **Visit the Releases Page:** [0G Serving Broker Releases](https://github.com/0gfoundation/0g-compute-ts-sdk/releases)
 - **Download and Extract:** Get the latest version of the fine-tuning installation package.
 
 ### Configuration Setup

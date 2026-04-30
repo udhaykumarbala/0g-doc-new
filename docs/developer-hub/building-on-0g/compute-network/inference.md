@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Inference
 
-Run inference by connecting to individual 0G Compute providers via the `@0glabs/0g-serving-broker` SDK. You manage per-provider sub-accounts and sign every request with your wallet. For fine-tuning via the same SDK see [Fine-tuning](./fine-tuning); for funding and sub-account management see [Account](./account-management).
+Run inference by connecting to individual 0G Compute providers via the `@0gfoundation/0g-compute-ts-sdk` SDK. You manage per-provider sub-accounts and sign every request with your wallet. For fine-tuning via the same SDK see [Fine-tuning](./fine-tuning); for funding and sub-account management see [Account](./account-management).
 
 :::tip Not sure which path to use?
 0G Compute offers **two ways** to run inference:
@@ -86,7 +86,7 @@ Two hosted entry points — both run the same Direct flow against the same per-p
 #### Installation
 
 ```bash
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 ```
 
 #### Launch Web UI
@@ -125,7 +125,7 @@ Open `http://localhost:3090` in your browser.
 ### Installation
 
 ```bash
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 ```
 
 ### Setup Environment
@@ -422,7 +422,7 @@ Then use any OpenAI-compatible client to connect to `http://localhost:3000`.
 ### Installation
 
 ```bash
-pnpm add @0glabs/0g-serving-broker
+pnpm add @0gfoundation/0g-compute-ts-sdk
 ```
 
 :::tip Starter Kits Available
@@ -438,7 +438,7 @@ Get up and running quickly with our comprehensive TypeScript starter kit within 
 
 ```typescript
 import { ethers } from "ethers";
-import { createZGComputeNetworkBroker } from "@0glabs/0g-serving-broker";
+import { createZGComputeNetworkBroker } from "@0gfoundation/0g-compute-ts-sdk";
 
 // Choose your network
 const RPC_URL = process.env.NODE_ENV === 'production'
@@ -455,7 +455,7 @@ const broker = await createZGComputeNetworkBroker(wallet);
 
 ```typescript
 import { BrowserProvider } from "ethers";
-import { createZGComputeNetworkBroker } from "@0glabs/0g-serving-broker";
+import { createZGComputeNetworkBroker } from "@0gfoundation/0g-compute-ts-sdk";
 
 // Check if MetaMask is installed
 if (typeof window.ethereum === "undefined") {
@@ -468,7 +468,7 @@ const broker = await createZGComputeNetworkBroker(signer);
 ```
 
 :::caution Browser Compatibility
-`@0glabs/0g-serving-broker` requires polyfills for Node.js built-in modules.
+`@0gfoundation/0g-compute-ts-sdk` requires polyfills for Node.js built-in modules.
 
 **Vite example:**
 ```bash
@@ -1017,7 +1017,7 @@ If the web UI fails to start:
 
 2. Ensure the package was installed globally:
 ```bash
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 ```
 </details>
 

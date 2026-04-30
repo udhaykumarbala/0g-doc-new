@@ -17,7 +17,7 @@ Node version >= 22.0.0
 ### Install CLI
 
 ```bash
-pnpm install @0glabs/0g-serving-broker -g
+pnpm install @0gfoundation/0g-compute-ts-sdk -g
 ```
 
 ### Set Environment
