@@ -185,7 +185,7 @@ if err != nil {
 Install the SDK and its peer dependency:
 
 ```bash
-npm install @0gfoundation/0g-ts-sdk ethers
+npm install @0gfoundation/0g-storage-ts-sdk ethers
 ```
 
 :::note
@@ -197,7 +197,7 @@ npm install @0gfoundation/0g-ts-sdk ethers
 ### Import Required Modules
 
 ```javascript
-import { ZgFile, Indexer, MemData } from '@0gfoundation/0g-ts-sdk';
+import { ZgFile, Indexer, MemData } from '@0gfoundation/0g-storage-ts-sdk';
 import { ethers } from 'ethers';
 ```
 
@@ -317,7 +317,7 @@ async function downloadFromKV(streamId, key) {
 For browser environments, use the SDK's `Blob` class (alias it to avoid collision with native `Blob`):
 
 ```javascript
-import { Blob as ZgBlob, Indexer } from '@0gfoundation/0g-ts-sdk';
+import { Blob as ZgBlob, Indexer } from '@0gfoundation/0g-storage-ts-sdk';
 import { BrowserProvider } from 'ethers';
 
 // Connect wallet via MetaMask
@@ -343,7 +343,7 @@ The SDK imports Node.js modules (`fs`, `crypto`) at load time. You need polyfill
 ### Encryption & Decryption
 
 :::note
-Requires `@0gfoundation/0g-ts-sdk` v1.2.6 or later.
+Requires `@0gfoundation/0g-storage-ts-sdk` v1.2.6 or later.
 :::
 
 Files are encrypted client-side before upload — the 0G network never sees plaintext. A compact header (17–50 bytes) is prepended so the SDK can auto-detect encryption mode on download.
@@ -356,7 +356,7 @@ Files are encrypted client-side before upload — the 0G network never sees plai
 #### AES-256
 
 ```javascript
-import { ZgFile, Indexer } from '@0gfoundation/0g-ts-sdk';
+import { ZgFile, Indexer } from '@0gfoundation/0g-storage-ts-sdk';
 import { ethers } from 'ethers';
 
 const indexer = new Indexer(indexerRpc);
@@ -382,7 +382,7 @@ const [blob, dlErr] = await indexer.downloadToBlob(rootHash, {
 For encrypt-to-self, your wallet's existing secp256k1 key works for both storage signing and decryption. Pass any recipient's compressed public key to encrypt for someone else.
 
 ```javascript
-import { ZgFile, Indexer } from '@0gfoundation/0g-ts-sdk';
+import { ZgFile, Indexer } from '@0gfoundation/0g-storage-ts-sdk';
 import { ethers } from 'ethers';
 
 const wallet = new ethers.Wallet(privateKey, provider);
@@ -405,7 +405,7 @@ const [blob, dlErr] = await indexer.downloadToBlob(rootHash, {
 #### Detecting encryption mode
 
 ```javascript
-import { Indexer } from '@0gfoundation/0g-ts-sdk';
+import { Indexer } from '@0gfoundation/0g-storage-ts-sdk';
 
 const [header, err] = await indexer.peekHeader(rootHash);
 // returns null for plaintext files
@@ -429,7 +429,7 @@ Wrong key does not throw — `downloadToBlob` silently returns raw ciphertext if
 
 ## Additional Resources
 
-- [TypeScript SDK Repository](https://github.com/0gfoundation/0g-ts-sdk)
+- [TypeScript SDK Repository](https://github.com/0gfoundation/0g-storage-ts-sdk)
 - [TypeScript Starter Kit](https://github.com/0gfoundation/0g-storage-ts-starter-kit) — Scripts, library, and browser UI with MetaMask
 
 </TabItem>
