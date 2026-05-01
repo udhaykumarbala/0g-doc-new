@@ -190,7 +190,7 @@ Decentralized storage offering 95% lower costs than AWS with instant retrieval.
 
 TypeScript/JavaScript:
 ```bash
-npm install @0gfoundation/0g-ts-sdk ethers
+npm install @0gfoundation/0g-storage-ts-sdk ethers
 ```
 
 Go:
@@ -206,7 +206,7 @@ go get github.com/0gfoundation/0g-storage-client
 
 TypeScript - Upload File:
 ```typescript
-import { ZgFile, Indexer } from "@0gfoundation/0g-ts-sdk";
+import { ZgFile, Indexer } from "@0gfoundation/0g-storage-ts-sdk";
 import { ethers } from "ethers";
 
 const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
@@ -224,7 +224,7 @@ await file.close();
 
 TypeScript - KV Operations (requires flow contract):
 ```typescript
-import { Batcher, KvClient } from "@0gfoundation/0g-ts-sdk";
+import { Batcher, KvClient } from "@0gfoundation/0g-storage-ts-sdk";
 
 // KV upload needs the flow contract address
 const batcher = new Batcher(1, nodes, flowContract, RPC_URL);
@@ -298,7 +298,7 @@ POST /file/segment                 # Upload file segment (JSON: txSeq/root, inde
 - Storage Node: https://github.com/0gfoundation/0g-storage-node
 - Storage KV: https://github.com/0gfoundation/0g-storage-kv
 - Go Client/CLI: https://github.com/0gfoundation/0g-storage-client
-- TypeScript SDK: https://github.com/0gfoundation/0g-ts-sdk
+- TypeScript SDK: https://github.com/0gfoundation/0g-storage-ts-sdk
 
 ### 0G Compute
 **Documentation**: [https://docs.0g.ai/concepts/compute](https://docs.0g.ai/concepts/compute)
@@ -320,7 +320,7 @@ Decentralized GPU marketplace offering 90% cheaper AI workloads with OpenAI SDK 
 
 **Two Integration Paths**:
 1. **Router (recommended)** — a single OpenAI-compatible API endpoint (`https://router-api.0g.ai/v1`) with one unified balance, automatic provider failover, and an API key. Best for server-side apps, agents, prototypes. Web UI: [pc.0g.ai](https://pc.0g.ai).
-2. **Direct** — connect to individual providers via the `@0glabs/0g-serving-broker` SDK, manage per-provider sub-accounts, sign each request with your wallet. Best for browser dApps with wallet signing or direct on-chain control. Web UI: [compute-marketplace.0g.ai](https://compute-marketplace.0g.ai) (or **Advanced** mode on pc.0g.ai).
+2. **Direct** — connect to individual providers via the `@0gfoundation/0g-compute-ts-sdk` SDK, manage per-provider sub-accounts, sign each request with your wallet. Best for browser dApps with wallet signing or direct on-chain control. Web UI: [compute-marketplace.0g.ai](https://compute-marketplace.0g.ai) (or **Advanced** mode on pc.0g.ai).
 
 The two balance pools are independent — a Router deposit does not fund Direct sub-accounts and vice versa.
 
@@ -361,7 +361,7 @@ response = client.chat.completions.create(
 
 ```bash
 # Install CLI
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 
 # Setup + fund
 0g-compute-cli setup-network
@@ -586,7 +586,7 @@ Physical GPU infrastructure provided by decentralized partners.
 **Quick Start (Recommended for Hackathons)**:
 ```bash
 # Install global CLI
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 
 # Option 1: Web UI (fastest way to start)
 0g-compute-cli ui start-web
@@ -619,10 +619,10 @@ response = client.chat.completions.create(
 ### Storage Starter Kit
 **TypeScript Example**:
 ```bash
-npm install @0gfoundation/0g-ts-sdk ethers
+npm install @0gfoundation/0g-storage-ts-sdk ethers
 ```
 ```typescript
-import { ZgFile, Indexer } from "@0gfoundation/0g-ts-sdk";
+import { ZgFile, Indexer } from "@0gfoundation/0g-storage-ts-sdk";
 import { ethers } from "ethers";
 
 const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
@@ -709,7 +709,7 @@ cast call <CONTRACT_ADDRESS> "number()" --rpc-url https://evmrpc-testnet.0g.ai
 ```
 
 ### SDK Examples
-- TypeScript SDK: https://github.com/0gfoundation/0g-ts-sdk/tree/main/examples
+- TypeScript SDK: https://github.com/0gfoundation/0g-storage-ts-sdk/tree/main/examples
 - Go SDK: https://github.com/0gfoundation/0g-storage-client/tree/main/examples
 
 ### Community Projects

@@ -63,7 +63,7 @@ Follow the [0G-TAPP README](https://github.com/0gfoundation/0g-tapp/blob/main/RE
 
 To register and manage TEE services, handle user request proxies, and perform settlements, you need to use the Inference Broker.
 
-Please visit the [releases page](https://github.com/0gfoundation/0g-serving-broker/releases) to download and extract the latest version of the installation package. After extracting, use the executable `config` file to generate the configuration file and docker-compose.yml file according to your setup.
+Please visit the [releases page](https://github.com/0gfoundation/0g-compute-ts-sdk/releases) to download and extract the latest version of the installation package. After extracting, use the executable `config` file to generate the configuration file and docker-compose.yml file according to your setup.
 
 ```bash
 # Download from releases page

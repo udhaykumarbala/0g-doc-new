@@ -138,7 +138,7 @@ const sidebars: SidebarsConfig = {
                         type: 'generated-index',
                         title: 'Direct Integration',
                         description:
-                          'Integrate with 0G Compute directly via the @0glabs/0g-serving-broker SDK: inference and fine-tuning, backed by the shared per-provider account system.',
+                          'Integrate with 0G Compute directly via the @0gfoundation/0g-compute-ts-sdk SDK: inference and fine-tuning, backed by the shared per-provider account system.',
                         slug: '/developer-hub/building-on-0g/compute-network/direct',
                       },
                       items: [
