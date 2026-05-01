@@ -74,7 +74,7 @@ Two integration paths — pick one:
 2. Deposit 0G tokens
 3. Point your OpenAI SDK at `https://router-api.0g.ai/v1`
 
-**[Direct](./direct)** — connect to individual providers via the `@0glabs/0g-serving-broker` SDK, manage per-provider sub-accounts, sign requests with your wallet. Use this for browser dApps with wallet signing, on-chain control, or when you need **fine-tuning** (Router is inference-only).
+**[Direct](./direct)** — connect to individual providers via the `@0gfoundation/0g-compute-ts-sdk` SDK, manage per-provider sub-accounts, sign requests with your wallet. Use this for browser dApps with wallet signing, on-chain control, or when you need **fine-tuning** (Router is inference-only).
 1. [Install SDK](./inference) and pick a provider
 2. [Fund your account](./account-management) — shared across inference and fine-tuning
 3. Run [Inference](./inference) or [Fine-tuning](./fine-tuning)

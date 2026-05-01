@@ -320,7 +320,7 @@ Decentralized GPU marketplace offering 90% cheaper AI workloads with OpenAI SDK 
 
 **Two Integration Paths**:
 1. **Router (recommended)** — a single OpenAI-compatible API endpoint (`https://router-api.0g.ai/v1`) with one unified balance, automatic provider failover, and an API key. Best for server-side apps, agents, prototypes. Web UI: [pc.0g.ai](https://pc.0g.ai).
-2. **Direct** — connect to individual providers via the `@0glabs/0g-serving-broker` SDK, manage per-provider sub-accounts, sign each request with your wallet. Best for browser dApps with wallet signing or direct on-chain control. Web UI: [compute-marketplace.0g.ai](https://compute-marketplace.0g.ai) (or **Advanced** mode on pc.0g.ai).
+2. **Direct** — connect to individual providers via the `@0gfoundation/0g-compute-ts-sdk` SDK, manage per-provider sub-accounts, sign each request with your wallet. Best for browser dApps with wallet signing or direct on-chain control. Web UI: [compute-marketplace.0g.ai](https://compute-marketplace.0g.ai) (or **Advanced** mode on pc.0g.ai).
 
 The two balance pools are independent — a Router deposit does not fund Direct sub-accounts and vice versa.
 
@@ -361,7 +361,7 @@ response = client.chat.completions.create(
 
 ```bash
 # Install CLI
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 
 # Setup + fund
 0g-compute-cli setup-network
@@ -586,7 +586,7 @@ Physical GPU infrastructure provided by decentralized partners.
 **Quick Start (Recommended for Hackathons)**:
 ```bash
 # Install global CLI
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 
 # Option 1: Web UI (fastest way to start)
 0g-compute-cli ui start-web

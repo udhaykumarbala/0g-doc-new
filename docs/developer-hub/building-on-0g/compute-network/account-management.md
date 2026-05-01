@@ -67,7 +67,7 @@ The account system provides a secure and flexible way to manage funds across dif
 ### Installation
 
 ```bash
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 ```
 
 ### Launch Web UI
@@ -92,7 +92,7 @@ Access the Web UI at `http://localhost:3090/wallet` where you can:
 ### Installation
 
 ```bash
-pnpm add @0glabs/0g-serving-broker -g
+pnpm add @0gfoundation/0g-compute-ts-sdk -g
 ```
 
 ### Setup Environment
@@ -204,14 +204,14 @@ Withdraw funds from main account to your wallet:
 ### Installation
 
 ```bash
-pnpm add @0glabs/0g-serving-broker
+pnpm add @0gfoundation/0g-compute-ts-sdk
 ```
 
 ### Initialize Broker
 
 ```typescript
 import { ethers } from "ethers";
-import { createZGComputeNetworkBroker } from "@0glabs/0g-serving-broker";
+import { createZGComputeNetworkBroker } from "@0gfoundation/0g-compute-ts-sdk";
 
 const provider = new ethers.JsonRpcProvider("https://evmrpc-testnet.0g.ai");
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
