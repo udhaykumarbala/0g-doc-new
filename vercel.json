@@ -43,5 +43,9 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/node-sale/intro/intro", "destination": "/node-sale/intro", "permanent": true },
+    { "source": "/node-sale/faq/faq", "destination": "/node-sale/faq", "permanent": true }
   ]
 }
