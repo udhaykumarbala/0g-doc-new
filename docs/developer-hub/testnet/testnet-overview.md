@@ -121,7 +121,6 @@ Addresses may change during testnet.
 ### Block Explorers
 - **[Chain Explorer](https://chainscan-galileo.0g.ai)**: View transactions, blocks, and smart contracts
 - **[Storage Explorer](https://storagescan-galileo.0g.ai)**: Track storage operations and metrics
-- **[Validator Dashboard](https://testnet.0g.explorers.guru)**: Monitor network validators
 
 <details>
 <summary>Development RPC</summary>

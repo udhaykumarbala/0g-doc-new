@@ -22,7 +22,6 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 | **RPC Endpoint** | https://evmrpc-testnet.0g.ai (development only — use 3rd party RPCs for production) |
 | **Block Explorer** | https://chainscan-galileo.0g.ai |
 | **Storage Explorer** | https://storagescan-galileo.0g.ai |
-| **Validator Dashboard** | https://testnet.0g.explorers.guru |
 | **Faucet** | https://faucet.0g.ai (0.1 0G/day) |
 | **Faucet (Google Cloud)** | https://cloud.google.com/application/web3/faucet/0g/galileo |
 | **Storage Indexer** | https://indexer-storage-testnet-turbo.0g.ai |

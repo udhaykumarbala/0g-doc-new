@@ -624,7 +624,6 @@ validator.undelegate{value: fee * 1 gwei}(recipient, shares);
 ## Resources
 
 - **Run Validator Node**: [Validator Setup Guide](../../../run-a-node/validator-node)
-- **GitHub Repository**: [0G Chain Contracts](https://github.com/0gfoundation/0g-chain-v2/blob/dev-v2.1/contracts/src/staking/)
 - **Deploy Contracts**: [Contract Deployment](./deploy-contracts)
 
 ---
