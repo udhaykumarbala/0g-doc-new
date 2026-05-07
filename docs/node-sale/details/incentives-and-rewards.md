@@ -32,4 +32,4 @@ You will be able to claim the commission of any successful node purchased throug
 Rewards from node operation vest over a three-year schedule, promoting consistent and long-term engagement. Vesting reduces the likelihood of short-term sales, fostering network stability and growth.
 
 ## Additional Community Incentives
-Partnerships, 0G ecosystem communities, and referrals provide extra benefits, such as rebates or promotional whitelist access. All promotional activities adhere to [regulatory guidelines](https://0gfoundation.ai/disclaimer), and any reward or referral payments are conditional upon KYC eligibility.
+Partnerships, 0G ecosystem communities, and referrals provide extra benefits, such as rebates or promotional whitelist access. All promotional activities adhere to [regulatory guidelines](https://www.0gfoundation.ai/ai-alignment#disclaimer), and any reward or referral payments are conditional upon KYC eligibility.

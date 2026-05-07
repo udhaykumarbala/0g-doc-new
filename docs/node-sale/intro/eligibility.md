@@ -10,4 +10,4 @@ description: "Eligibility requirements and whitelist participation details for t
 - **Special Roles and Partnerships**: Selected community members, project partners, and Key Opinion Leaders (KOLs) may receive additional access or promotional privileges, subject to guidelines for eligible users and without guarantees for resale or transferability of whitelist spots.
 
 ## Disclaimer​
-Please review the full details and terms of the 0G Node Sale by visiting our [disclaimer](https://0gfoundation.ai/disclaimer). 
+Please review the full details and terms of the 0G Node Sale by visiting our [disclaimer](https://www.0gfoundation.ai/ai-alignment#disclaimer). 
