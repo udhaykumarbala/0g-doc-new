@@ -65,7 +65,7 @@ https://node.0gfoundation.ai/
 ### How do I purchase AI Alignment Nodes?
 See the step by step guide [here](/node-sale/details/purchasing-nodes).
 ### Who can participate in the Node Sale?
-The 0G AI Alignment Node Sale is open to community members in eligible regions who meet the necessary criteria. Please review all disclaimers and important details regarding the 0G Node Sale by visiting our disclaimer [here](https://0gfoundation.ai/disclaimer). Only persons who meet the requirements for the sale are allowed to participate. KYC will be required from the purchaser before any receipt of rewards. 
+The 0G AI Alignment Node Sale is open to community members in eligible regions who meet the necessary criteria. Please review all disclaimers and important details regarding the 0G Node Sale by visiting our disclaimer [here](https://www.0gfoundation.ai/ai-alignment#disclaimer). Only persons who meet the requirements for the sale are allowed to participate. KYC will be required from the purchaser before any receipt of rewards. 
 ### Are Whitelist and Public Allocations Separate?
 The whitelist allocation is independent and will not be rolled over to the public sale. The **Whitelist Sale** opens November 11, 2024, at 12 PM UTC. The sale will be denominated in USDC on Arbitrum, and only whitelisted participants may purchase nodes during this phase. The **Public Sale** opens November 13, 2024, at 12 PM UTC, is denominated in USDC on Arbitrum, and is available to all users, subject to geographic and regulatory restrictions. Please see our disclaimer for more information.
 ![0g-node-sale-timeline-1600x900px](https://github.com/user-attachments/assets/dd6746d7-a102-43f3-9a1f-ae33d0ca7f72)

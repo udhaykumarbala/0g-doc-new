@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-description: "Guide to running a 0G archival node for complete historical blockchain data storage, including setup, snapshots, and deployment steps."
+description: "Guide to running a 0G archival node for complete historical blockchain data storage, including setup and deployment steps."
 ---
 
 # Archival Node
@@ -29,7 +29,6 @@ Running an Archival node for the **0G-Galileo-Testnet** means providing complete
 ### Required Files
 
 1. **Node Package**: [galileo-archive.tar.gz](/binaries/galileo-archive.tar.gz)
-2. **Archive Snapshot**: Download from https://chain-snapshot.oss-cn-hongkong.aliyuncs.com/snapshot/galileo/archive/20250717.tar.lz4
 
 ### System Requirements
 
@@ -46,20 +45,6 @@ Download the node package: [galileo-archive.tar.gz](/binaries/galileo-archive.ta
 ### 2. Extract Node Package
 
 Unzip the file to your home directory
-
-### 3. Download Archive Snapshot
-
-Download the archive node snapshot from:
-
-```
-https://chain-snapshot.oss-cn-hongkong.aliyuncs.com/snapshot/galileo/archive/20250717.tar.lz4
-```
-
-### 4. Extract Snapshot
-
-```bash
-lz4 -d 20250717.tar.lz4 | tar -xvf - -C /your/snapshot/directory
-```
 
 ## Deployment Steps
 
@@ -92,14 +77,7 @@ cp /{your data path}/tmp/config/node_key.json /{your data path}/0g-home/0gchaind
 cp /{your data path}/tmp/config/priv_validator_key.json /{your data path}/0g-home/0gchaind-home/config/
 ```
 
-### 5. Copy Data from Snapshot
-
-```bash
-cp -r /your/snapshot/directory/0g-home/geth-home/geth/chaindata /{your data path}/0g-home/geth-home/geth/
-cp -r /your/snapshot/directory/0g-home/0gchaind-home/data /{your data path}/0g-home/0gchaind-home/
-```
-
-### 6. Start 0gchaind
+### 5. Start 0gchaind
 
 ```bash
 cd galileo-v1.2.0
@@ -119,7 +97,7 @@ nohup ./bin/0gchaind start \
     --p2p.external_address {your node ip}:26656 > /{your data path}/0g-home/log/0gchaind.log 2>&1 &
 ```
 
-### 7. Start Geth
+### 6. Start Geth
 
 ```bash
 cd galileo-v1.2.0
@@ -133,7 +111,7 @@ nohup ./bin/geth \
     --networkid 16601 > /{your data path}/0g-home/log/geth.log 2>&1 &
 ```
 
-### 8. Verify Setup
+### 7. Verify Setup
 
 Check the logs to ensure the node is running properly:
 
@@ -158,7 +136,6 @@ tail -f /{your data path}/0g-home/log/0gchaind.log
 - `{your data path}`: Your chosen data directory path
 - `{node name}`: Your chosen node name
 - `{your node ip}`: Your server's public IP address
-- `/your/snapshot/directory`: Path where you extracted the snapshot
 
 ### Directory Structure
 
