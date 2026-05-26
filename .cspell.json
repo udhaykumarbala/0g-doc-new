@@ -543,7 +543,13 @@
     "zaporizhia",
     "zellic",
     "zerog",
-    "zerogravity"
+    "zerogravity",
+    "codeowners",
+    "easyops",
+    "gtag",
+    "hsts",
+    "katex",
+    "llms"
   ],
   "ignorePaths": [
     "node_modules/**",
