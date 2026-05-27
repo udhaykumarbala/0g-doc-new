@@ -430,10 +430,10 @@ Scalable data availability layer for rollups with 50 Gbps throughput.
   - Repo: https://github.com/0gfoundation/nitro
 - Integration Guide: [https://docs.0g.ai/developer-hub/building-on-0g/da-integration](https://docs.0g.ai/developer-hub/building-on-0g/da-integration)
 
-### INFT (Intelligent NFTs)
-**Documentation**: [https://docs.0g.ai/concepts/inft](https://docs.0g.ai/concepts/inft)
+### Agentic ID (formerly INFT)
+**Documentation**: [https://docs.0g.ai/concepts/agentic-id](https://docs.0g.ai/concepts/agentic-id)
 
-ERC-7857 is an NFT standard for tokenizing AI agents. It extends ERC-721 with encrypted metadata, secure re-encryption on transfer via TEE/ZKP oracles, cloning, and usage authorization. The reference implementation uses upgradeable beacon proxies and OpenZeppelin AccessControl.
+Agentic ID is the rebrand of what was previously called INFT (Intelligent NFT). ERC-7857 is the underlying NFT standard for tokenizing AI agents. It extends ERC-721 with encrypted metadata, secure re-encryption on transfer via TEE/ZKP oracles, cloning, and usage authorization. The reference implementation uses upgradeable beacon proxies and OpenZeppelin AccessControl.
 
 **GitHub Repository**: https://github.com/0gfoundation/0g-agent-nft
 
@@ -500,9 +500,9 @@ enum OracleType { TEE, ZKP }
 **Use Cases**: AI Trading Bots, Personal Assistants, Game Characters, Content Creation AI, Research Tools
 
 **Documentation Links**:
-- INFT Overview: [https://docs.0g.ai/developer-hub/building-on-0g/inft/inft-overview](https://docs.0g.ai/developer-hub/building-on-0g/inft/inft-overview)
-- ERC-7857 Standard: [https://docs.0g.ai/developer-hub/building-on-0g/inft/erc7857](https://docs.0g.ai/developer-hub/building-on-0g/inft/erc7857)
-- Integration Guide: [https://docs.0g.ai/developer-hub/building-on-0g/inft/integration](https://docs.0g.ai/developer-hub/building-on-0g/inft/integration)
+- Agentic ID Overview: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/overview](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/overview)
+- ERC-7857 Standard: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/erc7857](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/erc7857)
+- Integration Guide: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/integration](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/integration)
 
 ## Developer Tools
 
