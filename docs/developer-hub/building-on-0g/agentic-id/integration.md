@@ -1,18 +1,19 @@
 ---
 id: integration
-title: INFT Integration Guide
+title: Agentic ID Integration Guide
 sidebar_position: 2
-description: "Step-by-step guide to build INFTs on 0G. Deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
+description: "Step-by-step guide to build Agentic IDs (formerly INFTs) on 0G. Deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
+keywords: [agentic id integration, inft integration, build agentic id, build inft, erc-7857 tutorial, ai agent marketplace]
 ---
 
-# INFT Integration Guide
+# Agentic ID Integration Guide
 
 ## Overview
 
-This step-by-step guide shows you how to integrate INFTs into your applications using the 0G ecosystem. You'll learn to deploy contracts, manage metadata, and implement secure transfers.
+This step-by-step guide shows you how to integrate Agentic IDs into your applications using the 0G ecosystem. You'll learn to deploy contracts, manage metadata, and implement secure transfers.
 
 :::tip Quick Navigation
-- **New to INFTs?** Start with [INFT Overview](./inft-overview)
+- **New to Agentic IDs?** Start with [Agentic ID Overview](./overview)
 - **Need technical details?** See [ERC-7857 Standard](./erc7857)
 - **Ready to build?** Continue with this guide
 :::
@@ -48,13 +49,13 @@ export OG_COMPUTE_URL="https://compute-testnet.0g.ai"
 
 ## Understanding 0G Integration
 
-INFTs work seamlessly with 0G's complete AI infrastructure:
+Agentic IDs work seamlessly with 0G's complete AI infrastructure:
 
-| Component | Purpose | INFT Integration |
+| Component | Purpose | Agentic ID Integration |
 |-----------|---------|------------------|
 | **0G Storage** | Encrypted metadata storage | Stores AI agent data securely |
 | **0G DA** | Proof verification | Validates transfer integrity |
-| **0G Chain** | Smart contract execution | Hosts INFT contracts |
+| **0G Chain** | Smart contract execution | Hosts Agentic ID contracts |
 | **0G Compute** | Secure AI inference | Runs agent computations privately |
 
 :::note Why This Architecture Matters
@@ -67,7 +68,7 @@ This integration ensures that AI agents maintain their intelligence, privacy, an
 
 ```bash
 # Create new project
-mkdir my-inft-project && cd my-inft-project
+mkdir my-agentic-id-project && cd my-agentic-id-project
 npm init -y
 
 # Install required dependencies
@@ -89,10 +90,10 @@ OG_COMPUTE_URL=https://compute-testnet.0g.ai
 EOF
 ```
 
-### Step 2: Create INFT Smart Contract
+### Step 2: Create Agentic ID Smart Contract
 
 ```solidity
-// contracts/INFT.sol
+// contracts/AgenticID.sol
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -103,7 +104,7 @@ interface IOracle {
     function verifyProof(bytes calldata proof) external view returns (bool);
 }
 
-contract INFT is ERC721, Ownable, ReentrancyGuard {
+contract AgenticID is ERC721, Ownable, ReentrancyGuard {
     // State variables
     mapping(uint256 => bytes32) private _metadataHashes;
     mapping(uint256 => string) private _encryptedURIs;
@@ -211,17 +212,17 @@ async function main() {
     const oracle = await MockOracle.deploy();
     await oracle.deployed();
     
-    // Deploy INFT contract
-    const INFT = await ethers.getContractFactory("INFT");
-    const inft = await INFT.deploy(
+    // Deploy Agentic ID contract
+    const AgenticID = await ethers.getContractFactory("AgenticID");
+    const agenticId = await AgenticID.deploy(
         "AI Agent NFTs",
         "AINFT",
         oracle.address
     );
-    await inft.deployed();
+    await agenticId.deployed();
     
     console.log("Oracle deployed to:", oracle.address);
-    console.log("INFT deployed to:", inft.address);
+    console.log("Agentic ID deployed to:", agenticId.address);
 }
 
 main().catch((error) => {
@@ -294,7 +295,7 @@ class MetadataManager {
         }
     }
     
-    async mintINFT(contract, recipient, aiAgentData) {
+    async mintAgenticID(contract, recipient, aiAgentData) {
         const { encryptedURI, sealedKey, metadataHash } = aiAgentData;
         
         const tx = await contract.mint(
@@ -413,7 +414,7 @@ class SecureMetadata {
 **Batch Operations:**
 ```javascript
 // Batch multiple operations
-async function batchMintINFTs(agents, recipients) {
+async function batchMintAgenticIDs(agents, recipients) {
     const operations = agents.map((agent, i) => 
         metadataManager.createAIAgent(agent, recipients[i])
     );
@@ -427,12 +428,12 @@ async function batchMintINFTs(agents, recipients) {
 
 **Comprehensive Test Suite:**
 ```javascript
-// test/INFT.test.js
-describe('INFT Contract', function () {
-    it('should mint INFT with encrypted metadata', async function () {
+// test/Agentic ID.test.js
+describe('Agentic ID Contract', function () {
+    it('should mint Agentic ID with encrypted metadata', async function () {
         const metadata = await createTestMetadata();
-        const result = await inft.mint(owner.address, metadata.uri, metadata.hash);
-        expect(result).to.emit(inft, 'Transfer');
+        const result = await agenticId.mint(owner.address, metadata.uri, metadata.hash);
+        expect(result).to.emit(agenticId, 'Transfer');
     });
     
     it('should transfer with re-encryption', async function () {
@@ -459,15 +460,15 @@ describe('INFT Contract', function () {
 ```javascript
 // marketplace/AgentMarketplace.js
 class AgentMarketplace {
-    constructor(inftContract, paymentToken) {
-        this.inft = inftContract;
+    constructor(agenticIdContract, paymentToken) {
+        this.agenticId = agenticIdContract;
         this.payment = paymentToken;
         this.listings = new Map();
     }
     
     async listAgent(tokenId, price, description) {
         // Verify ownership
-        const owner = await this.inft.ownerOf(tokenId);
+        const owner = await this.agenticId.ownerOf(tokenId);
         require(owner === msg.sender, 'Not owner');
         
         // Create listing
@@ -482,7 +483,7 @@ class AgentMarketplace {
         this.listings.set(tokenId, listing);
         
         // Approve marketplace for transfer
-        await this.inft.approve(this.address, tokenId);
+        await this.agenticId.approve(this.address, tokenId);
         
         return listing;
     }
@@ -503,7 +504,7 @@ class AgentMarketplace {
         await this.payment.transferFrom(msg.sender, listing.seller, listing.price);
         
         // Execute secure transfer
-        await this.inft.transfer(
+        await this.agenticId.transfer(
             listing.seller,
             msg.sender,
             tokenId,
@@ -525,7 +526,7 @@ class AgentMarketplace {
 class AIaaSPlatform {
     async createSubscription(tokenId, subscriber, duration, permissions) {
         // Verify agent ownership
-        const owner = await this.inft.ownerOf(tokenId);
+        const owner = await this.agenticId.ownerOf(tokenId);
         
         // Create usage authorization
         const authData = {
@@ -539,7 +540,7 @@ class AIaaSPlatform {
         };
         
         // Grant usage rights
-        await this.inft.authorizeUsage(
+        await this.agenticId.authorizeUsage(
             tokenId,
             subscriber,
             ethers.utils.toUtf8Bytes(JSON.stringify(authData))
@@ -578,7 +579,7 @@ class AgentComposer {
     async composeAgents(agentTokenIds, compositionRules) {
         // Verify ownership of all agents
         for (const tokenId of agentTokenIds) {
-            const owner = await this.inft.ownerOf(tokenId);
+            const owner = await this.agenticId.ownerOf(tokenId);
             require(owner === msg.sender, `Not owner of agent ${tokenId}`);
         }
         
@@ -596,8 +597,8 @@ class AgentComposer {
             msg.sender
         );
         
-        // Mint new INFT for composite agent
-        const result = await this.inft.mint(
+        // Mint new Agentic ID for composite agent
+        const result = await this.agenticId.mint(
             msg.sender,
             encryptedComposite.encryptedURI,
             encryptedComposite.metadataHash
@@ -635,7 +636,7 @@ class AgentComposer {
 <details>
 <summary><b>Transfer Failures</b></summary>
 
-**Problem**: INFT transfer transaction reverts
+**Problem**: Agentic ID transfer transaction reverts
 
 **Causes & Solutions**:
 - **Invalid proof**: Verify oracle is online and proof is correctly formatted
@@ -646,7 +647,7 @@ class AgentComposer {
 ```javascript
 // Debug transfer issues
 async function debugTransfer(tokenId, proof) {
-    const owner = await inft.ownerOf(tokenId);
+    const owner = await agenticId.ownerOf(tokenId);
     console.log(`Token owner: ${owner}`);
     
     const isValidProof = await oracle.verifyProof(proof);
@@ -675,7 +676,7 @@ async function debugTransfer(tokenId, proof) {
 // Test metadata access
 async function testMetadataAccess(tokenId, privateKey) {
     try {
-        const encryptedURI = await inft.getEncryptedURI(tokenId);
+        const encryptedURI = await agenticId.getEncryptedURI(tokenId);
         const encryptedData = await storage.retrieve(encryptedURI);
         
         // Attempt decryption
@@ -714,7 +715,7 @@ async function optimizedTransfer(transfers) {
         proof: compressProof(t.proof)
     }));
     
-    return await inft.batchTransfer(batchData);
+    return await agenticId.batchTransfer(batchData);
 }
 ```
 
@@ -730,7 +731,7 @@ async function optimizedTransfer(transfers) {
 
 ### Continue Learning
 📋 **[ERC-7857 Technical Standard](./erc7857)** - Deep dive into implementation details  
-🎯 **[INFT Use Cases](./inft-overview#real-world-applications)** - Explore more applications  
+🎯 **[Agentic ID Use Cases](./overview#real-world-applications)** - Explore more applications  
 💻 **[Example Implementations](https://github.com/0gfoundation/0g-agent-nft/tree/eip-7857-draft)** - Reference code  
 
 ### Production Deployment
@@ -741,7 +742,7 @@ async function optimizedTransfer(transfers) {
 ### Community
 🤝 **Developer Community** - Share your implementation  
 💬 **Technical Discussions** - Join conversations about best practices  
-👥 **Contribute** - Help improve the INFT ecosystem  
+👥 **Contribute** - Help improve the Agentic ID ecosystem  
 
 :::tip Ready to Deploy?
 Once you've tested your implementation thoroughly, consider getting a security audit before deploying to mainnet. The 0G team can recommend trusted auditing partners.

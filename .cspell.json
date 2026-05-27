@@ -549,7 +549,9 @@
     "gtag",
     "hsts",
     "katex",
-    "llms"
+    "llms",
+    "agentic",
+    "infts"
   ],
   "ignorePaths": [
     "node_modules/**",

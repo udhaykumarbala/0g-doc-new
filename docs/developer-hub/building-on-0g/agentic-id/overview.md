@@ -1,17 +1,18 @@
 ---
-id: inft-overview
-title: INFTs Overview
+id: overview
+title: Agentic ID Overview
 sidebar_position: 1
-description: "Developer overview of INFTs (Intelligent NFTs) for tokenizing AI agents. Covers ERC-7857, secure transfers, encryption, and 0G infrastructure integration."
+description: "Developer overview of Agentic IDs (formerly INFTs / Intelligent NFTs) for tokenizing AI agents. Covers ERC-7857, secure transfers, encryption, and 0G infrastructure integration."
+keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, encrypted nft, tokenize ai]
 ---
 
-# INFTs: Tokenizing AI Agents
+# Agentic IDs: Tokenizing AI Agents
 
-## What Are INFTs?
+## What Are Agentic IDs?
 
 The rapid growth of AI agents necessitates new methods for managing their ownership, transfer, and capabilities within Web3 ecosystems. 
 
-**INFTs (Intelligent Non-Fungible Tokens)** represent a significant advancement in this space, enabling the tokenization of AI agents with:
+**Agentic IDs** (formerly Intelligent NFTs) represent a significant advancement in this space, enabling the tokenization of AI agents with:
 
 - **Transferability**: Move AI agents between owners securely
 - **Decentralized control**: No single point of failure
@@ -45,9 +46,9 @@ Traditional NFT standards like ERC-721 and ERC-1155 have significant limitations
 - Proprietary AI models remain exposed
 - Sensitive user data can't be protected
 
-## The INFT Solution: ERC-7857
+## The Agentic ID Solution: ERC-7857
 
-ERC-7857 is a new NFT standard specifically designed to address AI agent requirements. It enables the creation, ownership, and secure transfer of INFTs with their complete intelligence intact.
+ERC-7857 is a new NFT standard specifically designed to address AI agent requirements. It enables the creation, ownership, and secure transfer of Agentic IDs with their complete intelligence intact.
 
 ### Revolutionary Features
 
@@ -81,7 +82,7 @@ ERC-7857 is a new NFT standard specifically designed to address AI agent require
 - Pre-execution ownership verification
 - Specialized features for AI use cases
 
-## How INFT Transfers Work
+## How Agentic ID Transfers Work
 
 The transfer mechanism ensures both token ownership and encrypted metadata transfer securely together.
 
@@ -176,7 +177,7 @@ Secure AI agent tokenization opens up transformative possibilities:
 - Scalable service delivery
 
 ### 🤝 Agent Collaboration
-- Combine multiple INFT agents for enhanced capabilities
+- Combine multiple Agentic ID agents for enhanced capabilities
 - Create composite AI solutions
 - Build AI agent ecosystems
 
@@ -187,33 +188,33 @@ Secure AI agent tokenization opens up transformative possibilities:
 
 ## Powered by 0G Infrastructure
 
-INFTs leverage the complete 0G ecosystem for optimal performance:
+Agentic IDs leverage the complete 0G ecosystem for optimal performance:
 
-| Component | Role in INFTs | Key Benefits |
+| Component | Role in Agentic IDs | Key Benefits |
 |-----------|---------------|-------------|
 | **0G Storage** | Encrypted metadata storage | Secure, permanent, owner-only access |
 | **0G DA** | Transfer proof verification | Guaranteed metadata availability |
-| **0G Chain** | Smart contract execution | Fast, low-cost INFT operations |
+| **0G Chain** | Smart contract execution | Fast, low-cost Agentic ID operations |
 | **0G Compute** | Secure AI inference | Private agent execution |
 
 ### Why This Matters
 
-By combining INFTs with 0G's comprehensive AI infrastructure, developers can create sophisticated, transferable AI agents that maintain their intelligence, privacy, and functionality throughout their entire lifecycle.
+By combining Agentic IDs with 0G's comprehensive AI infrastructure, developers can create sophisticated, transferable AI agents that maintain their intelligence, privacy, and functionality throughout their entire lifecycle.
 
 :::info Complete AI Stack
-0G provides the only complete infrastructure stack specifically designed for AI applications, making it the ideal foundation for INFT development.
+0G provides the only complete infrastructure stack specifically designed for AI applications, making it the ideal foundation for Agentic ID development.
 :::
 
 ## Next Steps
 
 ### For Developers
-🚀 **[Integration Guide](./integration)** - Start building with INFTs  
+🚀 **[Integration Guide](./integration)** - Start building with Agentic IDs  
 📋 **[ERC-7857 Standard](./erc7857)** - Technical implementation details  
 💻 **[GitHub Repository](https://github.com/0gfoundation/0g-agent-nft/tree/eip-7857-draft)** - Sample code and examples  
 
 ### For Users
 🛒 **[AI Agent Marketplace](#)** - Browse available AI agents (coming soon)  
-📚 **[User Guide](#)** - How to buy, transfer, and use INFTs (coming soon)  
+📚 **[User Guide](#)** - How to buy, transfer, and use Agentic IDs (coming soon)  
 
 ### Get Support
 💬 **[Discord Community](https://discord.gg/0glabs)** - Ask questions and get help  
