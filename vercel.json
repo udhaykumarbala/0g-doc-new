@@ -52,6 +52,11 @@
   "redirects": [
     { "source": "/node-sale/intro/intro", "destination": "/node-sale/intro", "permanent": true },
     { "source": "/node-sale/faq/faq", "destination": "/node-sale/faq", "permanent": true },
-    { "source": "/0g-storage", "destination": "/concepts/storage", "permanent": true }
+    { "source": "/0g-storage", "destination": "/concepts/storage", "permanent": true },
+    { "source": "/concepts/inft", "destination": "/concepts/agentic-id", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/inft", "destination": "/developer-hub/building-on-0g/agentic-id/overview", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/inft/inft-overview", "destination": "/developer-hub/building-on-0g/agentic-id/overview", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/inft/integration", "destination": "/developer-hub/building-on-0g/agentic-id/integration", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/inft/erc7857", "destination": "/developer-hub/building-on-0g/agentic-id/erc7857", "permanent": true }
   ]
 }

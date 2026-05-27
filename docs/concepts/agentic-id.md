@@ -1,11 +1,12 @@
 ---
-id: inft
-title: INFT
+id: agentic-id
+title: Agentic ID
 sidebar_position: 5
-description: "Learn about INFTs (Intelligent NFTs) — a new token standard for true AI agent ownership with encrypted intelligence, secure transfers, and ERC-7857."
+description: "Learn about Agentic IDs (formerly INFTs / Intelligent NFTs) — a new token standard for true AI agent ownership with encrypted intelligence, secure transfers, and ERC-7857."
+keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, encrypted nft]
 ---
 
-# INFTs: Intelligent NFTs for AI
+# Agentic IDs: Token Identity for AI Agents
 
 Traditional NFTs can't handle AI agents. When you "own" an AI agent NFT today, you only own a pointer to some metadata - not the actual intelligence. The AI doesn't transfer with the NFT.
 
@@ -85,10 +86,10 @@ INFTs leverage the complete 0G ecosystem:
 ### For AI Developers
 Transform your AI agents into tradeable assets while maintaining privacy and control.
 
-**[Build INFTs](../developer-hub/building-on-0g/inft/inft-overview)** - Complete development guide
+**[Build INFTs](../developer-hub/building-on-0g/agentic-id/overview)** - Complete development guide
 
 ---
 
 :::tip Next Steps
-Ready to dive deeper? Check out the **[complete INFT documentation](../developer-hub/building-on-0g/inft/inft-overview)** for technical details, implementation guides, and real-world examples.
+Ready to dive deeper? Check out the **[complete INFT documentation](../developer-hub/building-on-0g/agentic-id/overview)** for technical details, implementation guides, and real-world examples.
 ::: 

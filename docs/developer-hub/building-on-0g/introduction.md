@@ -29,7 +29,7 @@ Based on your needs, dive into:
 - **Need Storage?** → [Storage SDK Guide](/developer-hub/building-on-0g/storage/sdk)
 - **Need Compute?** → [Compute Router](/developer-hub/building-on-0g/compute-network/router/overview)
 - **Building a Rollup?** → [DA Integration](/developer-hub/building-on-0g/da-integration)
-- **Creating INFTs?** → [INFT Overview](/developer-hub/building-on-0g/inft/inft-overview)
+- **Creating Agentic IDs?** → [Agentic ID Overview](/developer-hub/building-on-0g/agentic-id/overview)
 
 
 ---

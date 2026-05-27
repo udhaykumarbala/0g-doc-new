@@ -1,18 +1,19 @@
 ---
 id: integration
-title: INFT Integration Guide
+title: Agentic ID Integration Guide
 sidebar_position: 2
-description: "Step-by-step guide to build INFTs on 0G. Deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
+description: "Step-by-step guide to build Agentic IDs (formerly INFTs) on 0G. Deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
+keywords: [agentic id integration, inft integration, build agentic id, build inft, erc-7857 tutorial, ai agent marketplace]
 ---
 
-# INFT Integration Guide
+# Agentic ID Integration Guide
 
 ## Overview
 
 This step-by-step guide shows you how to integrate INFTs into your applications using the 0G ecosystem. You'll learn to deploy contracts, manage metadata, and implement secure transfers.
 
 :::tip Quick Navigation
-- **New to INFTs?** Start with [INFT Overview](./inft-overview)
+- **New to INFTs?** Start with [INFT Overview](./overview)
 - **Need technical details?** See [ERC-7857 Standard](./erc7857)
 - **Ready to build?** Continue with this guide
 :::
@@ -730,7 +731,7 @@ async function optimizedTransfer(transfers) {
 
 ### Continue Learning
 📋 **[ERC-7857 Technical Standard](./erc7857)** - Deep dive into implementation details  
-🎯 **[INFT Use Cases](./inft-overview#real-world-applications)** - Explore more applications  
+🎯 **[INFT Use Cases](./overview#real-world-applications)** - Explore more applications  
 💻 **[Example Implementations](https://github.com/0gfoundation/0g-agent-nft/tree/eip-7857-draft)** - Reference code  
 
 ### Production Deployment
