@@ -9,7 +9,7 @@ keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nf
 # Agentic IDs: Token Identity for AI Agents
 
 :::info Previously known as INFTs
-Agentic ID is the new name for what was previously called an **INFT** (Intelligent NFT). Same standard (ERC-7857), same encrypted-metadata transfer model — clearer name. Old `/concepts/inft` and `/developer-hub/building-on-0g/inft/*` URLs redirect here.
+Agentic ID is the new name for what was previously called an **INFT** (Intelligent NFT). Same standard (ERC-7857), same encrypted-metadata transfer model.
 :::
 
 Traditional NFTs can't handle AI agents. When you "own" an AI agent NFT today, you only own a pointer to some metadata - not the actual intelligence. The AI doesn't transfer with the NFT.
