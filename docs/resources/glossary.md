@@ -41,7 +41,7 @@ A comprehensive list of technical terms used throughout the 0G documentation.
 
 **Inference**: The process of using a trained AI model to make predictions or decisions based on new input data.
 
-**INFT (Intelligent Non-Fungible Token)**: NFTs that can encapsulate AI agents with their intelligence and capabilities intact.
+**Agentic ID** (formerly **INFT**, "Intelligent Non-Fungible Token"): NFTs that can encapsulate AI agents with their intelligence and capabilities intact. See [Agentic IDs](/concepts/agentic-id).
 
 ## M
 
@@ -49,7 +49,7 @@ A comprehensive list of technical terms used throughout the 0G documentation.
 
 ## O
 
-**Oracle**: In the context of INFTs, a service that verifies the integrity of metadata transfers using either TEE or ZKP technology.
+**Oracle**: In the context of Agentic IDs (formerly INFTs), a service that verifies the integrity of metadata transfers using either TEE or ZKP technology.
 
 ## P
 
