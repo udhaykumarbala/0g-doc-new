@@ -57,6 +57,19 @@
     { "source": "/developer-hub/building-on-0g/inft", "destination": "/developer-hub/building-on-0g/agentic-id/overview", "permanent": true },
     { "source": "/developer-hub/building-on-0g/inft/inft-overview", "destination": "/developer-hub/building-on-0g/agentic-id/overview", "permanent": true },
     { "source": "/developer-hub/building-on-0g/inft/integration", "destination": "/developer-hub/building-on-0g/agentic-id/integration", "permanent": true },
-    { "source": "/developer-hub/building-on-0g/inft/erc7857", "destination": "/developer-hub/building-on-0g/agentic-id/erc7857", "permanent": true }
+    { "source": "/developer-hub/building-on-0g/inft/erc7857", "destination": "/developer-hub/building-on-0g/agentic-id/erc7857", "permanent": true },
+    { "source": "/build-with-0g/da-integration", "destination": "/developer-hub/building-on-0g/da-integration", "permanent": true },
+    { "source": "/build-with-0g/faucet", "destination": "/developer-hub/testnet/testnet-overview", "permanent": true },
+    { "source": "/build-with-0g/storage-sdk", "destination": "/developer-hub/building-on-0g/storage/sdk", "permanent": true },
+    { "source": "/build-with-0g/contracts", "destination": "/developer-hub/building-on-0g/contracts-on-0g/deploy-contracts", "permanent": true },
+    { "source": "/build-with-0g/contracts-on-0g/deploy-contracts", "destination": "/developer-hub/building-on-0g/contracts-on-0g/deploy-contracts", "permanent": true },
+    { "source": "/build-with-0g/compute-network", "destination": "/developer-hub/building-on-0g/compute-network/overview", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/contracts-on-0g/precompiles/overview", "destination": "/developer-hub/building-on-0g/contracts-on-0g/precompiles/precompiles-overview", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/0g-da/da-client-nodes", "destination": "/developer-hub/building-on-0g/da-deep-dive", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/compute-network/cli", "destination": "/developer-hub/building-on-0g/compute-network/overview", "permanent": true },
+    { "source": "/developer-hub/building-on-0g/compute-network/sdk", "destination": "/developer-hub/building-on-0g/compute-network/overview", "permanent": true },
+    { "source": "/0g-chain", "destination": "/concepts/chain", "permanent": true },
+    { "source": "/intro", "destination": "/introduction/understanding-0g", "permanent": true },
+    { "source": "/run-a-node/testnet-information", "destination": "/developer-hub/testnet/testnet-overview", "permanent": true }
   ]
 }
