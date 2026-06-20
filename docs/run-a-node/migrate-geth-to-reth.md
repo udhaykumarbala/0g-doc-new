@@ -8,6 +8,9 @@ keywords: [0g, reth, geth, execution client, validator, migration, node]
 
 # Migrating from geth to reth
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 A 0G node runs two clients in tandem: a **consensus layer (CL)**, `0gchaind`, and an **execution layer (EL)**. The execution layer has historically been **geth**; 0G is now standardizing on **reth** as the recommended execution client.
 
 :::info This migration is optional
@@ -69,9 +72,6 @@ All binaries and configuration files are distributed as part of the official rel
 | `kzg-trusted-setup.json` | KZG trusted setup for the CL |
 | `jwt.hex` | JWT secret for CL–EL authentication |
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 <Tabs>
   <TabItem value="mainnet" label="Mainnet (Aristotle)" default>
 
@@ -95,7 +95,9 @@ export ETH_RPC_URL="https://<your-ethereum-mainnet-rpc-endpoint>"
 
 ### Initialize the node (Mainnet)
 
-> Run this once before the first start. Do not re-run on an already-initialized node — it will overwrite existing state.
+:::warning Run once
+Run this once before the first start. Do not re-run on an already-initialized node — it will overwrite existing state.
+:::
 
 Set the data directory:
 
@@ -217,7 +219,9 @@ export ETH_RPC_URL="https://<your-holesky-rpc-endpoint>"
 
 ### Initialize the node (Testnet)
 
-> Run this once before the first start. Do not re-run on an already-initialized node — it will overwrite existing state.
+:::warning Run once
+Run this once before the first start. Do not re-run on an already-initialized node — it will overwrite existing state.
+:::
 
 Set the data directory:
 
@@ -394,7 +398,9 @@ Export the full chain from block 1 to the current chain head. Both the `<first>`
   1 <chain_head>
 ```
 
-> This takes a long time depending on chain height and disk speed. Run it in a `screen` or `tmux` session.
+:::note
+This takes a long time depending on chain height and disk speed. Run it in a `screen` or `tmux` session.
+:::
 
 ### Step 4: Clear the geth data directory
 
@@ -402,7 +408,7 @@ Export the full chain from block 1 to the current chain head. Both the `<first>`
 rm -rf $DATA_DIR/geth-home
 ```
 
-:::warning
+:::warning Destructive step
 Only run this after confirming the Step 1 backup is complete.
 :::
 
@@ -516,7 +522,9 @@ Run (resume from a specific height, e.g. after an interrupted import):
 python3 trim_export.py <resume_height>
 ```
 
-> The script processes the file as a stream and uses minimal memory. The output filename includes the start block, e.g. `chain-export-from-1.rlp`.
+:::note
+The script processes the file as a stream and uses minimal memory. The output filename includes the start block, e.g. `chain-export-from-1.rlp`.
+:::
 
 ### Step 7: Import into reth
 
@@ -575,7 +583,7 @@ curl -s -X POST https://evmrpc-testnet.0g.ai \
 
 The two values should be equal or within a few blocks. If reth is still behind, it will catch up via P2P after `0gchaind` is started.
 
-:::danger
+:::danger Wait for reth to sync
 Do **not** proceed until reth height is at or near chain head. Starting `0gchaind` while reth is still syncing will cause a `-38002 Invalid forkchoice state` panic.
 :::
 
