@@ -209,6 +209,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'run-a-node/overview',
         'run-a-node/validator-node',
+        'run-a-node/migrate-geth-to-reth',
         'run-a-node/storage-node',
         'run-a-node/da-node',
         'run-a-node/archival-node',

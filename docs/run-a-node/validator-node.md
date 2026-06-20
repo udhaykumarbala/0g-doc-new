@@ -46,6 +46,10 @@ This enables staking in Symbiotic contracts on Ethereum (mainnet: Ethereum, test
 Restaking configuration is NOT required for non-validator nodes. Do not add the `--chaincfg.restaking.*` flags when running non-validator nodes.
 :::
 
+:::tip Execution client: reth is recommended
+The setup guides below use **geth** as the execution client. **reth** is the recommended execution client going forward — it offers faster sync and a more efficient on-disk database. If you are setting up a new node or want to switch an existing one, see **[Migrating from geth to reth](/run-a-node/migrate-geth-to-reth)**.
+:::
+
 ---
 
 import Tabs from '@theme/Tabs';
@@ -61,11 +65,11 @@ import TabItem from '@theme/TabItem';
 Download the latest Aristotle mainnet package:
 
 ```bash
-wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/1.0.4/aristotle-v1.0.4.tar.gz
+wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.6/aristotle-v1.0.6.tar.gz
 ```
 
 :::note Version Information
-Latest Aristotle mainnet release: v1.0.4. Check [releases page](https://github.com/0gfoundation/0gchain-Aristotle/releases) for newer versions.
+Latest Aristotle mainnet release: v1.0.6. Check [releases page](https://github.com/0gfoundation/0gchain-Aristotle/releases) for newer versions.
 :::
 
 ### 2. Extract Package
@@ -73,7 +77,7 @@ Latest Aristotle mainnet release: v1.0.4. Check [releases page](https://github.c
 Extract the Aristotle node package to your home directory:
 
 ```bash
-tar -xzvf aristotle-v1.0.4.tar.gz -C ~
+tar -xzvf aristotle-v1.0.6.tar.gz -C ~
 ```
 
 ### 3. Create Data Directory and Copy Configuration
@@ -81,7 +85,7 @@ tar -xzvf aristotle-v1.0.4.tar.gz -C ~
 Create your data directory and copy the default configuration:
 
 ```bash
-cd Aristotle-v1.0.4
+cd Aristotle-v1.0.6
 
 cp -r 0g-home {your data path}
 sudo chmod 777 ./bin/geth
@@ -170,7 +174,7 @@ export BLOCK_NUM=1
 Launch the 0gchaind consensus client with validator-specific parameters:
 
 ```bash
-cd Aristotle-v1.0.4
+cd Aristotle-v1.0.6
 
 nohup ./bin/0gchaind start \
     --rpc.laddr tcp://0.0.0.0:26657 \
@@ -194,7 +198,7 @@ nohup ./bin/0gchaind start \
 Launch the Geth execution client:
 
 ```bash
-cd Aristotle-v1.0.4
+cd Aristotle-v1.0.6
 
 nohup ./bin/geth \
     --config geth-config.toml \
@@ -365,6 +369,17 @@ tail -f {your data path}/0g-home/log/geth.log
 
 ## Validator Operations
 
+### Slashing
+
+0G Chain enforces **double-sign (equivocation) slashing** as a standing consensus rule. If a validator signs two conflicting votes at the same block height, the consensus layer applies a balance penalty.
+
+- **Penalty:** 2% of the validator's effective balance (minimum 1 gwei).
+- **Most common cause:** running the **same validator key on more than one node** at the same time (e.g. a forgotten old node, or a failover that did not fully stop the primary).
+
+:::danger Avoid double-signing
+Never run the same `priv_validator_key.json` on two nodes simultaneously. When migrating, upgrading, or failing over, **fully stop the old node** (confirm the process is gone) before starting the new one. There is no "standby" mode that is safe to run with the same key.
+:::
+
 ### Initialize Your Validator
 
 Once your validator node is running and fully synced (`catching_up: false`), you need to initialize your validator on the blockchain to start validating transactions.
@@ -441,8 +456,8 @@ wget -O galileo.tar.gz https://github.com/0gfoundation/0gchain-NG/releases/downl
 tar -xzvf Galileo-v3.0.4.tar.gz -C ~
 
 # For Mainnet (Aristotle)
-wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/1.0.4/aristotle-v1.0.4.tar.gz
-tar -xzvf aristotle-v1.0.4.tar.gz -C ~
+wget -O aristotle.tar.gz https://github.com/0gfoundation/0gchain-Aristotle/releases/download/v1.0.6/aristotle-v1.0.6.tar.gz
+tar -xzvf aristotle-v1.0.6.tar.gz -C ~
 
 # Verify extraction
 ls -la {network}-v{version}/

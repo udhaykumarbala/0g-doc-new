@@ -589,6 +589,35 @@ html[data-theme='dark'] .header-hubs-link:hover {
   /* color: var(--ifm-color-primary); */
 }
 
+/* Tailwind's preflight resets `ol, ul { list-style: none }` globally, which
+   strips markers from Markdown content lists. Restore them for doc content.
+   Scoped to `.markdown` so the TOC, sidebar menus, and tabs are untouched; the
+   `.markdown h3 + p + ul` "component cards" rule above is more specific and
+   keeps its custom bullet. */
+.markdown ul {
+  list-style: disc;
+  padding-left: var(--ifm-list-left-padding);
+}
+
+.markdown ol {
+  list-style: decimal;
+  padding-left: var(--ifm-list-left-padding);
+}
+
+.markdown ul ul {
+  list-style: circle;
+}
+
+.markdown ul ul ul {
+  list-style: square;
+}
+
+/* GitHub-style task lists keep no marker (checkbox stands in for it). */
+.markdown ul.contains-task-list,
+.markdown li.task-list-item {
+  list-style: none;
+}
+
 /* Site title in Geist Mono */
 .navbar__title {
   /* font-family: 'Geist Mono', 'Courier New', monospace !important; */
