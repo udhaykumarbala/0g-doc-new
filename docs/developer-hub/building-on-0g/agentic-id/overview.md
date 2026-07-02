@@ -3,7 +3,7 @@ id: overview
 title: Agentic ID Overview
 sidebar_position: 1
 description: "Developer overview of Agentic IDs (formerly INFTs / Intelligent NFTs) for tokenizing AI agents. Covers ERC-7857, secure transfers, encryption, and 0G infrastructure integration."
-keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, encrypted nft, tokenize ai]
+keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, erc-8004, trustless agent, encrypted nft, tokenize ai]
 ---
 
 # Agentic IDs: Tokenizing AI Agents
@@ -23,6 +23,7 @@ The rapid growth of AI agents necessitates new methods for managing their owners
 - **This page**: High-level concepts and use cases
 - **[ERC-7857 Standard](./erc7857)**: Technical implementation details
 - **[Integration Guide](./integration)**: Step-by-step development guide
+- **[ERC-8004 Trustless Agents](./erc8004)**: Discoverability across the agent ecosystem
 :::
 
 ## Why Traditional NFTs Don't Work for AI
@@ -150,6 +151,12 @@ For detailed oracle implementations (TEE vs ZKP), security considerations, and c
 - Sealed executor processes metadata securely
 - Enable AI-as-a-Service models
 
+## ERC-8004 Compatibility
+
+0G officially supports **ERC-8004**, the Trustless Agent standard for on-chain agent identity, discoverability, and reputation. Agentic IDs are ERC-8004 compatible: an Agentic ID can carry a corresponding ERC-8004 registration, so agents created on 0G are discoverable and interoperable across the broader ERC-8004 ecosystem and listed on [8004scan](https://8004scan.io).
+
+See the **[ERC-8004 Trustless Agents](./erc8004)** guide for registry addresses and details.
+
 ## Real-World Applications
 
 Secure AI agent tokenization opens up transformative possibilities:
@@ -210,6 +217,7 @@ By combining Agentic IDs with 0G's comprehensive AI infrastructure, developers c
 ### For Developers
 🚀 **[Integration Guide](./integration)** - Start building with Agentic IDs  
 📋 **[ERC-7857 Standard](./erc7857)** - Technical implementation details  
+🌐 **[ERC-8004 Trustless Agents](./erc8004)** - Make your agents discoverable  
 💻 **[GitHub Repository](https://github.com/0gfoundation/0g-agent-nft/tree/eip-7857-draft)** - Sample code and examples  
 
 ### For Users
