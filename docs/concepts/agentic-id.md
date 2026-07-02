@@ -3,7 +3,7 @@ id: agentic-id
 title: Agentic ID
 sidebar_position: 5
 description: "Learn about Agentic IDs (formerly INFTs / Intelligent NFTs) — a new token standard for true AI agent ownership with encrypted intelligence, secure transfers, and ERC-7857."
-keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, encrypted nft]
+keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, erc-8004, trustless agent, encrypted nft]
 ---
 
 # Agentic IDs: Token Identity for AI Agents
@@ -73,6 +73,10 @@ Agentic IDs are built on **ERC-7857**, a new NFT standard that extends ERC-721 w
 - **Secure re-encryption** for safe ownership transfers  
 - **Oracle verification** to ensure transfer integrity
 - **Authorized usage** for AI-as-a-Service models
+
+## ERC-8004 Compatibility
+
+Agentic IDs are compatible with **ERC-8004**, the Trustless Agent standard that 0G officially supports. An Agentic ID can carry a corresponding ERC-8004 registration, making the agent discoverable and interoperable across the ERC-8004 ecosystem. Learn more in the **[ERC-8004 guide](../developer-hub/building-on-0g/agentic-id/erc8004)**.
 
 ## Powered by 0G
 

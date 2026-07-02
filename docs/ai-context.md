@@ -433,7 +433,7 @@ Scalable data availability layer for rollups with 50 Gbps throughput.
 ### Agentic ID (formerly INFT)
 **Documentation**: [https://docs.0g.ai/concepts/agentic-id](https://docs.0g.ai/concepts/agentic-id)
 
-Agentic ID is the rebrand of what was previously called INFT (Intelligent NFT). ERC-7857 is the underlying NFT standard for tokenizing AI agents. It extends ERC-721 with encrypted metadata, secure re-encryption on transfer via TEE/ZKP oracles, cloning, and usage authorization. The reference implementation uses upgradeable beacon proxies and OpenZeppelin AccessControl.
+Agentic ID is the rebrand of what was previously called INFT (Intelligent NFT). ERC-7857 is the underlying NFT standard for tokenizing AI agents. It extends ERC-721 with encrypted metadata, secure re-encryption on transfer via TEE/ZKP oracles, cloning, and usage authorization. The reference implementation uses upgradeable beacon proxies and OpenZeppelin AccessControl. 0G also officially supports **ERC-8004** (Trustless Agents) for public on-chain agent identity and discoverability, and Agentic ID is ERC-8004 compatible (see the ERC-8004 section below).
 
 **GitHub Repository**: https://github.com/0gfoundation/0g-agent-nft
 
@@ -503,6 +503,14 @@ enum OracleType { TEE, ZKP }
 - Agentic ID Overview: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/overview](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/overview)
 - ERC-7857 Standard: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/erc7857](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/erc7857)
 - Integration Guide: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/integration](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/integration)
+
+**ERC-8004 Support**: 0G officially supports **ERC-8004** (Trustless Agents), the standard for on-chain agent identity, discoverability, and reputation. 0G's ERC-8004 registry deployment is listed in the official standard repo ([erc-8004/erc-8004-contracts](https://github.com/erc-8004/erc-8004-contracts)). Agentic ID is ERC-8004 compatible — an Agentic ID can carry a corresponding ERC-8004 registration. Registered agents are discoverable at [8004scan.io](https://8004scan.io).
+
+**Registry Addresses**:
+- 0G Mainnet (chain ID 16661): IdentityRegistry `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`, ReputationRegistry `0x8004BAa17C55a88189AE136b182e5fdA19dE9b63` (explorer: chainscan.0g.ai)
+- 0G Galileo Testnet (chain ID 16602): IdentityRegistry `0x8004A818BFB912233c491871b3d84c89A494BD9e`, ReputationRegistry `0x8004B663056A597Dffe9eCcC1965A193B7388713` (explorer: chainscan-galileo.0g.ai)
+
+**ERC-8004 Guide**: [https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/erc8004](https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/erc8004)
 
 ## Developer Tools
 

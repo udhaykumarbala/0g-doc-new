@@ -190,6 +190,7 @@ const sidebars: SidebarsConfig = {
                 'developer-hub/building-on-0g/agentic-id/overview',
                 'developer-hub/building-on-0g/agentic-id/integration',
                 'developer-hub/building-on-0g/agentic-id/erc7857',
+                'developer-hub/building-on-0g/agentic-id/erc8004',
               ],
             },
           ],
