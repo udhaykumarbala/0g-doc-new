@@ -35,13 +35,15 @@ A comprehensive list of technical terms used throughout the 0G documentation.
 
 **ERC-7857**: An extension of ERC-721 that adds support for encrypted metadata, enabling secure transfer of AI agents as NFTs.
 
+**ERC-8004**: The "Trustless Agents" standard defining on-chain registries (Identity, Reputation, Validation) that make AI agents discoverable, interoperable, and trusted across the ecosystem. 0G officially supports ERC-8004. See [ERC-8004 Trustless Agents](/developer-hub/building-on-0g/agentic-id/erc8004).
+
 **Erasure Coding**: A data protection method that breaks data into fragments and encodes it with redundant pieces to ensure recovery even if some parts are lost.
 
 ## I
 
 **Inference**: The process of using a trained AI model to make predictions or decisions based on new input data.
 
-**Agentic ID** (formerly **INFT**, "Intelligent Non-Fungible Token"): NFTs that can encapsulate AI agents with their intelligence and capabilities intact. See [Agentic IDs](/concepts/agentic-id).
+**Agentic ID** (formerly **INFT**, "Intelligent Non-Fungible Token"): NFTs that can encapsulate AI agents with their intelligence and capabilities intact. Compatible with [ERC-8004](/developer-hub/building-on-0g/agentic-id/erc8004) for cross-ecosystem discoverability. See [Agentic IDs](/concepts/agentic-id).
 
 ## M
 
