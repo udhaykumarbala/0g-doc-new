@@ -13,8 +13,9 @@ module.exports = function securityHeadersPlugin(context, options) {
     // For development server
     configureDevServer(app) {
       app.use((req, res, next) => {
-        // Prevent clickjacking
-        res.setHeader('X-Frame-Options', 'DENY');
+        // Prevent cross-origin clickjacking. SAMEORIGIN (not DENY) so the
+        // whitepaper page can embed its own /whitepaper.pdf in an iframe.
+        res.setHeader('X-Frame-Options', 'SAMEORIGIN');
         
         // Prevent MIME type sniffing
         res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -25,7 +26,7 @@ module.exports = function securityHeadersPlugin(context, options) {
         // Content Security Policy
         res.setHeader(
           'Content-Security-Policy',
-          "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://www.clarity.ms https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://*.clarity.ms https://github.com; font-src 'self' data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://c.bing.com https://build.0g.ai; frame-src 'self' https://challenges.cloudflare.com https://www.youtube.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'"
+          "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://www.clarity.ms https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://*.clarity.ms https://github.com; font-src 'self' data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://c.bing.com https://build.0g.ai; frame-src 'self' https://challenges.cloudflare.com https://www.youtube.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
         );
         
         // HTTPS enforcement
