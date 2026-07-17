@@ -569,7 +569,19 @@
     "katex",
     "llms",
     "agentic",
-    "infts"
+    "infts",
+    "bithumb",
+    "bitmart",
+    "cbbtc",
+    "interport",
+    "khalani",
+    "krw",
+    "portalbridge",
+    "stargate",
+    "tokenflight",
+    "wbtc",
+    "weth",
+    "wormhole"
   ],
   "ignorePaths": [
     "node_modules/**",
