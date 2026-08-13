@@ -26,8 +26,8 @@ The most straightforward way to acquire $0G is through centralized exchanges. Af
 
 | Exchange | Trading Pairs |
 |----------|---------------|
-| **[HTX](https://www.htx.com/trade/0g_usdt)** | 0G/USDT |
 | **[Binance](https://www.binance.com/en/trade/0G_USDT)** | 0G/USDT, 0G/USDC, 0G/TRY |
+| **[HTX](https://www.htx.com/trade/0g_usdt)** | 0G/USDT |
 | **[Bybit](https://www.bybit.com/en/trade/spot/0G/USDT)** | 0G/USDT |
 | **[MEXC](https://www.mexc.com/exchange/0G_USDT)** | 0G/USDT, 0G/USDC |
 | **[KuCoin](https://www.kucoin.com/trade/0G-USDT)** | 0G/USDT |
@@ -38,6 +38,16 @@ The most straightforward way to acquire $0G is through centralized exchanges. Af
 | **[Upbit](https://upbit.com/exchange?code=CRIX.UPBIT.KRW-0G)** | 0G/KRW, 0G/BTC, 0G/USDT |
 | **[Kraken](https://www.kraken.com/prices/0g)** | 0G/USD, 0G/EUR |
 | **[Bithumb](https://www.bithumb.com/react/trade/order/0G-KRW)** | 0G/KRW |
+
+## Buy on Fomo
+
+**[Fomo](https://fomo.family)** is a social trading app (mobile and web) for buying crypto in seconds — multichain, gasless, with Apple Pay support.
+
+- **URL**: [$0G on Fomo](https://fomo.family/coin?address=0x4b948d64de1f71fcd12fb586f4c776421a35b3ee&chainId=56&r=vargs_g&source=share_link)
+- **Network**: BNB Chain (trades the bridged $0G token)
+- **Features**: Gasless trading, Apple Pay funding, social feeds and top-trader alerts
+
+To move your $0G from BNB Chain to the native 0G network, bridge with [Stargate](https://stargate.finance).
 
 ## Bridge to 0G Chain
 
@@ -76,6 +86,10 @@ The most straightforward way to acquire $0G is through centralized exchanges. Af
 | **[0G Hub Bridge](https://hub.0g.ai/bridge)** | Ethereum ↔ 0G | Moves W0G (wrapped 0G) |
 | **[Gas.zip](https://www.gas.zip)** | Gas refuel only | Tops up a small amount of native 0G for transaction fees |
 
+:::note For developers
+[LI.FI](https://li.fi/) — the bridge & swap aggregation engine behind Jumper — supports 0G Mainnet directly (chain key `zerog`, chain ID `16661`). Use the [LI.FI API](https://docs.li.fi/) or [SDK](https://docs.li.fi/sdk/overview) to quote and execute cross-chain swaps into 0G programmatically, e.g. `GET https://li.quest/v1/quote?toChain=16661&...`.
+:::
+
 ## Swap on 0G Chain
 
 Once you have assets on the 0G network, swap them for native $0G tokens.
@@ -95,11 +109,23 @@ To receive and hold $0G, you need a wallet that supports the 0G network.
 
 ### Supported Wallets
 
-- **[Bitget Wallet](https://web3.bitget.com/)** - Built-in 0G Chain support: select "0G Chain" from the network list, no manual setup
-- **[MetaMask](https://metamask.io/)** - Add 0G network manually via [Mainnet Overview](/developer-hub/mainnet/mainnet-overview)
-- **[OKX Wallet](https://www.okx.com/web3)** - Add 0G network manually
-- **[Rabby](https://rabby.io/)** - Add 0G network manually
-- **[SafePal](https://www.safepal.com/)** - Add 0G via the in-app custom network directory (App v3.9.0+)
+Every wallet below detects the native $0G token automatically once the 0G network is added. "Bridged tokens" refers to W0G, USDC.e, WETH and WBTC on the 0G network.
+
+| Wallet | Add 0G Network | Token Detection |
+|--------|----------------|-----------------|
+| **[MetaMask](https://metamask.io/)** | Add manually — see [Mainnet Overview](/developer-hub/mainnet/mainnet-overview) | $0G |
+| **[Rabby](https://rabby.io/)** | Built-in | $0G and bridged tokens, with USD values |
+| **[OKX Wallet](https://www.okx.com/web3)** | Built-in | $0G (USD value) and bridged tokens |
+| **[Bitget Wallet](https://web3.bitget.com/)** | Built-in | $0G (USD value) and bridged tokens |
+| **[Zerion](https://zerion.io/)** | Built-in | $0G (USD value) and most bridged tokens |
+| **[Coinbase Wallet](https://www.coinbase.com/wallet)** | Add manually | $0G |
+| **[SafePal](https://www.safepal.com/)** | In-app network directory (App v3.9.0+) | $0G (USD value) and bridged tokens |
+| **[Trust Wallet](https://trustwallet.com/)** | Add manually | $0G |
+| **[TokenPocket](https://www.tokenpocket.pro/)** | In-app network directory | $0G |
+| **[Rainbow](https://rainbow.me/)** | Add manually | $0G |
+| **[Safe](https://safe.global/)** (multisig for teams & treasuries) | Built-in | — |
+| **[Fordefi](https://fordefi.com/)** (institutional MPC) | Built-in | — |
+| **[Ledger](https://www.ledger.com/)** (hardware wallet) | Built-in | — |
 
 ### Adding 0G Network
 
