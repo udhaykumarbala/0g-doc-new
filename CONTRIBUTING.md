@@ -26,8 +26,8 @@ By participating in this project, you agree to abide by our community standards:
 
 ### Prerequisites
 
-- Node.js >= 18.0.0
-- Yarn, npm, or pnpm package manager
+- Node.js 24 (`nvm use` picks it up from `.nvmrc`; minimum 22)
+- pnpm 11, pinned via the `packageManager` field (run `corepack enable` once; do not use yarn or npm)
 - Git
 - Basic knowledge of Markdown and React (for advanced contributions)
 
@@ -41,17 +41,17 @@ By participating in this project, you agree to abide by our community standards:
 
 2. **Install Dependencies**
    ```bash
-   yarn install
+   pnpm install --frozen-lockfile
    ```
 
 3. **Start Development Server**
    ```bash
-   yarn start
+   pnpm start
    ```
 
 4. **Build and Test**
    ```bash
-   yarn build
+   pnpm build
    ```
 
 ## 📝 Contribution Types
