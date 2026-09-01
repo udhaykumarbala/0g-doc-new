@@ -89,7 +89,7 @@ Built-in redundancy:
 <details>
 <summary>**Can I run proprietary models?**</summary>
 
-Yes. Upload any model, set requirements and pricing, start serving requests. Perfect for specialized use cases.
+Yes. Upload any model, set requirements and pricing, and start serving requests. Perfect for specialized use cases.
 
 </details>
 
