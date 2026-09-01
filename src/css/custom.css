@@ -58,30 +58,39 @@
   color: #666;
 }
 
-/* Keep keyboard shortcut icons inside the search field */
-.navbar__search [class*='searchHintContainer'],
-.navbar__search .DocSearch-Button-Keys {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin: 0;
-  pointer-events: none;
+/* Keep keyboard shortcut icons inside the search field (desktop only: the search
+   plugin hides the hint and shrinks the input to an icon below 576px) */
+@media (min-width: 577px) {
+  .navbar__search [class*='searchHintContainer'],
+  .navbar__search .DocSearch-Button-Keys {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .navbar__search [class*='searchHintContainer'] kbd,
+  .navbar__search [class*='searchHint'],
+  .navbar__search .DocSearch-Button-Key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    line-height: 1;
+  }
 }
 
-.navbar__search [class*='searchHintContainer'] kbd,
-.navbar__search [class*='searchHint'],
-.navbar__search .DocSearch-Button-Key {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
-  line-height: 1;
+@media (max-width: 576px) {
+  .navbar__search-input {
+    padding-right: 16px;
+  }
 }
 
 /* GitHub icon */
