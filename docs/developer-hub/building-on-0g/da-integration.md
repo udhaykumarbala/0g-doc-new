@@ -229,7 +229,7 @@ cargo run -r -p server --features grpc/parallel,grpc/cuda -- --config run/config
 If you do not have a CUDA environment, remove the cuda feature.
 :::
 
-DA Encoder will serve on port 34000 with specified gRPC interface.
+DA Encoder will serve on port 34000 with the specified gRPC interface.
 
 ## Using the Verification Logic
 
