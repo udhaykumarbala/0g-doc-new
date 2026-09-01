@@ -28,7 +28,7 @@ The default **Router** view on [pc.0g.ai](https://pc.0g.ai) shows the Router bal
 
 ## Prerequisites
 
-- Node.js >= 22.0.0
+- Node.js >= 20.0.0
 - A wallet with 0G tokens (either testnet or mainnet)
 - EVM compatible wallet (for Web UI)
 
