@@ -25,7 +25,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello"}],
     "verify_tee": true
   }'
@@ -107,7 +107,7 @@ const response = await fetch("https://router-api.0g.ai/v1/chat/completions", {
     "Content-Type": "application/json",
     "Authorization": "Bearer sk-YOUR_API_KEY",
   },
-  body: JSON.stringify({ model: "zai-org/GLM-5-FP8", messages: [...] }),
+  body: JSON.stringify({ model: "glm-5.2", messages: [...] }),
 });
 const data = await response.json();
 

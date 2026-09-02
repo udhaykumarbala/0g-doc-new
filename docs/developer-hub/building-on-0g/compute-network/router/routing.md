@@ -48,7 +48,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "X-0G-Provider-Sort: latency" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```
@@ -64,7 +64,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "X-0G-Provider-Sort: price" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```
@@ -81,7 +81,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "X-0G-Provider-Max-Price-Usd-Prompt: 1.0" \
   -H "X-0G-Provider-Max-Price-Usd-Completion: 5.0" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```
@@ -97,7 +97,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "X-0G-Provider-Address: 0xd9966e..." \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```
@@ -124,7 +124,7 @@ The legacy JSON body surface still works on JSON endpoints. New code should pref
 
 ```json
 {
-  "model": "zai-org/GLM-5-FP8",
+  "model": "glm-5.2",
   "messages": [{"role": "user", "content": "Hello"}],
   "provider": {
     "sort": "latency"
@@ -178,7 +178,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "X-0G-Provider-Max-Price-Usd-Prompt: 1.0" \
   -H "X-0G-Provider-Max-Price-Usd-Completion: 5.0" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```

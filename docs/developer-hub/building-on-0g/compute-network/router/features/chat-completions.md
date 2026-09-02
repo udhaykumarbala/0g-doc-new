@@ -18,7 +18,7 @@ Fully compatible with the [OpenAI Chat Completions API](https://developers.opena
 
 ```json
 {
-  "model": "zai-org/GLM-5-FP8",
+  "model": "glm-5.2",
   "messages": [
     {"role": "system", "content": "You are a helpful assistant."},
     {"role": "user", "content": "Explain quantum computing in simple terms."}
@@ -49,7 +49,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Write a haiku about decentralization"}],
     "stream": true
   }'
@@ -65,7 +65,7 @@ Models that advertise tool-calling capability accept the standard OpenAI `tools`
 
 ```json
 {
-  "model": "zai-org/GLM-5-FP8",
+  "model": "glm-5.2",
   "messages": [
     {"role": "user", "content": "What's the weather in Tokyo?"}
   ],
@@ -100,7 +100,7 @@ For models that support structured output:
 
 ```json
 {
-  "model": "zai-org/GLM-5-FP8",
+  "model": "glm-5.2",
   "messages": [
     {"role": "system", "content": "Respond with JSON only."},
     {"role": "user", "content": "List three colors and their hex codes."}
@@ -142,7 +142,7 @@ This means you don't need to compute costs yourself — the Router tells you exa
 
 ### `reasoning_content` (thinking models)
 
-For models with thinking support (e.g. `zai-org/GLM-5-FP8`), the Router returns the reasoning trace alongside the final answer. It appears in two equivalent places:
+For models with thinking support (e.g. `glm-5.2`), the Router returns the reasoning trace alongside the final answer. It appears in two equivalent places:
 
 ```json
 "choices": [{
