@@ -1,7 +1,7 @@
 ---
 title: 0G Whitepaper
 sidebar_label: Whitepaper
-description: "Read and download the official 0G whitepaper detailing the decentralized AI operating system architecture and vision."
+description: "Read and download the official 0G whitepaper detailing the architecture and vision behind 0G, the trust layer for AI."
 ---
 
 <div className="whitepaper-page">

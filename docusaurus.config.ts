@@ -113,7 +113,8 @@ const config: Config = {
         generateLLMsFullTxt: true,
         docsDir: 'docs',
         title: '0G Documentation',
-        description: '0G (Zero Gravity) is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace. Official website: https://0g.ai',
+        description:
+          '0G is the trust layer for AI. It combines private compute, encrypted storage, and an AI-native EVM L1 chain in one stack where AI work, from inference to agent actions, is verified and audited.',
         llmsTxtFilename: 'llms.txt',
         llmsFullTxtFilename: 'llms-full.txt',
       },
@@ -154,7 +155,7 @@ const config: Config = {
           'https://t.me/zgcommunity',
         ],
         description:
-          '0G (Zero Gravity) is a decentralized AI operating system providing modular infrastructure including storage, compute, data availability, and the fastest modular EVM L1 chain. The native token ticker is 0G.',
+          '0G is the trust layer for AI. It combines private compute, encrypted storage, and an AI-native EVM L1 chain in one stack where AI work, from inference to agent actions, is verified and audited. The native token ticker is 0G.',
       }),
     },
     {

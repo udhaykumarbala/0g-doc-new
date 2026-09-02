@@ -1,11 +1,11 @@
 ---
 id: chain
 title: 0G Chain
-description: "0G Chain is the fastest modular AI blockchain — an EVM-compatible L1 with sub-second finality designed for AI workloads, DeFi, and on-chain agents."
+description: "0G Chain is an EVM-compatible L1 built for AI workloads, with sub-second finality for AI applications, DeFi, and on-chain agents."
 sidebar_position: 5
 ---
 
-# 0G Chain: The Fastest Modular AI Chain
+# 0G Chain: An EVM-Compatible L1 Built for AI Workloads
 
 ## The Problem with AI on Blockchain
 

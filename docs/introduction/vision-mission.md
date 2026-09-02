@@ -11,7 +11,7 @@ sidebar_position: 3
 
 At 0G, our mission is clear: **To Make AI a Public Good**.
 
-We believe that AI technology should be accessible, transparent, and beneficial to everyone, not just a select few. By building a decentralized AI operating system, we're creating the infrastructure that will enable this vision.
+We believe that AI technology should be accessible, transparent, and beneficial to everyone, not just a select few. By building the trust layer for AI, we're creating the infrastructure that will enable this vision.
 
 ## Our Vision
 

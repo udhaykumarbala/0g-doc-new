@@ -104,7 +104,7 @@ All 18 decimals. The bridged token shares the same address on Ethereum and BNB C
 ### 0G Chain
 **Documentation**: [https://docs.0g.ai/concepts/chain](https://docs.0g.ai/concepts/chain)
 
-Fastest modular AI chain with 11,000 TPS per Shard, sub-second finality, and full EVM compatibility.
+AI-native EVM L1 chain with 11,000 TPS per Shard, sub-second finality, and full EVM compatibility.
 
 **Key Features**:
 - **Full EVM compatibility** - Use existing Ethereum tools (Hardhat, Foundry, Remix)
