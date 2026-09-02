@@ -5,7 +5,7 @@ description: "0G DA (Data Availability) ensures blockchain data is always access
 sidebar_position: 3
 ---
 
-# 0G DA: Infinitely Scalable and Programmable Data Availability
+# 0G DA
 
 ## The Rise of Data Availability Layers
 

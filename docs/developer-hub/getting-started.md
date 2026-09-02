@@ -5,7 +5,7 @@ description: "Get started building on 0G — quickstart guides for storage, comp
 sidebar_position: 1
 ---
 
-# Developer Hub
+# Getting Started
 
 ### The Problem We Solve
 

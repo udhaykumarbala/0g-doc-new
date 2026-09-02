@@ -1,11 +1,11 @@
 ---
 id: overview
-title: Overview
+title: 0G Compute Overview
 sidebar_position: 1
 description: "Overview of the 0G Compute Network — a decentralized GPU marketplace for affordable AI inference, fine-tuning, and verifiable computation."
 ---
 
-# 0G Compute Network
+# 0G Compute Overview
 
 Access affordable GPU computing power for AI workloads through a decentralized marketplace.
 

@@ -1,6 +1,6 @@
 ---
 id: faq
-title: FAQ
+title: Node Sale FAQ
 description: "Frequently asked questions about 0G AI Alignment Nodes — purchasing, hardware requirements, rewards, KYC, tokenomics, and node operations."
 sidebar_position: 1
 ---
@@ -58,7 +58,7 @@ import Head from '@docusaurus/Head';
   </script>
 </Head>
 
-# Frequently Asked Questions
+# Node Sale FAQ
 
 :::note
 

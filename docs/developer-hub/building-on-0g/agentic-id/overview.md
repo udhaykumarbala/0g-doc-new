@@ -6,7 +6,7 @@ description: "Developer overview of Agentic IDs (formerly INFTs / Intelligent NF
 keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, erc-8004, trustless agent, encrypted nft, tokenize ai]
 ---
 
-# Agentic IDs: Tokenizing AI Agents
+# Agentic ID Overview
 
 ## What Are Agentic IDs?
 

@@ -7,7 +7,7 @@ description: "Deploy and verify smart contracts on 0G Chain using Hardhat, Found
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Deploy Smart Contracts on 0G Chain
+# Deploy Contracts on 0G Chain
 
 Deploy smart contracts on 0G Chain - an EVM-compatible blockchain with built-in AI capabilities.
 

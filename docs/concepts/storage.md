@@ -5,7 +5,7 @@ description: "0G Storage is a decentralized storage network built for massive AI
 sidebar_position: 3
 ---
 
-# 0G Storage: Built for Massive Data
+# 0G Storage
 
 Current storage options force impossible tradeoffs:
 - **Cloud providers**: Fast but expensive with vendor lock-in

@@ -1,6 +1,6 @@
 ---
 id: verifiable-execution
-title: Verifiable Execution (verify_tee)
+title: Verifiable Execution
 sidebar_label: Verifiable Execution
 sidebar_position: 5
 description: "Opt-in TEE signature verification for Router responses. Ask the Router to synchronously verify that a response came from an attested TEE provider."

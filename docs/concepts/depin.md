@@ -5,7 +5,7 @@ sidebar_position: 6
 description: "Explore how 0G integrates DePIN providers like io.net and Aethir for cost-effective, decentralized GPU computing for AI workloads."
 ---
 
-# DePIN Providers: Decentralized Infrastructure Networks
+# DePIN Providers
 
 ## What is DePIN?
 

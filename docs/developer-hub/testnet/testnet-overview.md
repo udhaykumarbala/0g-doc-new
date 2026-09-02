@@ -10,7 +10,7 @@ import MetaMaskButton from '@site/src/components/MetaMaskButton';
 import RemoveNewtonModal from '@site/src/components/RemoveNewtonModal';
 import React, { useState } from 'react';
 
-# 0G Testnet (Galileo)
+# Testnet Overview
 
 Test your applications on 0G's infrastructure without real costs or risks.
 

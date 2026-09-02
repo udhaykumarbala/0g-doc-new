@@ -5,7 +5,7 @@ sidebar_position: 1
 description: "Step-by-step guide to purchasing 0G AI Alignment Nodes, including supported payment methods, promo codes, and wallet setup."
 ---
 
-# Purchasing Nodes: Steps and Payment Options
+# How to Purchase Nodes
 **Supported Blockchains and Payment Methods**: The sale was conducted in USDC on Arbitrum, with a live bridging gateway at checkout that supported multiple blockchains (ETH, Arbitrum, BNB) and tokens. All purchases require a compatible wallet, and the resulting node licenses are issued as non-transferable ERC-721 NFTs.
 
 ## Video Tutorial 

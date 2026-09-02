@@ -5,7 +5,7 @@ sidebar_position: 3
 description: "Technical deep dive into 0G DA architecture covering erasure encoding, KZG commitments, DA sampling, difficulty adjustment, and the economic model."
 ---
 
-# 0G DA Technical Deep Dive
+# Technical Deep Dive
 
 The Data Availability (DA) module allows users to submit a piece of data, referred to as a **DA blob**. This data is redundantly encoded by the client's proxy and divided into several slices, which are then sent to DA nodes. **DA nodes** gain eligibility to verify the correctness of DA slices by staking. Each DA node verifies the integrity and correctness of its slice and signs it. Once more than 2/3 of the aggregated signatures are on-chain, the data behind the related hash is considered to be published decentrally.
 

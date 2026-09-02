@@ -6,7 +6,7 @@ description: "Details on 0G node sale incentives, referral commissions, rebate p
 ---
 
 
-# Incentives, Rewards, and Vesting Mechanisms
+# Incentives & Rewards
 
 ## Rebate/Commission Portal Tutorial
 <iframe

@@ -4,7 +4,7 @@ title: 0G Compute Network
 description: "0G Compute Network is a decentralized GPU marketplace for AI inference, fine-tuning, and model training — pay only for what you use."
 ---
 
-# 0G Compute Network: Decentralized AI Computing
+# 0G Compute Network
 
 In today's world, AI models are transforming industries, driving innovation, and powering new applications. However, running advanced AI models for your application faces several obstacles:
 

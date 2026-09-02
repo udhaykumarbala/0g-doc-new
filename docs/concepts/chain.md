@@ -5,7 +5,7 @@ description: "0G Chain is an EVM-compatible L1 built for AI workloads, with sub-
 sidebar_position: 5
 ---
 
-# 0G Chain: An EVM-Compatible L1 Built for AI Workloads
+# 0G Chain
 
 ## The Problem with AI on Blockchain
 

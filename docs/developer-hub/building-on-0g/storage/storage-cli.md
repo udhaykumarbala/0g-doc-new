@@ -7,7 +7,7 @@ description: "Use the 0G Storage CLI to upload, download, and manage files and d
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 0G Storage CLI
+# Storage CLI
 
 The 0G Storage CLI is your command-line gateway to interact directly with the 0G Storage network. It simplifies the process of uploading and downloading files while providing full control over your decentralized storage operations.
 

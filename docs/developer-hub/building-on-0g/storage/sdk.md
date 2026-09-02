@@ -7,7 +7,7 @@ description: "Integrate 0G decentralized storage using Go and TypeScript SDKs. U
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 0G Storage SDKs
+# Storage SDK
 
 Build decentralized storage into your applications with our powerful SDKs designed for modern development workflows.
 
