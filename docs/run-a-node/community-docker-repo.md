@@ -15,5 +15,5 @@ Most of the officially endorsed 0G Docker implementations can be found under the
 
 Below is a list of community-maintained Docker images for 0G DA. Please note that these images are not officially endorsed by 0G, and users should proceed with caution.
 
-### All Node Types
+## All Node Types
 [Ember Stake](https://docs.emberstake.xyz/networks/zero-gravity/nodes-guide/getting-started)

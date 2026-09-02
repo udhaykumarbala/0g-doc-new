@@ -8,7 +8,7 @@ description: "Set up an inference provider on 0G Compute Network. Monetize GPUs 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Become an Inference Provider
+# Inference Provider
 
 Transform your AI services into verifiable, revenue-generating endpoints on the 0G Compute Network. This guide covers setting up your service and connecting it through the provider broker.
 

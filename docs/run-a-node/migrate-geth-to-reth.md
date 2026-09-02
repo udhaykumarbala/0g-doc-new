@@ -2,7 +2,7 @@
 id: migrate-geth-to-reth
 title: Migrating from geth to reth
 sidebar_position: 5
-description: "Why and how to run a 0G node with reth as the execution client — geth vs reth comparison, a fresh reth setup, and a step-by-step geth to reth migration."
+description: "Run a 0G node with reth: geth vs reth comparison, a fresh reth setup, and a step-by-step geth to reth migration."
 keywords: [0g, reth, geth, execution client, validator, migration, node]
 ---
 

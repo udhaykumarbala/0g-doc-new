@@ -3,7 +3,7 @@ id: inference
 title: Inference
 sidebar_position: 1
 sidebar_label: Inference
-description: "Run inference on 0G Compute via the Direct path — connect to individual providers, manage per-provider sub-accounts, and sign requests with your wallet. Web UI, CLI, and SDK options."
+description: "Run inference on 0G Compute via the Direct path: connect to providers, manage sub-accounts, and sign requests with your wallet."
 ---
 
 import Tabs from '@theme/Tabs';

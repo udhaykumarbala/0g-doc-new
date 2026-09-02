@@ -5,7 +5,7 @@ sidebar_position: 4
 description: "Become a fine-tuning provider on 0G Compute Network. Set up TEE-secured GPU infrastructure with Docker and Intel TDX for model training services."
 ---
 
-# Become a Fine-tuning Provider
+# Fine-tuning Provider
 
 This guide provides a comprehensive walkthrough for setting up and offering computing power as a fine-tuning provider on the 0G Compute Network.
 

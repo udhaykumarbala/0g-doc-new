@@ -5,7 +5,7 @@ sidebar_position: 2
 description: "Run an Arbitrum Nitro rollup with 0G DA for cost-effective data availability. Includes DA provider integration and setup prerequisites."
 ---
 
-# Run an Arbitrum Nitro Rollup on 0G DA
+# Arbitrum Nitro on 0G DA
 
 Arbitrum Nitro is a high-performance Ethereum rollup that uses a new consensus mechanism called "Nitro" to achieve scalability and efficiency. 0G DA is a high-performance data availability layer that can be used for Arbitrum Nitro to provide a cost-effective and secure solution for storing transaction data.
 

@@ -1,21 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+// Final values. These are also the initial state so that the numbers are
+// present in the server-rendered HTML: crawlers and other fetchers that do not
+// run JavaScript used to read "0+ Partners". The count-up animation runs after
+// hydration and counts up from 60% of the final value, so the numbers never
+// drop to zero after the server-rendered values have been shown.
+const TARGETS = {
+  partners: 350,
+  accounts: 20,
+  transactions: 250,
+};
+
 const SocialProofSection = () => {
   const sectionRef = useRef(null);
+  const timerRef = useRef(null);
+  const hasAnimatedRef = useRef(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [counts, setCounts] = useState({
-    partners: 0,
-    accounts: 0,
-    transactions: 0
-  });
+  const [counts, setCounts] = useState(TARGETS);
 
   useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return undefined;
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !isVisible) {
-            setIsVisible(true);
-            // Start count-up animation
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || hasAnimatedRef.current) return;
+          hasAnimatedRef.current = true;
+          setIsVisible(true);
+          if (!prefersReducedMotion) {
             animateCounts();
           }
         });
@@ -23,50 +41,54 @@ const SocialProofSection = () => {
       { threshold: 0.3 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      observer.unobserve(node);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
       }
     };
-  }, [isVisible]);
+  }, []);
 
   const animateCounts = () => {
     const duration = 2000; // 2 seconds
     const steps = 60;
     const interval = duration / steps;
 
-    const targets = {
-      partners: 350,
-      accounts: 20,
-      transactions: 250
-    };
-
     let currentStep = 0;
 
-    const timer = setInterval(() => {
+    // Count up from a fraction of the final value so the SSR numbers never
+    // visibly drop to zero before the animation starts.
+    const START = 0.6;
+    setCounts({
+      partners: Math.floor(TARGETS.partners * START),
+      accounts: Math.floor(TARGETS.accounts * START),
+      transactions: Math.floor(TARGETS.transactions * START),
+    });
+
+    timerRef.current = setInterval(() => {
       currentStep++;
       const progress = currentStep / steps;
-      
+
       // Use different easing for smaller numbers to keep them moving
       const easeOutCubic = 1 - Math.pow(1 - progress, 3);
       const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      
+
       // For accounts (20), use more linear progression to avoid getting stuck
       const accountsProgress = progress < 0.7 ? progress / 0.7 : 1;
-      
+
+      const lerp = (target, t) => Math.floor(target * (START + (1 - START) * t));
       setCounts({
-        partners: Math.floor(targets.partners * easeOutQuart),
-        accounts: Math.floor(targets.accounts * accountsProgress * easeOutCubic),
-        transactions: Math.floor(targets.transactions * easeOutQuart)
+        partners: lerp(TARGETS.partners, easeOutQuart),
+        accounts: lerp(TARGETS.accounts, accountsProgress * easeOutCubic),
+        transactions: lerp(TARGETS.transactions, easeOutQuart),
       });
 
       if (currentStep >= steps) {
-        clearInterval(timer);
-        setCounts(targets);
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+        setCounts(TARGETS);
       }
     }, interval);
   };

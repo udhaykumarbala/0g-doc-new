@@ -4,10 +4,7 @@ title: Storage CLI
 description: "Use the 0G Storage CLI to upload, download, and manage files and directories. Includes KV operations, REST API gateway, and automation examples."
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-# 0G Storage CLI
+# Storage CLI
 
 The 0G Storage CLI is your command-line gateway to interact directly with the 0G Storage network. It simplifies the process of uploading and downloading files while providing full control over your decentralized storage operations.
 
@@ -57,7 +54,7 @@ export PATH=~/go/bin:$PATH
 
 The CLI provides a comprehensive set of commands for storage operations:
 
-```
+```text
 0g-storage-client [command] [flags]
 
 Available Commands:
@@ -257,17 +254,17 @@ The indexer service provides a RESTful API gateway for easy HTTP-based file acce
 ### File Downloads via HTTP
 
 **By Transaction Sequence Number:**
-```
+```text
 GET /file?txSeq=7
 ```
 
 **By File Merkle Root:**
-```
+```text
 GET /file?root=0x0376e0d95e483b62d5100968ed17fe1b1d84f0bc5d9bda8000cdfd3f39a59927
 ```
 
 **With Custom Filename:**
-```
+```text
 GET /file?txSeq=7&name=foo.log
 ```
 
@@ -276,12 +273,12 @@ GET /file?txSeq=7&name=foo.log
 Download specific files from within structured folders:
 
 **By Transaction Sequence:**
-```
+```text
 GET /file/{txSeq}/path/to/file
 ```
 
 **By Merkle Root:**
-```
+```text
 GET /file/{merkleRoot}/path/to/file
 ```
 

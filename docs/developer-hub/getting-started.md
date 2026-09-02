@@ -5,9 +5,9 @@ description: "Get started building on 0G — quickstart guides for storage, comp
 sidebar_position: 1
 ---
 
-# Developer Hub
+# Getting Started
 
-### The Problem We Solve
+## The Problem We Solve
 
 Your AI application needs:
 

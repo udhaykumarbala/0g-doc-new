@@ -23,14 +23,14 @@ curl https://router-api.0g.ai/v1/models
   "object": "list",
   "data": [
     {
-      "id": "zai-org/GLM-5-FP8",
+      "id": "glm-5.2",
       "object": "model",
       "owned_by": "0G Foundation",
-      "name": "zai-org/GLM-5-FP8",
-      "context_length": 131072,
+      "name": "GLM-5.2",
+      "context_length": 1048576,
       "pricing": {
-        "prompt": "100000000000",
-        "completion": "320000000000"
+        "prompt": "4830000000000",
+        "completion": "16120000000000"
       },
       "provider_count": 3
     }
@@ -49,7 +49,7 @@ If you send a `tools` field to a model that doesn't support it, the Router retur
 ## Listing Providers for a Model
 
 ```bash
-curl "https://router-api.0g.ai/v1/providers?model=zai-org/GLM-5-FP8"
+curl "https://router-api.0g.ai/v1/providers?model=glm-5.2"
 ```
 
 Returns every TEE-acknowledged provider serving that model, with on-chain address, observed latency, and TEE attestation info. Use these addresses with the [`X-0G-Provider-Address` header](./routing) if you want deterministic routing.

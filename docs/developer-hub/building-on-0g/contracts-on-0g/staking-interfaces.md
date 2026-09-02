@@ -238,7 +238,7 @@ AMOUNT=500000000000  # Amount in wei (e.g., 500 for 500 0G tokens)
 ```
 
 **Output:**
-```
+```text
 ✅ Staking message created successfully!
 Note: This is NOT a transaction receipt; use these values to create a validator initialize transaction by Staking Contract.
 
@@ -282,7 +282,7 @@ Before submitting the validator initialization transaction, validate the signatu
 ```
 
 **Output:**
-```
+```text
 ✅ Deposit message is valid!
 ```
 

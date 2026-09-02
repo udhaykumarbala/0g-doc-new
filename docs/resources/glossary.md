@@ -25,7 +25,7 @@ A comprehensive list of technical terms used throughout the 0G documentation.
 
 **DA (Data Availability)**: A layer that ensures data required by blockchain applications is available when needed, crucial for scalability and security.
 
-**deAIOS**: Decentralized AI Operating System - 0G's comprehensive infrastructure for decentralized AI applications.
+**deAIOS**: Legacy term for the 0G stack, short for Decentralized AI Operating System. 0G now describes itself as the trust layer for AI: private compute, encrypted storage, and an AI-native EVM L1 chain in one stack. The older term still appears in earlier material.
 
 **Decentralized Storage**: A storage system that distributes data across multiple nodes rather than relying on centralized servers.
 

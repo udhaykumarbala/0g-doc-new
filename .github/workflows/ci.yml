@@ -97,12 +97,32 @@ jobs:
           fi
         } >> "$GITHUB_STEP_SUMMARY"
 
+        # The HTML crawler never opens llms.txt (no page links to it), so check
+        # every URL it lists against the served build explicitly.
+        LLMS_FAIL=0
+        LLMS_LINKS=$(grep -c '^- \[' build/llms.txt 2>/dev/null || echo 0)
+        LLMS_SOURCES=$(grep -c '^Source: ' build/llms-full.txt 2>/dev/null || echo 0)
+        if [ "$LLMS_LINKS" -lt 80 ]; then echo "::error::llms.txt has only $LLMS_LINKS links"; LLMS_FAIL=1; fi
+        if [ "$LLMS_SOURCES" -ne $((LLMS_LINKS - 4)) ]; then echo "::error::llms-full.txt has $LLMS_SOURCES Source lines for $((LLMS_LINKS - 4)) pages"; LLMS_FAIL=1; fi
+        while read -r url; do
+          path="${url#https://docs.0g.ai}"
+          code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:3000${path}")
+          if [ "$code" != "200" ]; then echo "::error::llms.txt link $url -> $code"; LLMS_FAIL=1; fi
+        done < <(grep -o 'https://docs\.0g\.ai[^) ,]*' build/llms.txt | grep -v '^https://docs\.0g\.ai$' | sort -u)
+        [ "$LLMS_FAIL" = 0 ] && echo "All llms.txt links resolve on the built site."
+
         kill $SERVER_PID 2>/dev/null || true
+
+        if [ "$LLMS_FAIL" != 0 ]; then
+          echo "::error::llms.txt contains links that do not resolve"
+          exit 1
+        fi
 
         if [ "$BROKEN" -gt 0 ]; then
           echo "::error::$BROKEN broken internal links found"
           exit 1
         fi
+
 
 
   spell-check:

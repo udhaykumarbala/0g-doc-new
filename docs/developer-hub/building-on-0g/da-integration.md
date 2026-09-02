@@ -8,7 +8,7 @@ description: "Set up 0G DA Client, Encoder, and Retriever nodes. Includes hardwa
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 0G Data Availability (DA): Integration
+# DA Client Nodes
 
 To submit data to the 0G DA, you must run a DA Client node and the Encoder node. The DA client interfaces with the Encoder for data encoding and the Retriever for data access.
 

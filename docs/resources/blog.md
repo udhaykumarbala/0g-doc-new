@@ -1,5 +1,6 @@
 ---
-title: Blog
+title: 0G Blog
+sidebar_label: Blog
 sidebar_position: 5
 description: "Stay up to date with the latest 0G news, product updates, and ecosystem announcements on the official blog."
 ---

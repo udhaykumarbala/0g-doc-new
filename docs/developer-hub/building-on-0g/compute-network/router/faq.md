@@ -1,11 +1,11 @@
 ---
 id: faq
-title: FAQ
+title: Router FAQ
 sidebar_position: 12
 description: "Frequently asked questions about the 0G Compute Router."
 ---
 
-# FAQ
+# Router FAQ
 
 ## I deposited on compute-marketplace.0g.ai but don't see my balance on pc.0g.ai — where did my 0G go?
 

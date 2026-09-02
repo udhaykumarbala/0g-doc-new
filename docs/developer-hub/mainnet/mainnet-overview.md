@@ -9,7 +9,7 @@ import OKXButton from '@site/src/components/OKXButton';
 import MetaMaskButton from '@site/src/components/MetaMaskButton';
 import React from 'react';
 
-# 0G Mainnet
+# Mainnet Overview
 
 Build and run production workloads on the 0G Mainnet.
 

@@ -30,8 +30,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       docusaurus-plugin-llms:
-        specifier: ^0.3.0
-        version: 0.3.0(@docusaurus/core@3.10.1(@mdx-js/react@3.1.0(@types/react@18.3.18)(react@18.3.1))(acorn@8.14.0)(debug@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))
+        specifier: ^0.5.1
+        version: 0.5.1(@docusaurus/core@3.10.1(@mdx-js/react@3.1.0(@types/react@18.3.18)(react@18.3.1))(acorn@8.14.0)(debug@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))
       gsap:
         specifier: ^3.12.5
         version: 3.12.7
@@ -2767,8 +2767,8 @@ packages:
     resolution: {integrity: sha512-l4gcSouhcgIKRvyy99RNVOgxXiicE+2jZoNmaNmZ6JXiGajBOJAesk1OBlJuM5k2c+eudGdLxDqXuPCKIj6kpw==}
     engines: {node: '>=6'}
 
-  docusaurus-plugin-llms@0.3.0:
-    resolution: {integrity: sha512-JuADAJA2fjTv1U4XQUoIu1LyjISDzxFhRK5HbCZiHum4HlmdPwyx8NBXsi+LfdUyjK9acbZgazGsHPhdwEZs0g==}
+  docusaurus-plugin-llms@0.5.1:
+    resolution: {integrity: sha512-4kNSK+TU67Y+pV45MJhvkW2ISNDh3SYet8PcPvwShV3VL/Ydwpvms0pTgvmOx1GEdLtJMYjD4PNkdmO3kAvLyw==}
     engines: {node: '>=18.0'}
     peerDependencies:
       '@docusaurus/core': ^3.0.0
@@ -4097,8 +4097,8 @@ packages:
   minimatch@3.1.5:
     resolution: {integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==}
 
-  minimatch@9.0.5:
-    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
+  minimatch@9.0.3:
+    resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==}
     engines: {node: '>=16 || 14 >=14.17'}
 
   minimist@1.2.8:
@@ -5807,8 +5807,8 @@ packages:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
     engines: {node: '>= 6'}
 
-  yaml@2.8.2:
-    resolution: {integrity: sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==}
+  yaml@2.8.1:
+    resolution: {integrity: sha512-lcYcMxX2PO9XMGvAJkJ3OsNMw+/7FKes7/hgerGUYWIoWu5j/+YQqcZr5JnPZWzOsEBgMbSbiSTn/dv/69Mkpw==}
     engines: {node: '>= 14.6'}
     hasBin: true
 
@@ -9911,12 +9911,12 @@ snapshots:
     dependencies:
       '@leichtgewicht/ip-codec': 2.0.5
 
-  docusaurus-plugin-llms@0.3.0(@docusaurus/core@3.10.1(@mdx-js/react@3.1.0(@types/react@18.3.18)(react@18.3.1))(acorn@8.14.0)(debug@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)):
+  docusaurus-plugin-llms@0.5.1(@docusaurus/core@3.10.1(@mdx-js/react@3.1.0(@types/react@18.3.18)(react@18.3.1))(acorn@8.14.0)(debug@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)):
     dependencies:
       '@docusaurus/core': 3.10.1(@mdx-js/react@3.1.0(@types/react@18.3.18)(react@18.3.1))(acorn@8.14.0)(debug@4.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       gray-matter: 4.0.3
-      minimatch: 9.0.5
-      yaml: 2.8.2
+      minimatch: 9.0.3
+      yaml: 2.8.1
 
   dom-converter@0.2.0:
     dependencies:
@@ -10298,7 +10298,7 @@ snapshots:
       fs-extra: 9.1.0
       glob: 7.2.3
       memfs: 3.5.3
-      minimatch: 3.1.2
+      minimatch: 3.1.5
       schema-utils: 2.7.0
       semver: 7.7.1
       tapable: 1.1.3
@@ -10388,7 +10388,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.1.2
+      minimatch: 3.1.5
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -11670,7 +11670,7 @@ snapshots:
     dependencies:
       brace-expansion: 1.1.11
 
-  minimatch@9.0.5:
+  minimatch@9.0.3:
     dependencies:
       brace-expansion: 2.0.2
 
@@ -12633,7 +12633,7 @@ snapshots:
 
   recursive-readdir@2.2.3:
     dependencies:
-      minimatch: 3.1.2
+      minimatch: 3.1.5
 
   reflect-metadata@0.2.2: {}
 
@@ -13648,7 +13648,7 @@ snapshots:
 
   yaml@1.10.2: {}
 
-  yaml@2.8.2: {}
+  yaml@2.8.1: {}
 
   yocto-queue@0.1.0: {}
 
