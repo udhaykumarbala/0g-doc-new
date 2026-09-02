@@ -108,7 +108,7 @@ nohup ./bin/geth \
     --datadir /{your data path}/0g-home/geth-home \
     --state.scheme=hash \
     --gcmode archive \
-    --networkid 16601 > /{your data path}/0g-home/log/geth.log 2>&1 &
+    --networkid 16602 > /{your data path}/0g-home/log/geth.log 2>&1 &
 ```
 
 ### 7. Verify Setup

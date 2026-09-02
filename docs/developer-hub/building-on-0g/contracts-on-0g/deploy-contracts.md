@@ -341,7 +341,7 @@ If you're using newer experimental opcodes from unreleased Ethereum upgrades and
 Try alternative endpoints:
 
 - QuikNode: [Get endpoint](https://www.quicknode.com/chains/0g)
-- ThirdWeb: [Get endpoint](https://thirdweb.com/0g-galileo-testnet-16601)
+- ThirdWeb: [Get endpoint](https://thirdweb.com/16602)
 </details>
 
 ## What's Next?

@@ -32,7 +32,7 @@ Test your applications on 0G's infrastructure without real costs or risks.
 
 #### ✅ 3rd Party RPCs (Recommended for production)
 - [QuickNode](https://www.quicknode.com/chains/0g)
-- [ThirdWeb](https://thirdweb.com/0g-galileo-testnet-16601)
+- [ThirdWeb](https://thirdweb.com/16602)
 - [Ankr](https://www.ankr.com/rpc/0g/)
 - [dRPC NodeCloud](https://drpc.org/chainlist/0g-galileo-testnet-rpc)
 
