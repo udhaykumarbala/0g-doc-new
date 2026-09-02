@@ -25,7 +25,8 @@ Test your applications on 0G's infrastructure without real costs or risks.
 | **Network Name** | 0G Galileo Testnet |
 | **Chain ID** | 16602 |
 | **Token Symbol** | 0G |
-| **Block Explorer** | ```https://chainscan-galileo.0g.ai``` |
+| **RPC URL** | `https://evmrpc-testnet.0g.ai` (development only, use a 3rd party RPC for production) |
+| **Block Explorer** | `https://chainscan-galileo.0g.ai` |
 | **Faucet** | https://faucet.0g.ai |
 | **Faucet (Google Cloud)** | https://cloud.google.com/application/web3/faucet/0g/galileo |
 
@@ -69,6 +70,21 @@ export const AddNetworkSection = () => {
 };
 
 <AddNetworkSection />
+
+<details>
+<summary>Removing an old 0G testnet from MetaMask</summary>
+
+The old testnet versions are no longer active. Remove them from your MetaMask network list before adding the current **0G Galileo Testnet**, to avoid conflicts.
+
+1. Open MetaMask and click the network dropdown menu at the top.
+2. Select any network *other* than **0G-Testnet**.
+3. Open the network dropdown menu again.
+4. Find **0G-Testnet** in the list and click the three vertical dots icon next to it.
+5. Select the **Delete** option from the menu.
+6. Confirm the deletion when prompted by MetaMask.
+7. Once removed, click the "Add to MetaMask" button above again.
+
+</details>
 
 <style>
   {`
