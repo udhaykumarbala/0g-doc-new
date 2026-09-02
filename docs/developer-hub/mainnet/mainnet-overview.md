@@ -32,6 +32,7 @@ Build and run production workloads on the 0G Mainnet.
 - [QuickNode](https://www.quicknode.com/chains/0g)
 - [ThirdWeb](https://thirdweb.com/0g-aristotle)
 - [Ankr](https://www.ankr.com/rpc/0g/)
+- [dRPC](https://drpc.org/chainlist/0g-mainnet-rpc)
 
 ### Add Network to Wallet
 
