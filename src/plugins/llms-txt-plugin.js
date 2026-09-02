@@ -139,36 +139,53 @@ module.exports = function llmsTxtPlugin(context, options = {}) {
       }
       console.log(`[llms-txt] Added markdown alternate links to ${tagged} pages`);
 
-      // Add a Source line under each page heading in llms-full.txt.
+      // Add a Source line under each page heading in llms-full.txt. A page
+      // starts with "## <title>" after a "---" separator, but a body section
+      // can look the same (a horizontal rule followed by a heading that equals
+      // some page title), so a candidate is confirmed by comparing the text
+      // that follows it with the start of that page's generated .md body.
       const fullPath = path.join(outDir, fullTxtFilename);
       if (fs.existsSync(fullPath)) {
-        const byTitle = new Map();
+        const firstBodyLine = (text) => {
+          const ls = text.split('\n');
+          let i = 0;
+          while (i < ls.length && (ls[i].trim() === '' || /^# /.test(ls[i]) || /^> /.test(ls[i]))) i += 1;
+          return (ls[i] || '').trim();
+        };
+        const candidates = new Map(); // title -> [{doc, firstLine}]
         for (const d of version.docs) {
-          if (!byTitle.has(d.title)) byTitle.set(d.title, d);
-          else byTitle.set(d.title, null); // ambiguous title, skip
+          if (!usable(d)) continue;
+          const permalink = d.permalink.replace(/\/$/, '') || '/';
+          const mdPath = path.join(outDir, `${permalink === '/' ? '/index' : permalink}.md`);
+          if (!fs.existsSync(mdPath)) continue;
+          const entry = { doc: d, url: `${siteUrl}${permalink === '/' ? '/index' : permalink}.md`, firstLine: firstBodyLine(fs.readFileSync(mdPath, 'utf8')) };
+          if (!candidates.has(d.title)) candidates.set(d.title, []);
+          candidates.get(d.title).push(entry);
         }
         const lines = fs.readFileSync(fullPath, 'utf8').split('\n');
         const result = [];
+        const used = new Set();
         let added = 0;
-        // Pages are joined with a "---" separator followed by "## <title>"; only
-        // those headings are page starts (body sections can share a doc's title).
         let prevNonEmpty = '';
         let seenFirstPage = false;
         for (let i = 0; i < lines.length; i++) {
           result.push(lines[i]);
           const m = /^## (.+)$/.exec(lines[i]);
-          const isPageStart = m && (prevNonEmpty === '---' || !seenFirstPage);
-          if (m && isPageStart) seenFirstPage = true;
+          const atSeparator = prevNonEmpty === '---' || !seenFirstPage;
           if (lines[i].trim() !== '') prevNonEmpty = lines[i].trim();
-          if (isPageStart && byTitle.get(m[1]) && lines[i + 1] === '' && !/^Source: /.test(lines[i + 2] || '')) {
-            const doc = byTitle.get(m[1]);
-            const permalink = doc.permalink.replace(/\/$/, '') || '/';
-            result.push('', `Source: ${siteUrl}${permalink === '/' ? '/index' : permalink}.md`);
-            added += 1;
-          }
+          if (!m || !atSeparator || !candidates.has(m[1])) continue;
+          let j = i + 1;
+          while (j < lines.length && lines[j].trim() === '') j += 1;
+          const following = (lines[j] || '').trim();
+          const match = candidates.get(m[1]).find((c) => !used.has(c.doc.id) && c.firstLine && following.startsWith(c.firstLine.slice(0, 60)));
+          if (!match) continue;
+          seenFirstPage = true;
+          used.add(match.doc.id);
+          result.push('', `Source: ${match.url}`);
+          added += 1;
         }
         fs.writeFileSync(fullPath, result.join('\n'));
-        console.log(`[llms-txt] Added Source lines to ${fullTxtFilename}: ${added}`);
+        console.log(`[llms-txt] Added Source lines to ${fullTxtFilename}: ${added} of ${used.size + (version.docs.filter(usable).length - used.size)} pages`);
       }
     },
   };
