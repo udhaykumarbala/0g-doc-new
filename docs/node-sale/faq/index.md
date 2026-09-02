@@ -15,10 +15,10 @@ import Head from '@docusaurus/Head';
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Where do I purchase AI Alignment Nodes?",
+          "name": "Where were AI Alignment Nodes sold?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can purchase AI Alignment Nodes at https://node.0gfoundation.ai/"
+            "text": "The node sale has concluded. It ran at https://node.0gfoundation.ai/"
           }
         },
         {
@@ -34,15 +34,15 @@ import Head from '@docusaurus/Head';
           "name": "When can I begin operating my 0G node?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AI Alignment utility went live in 2025 after 0G Mainnet Launch."
+            "text": "AI Alignment utility went live in 2025, after the 0G Mainnet launch."
           }
         },
         {
           "@type": "Question",
-          "name": "Are the node license NFTs transferable?",
+          "name": "Were the node license NFTs transferable?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Alignment Node license gives buyers lifetime access. The NFTs are non-transferable for the first year after the node sale."
+            "text": "The Alignment Node license gives buyers lifetime access. The NFTs were non-transferable for the first year after the node sale."
           }
         },
         {
@@ -60,19 +60,25 @@ import Head from '@docusaurus/Head';
 
 # Frequently Asked Questions
 
-### Where do I purchase AI Alignment Nodes?
-https://node.0gfoundation.ai/
-### How do I purchase AI Alignment Nodes?
+:::note
+
+The 0G AI Alignment Node Sale concluded in November 2024, and 0G Mainnet launched in September 2025. This page is kept for reference.
+
+:::
+
+### Where were AI Alignment Nodes sold?
+The sale ran at https://node.0gfoundation.ai/ and has concluded.
+### How did I purchase AI Alignment Nodes?
 See the step by step guide [here](/node-sale/details/purchasing-nodes).
-### Who can participate in the Node Sale?
-The 0G AI Alignment Node Sale is open to community members in eligible regions who meet the necessary criteria. Please review all disclaimers and important details regarding the 0G Node Sale by visiting our disclaimer [here](https://www.0gfoundation.ai/ai-alignment#disclaimer). Only persons who meet the requirements for the sale are allowed to participate. KYC will be required from the purchaser before any receipt of rewards. 
-### Are Whitelist and Public Allocations Separate?
-The whitelist allocation is independent and will not be rolled over to the public sale. The **Whitelist Sale** opens November 11, 2024, at 12 PM UTC. The sale will be denominated in USDC on Arbitrum, and only whitelisted participants may purchase nodes during this phase. The **Public Sale** opens November 13, 2024, at 12 PM UTC, is denominated in USDC on Arbitrum, and is available to all users, subject to geographic and regulatory restrictions. Please see our disclaimer for more information.
+### Who could participate in the Node Sale?
+The 0G AI Alignment Node Sale was open to community members in eligible regions who met the necessary criteria. Please review all disclaimers and important details regarding the 0G Node Sale by visiting our disclaimer [here](https://www.0gfoundation.ai/ai-alignment#disclaimer). Only persons who met the requirements for the sale were allowed to participate. KYC is required from the purchaser before any receipt of rewards. 
+### Were Whitelist and Public Allocations Separate?
+The whitelist allocation was independent and was not rolled over to the public sale. The **Whitelist Sale** opened on November 11, 2024, at 12 PM UTC. It was denominated in USDC on Arbitrum, and only whitelisted participants could purchase nodes during that phase. The **Public Sale** opened on November 13, 2024, at 12 PM UTC, was denominated in USDC on Arbitrum, and was open to all users, subject to geographic and regulatory restrictions. Please see our disclaimer for more information.
 ![0g-node-sale-timeline-1600x900px](https://github.com/user-attachments/assets/dd6746d7-a102-43f3-9a1f-ae33d0ca7f72)
-### What price will the sale be pegged to?
-Both the Whitelist and Public Sales are denominated in USDC on Arbitrum. Node pricing will be pegged to a snapshot price of wETH of $3,130. 
-### When Can I Operate My Node?
-Node operations will commence after the mainnet launch, projected for Q1 2025. License holders will receive further instructions for operation and delegation options if preferred.
+### What price was the sale pegged to?
+Both the Whitelist and Public Sales were denominated in USDC on Arbitrum. Node pricing was pegged to a snapshot price of wETH of $3,130. 
+### When can I operate my node?
+Node operations began after the mainnet launch, which took place in September 2025. License holders received further instructions for operation and delegation options if preferred.
 ### How Do Rewards for Alignment Nodes Compare with Other Nodes?
 Alignment Nodes are expected to offer higher reward rates due to their unique responsibilities, limited supply, and operational requirements compared to storage or validator nodes.
 ### Are Multiple NFTs Supported per Server?
@@ -83,23 +89,23 @@ Yes, users may operate multiple NFTs on a single server, with allowances for con
 Whitelist is a pre-approved list of participants who are given exclusive access to certain privileges during a sale event. This system is used to reward and incentivize key contributors, partners, or early supporters of a project.
 
 ### Does entering the whitelist guarantee that I can definitely purchase a node?​
-Your whitelist guarantees an allocation during the Whitelist sale period (starting Nov 11). If a purchase is not made within this period, your allocation will be released.
+The whitelist guaranteed an allocation during the Whitelist sale period (starting November 11, 2024). If no purchase was made within that period, the allocation was released.
 
-### How to join the whitelist?​
-To get a whitelist spot for the 0G Foundation Node Sale, community members and ecosystem participants are eligible for allocations, please visit 0G X and Discord for ways to receive a whitelist. You can also apply for a whitelist spot by filling out the whitelist form [here](https://docs.google.com/forms/d/e/1FAIpQLScZSiIn3WBEdztzCObFBnLa0c6f1YoRwlN_eI8NxGPuG4w-zg/viewform).
+### How did people join the whitelist?​
+Community members and ecosystem participants were eligible for whitelist allocations. Spots were announced on 0G X and Discord, and could also be requested through the whitelist form [here](https://docs.google.com/forms/d/e/1FAIpQLScZSiIn3WBEdztzCObFBnLa0c6f1YoRwlN_eI8NxGPuG4w-zg/viewform). The form is closed now that the sale has concluded.
 
 ## Payment & Licenses
-### What payment methods will be accepted for purchasing a node?​
-The nodes will be priced in USDC for both the Whitelist Sale and Public Sale, both on Arbitrum. However, to facilitate payment for users on different chains, the AI Alignment Node Sale will be accepting multiple tokens across multiple networks through a live bridging aggregator that accepts multichain payment including but not limited to BTC, ETH, ARB, SOL, etc. More info [here](https://docs.li.fi/list-chains-bridges-dex-aggregators-solvers).
+### What payment methods were accepted for purchasing a node?​
+The nodes were priced in USDC for both the Whitelist Sale and Public Sale, both on Arbitrum. To facilitate payment for users on different chains, the AI Alignment Node Sale accepted multiple tokens across multiple networks through a live bridging aggregator that accepted multichain payment including but not limited to BTC, ETH, ARB, SOL, etc. More info [here](https://docs.li.fi/list-chains-bridges-dex-aggregators-solvers).
 
-### How will the node licenses be distributed?​
-After the node sale period is completed, node licenses will be distributed as an NFT to the purchase wallet of the user.
+### How were the node licenses distributed?​
+After the node sale period ended, node licenses were distributed as an NFT to the purchase wallet of the user.
 
-### What will I receive from participating in the node sale?​
-You will receive a soulbound NFT (ERC-721) which represents your Node License. The NFTs can be minted and transferred to your wallet via claim.0gfoundation.ai after the conclusion of the node sale. You will be able to operate the node after 0G Mainnet is live.
+### What did participants receive from the node sale?​
+Participants received a soulbound NFT (ERC-721) which represents their Node License. The NFTs can be minted and transferred to your wallet via claim.0gfoundation.ai. Nodes can be operated now that 0G Mainnet is live.
 
-### Will the NFTs be transferable?
-The Alignment Node license gives buyers lifetime access. The NFTs will be non-transferable for the first year after the node sale.
+### Were the NFTs transferable?
+The Alignment Node license gives buyers lifetime access. The NFTs were non-transferable for the first year after the node sale.
 
 ## Node Operations
 ### What are the hardware requirements?​
@@ -111,10 +117,10 @@ As for device requirements, the configuration needed is very minimal:
 - 10Mbps Internet Connection
 
 ### When can I begin operating my node?​
-AI Alignment utility will go live in 2025, after 0G Mainnet Launch.
+AI Alignment utility went live in 2025, after the 0G Mainnet launch.
 
-### How many nodes can I purchase?​
-The number of purchasable nodes will be capped per tier. Please refer to the [Node Sale Tier documentation](https://docs.google.com/spreadsheets/d/16dgdbrs0LA_mSSYB7cSEWmQPMJvok0FjqAHX-nLxEzs/edit?gid=2031834824#gid=2031834824) for reference.
+### How many nodes could I purchase?​
+The number of purchasable nodes was capped per tier. Please refer to the [Node Sale Tier documentation](https://docs.google.com/spreadsheets/d/16dgdbrs0LA_mSSYB7cSEWmQPMJvok0FjqAHX-nLxEzs/edit?gid=2031834824#gid=2031834824) for reference.
 
 ### How do I run a node? Is it complicated?​
 Running a node can be quite straightforward and easy, typically involving just a few steps. Here's a video tutorial to guide you through the process:
@@ -129,13 +135,13 @@ Running a node can be quite straightforward and easy, typically involving just a
     allowfullscreen
 ></iframe>
 
-If you prefer not to manage the node yourself, you can delegate to other node operators with just a single click through our explorer, which will be available shortly.
+If you prefer not to manage the node yourself, you can delegate to other node operators with a single click through our explorer. See the [AI Alignment Node user guide](/node-sale/ai-alignment-node-user-guide) for the delegation steps.
 
-### Will the sale be accessible from other platforms?​
-Both Public and Whitelist sale will be available [here](https://node.0gfoundation.ai/) except for Partnered Launchpads, in which case the front end will be on 0G Partners' website.
+### Was the sale accessible from other platforms?​
+Both the Public and Whitelist sales ran [here](https://node.0gfoundation.ai/) except for Partnered Launchpads, whose front ends were on 0G Partners' websites.
 
-### What will happen to any unsold node rewards? 
-Rewards from unsold nodes will be reallocated to the sold node runners. 
+### What happened to any unsold node rewards? 
+Rewards from unsold nodes were reallocated to the sold node runners. 
 
 ### What is your tokenomics?
 ![token table-v4 (1)](https://github.com/user-attachments/assets/125b812b-cd4f-4f8f-bb95-a1933d70b84b)
@@ -148,13 +154,13 @@ Rewards from unsold nodes will be reallocated to the sold node runners.
 ### When is KYC required? How is it conducted? 
 KYC is required before claiming rewards. It will be provided by a third-party provider. No refund will be offered if the node purchaser does not meet KYC requirements. 
 
-### How many nodes can I purchase? 
-Each individual can purchase up to a certain amount of nodes per tier. See [here](https://docs.google.com/spreadsheets/d/16dgdbrs0LA_mSSYB7cSEWmQPMJvok0FjqAHX-nLxEzs/edit?gid=2031834824#gid=2031834824) for the caps per tier.
+### How many nodes could each buyer purchase? 
+Each individual could purchase up to a certain amount of nodes per tier. See [here](https://docs.google.com/spreadsheets/d/16dgdbrs0LA_mSSYB7cSEWmQPMJvok0FjqAHX-nLxEzs/edit?gid=2031834824#gid=2031834824) for the caps per tier.
 
 ### What happened to unsold nodes? 
-Unsold alignment node NFT licenses will be burned. The rewards from the unsold nodes will be re-allocated to the sold verified node buyers. 
+Unsold alignment node NFT licenses were burned. The rewards from the unsold nodes were re-allocated to the sold verified node buyers. 
 
-### What are the launchpad partners working on the 0G Foundation Node Sale? 
+### Which launchpad partners worked on the 0G Foundation Node Sale? 
 ![Launchpads-1600x900px](https://github.com/user-attachments/assets/4b4d98d8-c480-407d-89fa-530e66fe2328)
 
 

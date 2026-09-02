@@ -6,11 +6,11 @@ description: "Step-by-step guide to purchasing 0G AI Alignment Nodes, including 
 ---
 
 # Purchasing Nodes: Steps and Payment Options
-**Supported Blockchains and Payment Methods**: The sale will be conducted in USDC on Arbitrum, but we provide a live bridging gateway at checkout that supports multiple blockchains (ETH, Arbitrum, BNB) and tokens. All purchases require a compatible wallet, and the resulting node licenses are issued as non-transferable ERC-721 NFTs.
+**Supported Blockchains and Payment Methods**: The sale was conducted in USDC on Arbitrum, with a live bridging gateway at checkout that supported multiple blockchains (ETH, Arbitrum, BNB) and tokens. All purchases require a compatible wallet, and the resulting node licenses are issued as non-transferable ERC-721 NFTs.
 
 ## Video Tutorial 
 :::important
-Please note: Initially, the Public Sale was intended to use wETH on Arbitrum, but after the community’s feedback, it will be USDC on Arbitrum. Please note this correction to USDC on Arbitrum as the video says wETH.
+Please note: Initially, the Public Sale was intended to use wETH on Arbitrum, but after the community’s feedback it used USDC on Arbitrum. Please note this correction to USDC on Arbitrum as the video says wETH.
 :::
 
 <iframe
