@@ -62,7 +62,7 @@ import Head from '@docusaurus/Head';
 
 :::note
 
-The 0G AI Alignment Node Sale concluded in November 2024, and 0G Mainnet launched in September 2025. This page is kept for reference.
+The public 0G AI Alignment Node Sale was held in November 2024 and is now closed, and 0G Mainnet launched in September 2025. This page is kept for reference.
 
 :::
 

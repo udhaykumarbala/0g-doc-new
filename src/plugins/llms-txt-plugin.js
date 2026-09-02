@@ -121,6 +121,25 @@ module.exports = function llmsTxtPlugin(context, options = {}) {
       fs.writeFileSync(path.join(outDir, 'llms.txt'), out.join('\n'));
       console.log(`[llms-txt] Wrote llms.txt: ${sections.length} sections, ${listed.size + orphans.length} pages`);
 
+      // Clean the generated markdown twins: drop <style>/<script> blocks the
+      // plugin leaves behind (docs/index.mdx is 93% CSS otherwise) and the body
+      // H1 when it merely repeats the injected title.
+      const stripBlocks = (text) =>
+        text.replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/\n{3,}/g, '\n\n');
+      let cleaned = 0;
+      for (const doc of version.docs) {
+        if (!usable(doc)) continue;
+        const permalink = doc.permalink.replace(/\/$/, '') || '/';
+        const mdPath = path.join(outDir, `${permalink === '/' ? '/index' : permalink}.md`);
+        if (!fs.existsSync(mdPath)) continue;
+        let text = stripBlocks(fs.readFileSync(mdPath, 'utf8'));
+        const dupH1 = new RegExp(`^(# ${doc.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\n\n(?:> [^\n]*\n\n)?)# ${doc.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\n`);
+        text = text.replace(dupH1, '$1');
+        fs.writeFileSync(mdPath, text);
+        cleaned += 1;
+      }
+      console.log(`[llms-txt] Cleaned ${cleaned} markdown twins`);
+
       // Advertise the markdown twin and the index from every built page
       // (llms.txt spec v2: rel="alternate" type="text/markdown", rel="describedby").
       let tagged = 0;
@@ -134,6 +153,7 @@ module.exports = function llmsTxtPlugin(context, options = {}) {
         if (html.includes('type="text/markdown"')) continue;
         const mdUrl = `${siteUrl}${permalink === '/' ? '/index' : permalink}.md`;
         const tags = `<link rel="alternate" type="text/markdown" href="${mdUrl}"><link rel="describedby" href="${siteUrl}/llms.txt">`;
+        if (!html.includes('</head>')) continue;
         fs.writeFileSync(htmlPath, html.replace('</head>', `${tags}</head>`));
         tagged += 1;
       }
@@ -162,30 +182,41 @@ module.exports = function llmsTxtPlugin(context, options = {}) {
           if (!candidates.has(d.title)) candidates.set(d.title, []);
           candidates.get(d.title).push(entry);
         }
-        const lines = fs.readFileSync(fullPath, 'utf8').split('\n');
+        const lines = stripBlocks(fs.readFileSync(fullPath, 'utf8')).split('\n');
         const result = [];
         const used = new Set();
         let added = 0;
         let prevNonEmpty = '';
-        let seenFirstPage = false;
+        let seenFirstHeading = false; // the first "## " has no separator before it
         for (let i = 0; i < lines.length; i++) {
-          result.push(lines[i]);
           const m = /^## (.+)$/.exec(lines[i]);
-          const atSeparator = prevNonEmpty === '---' || !seenFirstPage;
+          const atSeparator = m && (prevNonEmpty === '---' || !seenFirstHeading);
+          if (m) seenFirstHeading = true;
           if (lines[i].trim() !== '') prevNonEmpty = lines[i].trim();
-          if (!m || !atSeparator || !candidates.has(m[1])) continue;
+          result.push(lines[i]);
+          if (!atSeparator || !candidates.has(m[1])) continue;
           let j = i + 1;
           while (j < lines.length && lines[j].trim() === '') j += 1;
-          const following = (lines[j] || '').trim();
+          // The body may open with an H1 that repeats the title; compare the
+          // first real content line, and drop that duplicate heading.
+          const repeatsTitle = (lines[j] || '').trim() === `# ${m[1]}`;
+          let k = j;
+          if (repeatsTitle) {
+            k = j + 1;
+            while (k < lines.length && lines[k].trim() === '') k += 1;
+          }
+          const following = (lines[k] || '').trim();
           const match = candidates.get(m[1]).find((c) => !used.has(c.doc.id) && c.firstLine && following.startsWith(c.firstLine.slice(0, 60)));
           if (!match) continue;
-          seenFirstPage = true;
           used.add(match.doc.id);
           result.push('', `Source: ${match.url}`);
           added += 1;
+          if (repeatsTitle) i = j; // skip the blank lines and the duplicate heading
         }
         fs.writeFileSync(fullPath, result.join('\n'));
-        console.log(`[llms-txt] Added Source lines to ${fullTxtFilename}: ${added} of ${used.size + (version.docs.filter(usable).length - used.size)} pages`);
+        const expected = version.docs.filter(usable).length;
+        const level = added === expected ? 'log' : 'warn';
+        console[level](`[llms-txt] Added Source lines to ${fullTxtFilename}: ${added} of ${expected} pages${added === expected ? '' : ' (MISMATCH: some pages were not recognised)'}`);
       }
     },
   };

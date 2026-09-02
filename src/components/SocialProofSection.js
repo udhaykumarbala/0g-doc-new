@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 // Final values. These are also the initial state so that the numbers are
 // present in the server-rendered HTML: crawlers and other fetchers that do not
 // run JavaScript used to read "0+ Partners". The count-up animation runs after
-// hydration and never lowers what SSR emitted.
+// hydration and counts up from 60% of the final value, so the numbers never
+// drop to zero after the server-rendered values have been shown.
 const TARGETS = {
   partners: 350,
   accounts: 20,
@@ -57,8 +58,14 @@ const SocialProofSection = () => {
 
     let currentStep = 0;
 
-    // Start from zero only once the section is on screen in a real browser.
-    setCounts({ partners: 0, accounts: 0, transactions: 0 });
+    // Count up from a fraction of the final value so the SSR numbers never
+    // visibly drop to zero before the animation starts.
+    const START = 0.6;
+    setCounts({
+      partners: Math.floor(TARGETS.partners * START),
+      accounts: Math.floor(TARGETS.accounts * START),
+      transactions: Math.floor(TARGETS.transactions * START),
+    });
 
     timerRef.current = setInterval(() => {
       currentStep++;
@@ -71,10 +78,11 @@ const SocialProofSection = () => {
       // For accounts (20), use more linear progression to avoid getting stuck
       const accountsProgress = progress < 0.7 ? progress / 0.7 : 1;
 
+      const lerp = (target, t) => Math.floor(target * (START + (1 - START) * t));
       setCounts({
-        partners: Math.floor(TARGETS.partners * easeOutQuart),
-        accounts: Math.floor(TARGETS.accounts * accountsProgress * easeOutCubic),
-        transactions: Math.floor(TARGETS.transactions * easeOutQuart),
+        partners: lerp(TARGETS.partners, easeOutQuart),
+        accounts: lerp(TARGETS.accounts, accountsProgress * easeOutCubic),
+        transactions: lerp(TARGETS.transactions, easeOutQuart),
       });
 
       if (currentStep >= steps) {

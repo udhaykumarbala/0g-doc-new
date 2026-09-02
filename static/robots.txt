@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-# Keep the search results page out of indexes, but allow the search index JSON
-Disallow: /search$
+# Keep search result pages out of indexes; the longer Allow wins for the index JSON
+Disallow: /search
 Allow: /search-index.json
 
 Sitemap: https://docs.0g.ai/sitemap.xml

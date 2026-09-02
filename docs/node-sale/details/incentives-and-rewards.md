@@ -23,7 +23,7 @@ description: "Details on 0G node sale incentives, referral commissions, rebate p
 Node buyers could share their wallet address as the referral code after they made a purchase, which gave a 10% rebate to their referrals. 
 
 ## What rebate is available when using a referral code?
-If you enter a referral code when purchasing a node, you'll receive a 10% rebate on the total price. 
+Buyers who entered a referral code when purchasing a node received a 10% rebate on the total price. 
 
 ## How will I receive my commission? (For Referrers)​
 Commission for any successful node purchased through your referral can be claimed on the reward claim site, which opened after the public sale. Please refer to 0G X for access to the claim site.

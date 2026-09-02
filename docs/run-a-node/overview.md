@@ -1,9 +1,11 @@
 ---
 sidebar_position: 1
 description: "Overview of running nodes on the 0G network — validator, storage, DA, and archival nodes. Earn rewards by securing the network."
+title: Running a 0G Node
+sidebar_label: Overview
 ---
 
-# Overview
+# Running a 0G Node
 ---
 Want to become an active participant in the 0G network and earn rewards while you're at it? 👇
 

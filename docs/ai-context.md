@@ -65,7 +65,7 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 | **Flow** | `0x22E03a6A89B950F1c82ec5e74F8eCa321a105296` | Storage data flow management |
 | **Mine** | `0x00A9E9604b0538e06b268Fb297Df333337f9593b` | Storage mining rewards |
 | **Reward** | `0xA97B57b4BdFEA2D0a25e535bd849ad4e6C440A69` | Reward distribution |
-| **DAEntrance** | `0xE75A073dA5bb7b0eC622170Fd268f35E675a957B` | DA blob submission (address being verified: confirm with the DA team before integrating) |
+| **DAEntrance** | not published; ask the DA team | DA blob submission. The previously documented testnet addresses have no code on Galileo, so none is listed here |
 | **DASigners** | `0x0000000000000000000000000000000000001000` | DA signer management (precompile) |
 | **WrappedOGBase** | `0x0000000000000000000000000000000000001002` | Wrapped native token (precompile) |
 | **Compute Ledger** | `0xE70830508dAc0A97e6c087c75f402f9Be669E406` | Compute network payment ledger |

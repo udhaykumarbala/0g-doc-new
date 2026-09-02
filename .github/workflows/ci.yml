@@ -100,6 +100,10 @@ jobs:
         # The HTML crawler never opens llms.txt (no page links to it), so check
         # every URL it lists against the served build explicitly.
         LLMS_FAIL=0
+        LLMS_LINKS=$(grep -c '^- \[' build/llms.txt 2>/dev/null || echo 0)
+        LLMS_SOURCES=$(grep -c '^Source: ' build/llms-full.txt 2>/dev/null || echo 0)
+        if [ "$LLMS_LINKS" -lt 80 ]; then echo "::error::llms.txt has only $LLMS_LINKS links"; LLMS_FAIL=1; fi
+        if [ "$LLMS_SOURCES" -ne $((LLMS_LINKS - 4)) ]; then echo "::error::llms-full.txt has $LLMS_SOURCES Source lines for $((LLMS_LINKS - 4)) pages"; LLMS_FAIL=1; fi
         while read -r url; do
           path="${url#https://docs.0g.ai}"
           code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:3000${path}")

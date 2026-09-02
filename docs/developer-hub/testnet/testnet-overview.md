@@ -1,16 +1,15 @@
 ---
 id: testnet-overview
-title: Testnet Overview
+title: 0G Galileo Testnet
+sidebar_label: Testnet Overview
 sidebar_position: 1
 description: "0G Galileo Testnet network details including Chain ID, RPC endpoints, faucet access, contract addresses, and wallet setup."
 ---
 
 import OKXButton from '@site/src/components/OKXButton';
 import MetaMaskButton from '@site/src/components/MetaMaskButton';
-import RemoveNewtonModal from '@site/src/components/RemoveNewtonModal';
-import React, { useState } from 'react';
 
-# Testnet Overview
+# 0G Galileo Testnet
 
 Test your applications on 0G's infrastructure without real costs or risks.
 
@@ -43,31 +42,20 @@ Test your applications on 0G's infrastructure without real costs or risks.
 
 ### Step 1: Add Network to Wallet
 
-export const AddNetworkSection = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  return (
-    <>
-      <div className="admonition admonition-note alert alert--warning">
-        <div className="admonition-content">
-          <p>
-            Remove any old 0G testnet configurations before adding Galileo. 
-            <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} style={{marginLeft: '5px'}}>
-              Need help?
-            </a>
-          </p>
-        </div>
+export const AddNetworkSection = () => (
+  <>
+    <div className="admonition admonition-note alert alert--warning">
+      <div className="admonition-content">
+        <p>Remove any old 0G testnet configurations before adding Galileo (steps below).</p>
       </div>
+    </div>
 
-      <div className="wallet-buttons">
-        <MetaMaskButton label="Add to MetaMask" />
-        <OKXButton label="Add to OKX Wallet" />
-      </div>
-
-      <RemoveNewtonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
-  );
-};
+    <div className="wallet-buttons">
+      <MetaMaskButton label="Add to MetaMask" />
+      <OKXButton label="Add to OKX Wallet" />
+    </div>
+  </>
+);
 
 <AddNetworkSection />
 
@@ -77,9 +65,18 @@ export const AddNetworkSection = () => {
 The old testnet versions are no longer active. Remove them from your MetaMask network list before adding the current **0G Galileo Testnet**, to avoid conflicts.
 
 1. Open MetaMask and click the network dropdown menu at the top.
+
+   ![MetaMask network dropdown](/img/step%201.png)
+
 2. Select any network *other* than **0G-Testnet**.
+
+   ![Switching network](/img/step%202.png)
+
 3. Open the network dropdown menu again.
 4. Find **0G-Testnet** in the list and click the three vertical dots icon next to it.
+
+   ![Three dots menu for network](/img/step%203.png)
+
 5. Select the **Delete** option from the menu.
 6. Confirm the deletion when prompted by MetaMask.
 7. Once removed, click the "Add to MetaMask" button above again.

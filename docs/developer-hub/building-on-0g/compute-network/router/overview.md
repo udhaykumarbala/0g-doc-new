@@ -1,11 +1,12 @@
 ---
 id: overview
-title: Router Overview
+title: 0G Compute Router
+sidebar_label: Overview
 sidebar_position: 1
 description: "A single OpenAI-compatible endpoint for every model on the 0G Compute Network. No SDK, no wallet keys — just an API key."
 ---
 
-# Router Overview
+# 0G Compute Router
 
 The **0G Compute Router** is an API gateway that sits in front of the entire 0G Compute Network. One endpoint, one API key, every model.
 
