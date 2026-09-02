@@ -8,7 +8,7 @@ description: "Deploy an OP Stack rollup using 0G DA for data availability. Full 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Run an OP Stack Rollup on 0G DA
+# OP Stack on 0G DA
 
 Optimism is a lightning-fast Ethereum L2 blockchain, built with the OP Stack. 0G DA is a high-performance data availability layer that can be used with Optimism to provide a cost-effective and secure solution for storing transaction data.
 

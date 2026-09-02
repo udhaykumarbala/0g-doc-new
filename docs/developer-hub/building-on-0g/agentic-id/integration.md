@@ -2,7 +2,7 @@
 id: integration
 title: Agentic ID Integration Guide
 sidebar_position: 2
-description: "Step-by-step guide to build Agentic IDs (formerly INFTs) on 0G. Deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
+description: "Build Agentic IDs on 0G: deploy contracts, manage encrypted AI metadata, implement secure transfers, and build AI agent marketplaces."
 keywords: [agentic id integration, inft integration, build agentic id, build inft, erc-7857 tutorial, erc-8004, ai agent marketplace]
 ---
 

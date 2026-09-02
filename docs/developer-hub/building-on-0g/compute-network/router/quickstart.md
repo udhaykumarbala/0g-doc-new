@@ -38,7 +38,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [
       {"role": "user", "content": "Hello!"}
     ]
@@ -57,7 +57,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="zai-org/GLM-5-FP8",
+    model="glm-5.2",
     messages=[{"role": "user", "content": "Hello!"}],
 )
 
@@ -76,7 +76,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: "zai-org/GLM-5-FP8",
+  model: "glm-5.2",
   messages: [{ role: "user", content: "Hello!" }],
 });
 

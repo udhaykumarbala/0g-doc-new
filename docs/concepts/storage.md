@@ -1,11 +1,11 @@
 ---
 id: storage
 title: 0G Storage
-description: "0G Storage is a decentralized storage network built for massive AI datasets — 10-100x cheaper than alternatives with high throughput and no vendor lock-in."
+description: "0G Storage is a decentralized storage network for massive AI datasets: 10-100x cheaper, high throughput, and no vendor lock-in."
 sidebar_position: 3
 ---
 
-# 0G Storage: Built for Massive Data
+# 0G Storage
 
 Current storage options force impossible tradeoffs:
 - **Cloud providers**: Fast but expensive with vendor lock-in

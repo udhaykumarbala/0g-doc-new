@@ -5,13 +5,19 @@ sidebar_position: 1
 description: "Introduction to 0G AI Alignment Nodes, their role in monitoring decentralized network protocols, and why to run a node."
 ---
 
+:::note
+
+The 0G AI Alignment Node Sale concluded in November 2024, and 0G Mainnet launched in September 2025. These pages are kept for reference. For running or delegating a node today, see the [AI Alignment Node user guide](/node-sale/ai-alignment-node-user-guide).
+
+:::
+
 ## Purpose and Benefits of the 0G AI Alignment Node Sale
-The objective of 0G Foundation: The 0G Foundation’s node sale aims to create a decentralized AI operating system (deAIOS) that operates transparently, safely, and under community influence. Centralized AI structures may lack these attributes, creating potential risks for data integrity and security. The 0G Foundation’s goal is to develop AI as a public good, fostering an ecosystem that prioritizes transparency and reduces reliance on central authorities, making it suitable for broad public utility.
+The objective of 0G Foundation: The 0G Foundation’s node sale aims to create a trust layer for AI that operates transparently, safely, and under community influence. Centralized AI structures may lack these attributes, creating potential risks for data integrity and security. The 0G Foundation’s goal is to develop AI as a public good, fostering an ecosystem that prioritizes transparency and reduces reliance on central authorities, making it suitable for broad public utility.
 
 ## What is an AI Alignment Node?
 Alignment nodes provide the key utility of monitoring whether the other kinds of decentralized nodes in the 0G network - validator nodes, storage nodes, security nodes - faithfully follow network protocols. To start, the nodes will have certain utility, and in the near future, AI Alignment Nodes will have additional utility to monitor on-chain AI model drift and to ensure that 0G’s on-chain AI is behaving as intended.
 
-To sustain the node utility operation and allow the network to be further secured, Alignment Node owners may receive a portion of the fees collected by the network by operating the nodes and contributing work to the 0G network. Node sale participants and stakers (i.e., long term believers who secure the ecosystem) may get additional rewards from the 0G ecosystem over time. The 0G node sale will be a launch that enables the community to participate on an equal playing field with entry points within multiple tiers.
+To sustain the node utility operation and allow the network to be further secured, Alignment Node owners may receive a portion of the fees collected by the network by operating the nodes and contributing work to the 0G network. Node sale participants and stakers (i.e., long term believers who secure the ecosystem) may get additional rewards from the 0G ecosystem over time. The 0G node sale was a launch that enabled the community to participate on an equal playing field with entry points within multiple tiers.
 
 ## Why Run a Node?
 

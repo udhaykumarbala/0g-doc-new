@@ -56,7 +56,7 @@ Without overcoming these hurdles, the dream of decentralized AI remains out of r
 
 | Component             | Works Independently?                                   | Key Features & Use Cases                                                          | Cost Highlight                        |
 |-----------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------|
-| **0G Chain**        | ✅ Yes (Optional for other services)             | Fastest modular EVM L1 for AI agents, DeFi with AI logic        | Low gas fees in 0G token              |
+| **0G Chain**        | ✅ Yes (Optional for other services)             | AI-native EVM L1 for AI agents, DeFi with AI logic             | Low gas fees in 0G token              |
 | **0G Storage**     | ✅ Yes (Any app/chain can access)                       | Store AI models (GBs-TBs), training datasets, user files, game assets            | 10-100x cheaper than alternatives     |
 | **0G Compute**     | ✅ Yes (Any app/chain can access)                     | Run AI inference, model training, verifiable compute, ML pipelines               | Pay-only-for-what-you-use             |
 | **0G DA**          | ✅ Yes (Works with any rollup/L1/L2)                  | Power gaming chains, AI rollups, high-frequency trading chains                   | Economical for high-volume DA         |

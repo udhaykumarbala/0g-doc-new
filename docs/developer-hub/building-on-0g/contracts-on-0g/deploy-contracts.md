@@ -7,7 +7,7 @@ description: "Deploy and verify smart contracts on 0G Chain using Hardhat, Found
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Deploy Smart Contracts on 0G Chain
+# Deploy Contracts on 0G Chain
 
 Deploy smart contracts on 0G Chain - an EVM-compatible blockchain with built-in AI capabilities.
 
@@ -341,7 +341,7 @@ If you're using newer experimental opcodes from unreleased Ethereum upgrades and
 Try alternative endpoints:
 
 - QuikNode: [Get endpoint](https://www.quicknode.com/chains/0g)
-- ThirdWeb: [Get endpoint](https://thirdweb.com/0g-galileo-testnet-16601)
+- ThirdWeb: [Get endpoint](https://thirdweb.com/16602)
 </details>
 
 ## What's Next?

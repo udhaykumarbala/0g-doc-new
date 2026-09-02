@@ -2,11 +2,11 @@
 id: agentic-id
 title: Agentic ID
 sidebar_position: 5
-description: "Learn about Agentic IDs (formerly INFTs / Intelligent NFTs) — a new token standard for true AI agent ownership with encrypted intelligence, secure transfers, and ERC-7857."
+description: "Agentic IDs (formerly INFTs) are a token standard for AI agent ownership, with encrypted intelligence, secure transfers, and ERC-7857."
 keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, erc-8004, trustless agent, encrypted nft]
 ---
 
-# Agentic IDs: Token Identity for AI Agents
+# Agentic ID
 
 :::info Previously known as INFTs
 Agentic ID is the new name for what was previously called an **INFT** (Intelligent NFT). Same standard (ERC-7857), same encrypted-metadata transfer model.

@@ -1,11 +1,11 @@
 ---
 id: node-sale-index
-title: AI Alignment node
+title: AI Alignment Node Sale
 sidebar_position: 1
 description: "Overview of the 0G Foundation AI Alignment Node Sale, with links to participation details, benefits, and purchasing guides."
 ---
 
-# Welcome to the 0G Foundation AI Alignment Node Sale
+# AI Alignment Node Sale
 
 In this section, learn more about the 0G Foundation AI Alignment Node Sale.
 

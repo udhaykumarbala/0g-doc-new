@@ -28,7 +28,7 @@ Payment Layer contract addresses:
 
 ## How Costs Are Calculated
 
-```
+```text
 total_cost = (input_tokens × prompt_price) + (output_tokens × completion_price)
 ```
 

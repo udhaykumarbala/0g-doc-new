@@ -5,7 +5,7 @@ sidebar_class_name: hidden
 description: "Comprehensive 0G infrastructure context for AI coding assistants, including network configs, contract addresses, and SDK examples."
 ---
 
-# 0G AI Context for Coding Assistants
+# AI Coding Context
 
 This page provides comprehensive context about 0G infrastructure to help AI coding assistants help developers build on 0G. All information is extracted from the official documentation at https://docs.0g.ai.
 
@@ -32,7 +32,7 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 
 **Third-Party RPCs (Recommended for Production)**:
 - QuickNode: https://www.quicknode.com/chains/0g
-- ThirdWeb: https://thirdweb.com/0g-galileo-testnet-16601
+- ThirdWeb: https://thirdweb.com/16602
 - Ankr: https://www.ankr.com/rpc/0g/
 - dRPC NodeCloud: https://drpc.org/chainlist/0g-galileo-testnet-rpc
 
@@ -65,9 +65,9 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 | **Flow** | `0x22E03a6A89B950F1c82ec5e74F8eCa321a105296` | Storage data flow management |
 | **Mine** | `0x00A9E9604b0538e06b268Fb297Df333337f9593b` | Storage mining rewards |
 | **Reward** | `0xA97B57b4BdFEA2D0a25e535bd849ad4e6C440A69` | Reward distribution |
-| **DAEntrance** | `0xE75A073dA5bb7b0eC622170Fd268f35E675a957B` | DA blob submission |
+| **DAEntrance** | `0xE75A073dA5bb7b0eC622170Fd268f35E675a957B` | DA blob submission (address being verified: confirm with the DA team before integrating) |
 | **DASigners** | `0x0000000000000000000000000000000000001000` | DA signer management (precompile) |
-| **WrappedOGBase** | `0x0000000000000000000000000000000000001001` | Wrapped native token (precompile) |
+| **WrappedOGBase** | `0x0000000000000000000000000000000000001002` | Wrapped native token (precompile) |
 | **Compute Ledger** | `0xE70830508dAc0A97e6c087c75f402f9Be669E406` | Compute network payment ledger |
 | **Compute Inference** | `0xa79F4c8311FF93C06b8CfB403690cc987c93F91E` | Compute inference service |
 | **Compute FineTuning** | `0xC6C075D8039763C8f1EbE580be5ADdf2fd6941bA` | Compute fine-tuning service (`fine-tuning-v1.1`) |
@@ -82,7 +82,7 @@ The previous testnet fine-tuning contract (`0xaC66eBd174435c04F1449BBa08157a707B
 | **Mine** | `0xCd01c5Cd953971CE4C2c9bFb95610236a7F414fe` | Storage mining rewards |
 | **Reward** | `0x457aC76B58ffcDc118AABD6DbC63ff9072880870` | Reward distribution |
 | **DASigners** | `0x0000000000000000000000000000000000001000` | DA signer management (precompile) |
-| **WrappedOGBase** | `0x0000000000000000000000000000000000001001` | Wrapped native token (precompile) |
+| **WrappedOGBase** | `0x0000000000000000000000000000000000001002` | Wrapped native token (precompile) |
 | **Compute Ledger** | `0x2dE54c845Cd948B72D2e32e39586fe89607074E3` | Compute network payment ledger |
 | **Compute Inference** | `0x47340d900bdFec2BD393c626E12ea0656F938d84` | Compute inference service |
 | **Compute FineTuning** | `0x4e3474095518883744ddf135b7E0A23301c7F9c0` | Compute fine-tuning service |
@@ -104,7 +104,7 @@ All 18 decimals. The bridged token shares the same address on Ethereum and BNB C
 ### 0G Chain
 **Documentation**: [https://docs.0g.ai/concepts/chain](https://docs.0g.ai/concepts/chain)
 
-Fastest modular AI chain with 11,000 TPS per Shard, sub-second finality, and full EVM compatibility.
+AI-native EVM L1 chain with 11,000 TPS per Shard, sub-second finality, and full EVM compatibility.
 
 **Key Features**:
 - **Full EVM compatibility** - Use existing Ethereum tools (Hardhat, Foundry, Remix)
@@ -160,18 +160,29 @@ Using Remix:
 
 DASigners (0x0000000000000000000000000000000000001000):
 ```solidity
-// Query DA signers and epochs
-function getEpochNumber(uint256 blockNumber) external view returns (uint256);
-function getQuorum(uint256 epochNumber, uint256 quorumId) external view returns (Signer[] memory);
-function isSigner(uint256 epochNumber, address account) external view returns (bool);
+// Query DA signers, quorums and epochs
+function epochNumber() external view returns (uint);
+function quorumCount(uint _epoch) external view returns (uint);
+function isSigner(address _account) external view returns (bool);
+function getSigner(address[] memory _account) external view returns (SignerDetail[] memory);
+function getQuorum(uint _epoch, uint _quorumId) external view returns (address[] memory);
+function getQuorumRow(uint _epoch, uint _quorumId, uint32 _rowIndex) external view returns (address);
+function registeredEpoch(address _account, uint _epoch) external view returns (bool);
 ```
 
-WrappedOGBase (0x0000000000000000000000000000000000001001):
+WrappedOGBase (0x0000000000000000000000000000000000001002):
 ```solidity
-// Wrapped native token (like WETH)
-function deposit() external payable;
-function withdraw(uint256 amount) external;
-function balanceOf(address account) external view returns (uint256);
+// Quota-based wrapper for native 0G; not a WETH-style deposit/withdraw interface.
+struct Supply {
+    uint256 cap;            // maximum allowed mint supply for the minter
+    uint256 initialSupply;  // initial mint supply, also the initial allowed burn amount
+    uint256 supply;         // current mint supply used by the minter
+}
+
+function getWA0GI() external view returns (address);
+function minterSupply(address minter) external view returns (Supply memory);
+function mint(address minter, uint256 amount) external;   // only callable by the WA0GI contract
+function burn(address minter, uint256 amount) external;   // only callable by the WA0GI contract
 ```
 
 **Verification & Indexing**:
@@ -295,7 +306,7 @@ go build
 ```
 
 **Indexer REST API** (HTTP gateway for file operations):
-```
+```text
 GET  /file?root=0x...              # Download file by merkle root
 GET  /file?txSeq=7                 # Download file by tx sequence
 GET  /file/{root}/path/to/file     # Download file from folder
@@ -352,7 +363,7 @@ curl https://router-api.0g.ai/v1/chat/completions \
   -H "Authorization: Bearer sk-YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "zai-org/GLM-5-FP8",
+    "model": "glm-5.2",
     "messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```
@@ -367,7 +378,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="zai-org/GLM-5-FP8",
+    model="glm-5.2",
     messages=[{"role": "user", "content": "Hello!"}]
 )
 ```
@@ -837,4 +848,4 @@ await window.ethereum.request({
 
 ---
 
-*This context page is automatically maintained to provide AI coding assistants with comprehensive, up-to-date information about 0G infrastructure. All information is sourced from official documentation at https://docs.0g.ai.*
+*Last verified: 2026-09-02 (see the ai-context-review workflow for automated drift checks). This context page gives AI coding assistants comprehensive information about 0G infrastructure. All information is sourced from official documentation at https://docs.0g.ai.*

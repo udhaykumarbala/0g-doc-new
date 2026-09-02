@@ -2,11 +2,11 @@
 id: overview
 title: Agentic ID Overview
 sidebar_position: 1
-description: "Developer overview of Agentic IDs (formerly INFTs / Intelligent NFTs) for tokenizing AI agents. Covers ERC-7857, secure transfers, encryption, and 0G infrastructure integration."
+description: "Developer overview of Agentic IDs for tokenizing AI agents: ERC-7857, secure transfers, encryption, and 0G infrastructure integration."
 keywords: [agentic id, agentic ids, inft, infts, intelligent nft, intelligent nfts, ai agent, erc-7857, erc-8004, trustless agent, encrypted nft, tokenize ai]
 ---
 
-# Agentic IDs: Tokenizing AI Agents
+# Agentic ID Overview
 
 ## What Are Agentic IDs?
 
@@ -89,7 +89,7 @@ The transfer mechanism ensures both token ownership and encrypted metadata trans
 
 ### Simple Transfer Flow
 
-```
+```text
 1. 📦 Encrypt & Commit    →  2. 🔄 Oracle Processing
           ↓                           ↓
 6. ✅ Access Granted     ←  3. 🔐 Re-encrypt for Receiver

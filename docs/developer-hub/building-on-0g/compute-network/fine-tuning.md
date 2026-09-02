@@ -256,7 +256,7 @@ The fine-tuning service fee is **automatically calculated** based on your datase
 
 #### Formula
 
-```
+```text
 Total Fee = Training Fee + Storage Reserve Fee
 ```
 
@@ -435,7 +435,7 @@ unzip model_output.zip -d ./lora_adapter/
 
 The extracted folder will contain:
 
-```
+```text
 lora_adapter/
 ├── output_model/
 │   ├── adapter_config.json       # LoRA configuration

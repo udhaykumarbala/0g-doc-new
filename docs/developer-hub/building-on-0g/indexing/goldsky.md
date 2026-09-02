@@ -5,7 +5,7 @@ sidebar_position: 1
 description: "Index 0G Chain data with Goldsky subgraphs and Mirror streaming. Query onchain data via GraphQL or stream it directly to your database."
 ---
 
-# Indexing 0G with Goldsky
+# Goldsky Subgraphs
 
 Goldsky is Web3's real-time data platform, giving developers the fastest way to query, stream, and scale onchain data without worrying about maintaining infrastructure.
 

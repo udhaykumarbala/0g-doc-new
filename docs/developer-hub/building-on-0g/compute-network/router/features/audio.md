@@ -74,7 +74,7 @@ Because this endpoint uses `multipart/form-data` instead of a JSON body, Router 
 
 **TEE verification** — pass `verify_tee` as a query parameter:
 
-```
+```text
 ?verify_tee=true
 ```
 

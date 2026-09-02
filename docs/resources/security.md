@@ -5,7 +5,7 @@ sidebar_position: 4
 description: "0G security overview including completed audit reports, bug bounty program details, reward tiers, and responsible disclosure guidelines."
 ---
 
-# Security at 0G
+# Security Policy
 
 At 0G, we prioritize the security and integrity of our platform. Our commitment to security is reflected in our rigorous audit processes and our active bug bounty program.
 
