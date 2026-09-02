@@ -150,10 +150,17 @@ module.exports = function llmsTxtPlugin(context, options = {}) {
         const lines = fs.readFileSync(fullPath, 'utf8').split('\n');
         const result = [];
         let added = 0;
+        // Pages are joined with a "---" separator followed by "## <title>"; only
+        // those headings are page starts (body sections can share a doc's title).
+        let prevNonEmpty = '';
+        let seenFirstPage = false;
         for (let i = 0; i < lines.length; i++) {
           result.push(lines[i]);
           const m = /^## (.+)$/.exec(lines[i]);
-          if (m && byTitle.get(m[1]) && lines[i + 1] === '' && !/^Source: /.test(lines[i + 2] || '')) {
+          const isPageStart = m && (prevNonEmpty === '---' || !seenFirstPage);
+          if (m && isPageStart) seenFirstPage = true;
+          if (lines[i].trim() !== '') prevNonEmpty = lines[i].trim();
+          if (isPageStart && byTitle.get(m[1]) && lines[i + 1] === '' && !/^Source: /.test(lines[i + 2] || '')) {
             const doc = byTitle.get(m[1]);
             const permalink = doc.permalink.replace(/\/$/, '') || '/';
             result.push('', `Source: ${siteUrl}${permalink === '/' ? '/index' : permalink}.md`);
