@@ -100,6 +100,7 @@ URL changes that would break inbound links go in `vercel.json`'s `redirects` arr
 Hosted on Vercel via the native GitHub integration (no GitHub Actions deploy workflow).
 
 - `main` → production at `https://docs.0g.ai`.
+- **`VERCEL_DEEP_CLONE=true` must be set in the Vercel project's environment variables.** Vercel clones with `--depth=10` by default; the visible "Last updated" dates (`showLastUpdateTime`) and the sitemap `<lastmod>` values come from `git log`, so without a full clone most pages would carry the date of the shallow boundary commit instead of their real last change. Search engines ignore `lastmod` they cannot verify, so a shallow clone silently defeats the freshness signals.
 - `staging` → long-lived staging at `https://staging.docs.0g.ai`. A QA / preview environment, **not** a release source — see workflow below.
 - Every PR / non-default branch → an ephemeral preview URL (`*.vercel.app`), auto-`noindex`ed by Vercel.
 
