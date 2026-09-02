@@ -34,6 +34,7 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 - QuickNode: https://www.quicknode.com/chains/0g
 - ThirdWeb: https://thirdweb.com/0g-galileo-testnet-16601
 - Ankr: https://www.ankr.com/rpc/0g/
+- dRPC: https://drpc.org/chainlist/0g-galileo-testnet-rpc
 - dRPC NodeCloud: https://drpc.org/chainlist/0g-galileo-testnet-rpc
 
 ### Mainnet (Aristotle)
@@ -55,6 +56,7 @@ This page provides comprehensive context about 0G infrastructure to help AI codi
 - QuickNode: https://www.quicknode.com/chains/0g
 - ThirdWeb: https://thirdweb.com/0g-aristotle
 - Ankr: https://www.ankr.com/rpc/0g/
+- dRPC: https://drpc.org/chainlist/0g-mainnet-rpc
 
 ## Smart Contract Addresses
 
