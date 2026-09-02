@@ -8,6 +8,11 @@ import rehypeKatex from 'rehype-katex';
 // Use this to gate analytics so they only fire from the live site.
 const isProd = process.env.VERCEL_ENV === 'production';
 
+// The approved one-line description of 0G. Used for llms.txt, llms-full.txt and
+// site metadata so every machine-readable surface says the same thing.
+const SITE_ONE_LINER =
+  '0G is the trust layer for AI. It combines private compute, encrypted storage, and an AI-native EVM L1 chain in one stack where AI work, from inference to agent actions, is verified and audited.';
+
 const config: Config = {
   title: '0G Documentation',
   tagline: 'The Next Generation Web3 Infrastructure',
@@ -56,6 +61,8 @@ const config: Config = {
           routeBasePath: '/',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
+          // Visible "Last updated" from git, a freshness signal AI search engines use.
+          showLastUpdateTime: true,
         },
         blog: false,
         theme: {
@@ -70,8 +77,10 @@ const config: Config = {
             }
           : {}),
         sitemap: {
-          changefreq: 'weekly' as const,
-          priority: 0.5,
+          // lastmod from git commit dates; changefreq and priority are ignored by Google.
+          lastmod: 'date' as const,
+          changefreq: null,
+          priority: null,
           ignorePatterns: ['/search', '/search/**'],
         },
       } satisfies Preset.Options,
@@ -101,21 +110,42 @@ const config: Config = {
     ],
     // Add security headers plugin
     require.resolve('./src/plugins/security-headers-plugin'),
-    // Enable LLM-compatible markdown endpoints (e.g., /page.md returns raw markdown)
-    // See: https://github.com/0gfoundation/0g-doc/issues/242
-    require.resolve('./src/plugins/markdown-endpoint-plugin'),
-    // Generate llms.txt and llms-full.txt for AI tools (industry standard)
-    // See: https://llmstxt.org/
+    // AI-facing outputs (https://llmstxt.org/): llms.txt generated from the sidebar,
+    // llms-full.txt and per-page .md files from docusaurus-plugin-llms (wrapped so it
+    // runs first), Source lines in llms-full.txt, and rel="alternate" markdown links.
     [
-      'docusaurus-plugin-llms',
+      require.resolve('./src/plugins/llms-txt-plugin'),
       {
-        generateLLMsTxt: true,
-        generateLLMsFullTxt: true,
-        docsDir: 'docs',
         title: '0G Documentation',
-        description: '0G (Zero Gravity) is a decentralized AI operating system (deAIOS) providing modular infrastructure for AI applications including decentralized storage, data availability, and GPU compute marketplace. Official website: https://0g.ai',
-        llmsTxtFilename: 'llms.txt',
-        llmsFullTxtFilename: 'llms-full.txt',
+        description: SITE_ONE_LINER,
+        rootContent: [
+          'This is the index of the technical documentation for 0G at https://docs.0g.ai, following the llmstxt.org standard. Sections mirror the site navigation. Every link points at the markdown version of a page; append .md to any docs URL to get that page as markdown, and use https://docs.0g.ai/llms-full.txt for the whole corpus in one file.',
+          '',
+          'Not here: what 0G is as a project and company is at https://0g.ai/llms.txt; the builder-focused overview, tools and funding are at https://build.0g.ai/llms.txt; how to buy, bridge or withdraw the 0G token is at https://get.0g.ai/llms.txt.',
+        ].join('\n'),
+        optionalLinks: [
+          { title: 'Full documentation corpus', url: 'https://docs.0g.ai/llms-full.txt', description: 'Every page in one markdown file with a Source line per page.' },
+          { title: '0G project and company', url: 'https://0g.ai/llms.txt', description: 'What 0G is, who builds it, products, press and key links.' },
+          { title: '0G Builder Hub', url: 'https://build.0g.ai/llms.txt', description: 'Builder-focused overview of the stack, tools, tutorials and funding.' },
+          { title: 'Get 0G', url: 'https://get.0g.ai/llms.txt', description: 'How and where to buy, bridge or withdraw the 0G token.' },
+        ],
+        llms: {
+          generateLLMsTxt: false,
+          generateLLMsFullTxt: true,
+          generateMarkdownFiles: true,
+          addMdExtension: true,
+          docsDir: 'docs',
+          ignoreFiles: ['src/**'],
+          title: '0G Documentation',
+          description: SITE_ONE_LINER,
+          fullRootContent:
+            'This file contains the full text of every page on https://docs.0g.ai in one document, following the llmstxt.org standard. Each page starts with a heading and a Source line with its markdown URL. For a sectioned index of pages use https://docs.0g.ai/llms.txt; append .md to any docs URL for that single page as markdown.',
+          llmsFullTxtFilename: 'llms-full.txt',
+          excludeImports: true,
+          removeDuplicateHeadings: true,
+          rewriteImageUrls: true,
+          pathTransformation: { ignorePaths: ['docs'] },
+        },
       },
     ],
   ],

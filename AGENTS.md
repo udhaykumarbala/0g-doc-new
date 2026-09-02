@@ -69,9 +69,8 @@ keywords: [keyword1, keyword2]
 
 ### Custom plugins (`src/plugins/`)
 
-- `markdown-endpoint-plugin.js` — copies raw `.md`/`.mdx` files into the build output so `docs.0g.ai/concepts/compute.md` returns raw markdown. Used by LLM tooling. Also installs dev-server middleware so the same routes work under `pnpm start`.
+- `llms-txt-plugin.js` — the AI-facing outputs. It wraps `docusaurus-plugin-llms` (so ordering is guaranteed; do not register that plugin separately) which writes `llms-full.txt` and a cleaned markdown twin of every page at `<route>.md` (imports and JSX stripped, image URLs made absolute), then generates `llms.txt` from the docs sidebar tree (sections mirror `sidebars.ts`, every link points at the `.md` twin, the landing page and `ai-context` are listed first, pages outside any sidebar go under "Other pages"), inserts a `Source:` line under each page heading in `llms-full.txt`, and injects `<link rel="alternate" type="text/markdown">` plus `<link rel="describedby" href="/llms.txt">` into every built page. The one-line site description used in all of these is the `SITE_ONE_LINER` constant in `docusaurus.config.ts`; change it there only. CI curls every link in the built `llms.txt` (the HTML link crawler never opens it). The `.md` files exist only in the production build, not on the dev server.
 - `security-headers-plugin.js` — sets CSP, X-Frame-Options, HSTS, etc. on the dev server. Production headers are set in `vercel.json`'s `headers` array **only** — Vercel does not read `_headers` files (that's a Netlify/Cloudflare Pages convention; a stale `static/_headers` used to sit here shipping nothing, and was removed). When a new page or component loads a third-party resource, the CSP in `vercel.json` (and the dev plugin, for parity) must be extended or the resource will be silently blocked in production.
-- `docusaurus-plugin-llms` — generates `llms.txt` and `llms-full.txt` at the site root from the docs corpus.
 
 ### Wallet buttons (`src/components/`)
 
