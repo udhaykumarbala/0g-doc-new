@@ -23,11 +23,11 @@ Ship `sk-` keys to the runtime that actually calls models; use `mk-` keys for da
 
 Both kinds go in the `Authorization` header — same shape:
 
-```
+```text
 Authorization: Bearer sk-YOUR_API_KEY
 ```
 
-```
+```text
 Authorization: Bearer mk-YOUR_MANAGEMENT_KEY
 ```
 

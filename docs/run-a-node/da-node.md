@@ -23,7 +23,7 @@ To operate effectively, your DA signer needs to run a DA node to verify encoded 
 
 **1. Clone the DA Node Repo:** 
 
-   ```
+   ```bash
    git clone https://github.com/0gfoundation/0g-da-node.git
    cd 0g-da-node
    ```
@@ -32,7 +32,7 @@ To operate effectively, your DA signer needs to run a DA node to verify encoded 
 
 If you don't have a BLS private key, generate one:
 
-```
+```bash
 cargo run --bin key-gen
 ```
 
@@ -80,7 +80,7 @@ Keep the generated BLS private key secure.
 
 **4. Build and Start the Docker Container:**
 
-   ```
+   ```bash
    docker build -t 0g-da-node .
    docker run -d --name 0g-da-node 0g-da-node
    ```
@@ -119,26 +119,26 @@ Remember to keep your private keys secure and regularly update your node softwar
 
 1. Install dependencies:
 
-   ```
+   ```bash
    sudo apt-get update && sudo apt-get install clang cmake build-essential pkg-config libssl-dev protobuf-compiler llvm llvm-dev
    ```
 
 2. Clone the repository and checkout the specific version:
 
-   ```
+   ```bash
    git clone https://github.com/0gfoundation/0g-da-node.git
    cd 0g-da-node
    ```
 
 3. Build the project:
 
-   ```
+   ```bash
    cargo build --release
    ```
 
 4. Download necessary parameters:
 
-   ```
+   ```bash
    ./dev_support/download_params.sh
    ```
 
@@ -146,7 +146,7 @@ Remember to keep your private keys secure and regularly update your node softwar
 
 If you don't have a BLS private key, generate one:
 
-```
+```bash
 cargo run --bin key-gen
 ```
 
@@ -197,7 +197,7 @@ cargo run --bin key-gen
 
 Start the 0g DA node using the following command:
 
-```
+```bash
 ./target/release/server --config config.toml
 ```
 
@@ -267,7 +267,7 @@ Ensure you have the following installed on your system:
 
 ### Contract Params (Testnet)
 
-```
+```toml
 TokensPerVote = 30
 MaxVotesPerSigner = 1024
 MaxQuorums = 10
@@ -309,7 +309,7 @@ Find the ABI on the [DASigners precompile page](/developer-hub/building-on-0g/co
 
 Register signer's information, including signer address, DA node service socket address, signer BLS public key on G1 and G2 group, and a signature signed by the BLS private key of the following message:
 
-```
+```text
 Keccak256(signerAddress, chainID, "0G_BN254_Pubkey_Registration")
 ```
 
@@ -334,7 +334,7 @@ function updateSocket(string memory _socket) external;
 
 Register to join the quorums in the next epoch. The signer needs to submit a signature signed by their BLS private key:
 
-```
+```text
 Keccak256(signerAddress, epoch, chainID)
 ```
 

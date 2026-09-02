@@ -1,7 +1,7 @@
 ---
 id: da
 title: 0G DA
-description: "0G DA (Data Availability) ensures blockchain data is always accessible — powering rollups, gaming chains, and high-frequency trading with scalable data availability."
+description: "0G DA keeps blockchain data accessible, powering rollups, gaming chains, and high-frequency trading with scalable data availability."
 sidebar_position: 3
 ---
 

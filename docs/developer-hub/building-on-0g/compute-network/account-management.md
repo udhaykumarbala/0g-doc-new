@@ -3,7 +3,7 @@ id: account-management
 title: Account
 sidebar_position: 2
 sidebar_label: Account
-description: "Main account + per-provider sub-accounts used by 0G Compute's SDK-based services (Direct Inference and Fine-tuning). Deposit, transfer, refund, and withdraw via Web UI, CLI, or SDK."
+description: "Main account and per-provider sub-accounts for 0G Compute SDK services. Deposit, transfer, refund, and withdraw via Web UI, CLI, or SDK."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -131,7 +131,7 @@ View your account overview:
 
 Example output:
 
-```
+```text
 Overview
 ┌──────────────────────────────────────────────────┬─────────────────────────────────────────────────────┐
 │ Balance                                          │ Value (0G)                                          │
@@ -179,7 +179,7 @@ Withdraw unused funds from sub-accounts back to main account:
 ```
 
 Example output showing refund details:
-```
+```text
 Details of Each Amount Applied for Return to Main Account
 ┌──────────────────────────────────────────────────┬──────────────────────────────────────────────────┐
 │ Amount (0G)                                      │ Remaining Locked Time                            │

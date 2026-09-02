@@ -306,7 +306,7 @@ go build
 ```
 
 **Indexer REST API** (HTTP gateway for file operations):
-```
+```text
 GET  /file?root=0x...              # Download file by merkle root
 GET  /file?txSeq=7                 # Download file by tx sequence
 GET  /file/{root}/path/to/file     # Download file from folder

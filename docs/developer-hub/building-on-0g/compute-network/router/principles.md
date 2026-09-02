@@ -21,7 +21,7 @@ The goal is zero switching cost. If we add a feature that OpenAI doesn't have (l
 
 There is no monthly plan. You deposit 0G tokens to a payment contract, and each request debits the exact cost based on per-model token prices. Remaining balance is always visible on-chain.
 
-```
+```text
 total_cost = (input_tokens × prompt_price) + (output_tokens × completion_price)
 ```
 

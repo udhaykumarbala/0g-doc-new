@@ -7,7 +7,7 @@ sidebar_position: 1
 
 # Getting Started
 
-### The Problem We Solve
+## The Problem We Solve
 
 Your AI application needs:
 

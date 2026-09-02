@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 In the 0G network, storage nodes play a vital role in maintaining the system's decentralized storage layer. They are responsible for storing and serving data, ensuring data availability and reliability across the network. By running a storage node, you actively contribute to the network and earn rewards for your participation.
 This guide details the process of running a storage node, including hardware specifications and interaction with on-chain contracts.
 
-### Hardware Requirements
+## Hardware Requirements
 
 | Component | Storage Node | Storage KV |
 |-----------|--------------|------------|
@@ -25,7 +25,7 @@ This guide details the process of running a storage node, including hardware spe
 - For Storage Node: The SSD ensures fast read/write operations, critical for efficient blob storage and retrieval.
 - For Storage KV: The disk size requirement is flexible and should be adjusted based on the volume of KV streams you intend to maintain.
 :::
-### Next Steps
+## Next Steps
 For detailed instructions on setting up and operating your Storage Node or Storage KV, please refer to our comprehensive setup guides below:
 
 <Tabs>
@@ -92,7 +92,7 @@ Navigate to the run directory and configure your storage node for either testnet
 
 :::info Config File References
 The official configuration files are in the `run/` directory. Currently only `turbo` is available:
-```
+```text
 run/config-testnet-turbo.toml
 run/config-mainnet-turbo.toml
 ```

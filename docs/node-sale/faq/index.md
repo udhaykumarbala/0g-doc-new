@@ -66,6 +66,8 @@ The 0G AI Alignment Node Sale concluded in November 2024, and 0G Mainnet launche
 
 :::
 
+## General
+
 ### Where were AI Alignment Nodes sold?
 The sale ran at https://node.0gfoundation.ai/ and has concluded.
 ### How did I purchase AI Alignment Nodes?

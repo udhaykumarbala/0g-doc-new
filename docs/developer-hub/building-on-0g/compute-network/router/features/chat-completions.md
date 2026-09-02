@@ -5,9 +5,6 @@ sidebar_position: 1
 description: "OpenAI-compatible /v1/chat/completions with streaming, tool calling, JSON mode, and reasoning tokens."
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Chat Completions
 
 **`POST /v1/chat/completions`**

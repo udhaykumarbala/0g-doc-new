@@ -59,7 +59,7 @@ NAAS providers offer two delegation models:
    - **Prepaid Price**: Cost for prepaid nodes
    - **Reputation**: Community ratings and uptime statistics
 
-   ![NAAS Providers](../../static/img/naas.png)
+   ![NAAS Providers](/img/naas.png)
 
 #### Step 2: Complete Provider Onboarding
 
@@ -82,7 +82,7 @@ NAAS providers offer two delegation models:
 6. Enter the **Target NAAS Node Address** provided by your NAAS provider
 7. Confirm the transaction
 
-![Delegate Licenses](../../static/img/delegate.png)
+![Delegate Licenses](/img/delegate.png)
 
 #### Step 4: Monitor Delegation Status
 

@@ -141,7 +141,7 @@ tail -f /{your data path}/0g-home/log/0gchaind.log
 
 After setup, your directory structure should look like:
 
-```
+```text
 {your data path}/
 └── 0g-home/
     ├── geth-home/
